@@ -167,6 +167,29 @@
     "inviteCount": "Počet pozvaných",
     "shareText": "Skúste Dzino — osobného pomocníka, ktorý Vám pomôže s dokumentmi po slovensky."
   },
+  "settings": {
+    "title": "Nastavenia",
+    "account": "Účet",
+    "signOut": "Odhlásiť sa",
+    "dangerZone": "Nebezpečná zóna",
+    "deleteData": "Vymazať všetky dáta",
+    "deleteDataDesc": "Toto vymaže všetky Vaše spomienky, konverzácie a zručnosti. Tento krok sa nedá vrátiť.",
+    "deleteConfirm": "Naozaj vymazať?",
+    "dataDeleted": "Dáta boli vymazané",
+    "navigation": "Navigácia",
+    "home": "Domov",
+    "write": "Napísať text",
+    "history": "História",
+    "memory": "Pamäť",
+    "skills": "Zručnosti",
+    "marketplace": "Trhovisko",
+    "invite": "Pozvať priateľa"
+  },
+  "notFound": {
+    "title": "Stránka sa nenašla",
+    "description": "Táto stránka neexistuje alebo bola presunutá.",
+    "backHome": "Späť na hlavnú stránku"
+  },
   "common": {
     "error": "Niečo sa nepodarilo",
     "retry": "Skúsiť znova",

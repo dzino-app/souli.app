@@ -57,9 +57,12 @@ export default async function RootLayout({
                   <Brain className="h-5 w-5" />
                 </Link>
                 <ThemeToggle />
-                <button className="inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors">
+                <Link
+                  href="/nastavenia"
+                  className="inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                >
                   <Settings className="h-5 w-5" />
-                </button>
+                </Link>
               </div>
             </div>
           </header>
