@@ -76,6 +76,20 @@
     "invalidCredentials": "Nesprávny e-mail alebo heslo",
     "signupSuccess": "Účet bol vytvorený"
   },
+  "memory": {
+    "title": "Čo o Vás viem",
+    "description": "Tu vidíte všetko, čo som si o Vás zapamätal. Môžete čokoľvek upraviť alebo vymazať.",
+    "empty": "Zatiaľ si o Vás nič nepamätám. Čím viac spolu komunikujeme, tým lepšie Vám budem vedieť pomôcť.",
+    "categoryPersonal": "Osobné",
+    "categoryWork": "Práca",
+    "categoryPreferences": "Preferencie",
+    "categoryDocuments": "Dokumenty",
+    "delete": "Vymazať",
+    "edit": "Upraviť",
+    "save": "Uložiť",
+    "cancel": "Zrušiť",
+    "deleteConfirm": "Naozaj chcete vymazať túto spomienku?"
+  },
   "chat": {
     "yourQuestion": "Vaša otázka",
     "thinking": "Premýšľam...",

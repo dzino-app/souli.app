@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
-import { Settings } from "lucide-react";
+import Link from "next/link";
+import { Brain, Settings } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import "./globals.css";
 
@@ -33,8 +34,16 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="flex h-14 items-center justify-between px-4 mx-auto max-w-3xl">
-              <span className="text-xl font-bold text-primary">Dzino</span>
+              <Link href="/" className="text-xl font-bold text-primary hover:opacity-80 transition-opacity">
+                Dzino
+              </Link>
               <div className="flex items-center gap-1">
+                <Link
+                  href="/pamat"
+                  className="inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                >
+                  <Brain className="h-5 w-5" />
+                </Link>
                 <ThemeToggle />
                 <button className="inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors">
                   <Settings className="h-5 w-5" />
