@@ -150,7 +150,13 @@
     "togglePrivate": "Zrušiť zdieľanie",
     "delete": "Vymazať",
     "uses": "použití",
-    "marketplace": "Trhovisko zručností"
+    "marketplace": "Trhovisko zručností",
+    "marketplaceDesc": "Objavte zručnosti zdieľané ostatnými používateľmi.",
+    "apply": "Pridať k sebe",
+    "applied": "Pridané!",
+    "noPublic": "Zatiaľ nikto nezdieľal žiadne zručnosti.",
+    "featured": "Odporúčané",
+    "community": "Od komunity"
   },
   "invite": {
     "title": "Pozvite priateľa",
