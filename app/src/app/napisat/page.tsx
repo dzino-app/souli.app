@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { PenLine, Copy, Check, RefreshCw, Loader2 } from "lucide-react";
+import { PenLine, Copy, Check, RefreshCw, Loader2, AlertTriangle, FileQuestion, FileX, Receipt } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -52,6 +52,33 @@ export default function WritePage() {
           <p className="text-sm text-muted-foreground">{t("description")}</p>
         </div>
       </div>
+
+      {/* Templates */}
+      {!result && !loading && (
+        <div>
+          <p className="text-sm text-muted-foreground mb-3">{t("templatesTitle")}</p>
+          <div className="grid grid-cols-2 gap-2">
+            {[
+              { key: "complaint", icon: AlertTriangle },
+              { key: "request", icon: FileQuestion },
+              { key: "termination", icon: FileX },
+              { key: "claim", icon: Receipt },
+            ].map(({ key, icon: Icon }) => (
+              <button
+                key={key}
+                onClick={() => setInput(t(`templates.${key}Prompt`))}
+                className="flex items-start gap-2 rounded-lg border bg-card p-3 text-left transition-colors hover:bg-secondary"
+              >
+                <Icon className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                <div>
+                  <div className="text-sm font-medium">{t(`templates.${key}`)}</div>
+                  <div className="text-xs text-muted-foreground">{t(`templates.${key}Desc`)}</div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Input */}
       <div className="flex flex-col gap-3">

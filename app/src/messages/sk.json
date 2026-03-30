@@ -102,7 +102,22 @@
     "generate": "Napísať",
     "result": "Váš text",
     "regenerate": "Prepísať",
-    "copySuccess": "Skopírované!"
+    "copySuccess": "Skopírované!",
+    "templatesTitle": "Alebo si vyberte šablónu",
+    "templates": {
+      "complaint": "Sťažnosť",
+      "complaintDesc": "Reklamácia, sťažnosť na službu alebo produkt",
+      "complaintPrompt": "Napíšte formálnu sťažnosť. Doplňte: na koho sa sťažujem, čo sa stalo, kedy sa to stalo, čo požadujem.",
+      "request": "Žiadosť",
+      "requestDesc": "Žiadosť o informácie, povolenie, alebo službu",
+      "requestPrompt": "Napíšte formálnu žiadosť. Doplňte: komu ju posielam, o čo žiadam, prečo o to žiadam.",
+      "termination": "Výpoveď",
+      "terminationDesc": "Výpoveď zmluvy, služby, alebo pracovného pomeru",
+      "terminationPrompt": "Napíšte formálnu výpoveď. Doplňte: čoho sa výpoveď týka (zmluva, služba, práca), aké je číslo zmluvy, od kedy má platiť.",
+      "claim": "Reklamácia",
+      "claimDesc": "Reklamácia tovaru alebo služby",
+      "claimPrompt": "Napíšte formálnu reklamáciu. Doplňte: čo reklamujem, kedy som to kúpil/a, čo je problém, čo požadujem (výmena, vrátenie peňazí)."
+    }
   },
   "history": {
     "title": "História konverzácií",
