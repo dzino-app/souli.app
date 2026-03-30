@@ -1,0 +1,40 @@
+{
+  "app": {
+    "name": "Dzino",
+    "tagline": "Váš osobný pomocník"
+  },
+  "nav": {
+    "settings": "Nastavenia"
+  },
+  "home": {
+    "uploadTitle": "Nahrajte dokument",
+    "uploadDescription": "Pretiahnite sem alebo kliknite pre výber súboru",
+    "uploadButton": "Vybrať súbor",
+    "uploadFormats": "PDF, DOCX, JPG, PNG — max. 10 MB",
+    "actionsTitle": "Čo pre Vás môžem urobiť?",
+    "searchPlaceholder": "Napr.: Môžem túto zmluvu vypovedať?"
+  },
+  "actions": {
+    "summarize": "Zhrnúť dokument",
+    "summarizeDesc": "Nahrať a získať prehľadné zhrnutie",
+    "explain": "Vysvetliť jednoducho",
+    "explainDesc": "Zrozumiteľné vysvetlenie zložitého textu",
+    "risks": "Nájsť riziká",
+    "risksDesc": "Upozornenie na dôležité body a riziká",
+    "keyPoints": "Nájsť kľúčové body",
+    "keyPointsDesc": "Najdôležitejšie informácie na jednom mieste",
+    "write": "Napísať odpoveď",
+    "writeDesc": "Napíšeme formálny list alebo e-mail za Vás",
+    "ask": "Opýtať sa",
+    "askDesc": "Položte akúkoľvek otázku k dokumentu"
+  },
+  "common": {
+    "error": "Niečo sa nepodarilo",
+    "retry": "Skúsiť znova",
+    "send": "Odoslať",
+    "back": "Späť",
+    "download": "Stiahnuť",
+    "copy": "Kopírovať",
+    "close": "Zavrieť"
+  }
+}

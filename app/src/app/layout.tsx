@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -10,30 +12,32 @@ const geistSans = localFont({
 
 export const metadata: Metadata = {
   title: "Dzino — Váš osobný pomocník",
-  description: "Nahrajte akýkoľvek dokument a opýtajte sa čoho chcete — po slovensky.",
+  description:
+    "Nahrajte akýkoľvek dokument a opýtajte sa čoho chcete — po slovensky.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="sk">
+    <html lang={locale}>
       <body className={`${geistSans.variable} antialiased`}>
-        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="container flex h-14 items-center justify-between px-4 mx-auto max-w-3xl">
-            <div className="flex items-center gap-2">
+        <NextIntlClientProvider messages={messages}>
+          <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+            <div className="container flex h-14 items-center justify-between px-4 mx-auto max-w-3xl">
               <span className="text-xl font-bold text-primary">Dzino</span>
-            </div>
-            <nav className="flex items-center gap-2">
               <span className="text-sm text-muted-foreground">Nastavenia</span>
-            </nav>
-          </div>
-        </header>
-        <main className="container mx-auto max-w-3xl px-4 py-8">
-          {children}
-        </main>
+            </div>
+          </header>
+          <main className="container mx-auto max-w-3xl px-4 py-8">
+            {children}
+          </main>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
