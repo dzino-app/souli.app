@@ -1,0 +1,30 @@
+# Autoresearch
+results.tsv
+run.log
+build.log
+typecheck.log
+test.log
+
+# Dependencies
+node_modules/
+.next/
+__pycache__/
+.venv/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+out/
