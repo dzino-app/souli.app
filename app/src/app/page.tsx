@@ -11,6 +11,7 @@ import {
 import { useTranslations } from "next-intl";
 import { UploadZone } from "@/components/document/upload-zone";
 import { DocumentActions } from "@/components/document/document-actions";
+import { DocumentView, type ActionKey } from "@/components/document/document-view";
 
 const sampleDocs = [
   { key: "rental", icon: FileText },
@@ -22,6 +23,18 @@ const sampleDocs = [
 export default function Home() {
   const t = useTranslations();
   const [file, setFile] = useState<File | null>(null);
+  const [activeAction, setActiveAction] = useState<ActionKey | null>(null);
+
+  // When in document view mode, show the analysis UI
+  if (file && activeAction) {
+    return (
+      <DocumentView
+        file={file}
+        action={activeAction}
+        onBack={() => setActiveAction(null)}
+      />
+    );
+  }
 
   return (
     <div className="flex flex-col gap-8">
@@ -61,7 +74,7 @@ export default function Home() {
       </div>
 
       {/* Action buttons grid */}
-      <DocumentActions hasDocument={!!file} />
+      <DocumentActions hasDocument={!!file} onAction={setActiveAction} />
 
       {/* Search-bar style input */}
       <div className="relative">

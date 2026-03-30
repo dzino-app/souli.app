@@ -76,6 +76,10 @@
     "invalidCredentials": "Nesprávny e-mail alebo heslo",
     "signupSuccess": "Účet bol vytvorený"
   },
+  "document": {
+    "processing": "Spracovávam Váš dokument...",
+    "followUpPlaceholder": "Opýtajte sa niečo k dokumentu..."
+  },
   "common": {
     "error": "Niečo sa nepodarilo",
     "retry": "Skúsiť znova",
