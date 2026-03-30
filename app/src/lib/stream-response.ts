@@ -1,13 +1,16 @@
+import { getMemoriesForContext } from "@/lib/memory";
+
 export async function streamChatResponse(
   documentText: string,
   action: string,
   question?: string,
   onChunk?: (text: string) => void
 ): Promise<string> {
+  const memories = getMemoriesForContext();
   const response = await fetch("/api/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ documentText, action, question }),
+    body: JSON.stringify({ documentText, action, question, memories }),
   });
 
   if (!response.ok) {

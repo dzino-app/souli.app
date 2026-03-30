@@ -28,17 +28,26 @@ Pravidlá:
 - Buďte struční ale úplní`;
 
 export async function POST(request: NextRequest) {
-  const { documentText, action, question } = await request.json();
+  const { documentText, action, question, memories } = await request.json();
 
   const actionPrompt = ACTION_PROMPTS[action] || ACTION_PROMPTS.ask;
-  const userMessage = question
-    ? `${actionPrompt}\n\nDokument:\n${documentText}\n\nOtázka: ${question}`
-    : `${actionPrompt}\n\nDokument:\n${documentText}`;
+  let userMessage = "";
+  if (documentText) {
+    userMessage = question
+      ? `${actionPrompt}\n\nDokument:\n${documentText}\n\nOtázka: ${question}`
+      : `${actionPrompt}\n\nDokument:\n${documentText}`;
+  } else if (question) {
+    userMessage = question;
+  }
+
+  const systemWithMemories = memories
+    ? `${SYSTEM_PROMPT}\n\nČo viete o tomto používateľovi:\n${memories}`
+    : SYSTEM_PROMPT;
 
   const stream = anthropic.messages.stream({
     model: "claude-sonnet-4-20250514",
     max_tokens: 2048,
-    system: SYSTEM_PROMPT,
+    system: systemWithMemories,
     messages: [{ role: "user", content: userMessage }],
   });
 

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MarkdownResponse } from "@/components/chat/markdown-response";
 import { streamChatResponse } from "@/lib/stream-response";
+import { extractAndStoreMemories } from "@/lib/memory";
 
 export type ActionKey =
   | "summarize"
@@ -45,9 +46,12 @@ export function DocumentView({ file, action, onBack }: DocumentViewProps) {
     async function run() {
       try {
         const text = await readFileAsText(file);
-        await streamChatResponse(text, action, undefined, (chunk) => {
+        const fullResponse = await streamChatResponse(text, action, undefined, (chunk) => {
           if (!cancelled) setResponse(chunk);
         });
+        if (!cancelled) {
+          extractAndStoreMemories(`Dokument: ${file.name}`, fullResponse);
+        }
       } catch {
         if (!cancelled) setError(t("common.error"));
       } finally {

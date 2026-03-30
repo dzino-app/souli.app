@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MarkdownResponse } from "@/components/chat/markdown-response";
 import { streamChatResponse } from "@/lib/stream-response";
+import { extractAndStoreMemories } from "@/lib/memory";
 
 interface QuestionViewProps {
   question: string;
@@ -27,7 +28,7 @@ export function QuestionView({ question, documentText, onBack }: QuestionViewPro
 
     async function run() {
       try {
-        await streamChatResponse(
+        const fullResponse = await streamChatResponse(
           documentText || "",
           "ask",
           question,
@@ -35,6 +36,9 @@ export function QuestionView({ question, documentText, onBack }: QuestionViewPro
             if (!cancelled) setResponse(chunk);
           }
         );
+        if (!cancelled) {
+          extractAndStoreMemories(question, fullResponse);
+        }
       } catch {
         if (!cancelled) setError(t("common.error"));
       } finally {
