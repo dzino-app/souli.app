@@ -5,6 +5,7 @@ import { getLocale, getMessages } from "next-intl/server";
 import Link from "next/link";
 import { Brain, Clock, PenLine, Settings } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { BottomNav } from "@/components/layout/bottom-nav";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -38,37 +39,39 @@ export default async function RootLayout({
                 Dzino
               </Link>
               <div className="flex items-center gap-1">
+                {/* Desktop-only nav icons */}
                 <Link
                   href="/napisat"
-                  className="inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                  className="hidden sm:inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
                 >
                   <PenLine className="h-5 w-5" />
                 </Link>
                 <Link
                   href="/historia"
-                  className="inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                  className="hidden sm:inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
                 >
                   <Clock className="h-5 w-5" />
                 </Link>
                 <Link
                   href="/pamat"
-                  className="inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                  className="hidden sm:inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
                 >
                   <Brain className="h-5 w-5" />
                 </Link>
                 <ThemeToggle />
                 <Link
                   href="/nastavenia"
-                  className="inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+                  className="hidden sm:inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
                 >
                   <Settings className="h-5 w-5" />
                 </Link>
               </div>
             </div>
           </header>
-          <main className="mx-auto max-w-3xl px-4 py-6 sm:py-8">
+          <main className="mx-auto max-w-3xl px-4 py-6 sm:py-8 pb-20 sm:pb-8">
             {children}
           </main>
+          <BottomNav />
         </NextIntlClientProvider>
       </body>
     </html>
