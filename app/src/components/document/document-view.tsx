@@ -1,9 +1,11 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { FileText, ArrowLeft, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { streamChatResponse } from "@/lib/stream-response";
 
 export type ActionKey =
   | "summarize"
@@ -19,8 +21,66 @@ interface DocumentViewProps {
   onBack: () => void;
 }
 
+async function readFileAsText(file: File): Promise<string> {
+  // For text-based files, read directly
+  // For images, we'll send a placeholder (real OCR would be needed)
+  if (file.type.startsWith("image/")) {
+    return `[Obrázok: ${file.name}]`;
+  }
+  return file.text();
+}
+
 export function DocumentView({ file, action, onBack }: DocumentViewProps) {
   const t = useTranslations();
+  const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [followUp, setFollowUp] = useState("");
+  const [sendingFollowUp, setSendingFollowUp] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function run() {
+      try {
+        const text = await readFileAsText(file);
+        await streamChatResponse(text, action, undefined, (chunk) => {
+          if (!cancelled) setResponse(chunk);
+        });
+      } catch {
+        if (!cancelled) setError(t("common.error"));
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+
+    run();
+    return () => {
+      cancelled = true;
+    };
+  }, [file, action, t]);
+
+  async function handleFollowUp(e: React.FormEvent) {
+    e.preventDefault();
+    if (!followUp.trim()) return;
+
+    setSendingFollowUp(true);
+    setResponse("");
+    setLoading(true);
+
+    try {
+      const text = await readFileAsText(file);
+      await streamChatResponse(text, "ask", followUp, (chunk) => {
+        setResponse(chunk);
+      });
+    } catch {
+      setError(t("common.error"));
+    } finally {
+      setLoading(false);
+      setSendingFollowUp(false);
+      setFollowUp("");
+    }
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -47,30 +107,53 @@ export function DocumentView({ file, action, onBack }: DocumentViewProps) {
 
       {/* Response area */}
       <Card>
-        <CardContent className="py-8">
-          <div className="flex flex-col items-center text-center gap-3">
-            <Loader2 className="h-6 w-6 text-muted-foreground animate-spin" />
-            <p className="text-sm text-muted-foreground">
-              {t("document.processing")}
-            </p>
-          </div>
+        <CardContent className="py-6">
+          {error ? (
+            <div className="text-center">
+              <p className="text-sm text-destructive mb-3">{error}</p>
+              <Button variant="outline" size="sm" onClick={onBack}>
+                {t("common.back")}
+              </Button>
+            </div>
+          ) : loading && !response ? (
+            <div className="flex flex-col items-center text-center gap-3">
+              <Loader2 className="h-6 w-6 text-muted-foreground animate-spin" />
+              <p className="text-sm text-muted-foreground">
+                {t("document.processing")}
+              </p>
+            </div>
+          ) : (
+            <div className="prose prose-sm max-w-none dark:prose-invert">
+              <div className="whitespace-pre-wrap text-sm leading-relaxed">
+                {response}
+              </div>
+              {loading && (
+                <Loader2 className="h-4 w-4 text-muted-foreground animate-spin mt-2" />
+              )}
+            </div>
+          )}
         </CardContent>
       </Card>
 
-      {/* Question input for follow-up */}
-      <div className="relative">
+      {/* Follow-up question input */}
+      <form onSubmit={handleFollowUp} className="relative">
         <input
           type="text"
+          value={followUp}
+          onChange={(e) => setFollowUp(e.target.value)}
           placeholder={t("document.followUpPlaceholder")}
-          className="w-full rounded-lg border bg-background py-3 pl-4 pr-20 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          disabled={sendingFollowUp}
+          className="w-full rounded-lg border bg-background py-3 pl-4 pr-24 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50"
         />
         <Button
+          type="submit"
           size="sm"
+          disabled={sendingFollowUp || !followUp.trim()}
           className="absolute right-1.5 top-1/2 -translate-y-1/2"
         >
           {t("common.send")}
         </Button>
-      </div>
+      </form>
     </div>
   );
 }
