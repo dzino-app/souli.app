@@ -12,7 +12,17 @@
     "uploadButton": "Vybrať súbor",
     "uploadFormats": "PDF, DOCX, JPG, PNG — max. 10 MB",
     "actionsTitle": "Čo pre Vás môžem urobiť?",
-    "searchPlaceholder": "Napr.: Môžem túto zmluvu vypovedať?"
+    "searchPlaceholder": "Napr.: Môžem túto zmluvu vypovedať?",
+    "trySample": "— alebo skúste s ukážkovým dokumentom —",
+    "orChooseAction": "alebo si vyberte akciu",
+    "recentTitle": "Posledné dokumenty",
+    "recentEmpty": "Zatiaľ žiadne dokumenty. Nahrajte prvý vyššie.",
+    "sample": {
+      "rental": "Zmluva o prenájme",
+      "insurance": "Poistná zmluva",
+      "invoice": "Faktúra",
+      "official": "Úradný list"
+    }
   },
   "actions": {
     "summarize": "Zhrnúť dokument",
