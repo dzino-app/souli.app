@@ -7,11 +7,14 @@ import {
   FileImage,
   ScanLine,
   Search,
+  Send,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { UploadZone } from "@/components/document/upload-zone";
 import { DocumentActions } from "@/components/document/document-actions";
 import { DocumentView, type ActionKey } from "@/components/document/document-view";
+import { QuestionView } from "@/components/chat/question-view";
+import { Button } from "@/components/ui/button";
 
 const sampleDocs = [
   { key: "rental", icon: FileText },
@@ -24,8 +27,20 @@ export default function Home() {
   const t = useTranslations();
   const [file, setFile] = useState<File | null>(null);
   const [activeAction, setActiveAction] = useState<ActionKey | null>(null);
+  const [question, setQuestion] = useState("");
+  const [submittedQuestion, setSubmittedQuestion] = useState("");
 
-  // When in document view mode, show the analysis UI
+  // Question view mode
+  if (submittedQuestion) {
+    return (
+      <QuestionView
+        question={submittedQuestion}
+        onBack={() => setSubmittedQuestion("")}
+      />
+    );
+  }
+
+  // Document action view mode
   if (file && activeAction) {
     return (
       <DocumentView
@@ -34,6 +49,13 @@ export default function Home() {
         onBack={() => setActiveAction(null)}
       />
     );
+  }
+
+  function handleQuestionSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!question.trim()) return;
+    setSubmittedQuestion(question.trim());
+    setQuestion("");
   }
 
   return (
@@ -77,14 +99,25 @@ export default function Home() {
       <DocumentActions hasDocument={!!file} onAction={setActiveAction} />
 
       {/* Search-bar style input */}
-      <div className="relative">
+      <form onSubmit={handleQuestionSubmit} className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
         <input
           type="text"
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
           placeholder={t("home.searchPlaceholder")}
-          className="w-full rounded-lg border bg-background py-3 pl-10 pr-4 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          className="w-full rounded-lg border bg-background py-3 pl-10 pr-14 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         />
-      </div>
+        <Button
+          type="submit"
+          size="icon"
+          variant="ghost"
+          disabled={!question.trim()}
+          className="absolute right-1.5 top-1/2 -translate-y-1/2"
+        >
+          <Send className="h-4 w-4" />
+        </Button>
+      </form>
 
       {/* Recent documents placeholder */}
       {!file && (
