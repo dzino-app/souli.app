@@ -28,6 +28,26 @@
     "ask": "Opýtať sa",
     "askDesc": "Položte akúkoľvek otázku k dokumentu"
   },
+  "onboarding": {
+    "welcome": "Vitajte v Dzino!",
+    "welcomeDesc": "Povedzte mi o sebe, aby som Vám mohol lepšie pomáhať.",
+    "step": "Krok {current} z {total}",
+    "q1": "Ako sa voláte?",
+    "q1placeholder": "Napr.: Maroš",
+    "q2": "Čo robíte? Aká je Vaša profesia?",
+    "q2placeholder": "Napr.: Som živnostník, vediem malú firmu",
+    "q3": "S čím Vám môžem pomôcť?",
+    "q3placeholder": "Napr.: Potrebujem pomoc s dokumentmi a úradnými listami",
+    "q4": "Aký typ dokumentov najčastejšie riešite?",
+    "q4placeholder": "Napr.: Faktúry, zmluvy, úradné listy",
+    "q5": "Ako Vám mám písať — stručne alebo podrobne?",
+    "q5option1": "Stručne a na vec",
+    "q5option2": "Podrobne s vysvetlením",
+    "next": "Ďalej",
+    "previous": "Späť",
+    "finish": "Začať používať Dzino",
+    "skip": "Preskočiť"
+  },
   "auth": {
     "loginTitle": "Prihláste sa",
     "loginDescription": "Zadajte svoj e-mail a heslo",
