@@ -95,6 +95,15 @@
     "thinking": "Premýšľam...",
     "followUpPlaceholder": "Opýtajte sa ďalšiu otázku..."
   },
+  "write": {
+    "title": "Napíšte to za mňa",
+    "description": "Popíšte, čo potrebujete, a ja napíšem formálny text za Vás.",
+    "placeholder": "Napr.: Potrebujem napísať sťažnosť na dodávateľa, ktorý nedodal tovar v termíne. Objednal som 10. marca a stále nič neprišlo.",
+    "generate": "Napísať",
+    "result": "Váš text",
+    "regenerate": "Prepísať",
+    "copySuccess": "Skopírované!"
+  },
   "history": {
     "title": "História konverzácií",
     "empty": "Zatiaľ žiadne konverzácie.",

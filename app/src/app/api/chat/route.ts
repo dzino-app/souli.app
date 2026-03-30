@@ -13,7 +13,7 @@ const ACTION_PROMPTS: Record<string, string> = {
   keyPoints:
     "Vyberte najdôležitejšie body a informácie z tohto dokumentu. Píšte po slovensky, vykajte.",
   write:
-    "Používateľ potrebuje napísať formálnu odpoveď alebo list. Pomôžte mu na základe kontextu dokumentu. Píšte po slovensky, vykajte.",
+    "Používateľ popísal, čo potrebuje napísať. Napíšte formálny text (list, e-mail, sťažnosť, žiadosť, alebo iný dokument) podľa popisu. Text musí byť v správnom formáte, formálnym jazykom, gramaticky bezchybný. Ak to je list, uveďte dátum, oslovenie, telo listu a podpis. Píšte po slovensky, vykajte.",
   ask: "Odpovedzte na otázku používateľa k tomuto dokumentu. Píšte po slovensky, vykajte.",
 };
 
