@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { PenLine, Copy, Check, RefreshCw, Loader2, AlertTriangle, FileQuestion, FileX, Receipt } from "lucide-react";
+import { PenLine, Copy, Check, RefreshCw, Loader2, AlertTriangle, FileQuestion, FileX, Receipt, Download, Pencil, Eye } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,6 +16,7 @@ export default function WritePage() {
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState("");
+  const [editing, setEditing] = useState(false);
 
   async function handleGenerate() {
     if (!input.trim()) return;
@@ -38,6 +39,16 @@ export default function WritePage() {
     await navigator.clipboard.writeText(result);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  }
+
+  function handleDownload() {
+    const blob = new Blob([result], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "dzino-text.txt";
+    a.click();
+    URL.revokeObjectURL(url);
   }
 
   return (
@@ -114,7 +125,19 @@ export default function WritePage() {
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-lg font-semibold">{t("result")}</h2>
             {result && !loading && (
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setEditing(!editing)}
+                >
+                  {editing ? (
+                    <Eye className="h-4 w-4 mr-1" />
+                  ) : (
+                    <Pencil className="h-4 w-4 mr-1" />
+                  )}
+                  {editing ? t("preview") : t("edit")}
+                </Button>
                 <Button
                   variant="outline"
                   size="sm"
@@ -126,6 +149,14 @@ export default function WritePage() {
                     <Copy className="h-4 w-4 mr-1" />
                   )}
                   {copied ? t("copySuccess") : tc("copy")}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleDownload}
+                >
+                  <Download className="h-4 w-4 mr-1" />
+                  {tc("download")}
                 </Button>
                 <Button
                   variant="outline"
@@ -144,6 +175,12 @@ export default function WritePage() {
                 <div className="flex flex-col items-center text-center gap-3">
                   <Loader2 className="h-6 w-6 text-muted-foreground animate-spin" />
                 </div>
+              ) : editing ? (
+                <textarea
+                  value={result}
+                  onChange={(e) => setResult(e.target.value)}
+                  className="w-full min-h-[300px] rounded-md border bg-background px-4 py-3 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-ring resize-y"
+                />
               ) : (
                 <div>
                   <MarkdownResponse content={result} />

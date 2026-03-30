@@ -103,6 +103,8 @@
     "result": "Váš text",
     "regenerate": "Prepísať",
     "copySuccess": "Skopírované!",
+    "edit": "Upraviť",
+    "preview": "Náhľad",
     "templatesTitle": "Alebo si vyberte šablónu",
     "templates": {
       "complaint": "Sťažnosť",
