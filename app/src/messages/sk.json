@@ -28,6 +28,24 @@
     "ask": "Opýtať sa",
     "askDesc": "Položte akúkoľvek otázku k dokumentu"
   },
+  "auth": {
+    "loginTitle": "Prihláste sa",
+    "loginDescription": "Zadajte svoj e-mail a heslo",
+    "signupTitle": "Vytvorte si účet",
+    "signupDescription": "Začnite používať Dzino za pár sekúnd",
+    "email": "E-mail",
+    "emailPlaceholder": "vas@email.sk",
+    "password": "Heslo",
+    "passwordPlaceholder": "Minimálne 6 znakov",
+    "login": "Prihlásiť sa",
+    "signup": "Vytvoriť účet",
+    "noAccount": "Nemáte účet?",
+    "hasAccount": "Už máte účet?",
+    "createAccount": "Vytvoriť účet",
+    "loginLink": "Prihlásiť sa",
+    "invalidCredentials": "Nesprávny e-mail alebo heslo",
+    "signupSuccess": "Účet bol vytvorený"
+  },
   "common": {
     "error": "Niečo sa nepodarilo",
     "retry": "Skúsiť znova",
