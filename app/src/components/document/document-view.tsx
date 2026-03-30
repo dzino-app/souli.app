@@ -5,6 +5,7 @@ import { FileText, ArrowLeft, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { MarkdownResponse } from "@/components/chat/markdown-response";
 import { streamChatResponse } from "@/lib/stream-response";
 
 export type ActionKey =
@@ -123,10 +124,8 @@ export function DocumentView({ file, action, onBack }: DocumentViewProps) {
               </p>
             </div>
           ) : (
-            <div className="prose prose-sm max-w-none dark:prose-invert">
-              <div className="whitespace-pre-wrap text-sm leading-relaxed">
-                {response}
-              </div>
+            <div>
+              <MarkdownResponse content={response} />
               {loading && (
                 <Loader2 className="h-4 w-4 text-muted-foreground animate-spin mt-2" />
               )}
