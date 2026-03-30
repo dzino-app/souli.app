@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { addMemories } from "@/lib/memory";
 
 const TOTAL_STEPS = 5;
 
@@ -26,9 +27,30 @@ export default function OnboardingPage() {
   }
 
   function handleFinish() {
-    // Store onboarding data in localStorage for now
-    // Will move to Supabase memories table later
     localStorage.setItem("dzino_onboarding", JSON.stringify(answers));
+
+    // Store answers as memories so the bot remembers from the start
+    const memories: { fact: string; category: string }[] = [];
+    if (answers.name) {
+      memories.push({ fact: `Volá sa ${answers.name}`, category: "personal" });
+    }
+    if (answers.profession) {
+      memories.push({ fact: `Profesia: ${answers.profession}`, category: "work" });
+    }
+    if (answers.needs) {
+      memories.push({ fact: `Potrebuje pomoc s: ${answers.needs}`, category: "preferences" });
+    }
+    if (answers.documentTypes) {
+      memories.push({ fact: `Najčastejšie rieši dokumenty: ${answers.documentTypes}`, category: "documents" });
+    }
+    if (answers.style) {
+      const styleText = answers.style === "brief" ? "stručné odpovede" : "podrobné odpovede s vysvetlením";
+      memories.push({ fact: `Preferuje ${styleText}`, category: "preferences" });
+    }
+    if (memories.length > 0) {
+      addMemories(memories);
+    }
+
     router.push("/");
   }
 
