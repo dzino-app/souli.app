@@ -131,6 +131,15 @@
     "processing": "Spracovávam Váš dokument...",
     "followUpPlaceholder": "Opýtajte sa niečo k dokumentu..."
   },
+  "invite": {
+    "title": "Pozvite priateľa",
+    "description": "Zdieľajte Dzino s priateľmi a rodinou. Za každého pozvaného používateľa získate 5 kreditov zadarmo.",
+    "yourLink": "Váš pozývací odkaz",
+    "copyLink": "Kopírovať odkaz",
+    "copied": "Skopírované!",
+    "inviteCount": "Počet pozvaných",
+    "shareText": "Skúste Dzino — osobného pomocníka, ktorý Vám pomôže s dokumentmi po slovensky."
+  },
   "common": {
     "error": "Niečo sa nepodarilo",
     "retry": "Skúsiť znova",
