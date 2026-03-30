@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MarkdownResponse } from "@/components/chat/markdown-response";
 import { streamChatResponse } from "@/lib/stream-response";
 import { extractAndStoreMemories } from "@/lib/memory";
+import { createConversation, addMessage } from "@/lib/conversations";
 
 interface QuestionViewProps {
   question: string;
@@ -22,12 +23,17 @@ export function QuestionView({ question, documentText, onBack }: QuestionViewPro
   const [error, setError] = useState("");
   const [followUp, setFollowUp] = useState("");
   const [sendingFollowUp, setSendingFollowUp] = useState(false);
+  const [conversationId, setConversationId] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
 
     async function run() {
       try {
+        const conv = createConversation(question);
+        setConversationId(conv.id);
+        addMessage(conv.id, "user", question);
+
         const fullResponse = await streamChatResponse(
           documentText || "",
           "ask",
@@ -37,6 +43,7 @@ export function QuestionView({ question, documentText, onBack }: QuestionViewPro
           }
         );
         if (!cancelled) {
+          addMessage(conv.id, "assistant", fullResponse);
           extractAndStoreMemories(question, fullResponse);
         }
       } catch {
@@ -56,14 +63,17 @@ export function QuestionView({ question, documentText, onBack }: QuestionViewPro
     e.preventDefault();
     if (!followUp.trim()) return;
 
+    const currentFollowUp = followUp.trim();
     setSendingFollowUp(true);
     setResponse("");
     setLoading(true);
 
     try {
-      await streamChatResponse(documentText || "", "ask", followUp, (chunk) => {
+      if (conversationId) addMessage(conversationId, "user", currentFollowUp);
+      const fullResponse = await streamChatResponse(documentText || "", "ask", currentFollowUp, (chunk) => {
         setResponse(chunk);
       });
+      if (conversationId) addMessage(conversationId, "assistant", fullResponse);
     } catch {
       setError(t("common.error"));
     } finally {

@@ -95,6 +95,12 @@
     "thinking": "Premýšľam...",
     "followUpPlaceholder": "Opýtajte sa ďalšiu otázku..."
   },
+  "history": {
+    "title": "História konverzácií",
+    "empty": "Zatiaľ žiadne konverzácie.",
+    "delete": "Vymazať",
+    "resume": "Pokračovať"
+  },
   "document": {
     "processing": "Spracovávam Váš dokument...",
     "followUpPlaceholder": "Opýtajte sa niečo k dokumentu..."
