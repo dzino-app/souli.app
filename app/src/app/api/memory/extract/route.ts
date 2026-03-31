@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 const anthropic = new Anthropic();
 
@@ -22,6 +23,12 @@ Konverzácia:
 Vráťte IBA validný JSON (pole objektov), nič iné.`;
 
 export async function POST(request: NextRequest) {
+  const ip = request.headers.get("x-forwarded-for") || "anonymous";
+  const { allowed } = checkRateLimit(ip);
+  if (!allowed) {
+    return NextResponse.json({ facts: [] });
+  }
+
   const { conversation } = await request.json();
 
   const response = await anthropic.messages.create({

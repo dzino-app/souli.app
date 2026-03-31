@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest, NextResponse } from "next/server";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 const anthropic = new Anthropic();
 
@@ -29,6 +30,15 @@ Pravidlá:
 
 export async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get("x-forwarded-for") || "anonymous";
+    const { allowed } = checkRateLimit(ip);
+    if (!allowed) {
+      return NextResponse.json(
+        { error: "Príliš veľa požiadaviek. Skúste to o chvíľu." },
+        { status: 429 }
+      );
+    }
+
     const { documentText, action, question, memories } = await request.json();
 
     if (!documentText && !question) {
