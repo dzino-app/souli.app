@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MarkdownResponse } from "@/components/chat/markdown-response";
 import { streamChatResponse } from "@/lib/stream-response";
 import { extractAndStoreMemories } from "@/lib/memory";
+import { extractDocumentText } from "@/lib/extract-document";
 
 export type ActionKey =
   | "summarize"
@@ -23,15 +24,6 @@ interface DocumentViewProps {
   onBack: () => void;
 }
 
-async function readFileAsText(file: File): Promise<string> {
-  // For text-based files, read directly
-  // For images, we'll send a placeholder (real OCR would be needed)
-  if (file.type.startsWith("image/")) {
-    return `[Obrázok: ${file.name}]`;
-  }
-  return file.text();
-}
-
 export function DocumentView({ file, action, onBack }: DocumentViewProps) {
   const t = useTranslations();
   const [response, setResponse] = useState("");
@@ -39,13 +31,16 @@ export function DocumentView({ file, action, onBack }: DocumentViewProps) {
   const [error, setError] = useState("");
   const [followUp, setFollowUp] = useState("");
   const [sendingFollowUp, setSendingFollowUp] = useState(false);
+  const [documentText, setDocumentText] = useState("");
 
   useEffect(() => {
     let cancelled = false;
 
     async function run() {
       try {
-        const text = await readFileAsText(file);
+        const text = await extractDocumentText(file);
+        if (cancelled) return;
+        setDocumentText(text);
         const fullResponse = await streamChatResponse(text, action, undefined, (chunk) => {
           if (!cancelled) setResponse(chunk);
         });
@@ -74,8 +69,7 @@ export function DocumentView({ file, action, onBack }: DocumentViewProps) {
     setLoading(true);
 
     try {
-      const text = await readFileAsText(file);
-      await streamChatResponse(text, "ask", followUp, (chunk) => {
+      await streamChatResponse(documentText, "ask", followUp, (chunk) => {
         setResponse(chunk);
       });
     } catch {
