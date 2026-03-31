@@ -83,10 +83,12 @@ export default function SettingsPage() {
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-3">
           {t("account")}
         </h2>
-        <Button variant="outline" className="w-full justify-start">
-          <LogOut className="h-4 w-4 mr-2" />
-          {t("signOut")}
-        </Button>
+        <form action="/api/auth/signout" method="POST">
+          <Button type="submit" variant="outline" className="w-full justify-start">
+            <LogOut className="h-4 w-4 mr-2" />
+            {t("signOut")}
+          </Button>
+        </form>
       </div>
 
       {/* Danger zone */}
