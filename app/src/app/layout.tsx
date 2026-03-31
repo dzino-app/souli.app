@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Brain, Clock, PenLine, Settings } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { BottomNav } from "@/components/layout/bottom-nav";
+import { ErrorBoundary } from "@/components/error-boundary";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -69,7 +70,7 @@ export default async function RootLayout({
             </div>
           </header>
           <main className="mx-auto max-w-3xl px-4 py-6 sm:py-8 pb-20 sm:pb-8">
-            {children}
+            <ErrorBoundary>{children}</ErrorBoundary>
           </main>
           <BottomNav />
         </NextIntlClientProvider>

@@ -1,5 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const anthropic = new Anthropic();
 
@@ -28,52 +28,77 @@ Pravidlá:
 - Buďte struční ale úplní`;
 
 export async function POST(request: NextRequest) {
-  const { documentText, action, question, memories } = await request.json();
+  try {
+    const { documentText, action, question, memories } = await request.json();
 
-  const actionPrompt = ACTION_PROMPTS[action] || ACTION_PROMPTS.ask;
-  let userMessage = "";
-  if (documentText) {
-    userMessage = question
-      ? `${actionPrompt}\n\nDokument:\n${documentText}\n\nOtázka: ${question}`
-      : `${actionPrompt}\n\nDokument:\n${documentText}`;
-  } else if (question) {
-    userMessage = question;
-  }
+    if (!documentText && !question) {
+      return NextResponse.json(
+        { error: "Žiadna otázka ani dokument" },
+        { status: 400 }
+      );
+    }
 
-  const systemWithMemories = memories
-    ? `${SYSTEM_PROMPT}\n\nČo viete o tomto používateľovi:\n${memories}`
-    : SYSTEM_PROMPT;
+    const actionPrompt = ACTION_PROMPTS[action] || ACTION_PROMPTS.ask;
+    let userMessage = "";
+    if (documentText) {
+      userMessage = question
+        ? `${actionPrompt}\n\nDokument:\n${documentText}\n\nOtázka: ${question}`
+        : `${actionPrompt}\n\nDokument:\n${documentText}`;
+    } else if (question) {
+      userMessage = question;
+    }
 
-  const stream = anthropic.messages.stream({
-    model: "claude-sonnet-4-20250514",
-    max_tokens: 2048,
-    system: systemWithMemories,
-    messages: [{ role: "user", content: userMessage }],
-  });
+    const systemWithMemories = memories
+      ? `${SYSTEM_PROMPT}\n\nČo viete o tomto používateľovi:\n${memories}`
+      : SYSTEM_PROMPT;
 
-  const encoder = new TextEncoder();
-  const readable = new ReadableStream({
-    async start(controller) {
-      for await (const event of stream) {
-        if (
-          event.type === "content_block_delta" &&
-          event.delta.type === "text_delta"
-        ) {
+    const stream = anthropic.messages.stream({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 2048,
+      system: systemWithMemories,
+      messages: [{ role: "user", content: userMessage }],
+    });
+
+    const encoder = new TextEncoder();
+    const readable = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const event of stream) {
+            if (
+              event.type === "content_block_delta" &&
+              event.delta.type === "text_delta"
+            ) {
+              controller.enqueue(
+                encoder.encode(
+                  `data: ${JSON.stringify({ text: event.delta.text })}\n\n`
+                )
+              );
+            }
+          }
+          controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+          controller.close();
+        } catch {
           controller.enqueue(
-            encoder.encode(`data: ${JSON.stringify({ text: event.delta.text })}\n\n`)
+            encoder.encode(
+              `data: ${JSON.stringify({ error: "Niečo sa nepodarilo" })}\n\n`
+            )
           );
+          controller.close();
         }
-      }
-      controller.enqueue(encoder.encode("data: [DONE]\n\n"));
-      controller.close();
-    },
-  });
+      },
+    });
 
-  return new Response(readable, {
-    headers: {
-      "Content-Type": "text/event-stream",
-      "Cache-Control": "no-cache",
-      Connection: "keep-alive",
-    },
-  });
+    return new Response(readable, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+      },
+    });
+  } catch {
+    return NextResponse.json(
+      { error: "Služba je dočasne nedostupná" },
+      { status: 500 }
+    );
+  }
 }

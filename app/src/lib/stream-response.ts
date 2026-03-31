@@ -1,5 +1,7 @@
 import { getMemoriesForContext } from "@/lib/memory";
 
+const TIMEOUT_MS = 60_000; // 60 second timeout
+
 export async function streamChatResponse(
   documentText: string,
   action: string,
@@ -7,45 +9,65 @@ export async function streamChatResponse(
   onChunk?: (text: string) => void
 ): Promise<string> {
   const memories = getMemoriesForContext();
-  const response = await fetch("/api/chat", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ documentText, action, question, memories }),
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
-  if (!response.ok) {
-    throw new Error("Niečo sa nepodarilo");
-  }
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ documentText, action, question, memories }),
+      signal: controller.signal,
+    });
 
-  const reader = response.body?.getReader();
-  if (!reader) throw new Error("No stream");
+    if (!response.ok) {
+      const status = response.status;
+      if (status === 429) {
+        throw new Error("Príliš veľa požiadaviek. Skúste to o chvíľu.");
+      }
+      if (status >= 500) {
+        throw new Error("Služba je dočasne nedostupná. Skúste to znova.");
+      }
+      throw new Error("Niečo sa nepodarilo");
+    }
 
-  const decoder = new TextDecoder();
-  let fullText = "";
+    const reader = response.body?.getReader();
+    if (!reader) throw new Error("Niečo sa nepodarilo");
 
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
+    const decoder = new TextDecoder();
+    let fullText = "";
 
-    const chunk = decoder.decode(value, { stream: true });
-    const lines = chunk.split("\n");
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
 
-    for (const line of lines) {
-      if (line.startsWith("data: ")) {
-        const data = line.slice(6);
-        if (data === "[DONE]") break;
-        try {
-          const parsed = JSON.parse(data);
-          if (parsed.text) {
-            fullText += parsed.text;
-            onChunk?.(fullText);
+      const chunk = decoder.decode(value, { stream: true });
+      const lines = chunk.split("\n");
+
+      for (const line of lines) {
+        if (line.startsWith("data: ")) {
+          const data = line.slice(6);
+          if (data === "[DONE]") break;
+          try {
+            const parsed = JSON.parse(data);
+            if (parsed.text) {
+              fullText += parsed.text;
+              onChunk?.(fullText);
+            }
+          } catch {
+            // skip parse errors
           }
-        } catch {
-          // skip parse errors
         }
       }
     }
-  }
 
-  return fullText;
+    return fullText;
+  } catch (err) {
+    if (err instanceof DOMException && err.name === "AbortError") {
+      throw new Error("Odpoveď trvá príliš dlho. Skúste to znova.");
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
