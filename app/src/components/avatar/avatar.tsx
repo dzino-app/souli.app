@@ -19,10 +19,15 @@ const SIZES = {
 };
 
 const DEFAULT_APPEARANCE: AvatarAppearance = {
+  species: "human",
   bodyShape: "round",
   eyeStyle: "dots",
   mouthStyle: "smile",
+  earStyle: "none",
   accessory: "none",
+  hairStyle: "none",
+  skinColor: "#FDDCB5",
+  bodyColor: "#4F46E5",
 };
 
 // Map AvatarState to animation key
@@ -152,7 +157,32 @@ function AccessoryLayer({ type, color }: { type: AvatarAppearance["accessory"]; 
       );
     case "halo":
       return <div className="av-accessory av-halo" />;
+    case "glasses":
+      return (
+        <div className="av-accessory av-glasses">
+          <div className="av-glasses__lens" />
+          <div className="av-glasses__bridge" />
+          <div className="av-glasses__lens" />
+        </div>
+      );
   }
+}
+
+/* ---------- Ears ---------- */
+function Ears({ style, skinColor }: { style: AvatarAppearance["earStyle"]; skinColor: string }) {
+  if (style === "none") return null;
+  return (
+    <>
+      <div className={`av-ear av-ear--${style} av-ear--left`} style={{ backgroundColor: skinColor }} />
+      <div className={`av-ear av-ear--${style} av-ear--right`} style={{ backgroundColor: skinColor }} />
+    </>
+  );
+}
+
+/* ---------- Hair ---------- */
+function Hair({ style, color }: { style: AvatarAppearance["hairStyle"]; color: string }) {
+  if (style === "none") return null;
+  return <div className={`av-hair av-hair--${style}`} style={{ backgroundColor: color }} />;
 }
 
 /* ---------- Main Avatar ---------- */
@@ -188,25 +218,32 @@ export function Avatar({ state, color, size = "md", appearance }: AvatarProps) {
 
   const currentFrame = animation.frames[frameIndex % animation.frames.length];
 
+  const bodyColor = ap.bodyColor || color;
+  const skinColor = ap.skinColor || "#FDDCB5";
+
   return (
     <div
       className="avatar-container"
       style={{ transform: `scale(${scale})` }}
     >
+      <Ears style={ap.earStyle} skinColor={skinColor} />
+      <Hair style={ap.hairStyle} color={bodyColor} />
       <AccessoryLayer
         type={ap.accessory}
-        color={color}
+        color={bodyColor}
         bounce={currentFrame.accessoryBounce}
       />
       <div
         className={`avatar-body avatar-body--${ap.bodyShape}`}
         style={{
-          backgroundColor: color,
+          backgroundColor: bodyColor,
           transform: `translateX(${currentFrame.bodyOffsetX}px) translateY(${currentFrame.bodyOffsetY}px) rotate(${currentFrame.bodyRotation}deg)`,
           transition: `transform ${1 / animation.fps * 0.8}s ease-in-out`,
         }}
       >
-        <div className="av-pixel-border" style={{ borderColor: color }} />
+        <div className="av-pixel-border" style={{ borderColor: bodyColor }} />
+        {/* Face area — lighter skin tone */}
+        <div className="av-face" style={{ backgroundColor: skinColor }} />
         <Eyes variant={currentFrame.eyeVariant} />
         <Mouth variant={currentFrame.mouthVariant} />
         <Effects frame={currentFrame} />

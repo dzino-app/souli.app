@@ -12,10 +12,15 @@ import {
 import { getIdleState, calculateMood } from "@/lib/avatar-mood";
 
 const DEFAULT_APPEARANCE: AvatarAppearance = {
+  species: "human",
   bodyShape: "round",
   eyeStyle: "dots",
   mouthStyle: "smile",
+  earStyle: "none",
   accessory: "none",
+  hairStyle: "none",
+  skinColor: "#FDDCB5",
+  bodyColor: "#4F46E5",
 };
 
 export function useAvatarState() {

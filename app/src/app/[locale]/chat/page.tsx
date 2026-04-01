@@ -34,7 +34,7 @@ export default function ChatPage() {
   }>({
     color: "#4F46E5",
     name: "Dzino",
-    appearance: { bodyShape: "round", eyeStyle: "dots", mouthStyle: "smile", accessory: "none" },
+    appearance: { species: "human", bodyShape: "round", eyeStyle: "dots", mouthStyle: "smile", earStyle: "none", accessory: "none", hairStyle: "none", skinColor: "#FDDCB5", bodyColor: "#4F46E5" },
   });
   const convIdRef = useRef<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -171,13 +171,8 @@ export default function ChatPage() {
       {/* Messages */}
       <div className="flex-1 overflow-y-auto space-y-4 pb-4">
         {messages.length === 0 && !streaming && (
-          <div className="text-center py-12">
-            {hasVoxel ? (
-              <VoxelAvatar state="waving" color={avatarData.color} size="md" />
-            ) : (
-              <Avatar state="waving" color={avatarData.color} size="md" appearance={avatarData.appearance} />
-            )}
-            <p className="text-sm text-muted-foreground mt-4">
+          <div className="text-center py-8">
+            <p className="text-sm text-muted-foreground">
               {t("companion.greeting")}
             </p>
           </div>
