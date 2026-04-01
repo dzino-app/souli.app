@@ -1,8 +1,6 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rate-limit";
-
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "");
+import { generateContent } from "@/lib/llm";
 
 const EXTRACTION_PROMPT = `Analyzujte nasledujúcu konverzáciu a extrahujte fakty o používateľovi.
 
@@ -20,19 +18,17 @@ Vráťte IBA validný JSON (pole objektov), nič iné.`;
 export async function POST(request: NextRequest) {
   const ip = request.headers.get("x-forwarded-for") || "anonymous";
   const { allowed } = checkRateLimit(ip);
-  if (!allowed) {
-    return NextResponse.json({ facts: [] });
-  }
+  if (!allowed) return NextResponse.json({ facts: [] });
 
   const { conversation } = await request.json();
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-    const result = await model.generateContent(
-      EXTRACTION_PROMPT.replace("{conversation}", conversation)
-    );
-
-    const text = result.response?.text() || "[]";
+    const text = await generateContent({
+      contents: [{
+        role: "user",
+        parts: [{ text: EXTRACTION_PROMPT.replace("{conversation}", conversation) }],
+      }],
+    });
     const jsonMatch = text.match(/\[[\s\S]*\]/);
     const facts = jsonMatch ? JSON.parse(jsonMatch[0]) : [];
     return NextResponse.json({ facts });

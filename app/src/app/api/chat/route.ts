@@ -1,8 +1,6 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rate-limit";
-
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "");
+import { generateContentStream } from "@/lib/llm";
 
 const SYSTEM_PROMPT = `Si Dzino — osobný spoločník používateľa. Si priateľský, vtipný, a starostlivý. Nie si robot, si kamarát.
 
@@ -65,14 +63,7 @@ export async function POST(request: NextRequest) {
       ? `${SYSTEM_PROMPT}\n\n== VAŠA DUŠA (čo o používateľovi viete) ==\n${soulContext}`
       : SYSTEM_PROMPT;
 
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.5-flash",
-      systemInstruction: systemWithSoul,
-    });
-
-    // Build conversation history
     const contents: { role: "user" | "model"; parts: { text: string }[] }[] = [];
-
     if (history && Array.isArray(history)) {
       for (const msg of history.slice(-10)) {
         contents.push({
@@ -81,34 +72,28 @@ export async function POST(request: NextRequest) {
         });
       }
     }
+    contents.push({ role: "user", parts: [{ text: message }] });
 
-    contents.push({
-      role: "user",
-      parts: [{ text: message }],
+    const stream = generateContentStream({
+      systemInstruction: systemWithSoul,
+      contents,
     });
-
-    const streamResult = await model.generateContentStream({ contents });
 
     const encoder = new TextEncoder();
     const readable = new ReadableStream({
       async start(controller) {
         try {
-          for await (const chunk of streamResult.stream) {
-            const text = chunk.text();
-            if (text) {
-              controller.enqueue(
-                encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
-              );
-            }
+          for await (const text of stream) {
+            controller.enqueue(
+              encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
+            );
           }
           controller.enqueue(encoder.encode("data: [DONE]\n\n"));
           controller.close();
         } catch (err) {
           const msg = err instanceof Error ? err.message : "Unknown error";
           controller.enqueue(
-            encoder.encode(
-              `data: ${JSON.stringify({ error: msg })}\n\n`
-            )
+            encoder.encode(`data: ${JSON.stringify({ error: msg })}\n\n`)
           );
           controller.close();
         }

@@ -1,8 +1,6 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rate-limit";
-
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "");
+import { generateContent } from "@/lib/llm";
 
 const BASE_PROMPT = `You are a voxel artist. Generate a 16×16×16 voxel character as a 3D array.
 
@@ -32,34 +30,24 @@ Return ONLY a JSON object with this exact structure:
 
 const ANIMATION_PROMPT = `You are a voxel animator. Given a base 16×16×16 voxel character grid, generate animation frames.
 
-The grid format is grid[y][z][x] where y=height, z=depth, x=width.
-null = empty, "#RRGGBB" = colored voxel.
-
 Base character grid:
 {baseGrid}
 
-Generate animation frames for this activity: {activity}
-Description: {activityDesc}
+Generate {frameCount} frames for: {activity} ({activityDesc})
+Each frame is a complete 16×16×16 grid. Frame 1 and last frame should be close to base pose.
 
-Create {frameCount} frames. Each frame should be a complete 16×16×16 grid.
-Modify the base grid to create the animation — move limbs, shift body, change expressions.
-Frame 1 and the last frame should be close to the base pose for seamless looping.
-
-Return ONLY a JSON object:
-{
-  "frames": [array of {frameCount} complete 16×16×16 grids]
-}`;
+Return ONLY: { "frames": [array of grids] }`;
 
 const ACTIVITIES = [
-  { key: "idle", desc: "Gentle breathing — subtle body bob up and down", frames: 4 },
-  { key: "walk", desc: "Walking in place — legs alternate, body sways", frames: 6 },
-  { key: "talk", desc: "Talking — mouth opens/closes, slight body movement", frames: 4 },
-  { key: "happy", desc: "Jumping with joy — bounces up high, arms up", frames: 4 },
-  { key: "sad", desc: "Slouching sadly — head down, slow sway", frames: 4 },
-  { key: "wave", desc: "Waving hello — one arm goes up and waves", frames: 4 },
-  { key: "think", desc: "Thinking — tilts head, looks up", frames: 4 },
-  { key: "eat", desc: "Eating — brings hands to mouth, chewing motion", frames: 6 },
-  { key: "sleep", desc: "Sleeping — eyes closed, slow breathing, very subtle", frames: 2 },
+  { key: "idle", desc: "Gentle breathing — subtle body bob", frames: 4 },
+  { key: "walk", desc: "Walking in place — legs alternate", frames: 6 },
+  { key: "talk", desc: "Talking — mouth opens/closes", frames: 4 },
+  { key: "happy", desc: "Jumping with joy", frames: 4 },
+  { key: "sad", desc: "Slouching sadly", frames: 4 },
+  { key: "wave", desc: "Waving hello", frames: 4 },
+  { key: "think", desc: "Thinking — tilts head", frames: 4 },
+  { key: "eat", desc: "Eating — chewing motion", frames: 6 },
+  { key: "sleep", desc: "Sleeping — slow breathing", frames: 2 },
 ];
 
 export async function POST(request: NextRequest) {
@@ -71,64 +59,55 @@ export async function POST(request: NextRequest) {
 
   try {
     const { description, generateAnimations } = await request.json();
-
     if (!description) {
       return NextResponse.json({ error: "Chýba popis postavy" }, { status: 400 });
     }
 
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.5-flash",
-      generationConfig: { responseMimeType: "application/json" },
+    // Generate base character
+    const baseText = await generateContent({
+      contents: [{ role: "user", parts: [{ text: BASE_PROMPT.replace("{description}", description) }] }],
+      jsonMode: true,
     });
-
-    // Step 1: Generate base character
-    const baseResult = await model.generateContent(
-      BASE_PROMPT.replace("{description}", description)
-    );
-    const baseData = JSON.parse(baseResult.response.text());
+    const baseData = JSON.parse(baseText);
 
     if (!baseData.grid || !Array.isArray(baseData.grid)) {
       return NextResponse.json({ error: "Nepodarilo sa vygenerovať postavu" }, { status: 500 });
     }
 
-    const result: {
-      baseGrid: unknown;
-      animations: Record<string, unknown[]>;
-      description: string;
-    } = {
+    const result: { baseGrid: unknown; animations: Record<string, unknown[]>; description: string } = {
       baseGrid: baseData.grid,
       animations: {},
       description,
     };
 
-    // Step 2: Generate animations (if requested)
     if (generateAnimations) {
       const baseGridStr = JSON.stringify(baseData.grid).slice(0, 6000);
 
-      const generateAnim = async (
-        activity: (typeof ACTIVITIES)[0]
-      ): Promise<{ key: string; frames: unknown[] }> => {
+      const generateAnim = async (a: (typeof ACTIVITIES)[0]) => {
         try {
-          const prompt = ANIMATION_PROMPT.replace("{baseGrid}", baseGridStr)
-            .replace("{activity}", activity.key)
-            .replace("{activityDesc}", activity.desc)
-            .replace("{frameCount}", String(activity.frames));
-
-          const animResult = await model.generateContent(prompt);
-          const animData = JSON.parse(animResult.response.text());
-          return { key: activity.key, frames: animData.frames || [] };
+          const prompt = ANIMATION_PROMPT
+            .replace("{baseGrid}", baseGridStr)
+            .replace("{activity}", a.key)
+            .replace("{activityDesc}", a.desc)
+            .replace("{frameCount}", String(a.frames));
+          const text = await generateContent({
+            contents: [{ role: "user", parts: [{ text: prompt }] }],
+            jsonMode: true,
+          });
+          const data = JSON.parse(text);
+          return { key: a.key, frames: data.frames || [] };
         } catch {
-          return { key: activity.key, frames: [] };
+          return { key: a.key, frames: [] };
         }
       };
 
-      // Generate priority animations first (idle + talk)
-      for (const activity of ACTIVITIES.filter((a) => a.key === "idle" || a.key === "talk")) {
-        const { key, frames } = await generateAnim(activity);
+      // Priority: idle + talk first
+      for (const a of ACTIVITIES.filter((a) => a.key === "idle" || a.key === "talk")) {
+        const { key, frames } = await generateAnim(a);
         result.animations[key] = frames;
       }
 
-      // Rest in parallel batches of 3
+      // Rest in parallel batches
       const rest = ACTIVITIES.filter((a) => a.key !== "idle" && a.key !== "talk");
       for (let i = 0; i < rest.length; i += 3) {
         const batch = rest.slice(i, i + 3);
