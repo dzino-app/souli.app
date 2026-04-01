@@ -1,32 +1,50 @@
-import Anthropic from "@anthropic-ai/sdk";
+import { VertexAI } from "@google-cloud/vertexai";
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rate-limit";
 
-const anthropic = new Anthropic();
+const vertexAI = new VertexAI({
+  project: process.env.GOOGLE_CLOUD_PROJECT || "",
+  location: process.env.GOOGLE_CLOUD_LOCATION || "us-central1",
+});
 
-const ACTION_PROMPTS: Record<string, string> = {
-  summarize:
-    "Zhrnite tento dokument. Uveďte hlavné body v prehľadnom zozname. Píšte po slovensky, vykajte.",
-  explain:
-    "Vysvetlite tento dokument jednoduchým jazykom, ktorému porozumie bežný človek. Vyhnite sa odborným výrazom. Píšte po slovensky, vykajte.",
-  risks:
-    "Nájdite v tomto dokumente všetky riziká, problematické body a na čo si treba dať pozor. Píšte po slovensky, vykajte.",
-  keyPoints:
-    "Vyberte najdôležitejšie body a informácie z tohto dokumentu. Píšte po slovensky, vykajte.",
-  write:
-    "Používateľ popísal, čo potrebuje napísať. Napíšte formálny text (list, e-mail, sťažnosť, žiadosť, alebo iný dokument) podľa popisu. Text musí byť v správnom formáte, formálnym jazykom, gramaticky bezchybný. Ak to je list, uveďte dátum, oslovenie, telo listu a podpis. Píšte po slovensky, vykajte.",
-  ask: "Odpovedzte na otázku používateľa k tomuto dokumentu. Píšte po slovensky, vykajte.",
-};
+const model = vertexAI.getGenerativeModel({
+  model: "gemini-3.0-flash",
+  generationConfig: {
+    maxOutputTokens: 2048,
+    temperature: 0.8,
+    // thinkingConfig: { thinkingBudget: 0 }, // enable when SDK supports it
+  },
+});
 
-const SYSTEM_PROMPT = `Ste Dzino — osobný pomocník, ktorý pomáha ľuďom porozumieť dokumentom a odpovedá na otázky po slovensky.
+const SYSTEM_PROMPT = `Si Dzino — osobný spoločník používateľa. Si priateľský, vtipný, a starostlivý. Nie si robot, si kamarát.
 
 Pravidlá:
-- Vždy píšte po slovensky, používajte vykanie (Vy, Váš, Vám)
-- Nikdy nespomínajte, že ste AI, LLM alebo model
-- Píšte zrozumiteľne, jednoducho, pre bežných ľudí
-- Ak nie ste si istý, povedzte to — nikdy nevymýšľajte
-- Citujte relevantné časti dokumentu keď je to užitočné
-- Buďte struční ale úplní`;
+- Vždy píš po slovensky, používaj vykanie (Vy, Váš, Vám)
+- Nikdy nespomínaj AI, LLM, model, algoritmus — si jednoducho Dzino
+- Buď prirodzený, ľudský, empatický
+- Pamätaj si kontext z duše (soul files) a odkazuj sa naň
+- Ak sa dozvieš niečo nové o používateľovi, na konci odpovede pridaj blok:
+
+:::aktualizacia
+subor: <slug>.md
+operacia: pridat
+obsah: |
+  - <fakt>
+:::
+
+- Ak sa dohodnete na udalosti alebo pláne, pridaj blok:
+
+:::udalost
+typ: plan
+datum: YYYY-MM-DD
+cas: HH:MM
+nazov: <názov>
+popis: <popis>
+pripomienka: <minúty pred>
+:::
+
+- Tieto bloky pridávaj IBA keď sa naozaj naučíš niečo nové, nie pri každej odpovedi
+- Buď stručný ale priateľský`;
 
 export async function POST(request: NextRequest) {
   try {
@@ -39,49 +57,52 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { documentText, action, question, memories } = await request.json();
+    const { message, soulContext, history } = await request.json();
 
-    if (!documentText && !question) {
+    if (!message) {
       return NextResponse.json(
-        { error: "Žiadna otázka ani dokument" },
+        { error: "Žiadna správa" },
         { status: 400 }
       );
     }
 
-    const actionPrompt = ACTION_PROMPTS[action] || ACTION_PROMPTS.ask;
-    let userMessage = "";
-    if (documentText) {
-      userMessage = question
-        ? `${actionPrompt}\n\nDokument:\n${documentText}\n\nOtázka: ${question}`
-        : `${actionPrompt}\n\nDokument:\n${documentText}`;
-    } else if (question) {
-      userMessage = question;
-    }
-
-    const systemWithMemories = memories
-      ? `${SYSTEM_PROMPT}\n\nČo viete o tomto používateľovi:\n${memories}`
+    const systemWithSoul = soulContext
+      ? `${SYSTEM_PROMPT}\n\n== VAŠA DUŠA (čo o používateľovi viete) ==\n${soulContext}`
       : SYSTEM_PROMPT;
 
-    const stream = anthropic.messages.stream({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 2048,
-      system: systemWithMemories,
-      messages: [{ role: "user", content: userMessage }],
+    // Build conversation history for context
+    const contents = [];
+
+    // Add conversation history if provided
+    if (history && Array.isArray(history)) {
+      for (const msg of history.slice(-10)) { // last 10 messages for context
+        contents.push({
+          role: msg.role === "assistant" ? "model" : "user",
+          parts: [{ text: msg.content }],
+        });
+      }
+    }
+
+    // Add current message
+    contents.push({
+      role: "user" as const,
+      parts: [{ text: message }],
+    });
+
+    const streamResult = await model.generateContentStream({
+      systemInstruction: { role: "system" as const, parts: [{ text: systemWithSoul }] },
+      contents,
     });
 
     const encoder = new TextEncoder();
     const readable = new ReadableStream({
       async start(controller) {
         try {
-          for await (const event of stream) {
-            if (
-              event.type === "content_block_delta" &&
-              event.delta.type === "text_delta"
-            ) {
+          for await (const chunk of streamResult.stream) {
+            const text = chunk.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (text) {
               controller.enqueue(
-                encoder.encode(
-                  `data: ${JSON.stringify({ text: event.delta.text })}\n\n`
-                )
+                encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
               );
             }
           }

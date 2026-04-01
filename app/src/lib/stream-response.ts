@@ -1,14 +1,18 @@
-import { getMemoriesForContext } from "@/lib/memory";
+import { getSoulContext } from "@/lib/soul";
 
-const TIMEOUT_MS = 60_000; // 60 second timeout
+const TIMEOUT_MS = 60_000;
+
+export interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+}
 
 export async function streamChatResponse(
-  documentText: string,
-  action: string,
-  question?: string,
+  message: string,
+  history: ChatMessage[] = [],
   onChunk?: (text: string) => void
 ): Promise<string> {
-  const memories = getMemoriesForContext();
+  const soulContext = getSoulContext();
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
@@ -16,7 +20,7 @@ export async function streamChatResponse(
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ documentText, action, question, memories }),
+      body: JSON.stringify({ message, soulContext, history }),
       signal: controller.signal,
     });
 

@@ -25,7 +25,7 @@ export default function WritePage() {
     setError("");
 
     try {
-      await streamChatResponse("", "write", input.trim(), (chunk) => {
+      await streamChatResponse(`Napíšte formálny text: ${input.trim()}`, [], (chunk) => {
         setResult(chunk);
       });
     } catch {

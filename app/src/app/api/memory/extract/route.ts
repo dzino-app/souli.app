@@ -1,21 +1,28 @@
-import Anthropic from "@anthropic-ai/sdk";
+import { VertexAI } from "@google-cloud/vertexai";
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rate-limit";
 
-const anthropic = new Anthropic();
+const vertexAI = new VertexAI({
+  project: process.env.GOOGLE_CLOUD_PROJECT || "",
+  location: process.env.GOOGLE_CLOUD_LOCATION || "us-central1",
+});
+
+const model = vertexAI.getGenerativeModel({
+  model: "gemini-3.0-flash",
+  generationConfig: {
+    maxOutputTokens: 512,
+    temperature: 0.3,
+    // thinkingConfig: { thinkingBudget: 0 }, // enable when SDK supports it
+  },
+});
 
 const EXTRACTION_PROMPT = `Analyzujte nasledujúcu konverzáciu a extrahujte fakty o používateľovi.
 
 Vráťte JSON pole faktov. Každý fakt má:
-- "fact": krátky popis faktu v slovenčine (napr. "Volá sa Maroš")
+- "fact": krátky popis faktu v slovenčine
 - "category": kategória — "personal", "work", "preferences", "documents"
 
 Ak žiadne fakty nie sú, vráťte prázdne pole [].
-
-DÔLEŽITÉ:
-- Extrahujte IBA fakty o používateľovi, nie o dokumente
-- Fakty musia byť konkrétne a užitočné pre budúce konverzácie
-- Neuvádzajte všeobecné veci (napr. "používateľ nahral dokument")
 
 Konverzácia:
 {conversation}
@@ -31,22 +38,17 @@ export async function POST(request: NextRequest) {
 
   const { conversation } = await request.json();
 
-  const response = await anthropic.messages.create({
-    model: "claude-sonnet-4-20250514",
-    max_tokens: 512,
-    messages: [
-      {
-        role: "user",
-        content: EXTRACTION_PROMPT.replace("{conversation}", conversation),
-      },
-    ],
-  });
-
-  const text =
-    response.content[0].type === "text" ? response.content[0].text : "[]";
-
   try {
-    // Extract JSON from response (may be wrapped in markdown code blocks)
+    const result = await model.generateContent({
+      contents: [
+        {
+          role: "user",
+          parts: [{ text: EXTRACTION_PROMPT.replace("{conversation}", conversation) }],
+        },
+      ],
+    });
+
+    const text = result.response?.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
     const jsonMatch = text.match(/\[[\s\S]*\]/);
     const facts = jsonMatch ? JSON.parse(jsonMatch[0]) : [];
     return NextResponse.json({ facts });

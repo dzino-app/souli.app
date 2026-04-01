@@ -11,7 +11,7 @@
     "test": "bun test --preload ./src/lib/__tests__/setup.ts"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.80.0",
+    "@google-cloud/vertexai": "^1.10.4",
     "@supabase/ssr": "^0.10.0",
     "@supabase/supabase-js": "^2.101.0",
     "class-variance-authority": "^0.7.1",
