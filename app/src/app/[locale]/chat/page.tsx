@@ -25,7 +25,7 @@ export default function ChatPage() {
   const [streamText, setStreamText] = useState("");
   const [pendingUpdates, setPendingUpdates] = useState<SoulUpdate[]>([]);
   const [pendingEvents, setPendingEvents] = useState<EventProposal[]>([]);
-  const [avatarState, setAvatarState] = useState<"idle" | "thinking" | "talking">("idle");
+  const [avatarState, setAvatarState] = useState<"idle" | "thinking" | "talking" | "happy">("idle");
   const [hasVoxel, setHasVoxel] = useState(false);
   const [avatarData, setAvatarData] = useState<{
     color: string;
@@ -69,9 +69,9 @@ export default function ChatPage() {
 
     try {
       const history = messages.slice(-10);
-      setAvatarState("talking");
 
       const fullResponse = await streamChatResponse(userMsg, history, (chunk) => {
+        setAvatarState("talking"); // switch to talking once first chunk arrives
         setStreamText(chunk);
       });
 
@@ -89,7 +89,8 @@ export default function ChatPage() {
     } finally {
       setStreaming(false);
       setStreamText("");
-      setAvatarState("idle");
+      setAvatarState("happy");
+      setTimeout(() => setAvatarState("idle"), 2000);
     }
   }
 
@@ -131,17 +132,19 @@ export default function ChatPage() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-8rem)] sm:h-[calc(100vh-6rem)]">
-      {/* Chat header with mini avatar */}
+      {/* Chat header with avatar */}
       <div className="flex items-center gap-3 pb-4 border-b mb-4">
-        {hasVoxel ? (
-          <VoxelAvatar state={avatarState} color={avatarData.color} size="sm" />
-        ) : (
-          <Avatar state={avatarState} color={avatarData.color} size="sm" appearance={avatarData.appearance} />
-        )}
+        <div className="w-12 h-12 flex items-center justify-center">
+          {hasVoxel ? (
+            <VoxelAvatar state={avatarState} color={avatarData.color} size="sm" />
+          ) : (
+            <Avatar state={avatarState} color={avatarData.color} size="sm" appearance={avatarData.appearance} />
+          )}
+        </div>
         <div>
           <h1 className="font-semibold">{avatarData.name}</h1>
-          <p className="text-xs text-muted-foreground">
-            {streaming ? "píše..." : "online"}
+          <p className={`text-xs ${avatarState === "thinking" ? "text-primary" : avatarState === "talking" ? "text-accent" : "text-muted-foreground"}`}>
+            {avatarState === "thinking" ? "premýšľa..." : avatarState === "talking" ? "píše..." : "online"}
           </p>
         </div>
       </div>
