@@ -137,37 +137,35 @@ export default function ChatPage() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-8rem)] sm:h-[calc(100vh-6rem)]">
-      {/* Chat header with avatar */}
-      <div className="flex items-center gap-3 pb-4 border-b mb-4">
-        <div className="w-12 h-12 flex items-center justify-center">
+      {/* Avatar — prominent, centered, animated */}
+      <div className="flex flex-col items-center gap-1 pb-3 border-b mb-3">
+        <div className="py-2">
           {hasVoxel ? (
-            <VoxelAvatar state={avatarState} color={avatarData.color} size="sm" />
+            <VoxelAvatar state={avatarState} color={avatarData.color} size="md" />
           ) : (
-            <Avatar state={avatarState} color={avatarData.color} size="sm" appearance={avatarData.appearance} />
+            <Avatar state={avatarState} color={avatarData.color} size="md" appearance={avatarData.appearance} />
           )}
         </div>
-        <div>
-          <h1 className="font-semibold">{avatarData.name}</h1>
-          <p className={`text-xs ${
-            avatarState === "thinking" ? "text-primary" :
-            avatarState === "talking" ? "text-accent" :
-            avatarState === "happy" ? "text-success" :
-            avatarState === "sad" ? "text-destructive" :
-            "text-muted-foreground"
-          }`}>
-            {{
-              thinking: "premýšľa...",
-              talking: "píše...",
-              happy: "😊 šťastný",
-              sad: "😢 smutný",
-              waving: "👋 máva",
-              walking: "🚶 prechádza sa",
-              eating: "🍽️ je",
-              sleeping: "💤 spí",
-              idle: "online",
-            }[avatarState] || "online"}
-          </p>
-        </div>
+        <h1 className="text-sm font-semibold">{avatarData.name}</h1>
+        <p className={`text-xs ${
+          avatarState === "thinking" ? "text-primary animate-pulse" :
+          avatarState === "talking" ? "text-accent" :
+          avatarState === "happy" ? "text-success" :
+          avatarState === "sad" ? "text-destructive" :
+          "text-muted-foreground"
+        }`}>
+          {{
+            thinking: "premýšľa...",
+            talking: "píše...",
+            happy: "šťastný",
+            sad: "smutný",
+            waving: "máva",
+            walking: "prechádza sa",
+            eating: "je",
+            sleeping: "spí",
+            idle: "online",
+          }[avatarState] || "online"}
+        </p>
       </div>
 
       {/* Messages */}
