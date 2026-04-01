@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import Link from "next/link";
-import { Brain, Clock, PenLine, Settings } from "lucide-react";
+import { MessageCircle, BookOpen, Calendar, Settings } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { ErrorBoundary } from "@/components/error-boundary";
@@ -16,9 +16,8 @@ const geistSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Dzino — Váš osobný pomocník",
-  description:
-    "Nahrajte akýkoľvek dokument a opýtajte sa čoho chcete — po slovensky.",
+  title: "Dzino — Váš osobný spoločník",
+  description: "Osobný spoločník, ktorý Vás pozná a rastie s Vami.",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
@@ -40,24 +39,23 @@ export default async function RootLayout({
                 Dzino
               </Link>
               <div className="flex items-center gap-1">
-                {/* Desktop-only nav icons */}
                 <Link
-                  href="/napisat"
+                  href="/chat"
                   className="hidden sm:inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
                 >
-                  <PenLine className="h-5 w-5" />
+                  <MessageCircle className="h-5 w-5" />
                 </Link>
                 <Link
-                  href="/historia"
+                  href="/dusa"
                   className="hidden sm:inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
                 >
-                  <Clock className="h-5 w-5" />
+                  <BookOpen className="h-5 w-5" />
                 </Link>
                 <Link
-                  href="/pamat"
+                  href="/udalosti"
                   className="hidden sm:inline-flex items-center justify-center rounded-md h-11 w-11 text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
                 >
-                  <Brain className="h-5 w-5" />
+                  <Calendar className="h-5 w-5" />
                 </Link>
                 <ThemeToggle />
                 <Link

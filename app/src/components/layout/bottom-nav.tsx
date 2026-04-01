@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PenLine, Clock, Brain, Settings } from "lucide-react";
+import { Home, MessageCircle, BookOpen, Calendar, Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const items = [
   { href: "/", icon: Home, label: "Domov" },
-  { href: "/napisat", icon: PenLine, label: "Napísať" },
-  { href: "/historia", icon: Clock, label: "História" },
-  { href: "/pamat", icon: Brain, label: "Pamäť" },
-  { href: "/nastavenia", icon: Settings, label: "Viac" },
+  { href: "/chat", icon: MessageCircle, label: "Chat" },
+  { href: "/dusa", icon: BookOpen, label: "Duša" },
+  { href: "/udalosti", icon: Calendar, label: "Udalosti" },
+  { href: "/nastavenia", icon: Menu, label: "Viac" },
 ] as const;
 
 export function BottomNav() {
