@@ -7,18 +7,36 @@ import {
   recordInteraction,
   type AvatarState,
   type AvatarData,
+  type AvatarAppearance,
 } from "@/lib/avatar";
 import { getIdleState, calculateMood } from "@/lib/avatar-mood";
 
+const DEFAULT_APPEARANCE: AvatarAppearance = {
+  bodyShape: "round",
+  eyeStyle: "dots",
+  mouthStyle: "smile",
+  accessory: "none",
+};
+
 export function useAvatarState() {
-  const [data, setData] = useState<AvatarData>(() => getAvatarData());
+  const [mounted, setMounted] = useState(false);
+  const [data, setData] = useState<AvatarData>({
+    state: "idle",
+    mood: 70,
+    lastInteraction: new Date().toISOString(),
+    color: "#4F46E5",
+    name: "Dzino",
+    appearance: DEFAULT_APPEARANCE,
+  });
   const [transientState, setTransientState] = useState<AvatarState | null>(null);
 
-  // On mount: calculate mood and set appropriate idle state
+  // Only read localStorage after mount (avoids hydration mismatch)
   useEffect(() => {
+    setMounted(true);
+    const stored = getAvatarData();
     const mood = calculateMood();
     const idle = getIdleState();
-    setData((prev) => ({ ...prev, mood, state: idle }));
+    setData({ ...stored, mood, state: idle });
 
     // Play waving animation on first load
     setTransientState("waving");
@@ -28,7 +46,6 @@ export function useAvatarState() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Play a temporary state animation, then return to idle
   const playState = useCallback(
     (state: AvatarState, durationMs: number = 2000) => {
       setTransientState(state);
@@ -43,9 +60,8 @@ export function useAvatarState() {
     []
   );
 
-  // Record a chat interaction (boosts mood)
   const onChatStart = useCallback(() => {
-    playState("thinking", 60000); // thinking until response
+    playState("thinking", 60000);
   }, [playState]);
 
   const onChatResponse = useCallback(() => {
@@ -58,11 +74,11 @@ export function useAvatarState() {
   }, [playState]);
 
   const currentState = transientState || data.state;
-  const mood = data.mood;
 
   return {
+    mounted,
     state: currentState,
-    mood,
+    mood: data.mood,
     color: data.color,
     name: data.name,
     appearance: data.appearance,

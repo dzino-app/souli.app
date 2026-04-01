@@ -19,7 +19,7 @@ import {
 } from "@/lib/conversations";
 
 export default function Home() {
-  const { state, mood, color, name, appearance } = useAvatarState();
+  const { mounted, state, mood, color, name, appearance } = useAvatarState();
   const [groups, setGroups] = useState<Record<string, Conversation[]>>({});
   const [hasVoxel, setHasVoxel] = useState(false);
   const [generating, setGenerating] = useState(false);
@@ -47,6 +47,8 @@ export default function Home() {
   }
 
   const dateKeys = Object.keys(groups);
+
+  if (!mounted) return null;
 
   return (
     <div className="flex flex-col gap-6">

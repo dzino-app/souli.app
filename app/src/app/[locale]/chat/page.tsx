@@ -26,10 +26,24 @@ export default function ChatPage() {
   const [pendingUpdates, setPendingUpdates] = useState<SoulUpdate[]>([]);
   const [pendingEvents, setPendingEvents] = useState<EventProposal[]>([]);
   const [avatarState, setAvatarState] = useState<"idle" | "thinking" | "talking">("idle");
-  const [hasVoxel] = useState(() => getVoxelAvatar() !== null);
+  const [hasVoxel, setHasVoxel] = useState(false);
+  const [avatarData, setAvatarData] = useState<{
+    color: string;
+    name: string;
+    appearance: import("@/lib/avatar").AvatarAppearance;
+  }>({
+    color: "#4F46E5",
+    name: "Dzino",
+    appearance: { bodyShape: "round", eyeStyle: "dots", mouthStyle: "smile", accessory: "none" },
+  });
   const convIdRef = useRef<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const avatarData = getAvatarData();
+
+  useEffect(() => {
+    setHasVoxel(getVoxelAvatar() !== null);
+    const data = getAvatarData();
+    setAvatarData({ color: data.color, name: data.name, appearance: data.appearance });
+  }, []);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
