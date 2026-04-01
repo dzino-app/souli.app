@@ -6,15 +6,13 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MarkdownResponse } from "@/components/chat/markdown-response";
-import { VoxelAvatar } from "@/components/avatar/voxel-avatar";
-import { Avatar } from "@/components/avatar/avatar";
+import { CachedAvatar } from "@/components/avatar/cached-avatar";
 import { streamChatResponse, type ChatMessage } from "@/lib/stream-response";
 import { parseResponse, type SoulUpdate, type EventProposal } from "@/lib/parse-soul-updates";
 import { appendToSoulFile, updateSoulFile } from "@/lib/soul";
 import { createEvent } from "@/lib/events";
 import { getAvatarData, recordInteraction } from "@/lib/avatar";
-import { getVoxelAvatar } from "@/lib/voxel";
-import { generateVoxelAvatar } from "@/lib/avatar-generator";
+import { clearFrameCache } from "@/lib/avatar-cache";
 import { createConversation, addMessage } from "@/lib/conversations";
 
 export default function ChatPage() {
@@ -26,13 +24,10 @@ export default function ChatPage() {
   const [pendingUpdates, setPendingUpdates] = useState<SoulUpdate[]>([]);
   const [pendingEvents, setPendingEvents] = useState<EventProposal[]>([]);
   const [avatarState, setAvatarState] = useState<import("@/lib/avatar").AvatarState>("idle");
-  const [hasVoxel, setHasVoxel] = useState(false);
   const [avatarData, setAvatarData] = useState<{
-    color: string;
     name: string;
     appearance: import("@/lib/avatar").AvatarAppearance;
   }>({
-    color: "#4F46E5",
     name: "Dzino",
     appearance: { species: "human", bodyShape: "round", eyeStyle: "dots", mouthStyle: "smile", earStyle: "none", accessory: "none", hairStyle: "none", skinColor: "#FDDCB5", bodyColor: "#4F46E5" },
   });
@@ -40,9 +35,8 @@ export default function ChatPage() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setHasVoxel(getVoxelAvatar() !== null);
     const data = getAvatarData();
-    setAvatarData({ color: data.color, name: data.name, appearance: data.appearance });
+    setAvatarData({ name: data.name, appearance: data.appearance });
   }, []);
 
   useEffect(() => {
@@ -107,9 +101,9 @@ export default function ChatPage() {
     }
     setPendingUpdates((prev) => prev.filter((u) => u !== update));
 
-    // If appearance changed, regenerate voxel avatar
+    // If appearance changed, clear frame cache so it regenerates
     if (update.slug === "vzhlad") {
-      generateVoxelAvatar(true).catch(() => {});
+      clearFrameCache();
     }
   }
 
@@ -140,11 +134,7 @@ export default function ChatPage() {
       {/* Avatar — prominent, centered, animated */}
       <div className="flex flex-col items-center gap-1 pb-3 border-b mb-3">
         <div className="py-2">
-          {hasVoxel ? (
-            <VoxelAvatar state={avatarState} color={avatarData.color} size="md" />
-          ) : (
-            <Avatar state={avatarState} color={avatarData.color} size="md" appearance={avatarData.appearance} />
-          )}
+          <CachedAvatar state={avatarState} appearance={avatarData.appearance} size="md" />
         </div>
         <h1 className="text-sm font-semibold">{avatarData.name}</h1>
         <p className={`text-xs ${

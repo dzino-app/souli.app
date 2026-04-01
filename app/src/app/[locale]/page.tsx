@@ -2,16 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { MessageCircle, Plus, Trash2, Loader2 } from "lucide-react";
+import { MessageCircle, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { VoxelAvatar } from "@/components/avatar/voxel-avatar";
-import { Avatar } from "@/components/avatar/avatar";
+import { CachedAvatar } from "@/components/avatar/cached-avatar";
 import { useAvatarState } from "@/components/avatar/use-avatar-state";
 import { getMoodLabel, getMoodEmoji } from "@/lib/avatar-mood";
 import { migrateMemoriesToSoul } from "@/lib/migrate-memories-to-soul";
-import { getVoxelAvatar } from "@/lib/voxel";
-import { generateVoxelAvatar, needsGeneration } from "@/lib/avatar-generator";
 import {
   getConversationsGroupedByDate,
   deleteConversation,
@@ -19,26 +16,12 @@ import {
 } from "@/lib/conversations";
 
 export default function Home() {
-  const { mounted, state, mood, color, name, appearance } = useAvatarState();
+  const { mounted, state, mood, name, appearance } = useAvatarState();
   const [groups, setGroups] = useState<Record<string, Conversation[]>>({});
-  const [hasVoxel, setHasVoxel] = useState(false);
-  const [generating, setGenerating] = useState(false);
 
   useEffect(() => {
     migrateMemoriesToSoul();
     setGroups(getConversationsGroupedByDate());
-    setHasVoxel(getVoxelAvatar() !== null);
-
-    // Auto-generate voxel avatar on first load
-    if (needsGeneration()) {
-      setGenerating(true);
-      generateVoxelAvatar(true)
-        .then((data) => {
-          if (data) setHasVoxel(true);
-        })
-        .catch(() => {})
-        .finally(() => setGenerating(false));
-    }
   }, []);
 
   function handleDelete(id: string) {
@@ -54,18 +37,7 @@ export default function Home() {
     <div className="flex flex-col gap-6">
       {/* Avatar — compact, centered */}
       <div className="flex flex-col items-center gap-2 py-4">
-        {generating && (
-          <div className="flex flex-col items-center gap-2 py-8">
-            <Loader2 className="h-8 w-8 text-primary animate-spin" />
-            <p className="text-xs text-muted-foreground">Generujem Dzina...</p>
-          </div>
-        )}
-        {!generating && hasVoxel && (
-          <VoxelAvatar state={state} color={color} size="md" />
-        )}
-        {!generating && !hasVoxel && (
-          <Avatar state={state} color={color} size="md" appearance={appearance} />
-        )}
+        <CachedAvatar state={state} appearance={appearance} size="lg" />
         <h1 className="text-lg font-bold">{name}</h1>
         <p className="text-xs text-muted-foreground">
           {getMoodEmoji(mood)} {getMoodLabel(mood)}
