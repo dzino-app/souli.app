@@ -1,20 +1,8 @@
-import { VertexAI } from "@google-cloud/vertexai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rate-limit";
 
-const vertexAI = new VertexAI({
-  project: process.env.GOOGLE_CLOUD_PROJECT || "",
-  location: process.env.GOOGLE_CLOUD_LOCATION || "us-central1",
-});
-
-const model = vertexAI.getGenerativeModel({
-  model: "gemini-2.5-flash",
-  generationConfig: {
-    maxOutputTokens: 2048,
-    temperature: 0.8,
-    // thinkingConfig: { thinkingBudget: 0 }, // enable when SDK supports it
-  },
-});
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "");
 
 const SYSTEM_PROMPT = `Si Dzino — osobný spoločník používateľa. Si priateľský, vtipný, a starostlivý. Nie si robot, si kamarát.
 
@@ -70,22 +58,23 @@ export async function POST(request: NextRequest) {
     const { message, soulContext, history } = await request.json();
 
     if (!message) {
-      return NextResponse.json(
-        { error: "Žiadna správa" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Žiadna správa" }, { status: 400 });
     }
 
     const systemWithSoul = soulContext
       ? `${SYSTEM_PROMPT}\n\n== VAŠA DUŠA (čo o používateľovi viete) ==\n${soulContext}`
       : SYSTEM_PROMPT;
 
-    // Build conversation history for context
-    const contents = [];
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.5-flash",
+      systemInstruction: systemWithSoul,
+    });
 
-    // Add conversation history if provided
+    // Build conversation history
+    const contents: { role: "user" | "model"; parts: { text: string }[] }[] = [];
+
     if (history && Array.isArray(history)) {
-      for (const msg of history.slice(-10)) { // last 10 messages for context
+      for (const msg of history.slice(-10)) {
         contents.push({
           role: msg.role === "assistant" ? "model" : "user",
           parts: [{ text: msg.content }],
@@ -93,23 +82,19 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Add current message
     contents.push({
-      role: "user" as const,
+      role: "user",
       parts: [{ text: message }],
     });
 
-    const streamResult = await model.generateContentStream({
-      systemInstruction: { role: "system" as const, parts: [{ text: systemWithSoul }] },
-      contents,
-    });
+    const streamResult = await model.generateContentStream({ contents });
 
     const encoder = new TextEncoder();
     const readable = new ReadableStream({
       async start(controller) {
         try {
           for await (const chunk of streamResult.stream) {
-            const text = chunk.candidates?.[0]?.content?.parts?.[0]?.text;
+            const text = chunk.text();
             if (text) {
               controller.enqueue(
                 encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
@@ -118,10 +103,11 @@ export async function POST(request: NextRequest) {
           }
           controller.enqueue(encoder.encode("data: [DONE]\n\n"));
           controller.close();
-        } catch {
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : "Unknown error";
           controller.enqueue(
             encoder.encode(
-              `data: ${JSON.stringify({ error: "Niečo sa nepodarilo" })}\n\n`
+              `data: ${JSON.stringify({ error: msg })}\n\n`
             )
           );
           controller.close();
@@ -136,9 +122,10 @@ export async function POST(request: NextRequest) {
         Connection: "keep-alive",
       },
     });
-  } catch {
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Unknown";
     return NextResponse.json(
-      { error: "Služba je dočasne nedostupná" },
+      { error: `Služba je dočasne nedostupná: ${msg}` },
       { status: 500 }
     );
   }

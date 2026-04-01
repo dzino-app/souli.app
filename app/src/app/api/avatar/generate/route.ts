@@ -1,20 +1,8 @@
-import { VertexAI } from "@google-cloud/vertexai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rate-limit";
 
-const vertexAI = new VertexAI({
-  project: process.env.GOOGLE_CLOUD_PROJECT || "",
-  location: process.env.GOOGLE_CLOUD_LOCATION || "us-central1",
-});
-
-const model = vertexAI.getGenerativeModel({
-  model: "gemini-2.5-flash",
-  generationConfig: {
-    maxOutputTokens: 8192,
-    temperature: 0.7,
-    responseMimeType: "application/json",
-  },
-});
+const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "");
 
 const BASE_PROMPT = `You are a voxel artist. Generate a 16×16×16 voxel character as a 3D array.
 
@@ -78,37 +66,29 @@ export async function POST(request: NextRequest) {
   const ip = request.headers.get("x-forwarded-for") || "anonymous";
   const { allowed } = checkRateLimit(ip);
   if (!allowed) {
-    return NextResponse.json(
-      { error: "Príliš veľa požiadaviek" },
-      { status: 429 }
-    );
+    return NextResponse.json({ error: "Príliš veľa požiadaviek" }, { status: 429 });
   }
 
   try {
     const { description, generateAnimations } = await request.json();
 
     if (!description) {
-      return NextResponse.json(
-        { error: "Chýba popis postavy" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Chýba popis postavy" }, { status: 400 });
     }
 
-    // Step 1: Generate base character
-    const basePrompt = BASE_PROMPT.replace("{description}", description);
-    const baseResult = await model.generateContent({
-      contents: [{ role: "user", parts: [{ text: basePrompt }] }],
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.5-flash",
+      generationConfig: { responseMimeType: "application/json" },
     });
 
-    const baseText =
-      baseResult.response?.candidates?.[0]?.content?.parts?.[0]?.text || "";
-    const baseData = JSON.parse(baseText);
+    // Step 1: Generate base character
+    const baseResult = await model.generateContent(
+      BASE_PROMPT.replace("{description}", description)
+    );
+    const baseData = JSON.parse(baseResult.response.text());
 
     if (!baseData.grid || !Array.isArray(baseData.grid)) {
-      return NextResponse.json(
-        { error: "Nepodarilo sa vygenerovať postavu" },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: "Nepodarilo sa vygenerovať postavu" }, { status: 500 });
     }
 
     const result: {
@@ -123,15 +103,7 @@ export async function POST(request: NextRequest) {
 
     // Step 2: Generate animations (if requested)
     if (generateAnimations) {
-      // Generate idle + talk first (most important), rest in parallel
-      const priorityActivities = ACTIVITIES.filter(
-        (a) => a.key === "idle" || a.key === "talk"
-      );
-      const otherActivities = ACTIVITIES.filter(
-        (a) => a.key !== "idle" && a.key !== "talk"
-      );
-
-      const baseGridStr = JSON.stringify(baseData.grid).slice(0, 6000); // truncate for prompt size
+      const baseGridStr = JSON.stringify(baseData.grid).slice(0, 6000);
 
       const generateAnim = async (
         activity: (typeof ACTIVITIES)[0]
@@ -142,29 +114,24 @@ export async function POST(request: NextRequest) {
             .replace("{activityDesc}", activity.desc)
             .replace("{frameCount}", String(activity.frames));
 
-          const animResult = await model.generateContent({
-            contents: [{ role: "user", parts: [{ text: prompt }] }],
-          });
-
-          const animText =
-            animResult.response?.candidates?.[0]?.content?.parts?.[0]?.text ||
-            "";
-          const animData = JSON.parse(animText);
+          const animResult = await model.generateContent(prompt);
+          const animData = JSON.parse(animResult.response.text());
           return { key: activity.key, frames: animData.frames || [] };
         } catch {
           return { key: activity.key, frames: [] };
         }
       };
 
-      // Generate priority animations first
-      for (const activity of priorityActivities) {
+      // Generate priority animations first (idle + talk)
+      for (const activity of ACTIVITIES.filter((a) => a.key === "idle" || a.key === "talk")) {
         const { key, frames } = await generateAnim(activity);
         result.animations[key] = frames;
       }
 
-      // Generate remaining in parallel (3 at a time)
-      for (let i = 0; i < otherActivities.length; i += 3) {
-        const batch = otherActivities.slice(i, i + 3);
+      // Rest in parallel batches of 3
+      const rest = ACTIVITIES.filter((a) => a.key !== "idle" && a.key !== "talk");
+      for (let i = 0; i < rest.length; i += 3) {
+        const batch = rest.slice(i, i + 3);
         const results = await Promise.all(batch.map(generateAnim));
         for (const { key, frames } of results) {
           result.animations[key] = frames;
@@ -175,9 +142,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(result);
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
-    return NextResponse.json(
-      { error: `Generovanie zlyhalo: ${message}` },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: `Generovanie zlyhalo: ${message}` }, { status: 500 });
   }
 }
