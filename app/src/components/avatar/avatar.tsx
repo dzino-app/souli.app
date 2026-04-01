@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useState, useRef } from "react";
 import type { AvatarState, AvatarAppearance } from "@/lib/avatar";
+import { ACTIVITY_ANIMATIONS, type AvatarFrame } from "./avatar-frames";
 import "./avatar.css";
 
 interface AvatarProps {
@@ -11,9 +13,9 @@ interface AvatarProps {
 }
 
 const SIZES = {
-  sm: { body: 40, scale: 0.5 },
-  md: { body: 80, scale: 1 },
-  lg: { body: 120, scale: 1.5 },
+  sm: 0.5,
+  md: 1,
+  lg: 1.5,
 };
 
 const DEFAULT_APPEARANCE: AvatarAppearance = {
@@ -23,60 +25,100 @@ const DEFAULT_APPEARANCE: AvatarAppearance = {
   accessory: "none",
 };
 
-/* ---------- Eyes ---------- */
-function Eyes({ style }: { style: AvatarAppearance["eyeStyle"] }) {
-  switch (style) {
-    case "dots":
+// Map AvatarState to animation key
+const STATE_MAP: Record<AvatarState, string> = {
+  idle: "idle",
+  talking: "talking",
+  thinking: "thinking",
+  happy: "happy",
+  sad: "sad",
+  waving: "waving",
+  walking: "walking",
+  eating: "eating",
+  sleeping: "sleeping",
+};
+
+/* ---------- Eye Renderer ---------- */
+function Eyes({ variant }: { variant: AvatarFrame["eyeVariant"] }) {
+  switch (variant) {
+    case "open":
       return (
         <div className="av-eyes">
-          <div className="av-eye av-eye--dots" />
-          <div className="av-eye av-eye--dots" />
+          <div className="av-eye av-eye--dot" />
+          <div className="av-eye av-eye--dot" />
         </div>
       );
     case "wide":
       return (
         <div className="av-eyes">
-          <div className="av-eye av-eye--wide">
-            <div className="av-pupil" />
-          </div>
-          <div className="av-eye av-eye--wide">
-            <div className="av-pupil" />
-          </div>
+          <div className="av-eye av-eye--wide"><div className="av-pupil" /></div>
+          <div className="av-eye av-eye--wide"><div className="av-pupil" /></div>
         </div>
       );
-    case "sleepy":
+    case "closed":
       return (
         <div className="av-eyes">
-          <div className="av-eye av-eye--sleepy" />
-          <div className="av-eye av-eye--sleepy" />
+          <div className="av-eye av-eye--closed" />
+          <div className="av-eye av-eye--closed" />
         </div>
       );
-    case "anime":
+    case "half":
       return (
-        <div className="av-eyes av-eyes--anime">
-          <div className="av-eye av-eye--anime">
-            <div className="av-pupil av-pupil--anime" />
-            <div className="av-shine" />
-          </div>
-          <div className="av-eye av-eye--anime">
-            <div className="av-pupil av-pupil--anime" />
-            <div className="av-shine" />
-          </div>
+        <div className="av-eyes">
+          <div className="av-eye av-eye--half" />
+          <div className="av-eye av-eye--half" />
+        </div>
+      );
+    case "up-left":
+      return (
+        <div className="av-eyes">
+          <div className="av-eye av-eye--wide"><div className="av-pupil av-pupil--up-left" /></div>
+          <div className="av-eye av-eye--wide"><div className="av-pupil av-pupil--up-left" /></div>
+        </div>
+      );
+    case "up-right":
+      return (
+        <div className="av-eyes">
+          <div className="av-eye av-eye--wide"><div className="av-pupil av-pupil--up-right" /></div>
+          <div className="av-eye av-eye--wide"><div className="av-pupil av-pupil--up-right" /></div>
+        </div>
+      );
+    case "squeezed":
+      return (
+        <div className="av-eyes">
+          <div className="av-eye av-eye--squeezed" />
+          <div className="av-eye av-eye--squeezed" />
         </div>
       );
   }
 }
 
-/* ---------- Mouth ---------- */
-function Mouth({ style }: { style: AvatarAppearance["mouthStyle"] }) {
-  return <div className={`av-mouth av-mouth--${style}`} />;
+/* ---------- Mouth Renderer ---------- */
+function Mouth({ variant }: { variant: AvatarFrame["mouthVariant"] }) {
+  return <div className={`av-mouth av-mouth--${variant}`} />;
+}
+
+/* ---------- Effects ---------- */
+function Effects({ frame }: { frame: AvatarFrame }) {
+  return (
+    <>
+      {frame.zzz && <span className="av-zzz">💤</span>}
+      {frame.sparkle && <span className="av-sparkle">✨</span>}
+      {frame.blush && (
+        <>
+          <span className="av-blush av-blush--left" />
+          <span className="av-blush av-blush--right" />
+        </>
+      )}
+      {frame.sweatDrop && <span className="av-sweat">💧</span>}
+    </>
+  );
 }
 
 /* ---------- Accessory ---------- */
-function AccessoryLayer({ type, color }: { type: AvatarAppearance["accessory"]; color: string }) {
+function AccessoryLayer({ type, color }: { type: AvatarAppearance["accessory"]; color: string; bounce: number }) {
   switch (type) {
-    case "none":
-      return null;
+    case "none": return null;
     case "crown":
       return (
         <div className="av-accessory av-crown">
@@ -109,30 +151,65 @@ function AccessoryLayer({ type, color }: { type: AvatarAppearance["accessory"]; 
         </div>
       );
     case "halo":
-      return (
-        <div className="av-accessory av-halo" />
-      );
+      return <div className="av-accessory av-halo" />;
   }
 }
 
+/* ---------- Main Avatar ---------- */
 export function Avatar({ state, color, size = "md", appearance }: AvatarProps) {
-  const { scale } = SIZES[size];
+  const scale = SIZES[size];
   const ap = appearance ?? DEFAULT_APPEARANCE;
+  const animKey = STATE_MAP[state] || "idle";
+  const animation = ACTIVITY_ANIMATIONS[animKey] || ACTIVITY_ANIMATIONS.idle;
+
+  const [frameIndex, setFrameIndex] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Cycle frames
+  useEffect(() => {
+    setFrameIndex(0);
+    if (intervalRef.current) clearInterval(intervalRef.current);
+
+    intervalRef.current = setInterval(() => {
+      setFrameIndex((prev) => {
+        const next = prev + 1;
+        if (!animation.loop && next >= animation.frames.length) {
+          if (intervalRef.current) clearInterval(intervalRef.current);
+          return animation.frames.length - 1;
+        }
+        return next % animation.frames.length;
+      });
+    }, 1000 / animation.fps);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [animKey, animation.fps, animation.frames.length, animation.loop]);
+
+  const currentFrame = animation.frames[frameIndex % animation.frames.length];
 
   return (
     <div
-      className={`avatar-container avatar--${state}`}
+      className="avatar-container"
       style={{ transform: `scale(${scale})` }}
     >
-      <AccessoryLayer type={ap.accessory} color={color} />
+      <AccessoryLayer
+        type={ap.accessory}
+        color={color}
+        bounce={currentFrame.accessoryBounce}
+      />
       <div
         className={`avatar-body avatar-body--${ap.bodyShape}`}
-        style={{ backgroundColor: color }}
+        style={{
+          backgroundColor: color,
+          transform: `translateX(${currentFrame.bodyOffsetX}px) translateY(${currentFrame.bodyOffsetY}px) rotate(${currentFrame.bodyRotation}deg)`,
+          transition: `transform ${1 / animation.fps * 0.8}s ease-in-out`,
+        }}
       >
         <div className="av-pixel-border" style={{ borderColor: color }} />
-        <Eyes style={ap.eyeStyle} />
-        <Mouth style={ap.mouthStyle} />
-        <span className="avatar-zzz">&#x1F4A4;</span>
+        <Eyes variant={currentFrame.eyeVariant} />
+        <Mouth variant={currentFrame.mouthVariant} />
+        <Effects frame={currentFrame} />
       </div>
     </div>
   );
