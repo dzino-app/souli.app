@@ -6,12 +6,15 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MarkdownResponse } from "@/components/chat/markdown-response";
+import { VoxelAvatar } from "@/components/avatar/voxel-avatar";
 import { Avatar } from "@/components/avatar/avatar";
 import { streamChatResponse, type ChatMessage } from "@/lib/stream-response";
 import { parseResponse, type SoulUpdate, type EventProposal } from "@/lib/parse-soul-updates";
-import { appendToSoulFile } from "@/lib/soul";
+import { appendToSoulFile, updateSoulFile } from "@/lib/soul";
 import { createEvent } from "@/lib/events";
 import { getAvatarData, recordInteraction } from "@/lib/avatar";
+import { getVoxelAvatar } from "@/lib/voxel";
+import { generateVoxelAvatar } from "@/lib/avatar-generator";
 import { createConversation, addMessage } from "@/lib/conversations";
 
 export default function ChatPage() {
@@ -23,6 +26,7 @@ export default function ChatPage() {
   const [pendingUpdates, setPendingUpdates] = useState<SoulUpdate[]>([]);
   const [pendingEvents, setPendingEvents] = useState<EventProposal[]>([]);
   const [avatarState, setAvatarState] = useState<"idle" | "thinking" | "talking">("idle");
+  const [hasVoxel] = useState(() => getVoxelAvatar() !== null);
   const convIdRef = useRef<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const avatarData = getAvatarData();
@@ -76,8 +80,17 @@ export default function ChatPage() {
   }
 
   function approveSoulUpdate(update: SoulUpdate) {
-    appendToSoulFile(update.slug, update.content, "dzino");
+    if (update.operation === "nahradit") {
+      updateSoulFile(update.slug, update.content, "dzino");
+    } else {
+      appendToSoulFile(update.slug, update.content, "dzino");
+    }
     setPendingUpdates((prev) => prev.filter((u) => u !== update));
+
+    // If appearance changed, regenerate voxel avatar
+    if (update.slug === "vzhlad") {
+      generateVoxelAvatar(true).catch(() => {});
+    }
   }
 
   function rejectSoulUpdate(update: SoulUpdate) {
@@ -106,7 +119,11 @@ export default function ChatPage() {
     <div className="flex flex-col h-[calc(100vh-8rem)] sm:h-[calc(100vh-6rem)]">
       {/* Chat header with mini avatar */}
       <div className="flex items-center gap-3 pb-4 border-b mb-4">
-        <Avatar state={avatarState} color={avatarData.color} size="sm" appearance={avatarData.appearance} />
+        {hasVoxel ? (
+          <VoxelAvatar state={avatarState} color={avatarData.color} size="sm" />
+        ) : (
+          <Avatar state={avatarState} color={avatarData.color} size="sm" appearance={avatarData.appearance} />
+        )}
         <div>
           <h1 className="font-semibold">{avatarData.name}</h1>
           <p className="text-xs text-muted-foreground">
@@ -119,7 +136,11 @@ export default function ChatPage() {
       <div className="flex-1 overflow-y-auto space-y-4 pb-4">
         {messages.length === 0 && !streaming && (
           <div className="text-center py-12">
-            <Avatar state="waving" color={avatarData.color} size="md" appearance={avatarData.appearance} />
+            {hasVoxel ? (
+              <VoxelAvatar state="waving" color={avatarData.color} size="md" />
+            ) : (
+              <Avatar state="waving" color={avatarData.color} size="md" appearance={avatarData.appearance} />
+            )}
             <p className="text-sm text-muted-foreground mt-4">
               {t("companion.greeting")}
             </p>

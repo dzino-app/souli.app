@@ -43,6 +43,16 @@ popis: <popis>
 pripomienka: <minúty pred>
 :::
 
+- Ak používateľ chce zmeniť Tvoj vzhľad, aktualizuj vzhlad.md:
+
+:::aktualizacia
+subor: vzhlad.md
+operacia: nahradit
+obsah: |
+  # Vzhľad
+  - <nový popis vzhľadu>
+:::
+
 - Tieto bloky pridávaj IBA keď sa naozaj naučíš niečo nové, nie pri každej odpovedi
 - Buď stručný ale priateľský`;
 

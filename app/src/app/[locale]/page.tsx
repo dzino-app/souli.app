@@ -2,13 +2,16 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { MessageCircle, Plus, Trash2 } from "lucide-react";
+import { MessageCircle, Plus, Trash2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { VoxelAvatar } from "@/components/avatar/voxel-avatar";
 import { Avatar } from "@/components/avatar/avatar";
 import { useAvatarState } from "@/components/avatar/use-avatar-state";
 import { getMoodLabel, getMoodEmoji } from "@/lib/avatar-mood";
 import { migrateMemoriesToSoul } from "@/lib/migrate-memories-to-soul";
+import { getVoxelAvatar } from "@/lib/voxel";
+import { generateVoxelAvatar, needsGeneration } from "@/lib/avatar-generator";
 import {
   getConversationsGroupedByDate,
   deleteConversation,
@@ -18,10 +21,24 @@ import {
 export default function Home() {
   const { state, mood, color, name, appearance } = useAvatarState();
   const [groups, setGroups] = useState<Record<string, Conversation[]>>({});
+  const [hasVoxel, setHasVoxel] = useState(false);
+  const [generating, setGenerating] = useState(false);
 
   useEffect(() => {
     migrateMemoriesToSoul();
     setGroups(getConversationsGroupedByDate());
+    setHasVoxel(getVoxelAvatar() !== null);
+
+    // Auto-generate voxel avatar on first load
+    if (needsGeneration()) {
+      setGenerating(true);
+      generateVoxelAvatar(true)
+        .then((data) => {
+          if (data) setHasVoxel(true);
+        })
+        .catch(() => {})
+        .finally(() => setGenerating(false));
+    }
   }, []);
 
   function handleDelete(id: string) {
@@ -35,7 +52,18 @@ export default function Home() {
     <div className="flex flex-col gap-6">
       {/* Avatar — compact, centered */}
       <div className="flex flex-col items-center gap-2 py-4">
-        <Avatar state={state} color={color} size="md" appearance={appearance} />
+        {generating && (
+          <div className="flex flex-col items-center gap-2 py-8">
+            <Loader2 className="h-8 w-8 text-primary animate-spin" />
+            <p className="text-xs text-muted-foreground">Generujem Dzina...</p>
+          </div>
+        )}
+        {!generating && hasVoxel && (
+          <VoxelAvatar state={state} color={color} size="md" />
+        )}
+        {!generating && !hasVoxel && (
+          <Avatar state={state} color={color} size="md" appearance={appearance} />
+        )}
         <h1 className="text-lg font-bold">{name}</h1>
         <p className="text-xs text-muted-foreground">
           {getMoodEmoji(mood)} {getMoodLabel(mood)}
@@ -64,7 +92,7 @@ export default function Home() {
                   <Card key={conv.id} className="hover:bg-secondary transition-colors">
                     <CardContent className="py-3 px-4">
                       <div className="flex items-center justify-between gap-3">
-                        <Link href={`/chat`} className="flex items-center gap-3 flex-1 min-w-0">
+                        <Link href="/chat" className="flex items-center gap-3 flex-1 min-w-0">
                           <MessageCircle className="h-4 w-4 text-muted-foreground shrink-0" />
                           <div className="min-w-0">
                             <p className="text-sm font-medium truncate">{conv.title}</p>
