@@ -10,13 +10,13 @@ import { getMoodLabel, getMoodEmoji } from "@/lib/avatar-mood";
 
 export function AvatarScene() {
   const t = useTranslations("companion");
-  const { state, mood, color, name } = useAvatarState();
+  const { state, mood, color, name, appearance } = useAvatarState();
 
   return (
     <div className="flex flex-col items-center gap-8">
       {/* Avatar + mood */}
       <div className="flex flex-col items-center gap-3 py-8">
-        <Avatar state={state} color={color} size="lg" />
+        <Avatar state={state} color={color} size="lg" appearance={appearance} />
         <h1 className="text-2xl font-bold">{name}</h1>
         <p className="text-sm text-muted-foreground">
           {getMoodEmoji(mood)} {getMoodLabel(mood)} · {mood}/100

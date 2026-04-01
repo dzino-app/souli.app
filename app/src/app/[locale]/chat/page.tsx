@@ -106,7 +106,7 @@ export default function ChatPage() {
     <div className="flex flex-col h-[calc(100vh-8rem)] sm:h-[calc(100vh-6rem)]">
       {/* Chat header with mini avatar */}
       <div className="flex items-center gap-3 pb-4 border-b mb-4">
-        <Avatar state={avatarState} color={avatarData.color} size="sm" />
+        <Avatar state={avatarState} color={avatarData.color} size="sm" appearance={avatarData.appearance} />
         <div>
           <h1 className="font-semibold">{avatarData.name}</h1>
           <p className="text-xs text-muted-foreground">
@@ -119,7 +119,7 @@ export default function ChatPage() {
       <div className="flex-1 overflow-y-auto space-y-4 pb-4">
         {messages.length === 0 && !streaming && (
           <div className="text-center py-12">
-            <Avatar state="waving" color={avatarData.color} size="md" />
+            <Avatar state="waving" color={avatarData.color} size="md" appearance={avatarData.appearance} />
             <p className="text-sm text-muted-foreground mt-4">
               {t("companion.greeting")}
             </p>

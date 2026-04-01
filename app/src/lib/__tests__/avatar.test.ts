@@ -17,6 +17,11 @@ describe("avatar", () => {
     expect(data.name).toBe("Dzino");
     expect(data.mood).toBe(70);
     expect(data.state).toBe("idle");
+    expect(data.appearance).toBeDefined();
+    expect(data.appearance.bodyShape).toBeDefined();
+    expect(data.appearance.eyeStyle).toBeDefined();
+    expect(data.appearance.mouthStyle).toBeDefined();
+    expect(data.appearance.accessory).toBeDefined();
   });
 
   it("sets avatar state", () => {

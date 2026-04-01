@@ -65,6 +65,7 @@ export function useAvatarState() {
     mood,
     color: data.color,
     name: data.name,
+    appearance: data.appearance,
     playState,
     onChatStart,
     onChatResponse,

@@ -1,27 +1,14 @@
 "use client";
 
-import type { AvatarState } from "@/lib/avatar";
-import "./avatar.css";
+import type { AvatarState, AvatarAppearance } from "@/lib/avatar";
+import { Avatar } from "./avatar";
 
 interface AvatarMiniProps {
   state: AvatarState;
   color: string;
+  appearance?: AvatarAppearance;
 }
 
-export function AvatarMini({ state, color }: AvatarMiniProps) {
-  return (
-    <div
-      className={`avatar-container avatar--${state}`}
-      style={{ transform: "scale(0.4)" }}
-    >
-      <div className="avatar-body" style={{ backgroundColor: color }}>
-        <div className="avatar-eyes">
-          <div className="avatar-eye" />
-          <div className="avatar-eye" />
-        </div>
-        <div className="avatar-mouth" />
-        <span className="avatar-zzz">💤</span>
-      </div>
-    </div>
-  );
+export function AvatarMini({ state, color, appearance }: AvatarMiniProps) {
+  return <Avatar state={state} color={color} size="sm" appearance={appearance} />;
 }

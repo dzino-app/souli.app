@@ -19,6 +19,61 @@ describe("soul", () => {
     expect(files[0].slug).toBe("osobnost");
   });
 
+  it("default osobnost has real personality traits", () => {
+    getSoulFiles(); // seed
+    const file = getSoulFile("osobnost");
+    expect(file).not.toBeNull();
+    expect(file!.content).toContain("Priateľský a zvedavý");
+    expect(file!.content).toContain("Trpezlivý a chápavý");
+  });
+
+  it("default zaujmy has broad interests", () => {
+    getSoulFiles(); // seed
+    const file = getSoulFile("zaujmy");
+    expect(file).not.toBeNull();
+    expect(file!.content).toContain("príbehy ľudí");
+    expect(file!.content).toContain("nové technológie");
+  });
+
+  it("default humor has humor style", () => {
+    getSoulFiles(); // seed
+    const file = getSoulFile("humor");
+    expect(file).not.toBeNull();
+    expect(file!.content).toContain("slovné hry a kalambúry");
+    expect(file!.content).toContain("sarkastický");
+  });
+
+  it("default vztahy is inviting but empty", () => {
+    getSoulFiles(); // seed
+    const file = getSoulFile("vztahy");
+    expect(file).not.toBeNull();
+    expect(file!.content).toContain("Ešte som nikoho nespoznal");
+  });
+
+  it("default ciele has Dzino's own goals", () => {
+    getSoulFiles(); // seed
+    const file = getSoulFile("ciele");
+    expect(file).not.toBeNull();
+    expect(file!.content).toContain("Lepšie spoznať Vás");
+    expect(file!.content).toContain("organizáciou dňa");
+  });
+
+  it("default preferencie has communication defaults", () => {
+    getSoulFiles(); // seed
+    const file = getSoulFile("preferencie");
+    expect(file).not.toBeNull();
+    expect(file!.content).toContain("stručne ale priateľsky");
+    expect(file!.content).toContain("Radšej sa opýtam než hádám");
+  });
+
+  it("default dennik has a first-day entry", () => {
+    getSoulFiles(); // seed
+    const file = getSoulFile("dennik");
+    expect(file).not.toBeNull();
+    expect(file!.content).toContain("narodil");
+    expect(file!.content).toContain("Teším sa na prvý rozhovor");
+  });
+
   it("gets a specific soul file by slug", () => {
     getSoulFiles(); // seed
     const file = getSoulFile("humor");

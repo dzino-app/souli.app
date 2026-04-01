@@ -16,7 +16,7 @@ import {
 } from "@/lib/conversations";
 
 export default function Home() {
-  const { state, mood, color, name } = useAvatarState();
+  const { state, mood, color, name, appearance } = useAvatarState();
   const [groups, setGroups] = useState<Record<string, Conversation[]>>({});
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function Home() {
     <div className="flex flex-col gap-6">
       {/* Avatar — compact, centered */}
       <div className="flex flex-col items-center gap-2 py-4">
-        <Avatar state={state} color={color} size="md" />
+        <Avatar state={state} color={color} size="md" appearance={appearance} />
         <h1 className="text-lg font-bold">{name}</h1>
         <p className="text-xs text-muted-foreground">
           {getMoodEmoji(mood)} {getMoodLabel(mood)}
