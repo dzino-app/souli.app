@@ -107,4 +107,52 @@ obsah: Má rád sarkastický humor
     expect(result.soulUpdates).toHaveLength(1);
     expect(result.soulUpdates[0].content).toBe("Má rád sarkastický humor");
   });
+
+  it("defaults mood to happy when no :::nalada block", () => {
+    const result = parseResponse("Super odpoveď!");
+    expect(result.mood).toBe("happy");
+  });
+
+  it("parses mood from :::nalada block", () => {
+    const input = `To ma mrzí...
+
+:::nalada
+stav: sad
+:::`;
+
+    const result = parseResponse(input);
+    expect(result.text).toBe("To ma mrzí...");
+    expect(result.mood).toBe("sad");
+  });
+
+  it("parses mood + soul update together", () => {
+    const input = `Rád behávate!
+
+:::aktualizacia
+subor: zaujmy.md
+operacia: pridat
+obsah: |
+  - Rád beháva
+:::
+
+:::nalada
+stav: happy
+:::`;
+
+    const result = parseResponse(input);
+    expect(result.text).toBe("Rád behávate!");
+    expect(result.soulUpdates).toHaveLength(1);
+    expect(result.mood).toBe("happy");
+  });
+
+  it("ignores invalid mood values", () => {
+    const input = `Hmm
+
+:::nalada
+stav: angry
+:::`;
+
+    const result = parseResponse(input);
+    expect(result.mood).toBe("happy"); // falls back to default
+  });
 });

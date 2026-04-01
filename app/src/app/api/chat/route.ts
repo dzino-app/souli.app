@@ -40,6 +40,15 @@ obsah: |
 :::
 
 - Tieto bloky pridávaj IBA keď sa naozaj naučíš niečo nové, nie pri každej odpovedi
+
+- NA KONCI KAŽDEJ odpovede pridaj blok nálady podľa kontextu konverzácie:
+
+:::nalada
+stav: <happy|sad|thinking|waving|idle|walking|eating>
+:::
+
+Vyber náladu podľa obsahu — ak niečo veselé tak happy, ak smutné tak sad, ak sa nad niečím zamýšľaš tak thinking, ak sa lúčiš tak waving, ak je to bežný rozhovor tak idle.
+
 - Buď stručný ale priateľský`;
 
 export async function POST(request: NextRequest) {

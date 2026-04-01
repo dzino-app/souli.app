@@ -25,7 +25,7 @@ export default function ChatPage() {
   const [streamText, setStreamText] = useState("");
   const [pendingUpdates, setPendingUpdates] = useState<SoulUpdate[]>([]);
   const [pendingEvents, setPendingEvents] = useState<EventProposal[]>([]);
-  const [avatarState, setAvatarState] = useState<"idle" | "thinking" | "talking" | "happy">("idle");
+  const [avatarState, setAvatarState] = useState<import("@/lib/avatar").AvatarState>("idle");
   const [hasVoxel, setHasVoxel] = useState(false);
   const [avatarData, setAvatarData] = useState<{
     color: string;
@@ -75,7 +75,7 @@ export default function ChatPage() {
         setStreamText(chunk);
       });
 
-      // Parse soul updates and events from response
+      // Parse soul updates, events, and mood from response
       const parsed = parseResponse(fullResponse);
       setPendingUpdates(parsed.soulUpdates);
       setPendingEvents(parsed.eventProposals);
@@ -83,14 +83,19 @@ export default function ChatPage() {
       setMessages((prev) => [...prev, { role: "assistant", content: parsed.text }]);
       addMessage(convIdRef.current!, "assistant", parsed.text);
       recordInteraction();
+
+      // Set avatar mood from LLM response, then fade to idle
+      setStreaming(false);
+      setStreamText("");
+      setAvatarState(parsed.mood);
+      setTimeout(() => setAvatarState("idle"), 3000);
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : t("common.error");
       setMessages((prev) => [...prev, { role: "assistant", content: errorMsg }]);
-    } finally {
       setStreaming(false);
       setStreamText("");
-      setAvatarState("happy");
-      setTimeout(() => setAvatarState("idle"), 2000);
+      setAvatarState("sad");
+      setTimeout(() => setAvatarState("idle"), 3000);
     }
   }
 
@@ -143,8 +148,24 @@ export default function ChatPage() {
         </div>
         <div>
           <h1 className="font-semibold">{avatarData.name}</h1>
-          <p className={`text-xs ${avatarState === "thinking" ? "text-primary" : avatarState === "talking" ? "text-accent" : "text-muted-foreground"}`}>
-            {avatarState === "thinking" ? "premýšľa..." : avatarState === "talking" ? "píše..." : "online"}
+          <p className={`text-xs ${
+            avatarState === "thinking" ? "text-primary" :
+            avatarState === "talking" ? "text-accent" :
+            avatarState === "happy" ? "text-success" :
+            avatarState === "sad" ? "text-destructive" :
+            "text-muted-foreground"
+          }`}>
+            {{
+              thinking: "premýšľa...",
+              talking: "píše...",
+              happy: "😊 šťastný",
+              sad: "😢 smutný",
+              waving: "👋 máva",
+              walking: "🚶 prechádza sa",
+              eating: "🍽️ je",
+              sleeping: "💤 spí",
+              idle: "online",
+            }[avatarState] || "online"}
           </p>
         </div>
       </div>

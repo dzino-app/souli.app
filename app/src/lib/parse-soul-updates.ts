@@ -13,15 +13,21 @@ export interface EventProposal {
   remindBefore?: number;
 }
 
+export type MoodState = "idle" | "happy" | "sad" | "thinking" | "waving" | "eating" | "walking";
+
 export interface ParsedResponse {
   text: string; // cleaned response without update blocks
   soulUpdates: SoulUpdate[];
   eventProposals: EventProposal[];
+  mood: MoodState; // avatar state after response
 }
 
-// Parse :::aktualizacia blocks from Claude's response
+// Parse :::aktualizacia, :::udalost, :::nalada blocks from response
 const SOUL_UPDATE_REGEX = /:::aktualizacia\s*([\s\S]*?):::/g;
 const EVENT_REGEX = /:::udalost\s*([\s\S]*?):::/g;
+const MOOD_REGEX = /:::nalada\s*([\s\S]*?):::/g;
+
+const VALID_MOODS: MoodState[] = ["idle", "happy", "sad", "thinking", "waving", "eating", "walking"];
 
 function parseKeyValue(block: string): Record<string, string> {
   const result: Record<string, string> = {};
@@ -97,11 +103,23 @@ export function parseResponse(fullText: string): ParsedResponse {
     }
   }
 
-  // Clean text: remove all update/event blocks
+  // Extract mood
+  let mood: MoodState = "happy"; // default after response
+  let moodMatch;
+  while ((moodMatch = MOOD_REGEX.exec(fullText)) !== null) {
+    const kv = parseKeyValue(moodMatch[1]);
+    const stav = kv.stav?.trim().toLowerCase();
+    if (stav && VALID_MOODS.includes(stav as MoodState)) {
+      mood = stav as MoodState;
+    }
+  }
+
+  // Clean text: remove all special blocks
   const text = fullText
     .replace(SOUL_UPDATE_REGEX, "")
     .replace(EVENT_REGEX, "")
+    .replace(MOOD_REGEX, "")
     .trim();
 
-  return { text, soulUpdates, eventProposals };
+  return { text, soulUpdates, eventProposals, mood };
 }
