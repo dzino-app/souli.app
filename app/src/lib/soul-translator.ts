@@ -3,7 +3,7 @@
 // Translations are persisted to Supabase Storage (same as soul files)
 
 import { getSoulFiles, updateSoulFileInCache, saveSoulFile } from "./soul";
-import { getLanguageOrDefault } from "./languages";
+import { isInformalByDefault } from "./languages";
 
 const TRANSLATED_KEY_PREFIX = "dzino_soul_translated_";
 
@@ -29,7 +29,7 @@ export async function translateSoulFiles(langCode: string): Promise<void> {
 
   if (isAlreadyTranslated(langCode)) return;
 
-  const lang = getLanguageOrDefault(langCode);
+  const informal = isInformalByDefault(langCode);
   const files = getSoulFiles();
 
   const filesToTranslate = files.map((f) => ({
@@ -38,11 +38,11 @@ export async function translateSoulFiles(langCode: string): Promise<void> {
     content: f.content,
   }));
 
-  const prompt = `Translate these soul files to ${lang.nameEn} (${lang.name}).
+  const prompt = `Translate these soul files to the language with code "${langCode}".
 Keep the markdown structure (headers, bullet points).
 Keep names like "Dzino" unchanged.
 Translate naturally, not word-by-word.
-Use ${lang.tykanie ? "informal/casual" : "formal/polite"} tone.
+Use ${informal ? "informal/casual" : "formal/polite"} tone.
 
 Return a JSON object with this structure:
 {

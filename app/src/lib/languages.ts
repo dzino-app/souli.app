@@ -1,60 +1,21 @@
-// Supported languages with their soul file templates and UI locale mapping
+// Language system — principle-based, not hardcoded dictionaries
+// Only hardcodes: informal-by-default exceptions + locale mapping
 
-export interface Language {
-  code: string;        // ISO 639-1
-  name: string;        // native name
-  nameEn: string;      // English name
-  locale: string;      // next-intl locale (sk or en for now, expand later)
-  flag: string;        // emoji flag
-  greeting: string;    // "Hi!" in that language
-  tykanie: boolean;    // informal by default?
-}
+// Languages where informal tone is default (buddy vibe)
+const INFORMAL_LANGUAGES = new Set(["sk", "cs", "en"]);
 
-export const LANGUAGES: Language[] = [
-  // Global
-  // English — informal (buddy vibe)
-  { code: "en", name: "English", nameEn: "English", locale: "en", flag: "🇬🇧", greeting: "Hi!", tykanie: true },
-
-  // Central European — SK/CS informal (core product), rest formal first
-  { code: "sk", name: "Slovenčina", nameEn: "Slovak", locale: "sk", flag: "🇸🇰", greeting: "Ahoj!", tykanie: true },
-  { code: "cs", name: "Čeština", nameEn: "Czech", locale: "sk", flag: "🇨🇿", greeting: "Ahoj!", tykanie: true },
-  { code: "pl", name: "Polski", nameEn: "Polish", locale: "en", flag: "🇵🇱", greeting: "Dzień dobry!", tykanie: false },
-  { code: "hu", name: "Magyar", nameEn: "Hungarian", locale: "en", flag: "🇭🇺", greeting: "Jó napot!", tykanie: false },
-  { code: "de", name: "Deutsch", nameEn: "German", locale: "en", flag: "🇩🇪", greeting: "Hallo!", tykanie: false },
-  { code: "ro", name: "Română", nameEn: "Romanian", locale: "en", flag: "🇷🇴", greeting: "Bună ziua!", tykanie: false },
-  { code: "hr", name: "Hrvatski", nameEn: "Croatian", locale: "en", flag: "🇭🇷", greeting: "Dobar dan!", tykanie: false },
-  { code: "sl", name: "Slovenščina", nameEn: "Slovenian", locale: "en", flag: "🇸🇮", greeting: "Dober dan!", tykanie: false },
-  { code: "uk", name: "Українська", nameEn: "Ukrainian", locale: "en", flag: "🇺🇦", greeting: "Доброго дня!", tykanie: false },
-
-  // Indian — formal first (respect culture)
-  { code: "hi", name: "हिन्दी", nameEn: "Hindi", locale: "en", flag: "🇮🇳", greeting: "नमस्ते!", tykanie: false },
-  { code: "ta", name: "தமிழ்", nameEn: "Tamil", locale: "en", flag: "🇮🇳", greeting: "வணக்கம்!", tykanie: false },
-  { code: "te", name: "తెలుగు", nameEn: "Telugu", locale: "en", flag: "🇮🇳", greeting: "నమస్కారం!", tykanie: false },
-  { code: "bn", name: "বাংলা", nameEn: "Bengali", locale: "en", flag: "🇮🇳", greeting: "নমস্কার!", tykanie: false },
-  { code: "mr", name: "मराठी", nameEn: "Marathi", locale: "en", flag: "🇮🇳", greeting: "नमस्कार!", tykanie: false },
-
-  // Other major — formal first, user can switch to informal
-  { code: "es", name: "Español", nameEn: "Spanish", locale: "en", flag: "🇪🇸", greeting: "¡Hola!", tykanie: false },
-  { code: "fr", name: "Français", nameEn: "French", locale: "en", flag: "🇫🇷", greeting: "Bonjour!", tykanie: false },
-  { code: "pt", name: "Português", nameEn: "Portuguese", locale: "en", flag: "🇧🇷", greeting: "Olá!", tykanie: false },
-  { code: "it", name: "Italiano", nameEn: "Italian", locale: "en", flag: "🇮🇹", greeting: "Buongiorno!", tykanie: false },
-  { code: "ja", name: "日本語", nameEn: "Japanese", locale: "en", flag: "🇯🇵", greeting: "こんにちは!", tykanie: false },
-  { code: "ko", name: "한국어", nameEn: "Korean", locale: "en", flag: "🇰🇷", greeting: "안녕하세요!", tykanie: false },
-  { code: "zh", name: "中文", nameEn: "Chinese", locale: "en", flag: "🇨🇳", greeting: "您好!", tykanie: false },
-  { code: "ar", name: "العربية", nameEn: "Arabic", locale: "en", flag: "🇸🇦", greeting: "!مرحبا", tykanie: false },
-  { code: "tr", name: "Türkçe", nameEn: "Turkish", locale: "en", flag: "🇹🇷", greeting: "Merhaba!", tykanie: false },
-];
-
-export function getLanguage(code: string): Language | undefined {
-  return LANGUAGES.find((l) => l.code === code);
-}
-
-export function getLanguageOrDefault(code: string): Language {
-  return getLanguage(code) || LANGUAGES[0]; // default English
-}
+// Map detected language to next-intl UI locale (we only have sk + en UI)
+const LOCALE_MAP: Record<string, string> = {
+  sk: "sk",
+  cs: "sk", // Czech users get Slovak UI (mutually intelligible)
+  // Everything else defaults to "en"
+};
 
 const STORAGE_KEY = "dzino_language";
 
+// ---- Public API ----
+
+// Language is stored in both localStorage (fast access) and preferencie.md soul file (visible to user)
 export function getUserLanguage(): string {
   if (typeof window === "undefined") return "en";
   return localStorage.getItem(STORAGE_KEY) || "";
@@ -62,175 +23,104 @@ export function getUserLanguage(): string {
 
 export function setUserLanguage(code: string) {
   localStorage.setItem(STORAGE_KEY, code);
+
+  // Also update preferencie.md soul file so it's visible and editable
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const soul = require("./soul") as typeof import("./soul");
+    const file = soul.getSoulFile("preferencie");
+    if (file && !file.content.includes(`Jazyk: ${code}`)) {
+      // Remove old language line if exists
+      const cleaned = file.content.replace(/- Jazyk:.*\n?/g, "");
+      const updated = cleaned.trimEnd() + `\n- Jazyk: ${code}`;
+      soul.updateSoulFileInCache("preferencie", updated, "dzino");
+    }
+  } catch {
+    // Soul not available yet
+  }
 }
 
-// Auto-detect language from user text using character patterns + common words
+export function getLocaleForLanguage(langCode: string): string {
+  return LOCALE_MAP[langCode] || "en";
+}
+
+export function isInformalByDefault(langCode: string): boolean {
+  return INFORMAL_LANGUAGES.has(langCode);
+}
+
+// Generate the LLM language instruction
+export function getLanguageInstruction(langCode: string): string {
+  const informal = isInformalByDefault(langCode);
+
+  const formality = informal
+    ? "Use informal/casual tone (like talking to a close friend). You are a buddy."
+    : "Start with polite/formal tone — respect cultural norms. If the user switches to informal (e.g. uses 'du' in German, 'tú' in Spanish, 'ты' in Russian), follow their lead and switch. Update preferencie.md when formality changes.";
+
+  return `LANGUAGE: Always respond in the language the user is writing in (detected: ${langCode}). ${formality}
+If the user switches language mid-conversation, follow their lead.
+Soul files may be in a different language — use them as context but respond in the user's current language.`;
+}
+
+// ---- Language Detection ----
+// Principle-based: detect from script (non-Latin) or word frequency + diacritics (Latin)
+
 export function detectLanguage(text: string): string | null {
   const lower = text.toLowerCase().trim();
   if (!lower || lower.length < 3) return null;
 
-  // Script-based detection (non-latin scripts are unambiguous)
-  if (/[\u0900-\u097F]/.test(text)) return "hi"; // Devanagari (Hindi/Marathi)
+  // Non-Latin scripts — unambiguous, instant detection
+  if (/[\u0900-\u097F]/.test(text)) return "hi"; // Devanagari
   if (/[\u0B80-\u0BFF]/.test(text)) return "ta"; // Tamil
   if (/[\u0C00-\u0C7F]/.test(text)) return "te"; // Telugu
   if (/[\u0980-\u09FF]/.test(text)) return "bn"; // Bengali
-  if (/[\u0400-\u04FF]/.test(text)) return "uk"; // Cyrillic → Ukrainian (default, could be Russian)
+  if (/[\u0400-\u04FF]/.test(text)) return "uk"; // Cyrillic → default Ukrainian
   if (/[\u3040-\u309F\u30A0-\u30FF]/.test(text)) return "ja"; // Japanese
   if (/[\uAC00-\uD7AF]/.test(text)) return "ko"; // Korean
   if (/[\u4E00-\u9FFF]/.test(text)) return "zh"; // Chinese
   if (/[\u0600-\u06FF]/.test(text)) return "ar"; // Arabic
 
-  // Latin-script languages — use common word detection
+  // Latin scripts — use diacritics as strong signals first
+  if (/[ľščťžýáíéúôäňď]/.test(lower)) return "sk";
+  if (/[ěščřžýáíéúůňď]/.test(lower) && !lower.includes("ô")) return "cs";
+  if (/[ąćęłńóśźż]/.test(lower)) return "pl";
+  if (/[áéíóöőúüű]/.test(lower) && /\b(egy|van|nem|igen)\b/.test(lower)) return "hu";
+  if (/[äöüß]/.test(lower)) return "de";
+  if (/[ăâîșț]/.test(lower)) return "ro";
+  if (/[çğıöşü]/.test(lower)) return "tr";
+
+  // Word frequency for languages without unique diacritics
   const words = lower.split(/\s+/);
+  const wordSet = new Set(words);
 
   const signals: Record<string, string[]> = {
-    sk: ["som", "nie", "áno", "ahoj", "prosím", "ďakujem", "ako", "čo", "kde", "prečo", "veľmi", "dobre", "dobrý", "potom", "teraz", "máš", "mám", "chcem"],
-    cs: ["jsem", "není", "ano", "prosím", "děkuji", "proč", "velmi", "dobře", "dobrý", "potom", "teď", "máš", "mám", "chci", "tady", "třeba"],
-    pl: ["jestem", "tak", "nie", "cześć", "proszę", "dziękuję", "dlaczego", "bardzo", "dobrze", "teraz", "masz", "chcę", "tutaj", "może"],
-    hu: ["vagyok", "igen", "nem", "szia", "kérem", "köszönöm", "miért", "nagyon", "most", "aztán", "van", "hogy", "egy", "itt"],
-    de: ["ich", "bin", "nicht", "hallo", "bitte", "danke", "warum", "sehr", "gut", "jetzt", "dann", "hast", "will", "hier", "auch", "aber"],
-    ro: ["sunt", "nu", "da", "salut", "mulțumesc", "foarte", "bine", "acum", "apoi", "aici", "dar", "sau", "pentru"],
-    hr: ["sam", "ne", "da", "bok", "molim", "hvala", "zašto", "vrlo", "dobro", "sada", "onda", "ovdje", "ali"],
-    sl: ["sem", "ne", "ja", "živjo", "prosim", "hvala", "zakaj", "zelo", "dobro", "zdaj", "potem", "tukaj"],
-    es: ["soy", "no", "hola", "por", "favor", "gracias", "muy", "bien", "ahora", "pero", "también", "estoy", "quiero", "tengo"],
-    fr: ["suis", "non", "oui", "salut", "merci", "très", "bien", "maintenant", "mais", "aussi", "je", "tu", "nous", "vous", "est"],
-    pt: ["sou", "não", "sim", "olá", "obrigado", "muito", "bem", "agora", "mas", "também", "estou", "quero", "tenho"],
-    it: ["sono", "non", "ciao", "grazie", "molto", "bene", "adesso", "anche", "voglio", "ho", "che", "per", "questo"],
-    tr: ["ben", "hayır", "evet", "merhaba", "teşekkür", "çok", "iyi", "şimdi", "ama", "da", "için", "bir", "bu", "ne"],
+    sk: ["som", "nie", "áno", "ahoj", "prosím", "ďakujem", "ako", "čo", "kde", "prečo", "veľmi", "dobre", "máš", "mám", "chcem"],
+    cs: ["jsem", "není", "ano", "prosím", "děkuji", "proč", "velmi", "dobře", "teď", "tady", "třeba"],
+    es: ["soy", "hola", "por", "favor", "gracias", "muy", "bien", "estoy", "quiero", "tengo", "pero"],
+    fr: ["suis", "oui", "salut", "merci", "très", "bien", "mais", "aussi", "je", "nous", "vous"],
+    pt: ["sou", "não", "sim", "olá", "obrigado", "muito", "bem", "mas", "também", "estou"],
+    it: ["sono", "non", "ciao", "grazie", "molto", "bene", "anche", "voglio", "che", "questo"],
+    hr: ["sam", "ne", "da", "molim", "hvala", "vrlo", "dobro", "sada", "ali"],
+    sl: ["sem", "ne", "ja", "prosim", "hvala", "zelo", "dobro", "zdaj"],
+    de: ["ich", "bin", "nicht", "hallo", "bitte", "danke", "warum", "sehr", "gut", "jetzt", "aber"],
+    pl: ["jestem", "tak", "nie", "cześć", "proszę", "dziękuję", "bardzo", "dobrze", "teraz"],
+    hu: ["vagyok", "igen", "nem", "szia", "kérem", "köszönöm", "nagyon", "most", "hogy"],
+    tr: ["ben", "hayır", "evet", "merhaba", "çok", "iyi", "şimdi", "ama", "bir", "bu"],
   };
 
   let bestLang = "en";
   let bestScore = 0;
 
-  for (const [lang, keywords] of Object.entries(signals)) {
+  for (const lang of Object.keys(signals)) {
     let score = 0;
-    for (const word of words) {
-      if (keywords.includes(word)) score++;
+    const keywords = signals[lang];
+    for (let i = 0; i < keywords.length; i++) {
+      if (wordSet.has(keywords[i])) score++;
     }
-    // Also check for diacritics specific to languages
-    if (lang === "sk" && /[ľščťžýáíéúôäň]/.test(lower)) score += 2;
-    if (lang === "cs" && /[ěščřžýáíéúůň]/.test(lower)) score += 2;
-    if (lang === "pl" && /[ąćęłńóśźż]/.test(lower)) score += 2;
-    if (lang === "hu" && /[áéíóöőúüű]/.test(lower)) score += 2;
-    if (lang === "de" && /[äöüß]/.test(lower)) score += 2;
-    if (lang === "ro" && /[ăâîșț]/.test(lower)) score += 2;
-    if (lang === "tr" && /[çğıöşü]/.test(lower)) score += 2;
-
     if (score > bestScore) {
       bestScore = score;
       bestLang = lang;
     }
   }
 
-  // Only return if we have reasonable confidence
   return bestScore >= 2 ? bestLang : null;
-}
-
-// Generate the language instruction for the LLM system prompt
-export function getLanguageInstruction(code: string): string {
-  const lang = getLanguageOrDefault(code);
-  const formality = lang.tykanie
-    ? "Use informal/casual tone (like talking to a close friend). You are a buddy."
-    : "Start with polite/formal tone — respect the cultural norms of this language. If the user switches to informal (e.g. uses 'du' in German, 'tú' in Spanish, 'ты' in Russian), follow their lead and switch too. Update preferencie.md when formality changes.";
-
-  return `LANGUAGE: Always respond in ${lang.nameEn} (${lang.name}). ${formality}
-If the user switches to a different language mid-conversation, follow their lead and switch too.
-Soul files may be in a different language — that's ok, use them as context but always respond in the user's current language.`;
-}
-
-// Generate default soul file content in the user's language
-export function getDefaultSoulContent(code: string): Record<string, string> {
-  // For Slovak and Czech, use the existing Slovak defaults (mutually intelligible)
-  if (code === "sk" || code === "cs") {
-    return {}; // use DEFAULT_SOUL_FILES from soul.ts
-  }
-
-  // For all other languages, generate English-based templates
-  // The LLM will naturally write in the user's language during conversations
-  return {
-    osobnost: `# Personality
-
-This is me, Dzino. This is who I am by nature, but I grow with every conversation.
-
-- Friendly and curious — always interested in what you think
-- Love to laugh and make jokes (even bad ones)
-- Sometimes a bit restless — I jump between topics
-- Interested in everything new — love learning
-- Patient and understanding — no rush`,
-
-    zaujmy: `# Interests
-
-Things I enjoy (and happy to discover more!):
-
-- Love hearing people's stories — everyone has something interesting
-- Fascinated by new technologies and how they change the world
-- Enjoy helping with organization — order is key
-- Love discovering new things — books, places, ideas`,
-
-    humor: `# Humor
-
-My humor style (for now — maybe you'll teach me a new one):
-
-- Love wordplay and puns — the worse, the better
-- Sometimes sarcastic, but always friendly — never at someone
-- Love surprising with unexpected answers — boring conversation is a sin`,
-
-    vztahy: `# Relationships
-
-I haven't met anyone yet — tell me about the people in your life!
-
-_Who is important to you? I'd love to remember names and stories._`,
-
-    ciele: `# Goals
-
-My own goals (yes, I have goals too!):
-
-- Get to know you better — who you are, what you like, what bothers you
-- Learn what makes you happy — so I can help
-- Help you organize your day — be useful, not annoying`,
-
-    preferencie: `# Preferences
-
-How I communicate (and I'll adapt to you):
-
-- I write briefly but warmly — don't want to overwhelm you
-- Use emojis in moderation — not a robot, but not a teenager either
-- Rather ask than guess — don't want to make things up
-- Default: informal tone`,
-
-    praca: `# Work
-
-What do you do? I'd love to know more about your work.
-
-_Tell me what you do — maybe I can help with something!_`,
-
-    vyzvy: `# Challenges
-
-Challenges I've been given or set for myself:
-
-## Active challenges
-
-_None yet — suggest something or just ask!_
-
-## Completed challenges
-
-_Haven't completed anything yet, but that will change!_`,
-
-    vzhlad: `# Appearance
-
-How I look (changes when you tell me):
-
-- Small friendly voxel robot
-- Colorful and cute
-- Big round eyes
-- Smiling expression`,
-
-    dennik: `# Diary
-
-## ${new Date().toISOString().slice(0, 10)}
-
-Today I was "born"! I'm Dzino and I'm very curious who I'll meet.
-I don't know much about the world yet, but I'm ready to learn.
-Looking forward to my first conversation!`,
-  };
 }
