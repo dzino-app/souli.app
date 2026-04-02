@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { getDailyChallenges, completeChallengeById, type DailyChallenge } from "@/lib/challenges";
 import { addXp } from "@/lib/gamification";
+import { ShareCompletion } from "./share-completion";
 
 /** Compact daily challenges preview for the homepage. */
 export function DailyChallenges() {
@@ -25,28 +26,37 @@ export function DailyChallenges() {
         {items.map((ch) => {
           const done = ch.completed;
           return (
-            <button
+            <div
               key={ch.id}
-              onClick={() => !done && handleComplete(ch.id)}
-              disabled={done}
               className={`flex items-center gap-3 rounded-lg border p-3 text-left transition-colors ${
                 done
                   ? "bg-success/5 border-success/30 opacity-70"
-                  : "bg-card hover:bg-secondary cursor-pointer"
+                  : "bg-card hover:bg-secondary"
               }`}
             >
-              <span className="text-xl shrink-0">{ch.emoji}</span>
-              <div className="flex-1 min-w-0">
-                <p className={`text-sm ${done ? "line-through text-muted-foreground" : "font-medium"}`}>
-                  {ch.text}
-                </p>
+              <button
+                onClick={() => !done && handleComplete(ch.id)}
+                disabled={done}
+                className="flex items-center gap-3 flex-1 min-w-0 text-left cursor-pointer disabled:cursor-default"
+              >
+                <span className="text-xl shrink-0">{ch.emoji}</span>
+                <div className="flex-1 min-w-0">
+                  <p className={`text-sm ${done ? "line-through text-muted-foreground" : "font-medium"}`}>
+                    {ch.text}
+                  </p>
+                </div>
+              </button>
+              <div className="flex items-center gap-2 shrink-0">
+                {done ? (
+                  <>
+                    <ShareCompletion challengeText={ch.text} />
+                    <span className="text-success text-sm">{"\u2713"}</span>
+                  </>
+                ) : (
+                  <span className="text-xs text-muted-foreground">Splni{"\u0165"}</span>
+                )}
               </div>
-              {done ? (
-                <span className="text-success text-sm">✓</span>
-              ) : (
-                <span className="text-xs text-muted-foreground">Splniť</span>
-              )}
-            </button>
+            </div>
           );
         })}
       </div>

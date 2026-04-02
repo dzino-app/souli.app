@@ -17,6 +17,10 @@ import {
 import { XpBar } from "@/components/gamification/xp-bar";
 import { StreakDisplay } from "@/components/gamification/streak-display";
 import { DailyChallenges } from "@/components/gamification/daily-challenges";
+import { WeeklyReviewCard } from "@/components/review/weekly-review-card";
+import { DailyGreeting } from "@/components/greeting/daily-greeting";
+import { MoodPicker } from "@/components/mood/mood-picker";
+import { TellMeSomething } from "@/components/quick-action/tell-me-something";
 
 export default function Home() {
   const { mounted, state, mood, name, appearance } = useAvatarState();
@@ -38,6 +42,9 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-6">
+      {/* Daily greeting — shows once per day */}
+      <DailyGreeting />
+
       {/* Avatar — compact, centered */}
       <div className="flex flex-col items-center gap-2 py-4">
         <CachedAvatar state={state} appearance={appearance} size="lg" />
@@ -47,11 +54,20 @@ export default function Home() {
         </p>
       </div>
 
+      {/* Mood picker */}
+      <MoodPicker />
+
+      {/* Tell me something */}
+      <TellMeSomething />
+
       {/* Gamification section */}
       <div className="flex flex-col items-center gap-3 px-2">
         <XpBar />
         <StreakDisplay />
       </div>
+
+      {/* Weekly review */}
+      <WeeklyReviewCard />
 
       {/* Daily challenges */}
       <DailyChallenges />

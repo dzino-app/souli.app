@@ -122,7 +122,22 @@
     "memory": "Memory",
     "skills": "Skills",
     "marketplace": "Marketplace",
-    "invite": "Invite a friend"
+    "invite": "Invite a friend",
+    "features": {
+      "title": "Features",
+      "dailyGreeting": "Daily greeting",
+      "dailyGreetingDesc": "Dzino greets you when you open the app",
+      "moodTracking": "Mood tracking",
+      "moodTrackingDesc": "Asks you how you feel every day",
+      "weeklyReview": "Weekly review",
+      "weeklyReviewDesc": "Summary of your week on Sunday",
+      "healthNudges": "Health tips",
+      "healthNudgesDesc": "Gentle reminders about healthy lifestyle",
+      "interestingFacts": "Interesting facts",
+      "interestingFactsDesc": "Facts from nature, science, and history",
+      "challengeNotifications": "Challenge notifications",
+      "challengeNotificationsDesc": "Reminders about daily challenges"
+    }
   },
   "notFound": {
     "title": "Page not found",
@@ -178,5 +193,20 @@
     "download": "Download",
     "copy": "Copy",
     "close": "Close"
+  },
+  "features": {
+    "goodMorning": "Good morning",
+    "goodAfternoon": "Good afternoon",
+    "goodEvening": "Good evening",
+    "missedYou": "Hey, I missed you!",
+    "howAreYou": "How are you feeling today?",
+    "tellMeSomething": "Tell me something",
+    "moodGreat": "Great!",
+    "moodGood": "Good",
+    "moodOk": "OK",
+    "moodBad": "Not great",
+    "moodAwful": "Awful",
+    "moodThanks": "Thanks for sharing!",
+    "weeklyReview": "Weekly review"
   }
 }

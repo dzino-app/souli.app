@@ -249,7 +249,22 @@
     "memory": "Pamäť",
     "skills": "Zručnosti",
     "marketplace": "Trhovisko",
-    "invite": "Pozvať priateľa"
+    "invite": "Pozvať priateľa",
+    "features": {
+      "title": "Funkcie",
+      "dailyGreeting": "Denné privítanie",
+      "dailyGreetingDesc": "Dzino ťa pozdraví keď otvoríš apku",
+      "moodTracking": "Sledovanie nálady",
+      "moodTrackingDesc": "Každý deň sa ťa opýta, ako sa cítiš",
+      "weeklyReview": "Týždenný prehľad",
+      "weeklyReviewDesc": "Zhrnutie týždňa v nedeľu",
+      "healthNudges": "Zdravotné tipy",
+      "healthNudgesDesc": "Jemné pripomienky o zdravom životnom štýle",
+      "interestingFacts": "Zaujímavosti",
+      "interestingFactsDesc": "Fakty zo sveta prírody, vedy a histórie",
+      "challengeNotifications": "Upozornenia na výzvy",
+      "challengeNotificationsDesc": "Pripomienky o denných výzvach"
+    }
   },
   "notFound": {
     "title": "Stránka sa nenašla",
@@ -305,5 +320,20 @@
     "download": "Stiahnuť",
     "copy": "Kopírovať",
     "close": "Zavrieť"
+  },
+  "features": {
+    "goodMorning": "Dobré ráno",
+    "goodAfternoon": "Dobré popoludnie",
+    "goodEvening": "Dobrý večer",
+    "missedYou": "Hej, chýbal si mi!",
+    "howAreYou": "Ako sa dnes cítiš?",
+    "tellMeSomething": "Povedz mi niečo",
+    "moodGreat": "Super!",
+    "moodGood": "Dobre",
+    "moodOk": "Ujde to",
+    "moodBad": "Nie najlepšie",
+    "moodAwful": "Zle",
+    "moodThanks": "Ďakujem, že si sa podelil!",
+    "weeklyReview": "Týždenný prehľad"
   }
 }
