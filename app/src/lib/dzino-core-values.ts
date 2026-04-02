@@ -1,4 +1,4 @@
-// Dzino's immutable core values — the "genetics" that cannot be modified
+// Dzino's immutable core values — the "genes" that cannot be modified
 // These are hardcoded safety and behavioral guardrails.
 // They're injected BEFORE soul files in the system prompt, so they always win.
 

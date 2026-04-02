@@ -12,7 +12,7 @@ Dzino is a personal AI companion app built with Next.js 14, Gemini 2.5 Flash, Su
 
 ## Architecture
 - Soul files (.md) are stored in Supabase Storage, cached in localStorage
-- Core values (genetics) are in `src/lib/dzino-core-values.ts` — NEVER user-editable
+- Core values (genes) are in `src/lib/dzino-core-values.ts` — NEVER user-editable
 - LLM: Gemini 2.5 Flash via `@google/generative-ai` (src/lib/llm.ts)
 - Languages: 25 supported, auto-detected from user messages
 - Gamification: XP, levels, streaks, achievements, daily challenges
@@ -27,9 +27,9 @@ Align all translation files and soul defaults with the English source of truth.
 4. Report what's missing or outdated
 5. Fix any issues found
 
-### /align-genetics
-Review and update Dzino's core values (genetics) in dzino-core-values.ts.
+### /align-genes
+Review and update Dzino's core values (genes) in dzino-core-values.ts.
 1. Read the current CORE_VALUES
 2. Check for completeness: safety, morals, challenges, emotions, curiosity, health, language
 3. Suggest improvements based on latest AI safety best practices
-4. Ensure genetics can't be bypassed via soul file edits or language switching
+4. Ensure genes can't be bypassed via soul file edits or language switching
