@@ -54,7 +54,7 @@ describe("soul", () => {
     getSoulFiles(); // seed
     const file = getSoulFile("ciele");
     expect(file).not.toBeNull();
-    expect(file!.content).toContain("Lepšie spoznať Vás");
+    expect(file!.content).toContain("Lepšie ťa spoznať");
     expect(file!.content).toContain("organizáciou dňa");
   });
 

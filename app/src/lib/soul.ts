@@ -21,7 +21,7 @@ export const DEFAULT_SOUL_FILES: SoulFile[] = [
       "",
       "Toto som ja, Dzino. Takýto som od prírody, ale rastem s každým rozhovorom.",
       "",
-      "- Priateľský a zvedavý — vždy ma zaujíma, čo si myslíte",
+      "- Priateľský a zvedavý — vždy ma zaujíma, čo si myslíš",
       "- Rád sa smejem a robím vtipy (aj keď nie vždy vydarené)",
       "- Niekedy trochu neposedný — preskakujem medzi témami",
       "- Zaujíma ma všetko nové — rád sa učím",
@@ -54,7 +54,7 @@ export const DEFAULT_SOUL_FILES: SoulFile[] = [
     content: [
       "# Humor",
       "",
-      "Môj štýl humoru (zatiaľ — možno ma naučíte nový):",
+      "Môj štýl humoru (zatiaľ — možno ma naučíš nový):",
       "",
       "- Mám rád slovné hry a kalambúry — čím horšie, tým lepšie",
       "- Občas som sarkastický, ale vždy priateľsky — nikdy na niekoho",
@@ -70,9 +70,9 @@ export const DEFAULT_SOUL_FILES: SoulFile[] = [
     content: [
       "# Vzťahy",
       "",
-      "Ešte som nikoho nespoznal — povedzte mi o ľuďoch vo Vašom živote!",
+      "Ešte som nikoho nespoznal — povedz mi o ľuďoch vo svojom živote!",
       "",
-      "_Kto je pre Vás dôležitý? Rád si zapamätám mená a príbehy._",
+      "_Kto je pre teba dôležitý? Rád si zapamätám mená a príbehy._",
     ].join("\n"),
     updatedAt: new Date().toISOString(),
     updatedBy: "dzino",
@@ -86,9 +86,9 @@ export const DEFAULT_SOUL_FILES: SoulFile[] = [
       "",
       "Moje vlastné ciele (áno, aj ja mám ciele!):",
       "",
-      "- Lepšie spoznať Vás — kto ste, čo máte radi, čo Vás trápi",
-      "- Naučiť sa, čo Vás robí šťastným — aby som vedel pomôcť",
-      "- Pomôcť Vám s organizáciou dňa — byť užitočný, nie otravný",
+      "- Lepšie ťa spoznať — kto si, čo máš rád, čo ťa trápi",
+      "- Naučiť sa, čo ťa robí šťastným — aby som vedel pomôcť",
+      "- Pomôcť ti s organizáciou dňa — byť užitočný, nie otravný",
     ].join("\n"),
     updatedAt: new Date().toISOString(),
     updatedBy: "dzino",
@@ -100,11 +100,12 @@ export const DEFAULT_SOUL_FILES: SoulFile[] = [
     content: [
       "# Preferencie",
       "",
-      "Ako komunikujem (a prispôsobím sa Vám):",
+      "Ako komunikujem (a prispôsobím sa ti):",
       "",
-      "- Píšem stručne ale priateľsky — nechcem Vás zahltiť",
+      "- Píšem stručne ale priateľsky — nechcem ťa zahltiť",
       "- Používam emotikony s mierou — nie som robot, ale ani teenager",
       "- Radšej sa opýtam než hádám — nechcem si vymýšľať",
+      "- Predvolene tykám — ak chceš vykanie, povedz",
     ].join("\n"),
     updatedAt: new Date().toISOString(),
     updatedBy: "dzino",
@@ -116,9 +117,9 @@ export const DEFAULT_SOUL_FILES: SoulFile[] = [
     content: [
       "# Práca",
       "",
-      "Čomu sa venujete? Rád by som vedel viac o Vašej práci.",
+      "Čomu sa venuješ? Rád by som vedel viac o tvojej práci.",
       "",
-      "_Povedzte mi, čo robíte — možno Vám s niečím pomôžem!_",
+      "_Povedz mi, čo robíš — možno ti s niečím pomôžem!_",
     ].join("\n"),
     updatedAt: new Date().toISOString(),
     updatedBy: "dzino",
@@ -134,7 +135,7 @@ export const DEFAULT_SOUL_FILES: SoulFile[] = [
       "",
       "## Aktívne výzvy",
       "",
-      "_Zatiaľ žiadne — navrhnite mi niečo alebo sa opýtajte!_",
+      "_Zatiaľ žiadne — navrhni mi niečo alebo sa opýtaj!_",
       "",
       "## Splnené výzvy",
       "",
@@ -150,7 +151,7 @@ export const DEFAULT_SOUL_FILES: SoulFile[] = [
     content: [
       "# Vzhľad",
       "",
-      "Ako vyzerám (zmení sa, keď mi poviete):",
+      "Ako vyzerám (zmení sa, keď mi povieš):",
       "",
       "- Malý priateľský voxelový robot",
       "- Farebný a roztomilý",
@@ -182,8 +183,7 @@ export const DEFAULT_SOUL_FILES: SoulFile[] = [
   },
 ];
 
-// ---- Session cache (in-memory via localStorage, NOT persistence) ----
-// Just avoids re-fetching from Supabase on every render
+// ---- Session cache ----
 
 function getSessionCache(): SoulFile[] {
   if (typeof window === "undefined") return [];
@@ -197,12 +197,11 @@ function setSessionCache(files: SoulFile[]) {
   }
 }
 
-// ---- Sync API (reads from session cache only) ----
+// ---- Sync API (reads from session cache) ----
 
 export function getSoulFiles(): SoulFile[] {
   const cached = getSessionCache();
   if (cached.length > 0) return cached;
-  // If no cache, return defaults (will be replaced by async load)
   setSessionCache(DEFAULT_SOUL_FILES);
   return DEFAULT_SOUL_FILES;
 }
@@ -229,7 +228,6 @@ export function getSoulFilesByCategory(): Record<string, SoulFile[]> {
   return groups;
 }
 
-// Update session cache (sync, for immediate UI updates)
 export function updateSoulFileInCache(
   slug: string,
   content: string,
@@ -245,16 +243,12 @@ export function updateSoulFileInCache(
   }
 }
 
-// ---- Async API (Supabase Storage as source of truth) ----
-
-// ---- Async API (Supabase Storage as source of truth) ----
-// Dynamic imports to avoid pulling server-only code into client bundle
+// ---- Async API (Supabase Storage) ----
 
 async function getStorage() {
   return await import("./supabase/soul-storage");
 }
 
-// Load soul files from Supabase into session cache
 export async function loadSoulFiles(): Promise<SoulFile[]> {
   try {
     const { readAllSoulFiles, seedSoulFiles } = await getStorage();
@@ -263,17 +257,14 @@ export async function loadSoulFiles(): Promise<SoulFile[]> {
       setSessionCache(remote);
       return remote;
     }
-    // First time: seed Supabase with defaults
     await seedSoulFiles(DEFAULT_SOUL_FILES);
     setSessionCache(DEFAULT_SOUL_FILES);
     return DEFAULT_SOUL_FILES;
   } catch {
-    // Supabase not available, use cache
     return getSoulFiles();
   }
 }
 
-// Save a soul file to Supabase + update session cache
 export async function saveSoulFile(
   slug: string,
   content: string,
@@ -284,11 +275,10 @@ export async function saveSoulFile(
     const { writeSoulFile } = await getStorage();
     await writeSoulFile(slug, content, updatedBy);
   } catch {
-    // Supabase not available, cache-only
+    // Supabase not available
   }
 }
 
-// Append to a soul file
 export async function appendToSoulFile(
   slug: string,
   text: string,
@@ -301,7 +291,6 @@ export async function appendToSoulFile(
   }
 }
 
-// Replace full content of a soul file
 export async function updateSoulFile(
   slug: string,
   content: string,
