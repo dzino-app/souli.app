@@ -14,6 +14,9 @@ import {
   deleteConversation,
   type Conversation,
 } from "@/lib/conversations";
+import { XpBar } from "@/components/gamification/xp-bar";
+import { StreakDisplay } from "@/components/gamification/streak-display";
+import { DailyChallenges } from "@/components/gamification/daily-challenges";
 
 export default function Home() {
   const { mounted, state, mood, name, appearance } = useAvatarState();
@@ -44,11 +47,20 @@ export default function Home() {
         </p>
       </div>
 
+      {/* Gamification section */}
+      <div className="flex flex-col items-center gap-3 px-2">
+        <XpBar />
+        <StreakDisplay />
+      </div>
+
+      {/* Daily challenges */}
+      <DailyChallenges />
+
       {/* New chat button */}
       <Link href="/chat">
         <Button size="lg" className="w-full">
           <Plus className="h-4 w-4 mr-2" />
-          Nová konverzácia
+          Nov{"\u00e1"} konverz{"\u00e1"}cia
         </Button>
       </Link>
 
@@ -56,7 +68,7 @@ export default function Home() {
       {dateKeys.length > 0 && (
         <div className="flex flex-col gap-4">
           <h2 className="text-sm font-semibold text-muted-foreground">
-            Predchádzajúce konverzácie
+            Predch{"\u00e1"}dzaj{"\u00fa"}ce konverz{"\u00e1"}cie
           </h2>
           {dateKeys.map((dateKey) => (
             <div key={dateKey}>
@@ -71,7 +83,7 @@ export default function Home() {
                           <div className="min-w-0">
                             <p className="text-sm font-medium truncate">{conv.title}</p>
                             <p className="text-xs text-muted-foreground">
-                              {conv.messages.length} {conv.messages.length === 1 ? "správa" : "správ"}
+                              {conv.messages.length} {conv.messages.length === 1 ? "spr\u00e1va" : "spr\u00e1v"}
                             </p>
                           </div>
                         </Link>
@@ -95,7 +107,7 @@ export default function Home() {
 
       {dateKeys.length === 0 && (
         <p className="text-sm text-muted-foreground text-center py-4">
-          Začnite konverzáciu — Dzino sa teší!
+          Za{"\u010d"}nite konverz{"\u00e1"}ciu {"\u2014"} Dzino sa te{"\u0161"}{"\u00ed"}!
         </p>
       )}
     </div>

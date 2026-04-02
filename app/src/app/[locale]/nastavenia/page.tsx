@@ -8,6 +8,7 @@ import {
   MessageCircle,
   BookOpen,
   Calendar,
+  Trophy,
   Trash2,
   LogOut,
   ChevronRight,
@@ -18,8 +19,9 @@ import { Card, CardContent } from "@/components/ui/card";
 const NAV_ITEMS = [
   { href: "/", icon: Home, label: "Domov" },
   { href: "/chat", icon: MessageCircle, label: "Chat" },
-  { href: "/dusa", icon: BookOpen, label: "Duša" },
+  { href: "/dusa", icon: BookOpen, label: "Du\u0161a" },
   { href: "/udalosti", icon: Calendar, label: "Udalosti" },
+  { href: "/uspechy", icon: Trophy, label: "\u00DAspechy" },
 ] as const;
 
 export default function SettingsPage() {

@@ -15,6 +15,9 @@ import { createEvent } from "@/lib/events";
 import { getAvatarData, recordInteraction } from "@/lib/avatar";
 import { clearFrameCache } from "@/lib/avatar-cache";
 import { createConversation, addMessage } from "@/lib/conversations";
+import { addXp, getGamification, saveGamification } from "@/lib/gamification";
+import { checkAchievements, grantAchievement, type Achievement } from "@/lib/achievements";
+import { updateChallengeProgress } from "@/lib/challenges";
 
 export default function ChatPage() {
   const t = useTranslations();
@@ -32,8 +35,48 @@ export default function ChatPage() {
     name: "Dzino",
     appearance: { species: "human", bodyShape: "round", eyeStyle: "dots", mouthStyle: "smile", earStyle: "none", accessory: "none", hairStyle: "none", skinColor: "#FDDCB5", bodyColor: "#4F46E5" },
   });
+  const [achievementToast, setAchievementToast] = useState<Achievement | null>(null);
   const convIdRef = useRef<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  function showAchievementToasts(newAchievements: Achievement[]) {
+    if (newAchievements.length === 0) return;
+    // Show each achievement sequentially
+    let delay = 0;
+    for (const ach of newAchievements) {
+      setTimeout(() => {
+        setAchievementToast(ach);
+        setTimeout(() => setAchievementToast(null), 3000);
+      }, delay);
+      delay += 3500;
+    }
+  }
+
+  function processGamificationOnMessage() {
+    addXp(5, "message");
+    updateChallengeProgress("chat");
+
+    // Check time-based achievements
+    const hour = new Date().getHours();
+    const data = getGamification();
+    const allNew: Achievement[] = [];
+    if (hour >= 0 && hour < 5) {
+      const a = grantAchievement(data, "night_owl");
+      if (a) allNew.push(a);
+    }
+    if (hour >= 5 && hour < 7) {
+      const a = grantAchievement(data, "early_bird");
+      if (a) allNew.push(a);
+    }
+
+    // Check data-driven achievements
+    const dataNew = checkAchievements(data);
+    allNew.push(...dataNew);
+    if (allNew.length > 0) {
+      saveGamification(data);
+      showAchievementToasts(allNew);
+    }
+  }
 
   useEffect(() => {
     const data = getAvatarData();
@@ -78,6 +121,7 @@ export default function ChatPage() {
       setMessages((prev) => [...prev, { role: "assistant", content: parsed.text }]);
       addMessage(convIdRef.current!, "assistant", parsed.text);
       recordInteraction();
+      processGamificationOnMessage();
 
       // Set avatar mood from LLM response, then fade to idle
       setStreaming(false);
@@ -103,6 +147,8 @@ export default function ChatPage() {
     } else {
       appendToSoulFile(update.slug, update.content, "dzino");
     }
+    addXp(10, "soul_update");
+    updateChallengeProgress("soul");
     setPendingUpdates((prev) => prev.filter((u) => u !== update));
 
     // If appearance changed, clear frame cache so it regenerates
@@ -126,6 +172,8 @@ export default function ChatPage() {
       remindBefore: proposal.remindBefore,
       createdBy: "dzino",
     });
+    addXp(5, "event");
+    updateChallengeProgress("event");
     setPendingEvents((prev) => prev.filter((e) => e !== proposal));
   }
 
@@ -278,6 +326,22 @@ export default function ChatPage() {
           <Send className="h-4 w-4" />
         </Button>
       </form>
+
+      {/* Achievement toast */}
+      {achievementToast && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-top fade-in duration-300">
+          <Card className="border-primary/50 bg-primary/10 shadow-lg">
+            <CardContent className="py-3 px-5 flex items-center gap-3">
+              <span className="text-2xl">{achievementToast.icon}</span>
+              <div>
+                <p className="text-xs text-muted-foreground">Novy uspech!</p>
+                <p className="text-sm font-semibold">{achievementToast.name}</p>
+                <p className="text-xs text-muted-foreground">{achievementToast.description}</p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
