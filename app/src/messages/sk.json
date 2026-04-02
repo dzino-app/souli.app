@@ -1,7 +1,7 @@
 {
   "app": {
     "name": "Dzino",
-    "tagline": "Váš osobný spoločník"
+    "tagline": "Váš osobný parťák"
   },
   "nav": {
     "home": "Domov",
@@ -173,13 +173,13 @@
     "community": "Od komunity"
   },
   "landing": {
-    "hero": "Váš osobný spoločník, ktorý rastie s Vami",
+    "hero": "Váš osobný parťák, ktorý rastie s Vami",
     "heroSub": "Dzino si pamätá, kto ste. Pomáha, organizuje, rozpráva sa — a čím viac ho používate, tým lepšie Vám rozumie.",
     "cta": "Vytvoriť si Dzina",
     "ctaSub": "Zadarmo. Žiadna kreditná karta.",
     "useCasesTitle": "Čo pre Vás Dzino môže byť?",
     "useCase1": "Kamarát na rozhovor",
-    "useCase1Desc": "Niekto, kto Vás počúva, pamätá si Vaše príbehy a vždy má čas. Nie chatbot — spoločník.",
+    "useCase1Desc": "Niekto, kto Vás počúva, pamätá si Vaše príbehy a vždy má čas. Nie chatbot — parťák.",
     "useCase2": "Organizátor života",
     "useCase2Desc": "Naplánuje Váš deň, pripomenie udalosti, navrhne výzvy — a urobí to s úsmevom.",
     "useCase3": "Pamäť, ktorá rastie",
@@ -222,7 +222,7 @@
     "faq3a": "Nie. 20 správ mesačne je zadarmo. Stačí na to, aby ste si Dzina vyskúšali.",
     "faq4q": "Môžem zmeniť, ako Dzino vyzerá a správa sa?",
     "faq4a": "Áno! Stačí povedať — 'zmeň sa na mačku' alebo 'buď viac sarkastický'. Dzino sa prispôsobí.",
-    "footer": "Dzino — Váš osobný spoločník, ktorý sa učí"
+    "footer": "Dzino — Váš osobný parťák, ktorý sa učí"
   },
   "invite": {
     "title": "Pozvite priateľa",

@@ -14,8 +14,8 @@ const geistSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Dzino — Váš osobný spoločník",
-  description: "Osobný spoločník, ktorý Vás pozná a rastie s Vami.",
+  title: "Dzino — Váš osobný parťák",
+  description: "Osobný parťák, ktorý Vás pozná a rastie s Vami.",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
