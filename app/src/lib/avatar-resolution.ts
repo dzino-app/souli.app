@@ -24,11 +24,11 @@ export interface AvatarResolution {
 export function getAvatarResolution(level: number): AvatarResolution {
   return {
     level,
-    gridSize: level <= 5 ? 4 : level <= 10 ? 8 : level <= 15 ? 12 : level <= 20 ? 16 : 20,
-    bodyWidth: level <= 5 ? 48 + level * 4 : level <= 10 ? 64 + (level - 5) * 2 : 80,
-    bodyHeight: level <= 5 ? 48 + level * 4 : level <= 10 ? 64 + (level - 5) * 2 : 80,
-    pixelSize: level <= 5 ? 14 - level : level <= 10 ? 8 : level <= 15 ? 6 : level <= 20 ? 5 : 4,
-    label: level <= 5 ? "4×4" : level <= 10 ? "8×8" : level <= 15 ? "12×12" : level <= 20 ? "16×16" : "20×20",
+    gridSize: level <= 2 ? 4 : level <= 5 ? 6 : level <= 10 ? 8 : level <= 15 ? 12 : 16,
+    bodyWidth: level <= 2 ? 60 : level <= 5 ? 72 : level <= 10 ? 80 : level <= 15 ? 84 : 88,
+    bodyHeight: level <= 2 ? 60 : level <= 5 ? 72 : level <= 10 ? 80 : level <= 15 ? 84 : 88,
+    pixelSize: level <= 2 ? 15 : level <= 5 ? 12 : level <= 10 ? 10 : level <= 15 ? 7 : 5,
+    label: level <= 2 ? "4×4" : level <= 5 ? "6×6" : level <= 10 ? "8×8" : level <= 15 ? "12×12" : "16×16",
 
     // Level 1: colored blob only
     // Level 2: + eyes
@@ -62,6 +62,7 @@ export function getLevelUpMessage(newLevel: number): string {
     case 3: return "Dzino sa usmieva! 😊";
     case 4: return "Dzino vyzerá 3D! ✨";
     case 5: return "Odomknuté: doplnky! 👑";
+    case 3: return "6×6 rozlíšenie! Dzino rastie!";
     case 6: return "8×8 rozlíšenie! Viac detailov!";
     case 7: return "Dzino dostal pleť!";
     case 8: return "Ostrejšie detaily!";

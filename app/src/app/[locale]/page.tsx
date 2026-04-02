@@ -5,7 +5,7 @@ import Link from "next/link";
 import { MessageCircle, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CachedAvatar } from "@/components/avatar/cached-avatar";
+import { PixelAvatar } from "@/components/avatar/pixel-avatar";
 import { useAvatarState } from "@/components/avatar/use-avatar-state";
 import { getMoodLabel, getMoodEmoji } from "@/lib/avatar-mood";
 import { migrateMemoriesToSoul } from "@/lib/migrate-memories-to-soul";
@@ -50,7 +50,7 @@ export default function Home() {
 
       {/* Avatar — compact, centered */}
       <div className="flex flex-col items-center gap-2 py-4">
-        <CachedAvatar state={state} appearance={appearance} size="lg" />
+        <PixelAvatar state={state} appearance={appearance} size="lg" />
         <h1 className="text-lg font-bold">{name}</h1>
         <p className="text-xs text-muted-foreground">
           {getMoodEmoji(mood)} {getMoodLabel(mood)}

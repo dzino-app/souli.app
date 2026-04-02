@@ -4,19 +4,19 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { MessageCircle, BookOpen, Calendar, Sparkles } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Avatar } from "./avatar";
+import { PixelAvatar } from "./pixel-avatar";
 import { useAvatarState } from "./use-avatar-state";
 import { getMoodLabel, getMoodEmoji } from "@/lib/avatar-mood";
 
 export function AvatarScene() {
   const t = useTranslations("companion");
-  const { state, mood, color, name, appearance } = useAvatarState();
+  const { state, mood, name, appearance } = useAvatarState();
 
   return (
     <div className="flex flex-col items-center gap-8">
       {/* Avatar + mood */}
       <div className="flex flex-col items-center gap-3 py-8">
-        <Avatar state={state} color={color} size="lg" appearance={appearance} />
+        <PixelAvatar state={state} size="lg" appearance={appearance} />
         <h1 className="text-2xl font-bold">{name}</h1>
         <p className="text-sm text-muted-foreground">
           {getMoodEmoji(mood)} {getMoodLabel(mood)} · {mood}/100

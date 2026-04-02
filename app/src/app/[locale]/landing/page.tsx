@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Avatar } from "@/components/avatar/avatar";
+import { PixelAvatar } from "@/components/avatar/pixel-avatar";
 
 const useCases = [
   { key: "useCase1", icon: Heart },
@@ -51,9 +51,9 @@ export default function LandingPage() {
       {/* Hero */}
       <section className="text-center py-12">
         <div className="flex justify-center mb-6">
-          <Avatar
+          <PixelAvatar
             state="waving"
-            color="#4F46E5"
+            level={10}
             size="lg"
             appearance={{
               species: "cat",

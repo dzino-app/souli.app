@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MarkdownResponse } from "@/components/chat/markdown-response";
-import { CachedAvatar } from "@/components/avatar/cached-avatar";
+import { PixelAvatar } from "@/components/avatar/pixel-avatar";
 import { streamChatResponse, type ChatMessage } from "@/lib/stream-response";
 import { parseResponse, type SoulUpdate, type EventProposal } from "@/lib/parse-soul-updates";
 import { appendToSoulFile, updateSoulFile } from "@/lib/soul";
@@ -216,7 +216,7 @@ export default function ChatPage() {
       {/* Avatar -- prominent, centered, animated */}
       <div className="flex flex-col items-center gap-1 pb-3 border-b mb-3">
         <div className="py-2">
-          <CachedAvatar state={avatarState} appearance={avatarData.appearance} size="md" />
+          <PixelAvatar state={avatarState} appearance={avatarData.appearance} size="md" />
         </div>
         <h1 className="text-sm font-semibold">{avatarData.name}</h1>
         <p className={`text-xs ${
