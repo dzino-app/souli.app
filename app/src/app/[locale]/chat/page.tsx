@@ -10,6 +10,7 @@ import { CachedAvatar } from "@/components/avatar/cached-avatar";
 import { streamChatResponse, type ChatMessage } from "@/lib/stream-response";
 import { parseResponse, type SoulUpdate, type EventProposal } from "@/lib/parse-soul-updates";
 import { appendToSoulFile, updateSoulFile } from "@/lib/soul";
+import { processConversationInBackground } from "@/lib/soul-background";
 import { createEvent } from "@/lib/events";
 import { getAvatarData, recordInteraction } from "@/lib/avatar";
 import { clearFrameCache } from "@/lib/avatar-cache";
@@ -83,6 +84,9 @@ export default function ChatPage() {
       setStreamText("");
       setAvatarState(parsed.mood);
       setTimeout(() => setAvatarState("idle"), 3000);
+
+      // Background memory processing (non-blocking heuristics)
+      processConversationInBackground(userMsg, parsed.text);
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : t("common.error");
       setMessages((prev) => [...prev, { role: "assistant", content: errorMsg }]);

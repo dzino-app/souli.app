@@ -1,10 +1,13 @@
+export type SoulCategory = "jadro" | "zaujmy" | "vztahy" | "praca" | (string & {});
+
 export interface SoulFile {
   slug: string;
   displayName: string;
-  category: "jadro" | "zaujmy" | "vztahy" | "praca";
+  category: SoulCategory;
   content: string;
   updatedAt: string;
   updatedBy: "user" | "dzino";
+  isCustom?: boolean;
 }
 
 const SESSION_CACHE_KEY = "dzino_soul_cache";
@@ -304,4 +307,135 @@ export const CATEGORY_LABELS: Record<string, string> = {
   zaujmy: "Záujmy",
   vztahy: "Vzťahy",
   praca: "Práca",
+  custom: "Vlastné",
 };
+
+// ---- Default file slugs ----
+
+export const DEFAULT_SLUGS = [
+  "osobnost",
+  "zaujmy",
+  "humor",
+  "vztahy",
+  "ciele",
+  "preferencie",
+  "praca",
+  "vyzvy",
+  "vzhlad",
+  "dennik",
+] as const;
+
+export function isDefaultFile(slug: string): boolean {
+  return (DEFAULT_SLUGS as readonly string[]).includes(slug);
+}
+
+// ---- Custom soul files ----
+
+export function createCustomSoulFile(
+  slug: string,
+  displayName: string,
+  category: SoulCategory
+): SoulFile {
+  const file: SoulFile = {
+    slug,
+    displayName,
+    category,
+    content: `# ${displayName}\n\n`,
+    updatedAt: new Date().toISOString(),
+    updatedBy: "user",
+    isCustom: true,
+  };
+
+  const files = getSoulFiles();
+  files.push(file);
+  setSessionCache(files);
+
+  // Persist to Supabase in background
+  saveSoulFile(slug, file.content, "user").catch(() => {});
+
+  return file;
+}
+
+export function deleteCustomSoulFile(slug: string): void {
+  if (isDefaultFile(slug)) return;
+
+  const files = getSoulFiles().filter((f) => f.slug !== slug);
+  setSessionCache(files);
+
+  // Remove from Supabase in background
+  getStorage()
+    .then(({ deleteSoulFile }) => deleteSoulFile(slug))
+    .catch(() => {});
+}
+
+// ---- Memory Decay ----
+
+const RECENT_ENTRIES_LIMIT = 20;
+const DECAY_THRESHOLD = 30;
+
+/**
+ * Apply memory decay to a soul file's content:
+ * - Keep all non-bullet content (headers, preamble)
+ * - Prioritize recent entries (last RECENT_ENTRIES_LIMIT bullets)
+ * - Keep important entries marked with ! or * regardless of age
+ * - Older entries beyond DECAY_THRESHOLD are summarized
+ */
+export function applyDecay(content: string): string {
+  const lines = content.split("\n");
+  const preambleLines: string[] = [];
+  const bullets: string[] = [];
+  const structuralLines: Array<{ index: number; text: string }> = [];
+  let seenBullet = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const trimmed = lines[i].trimStart();
+    if (trimmed.startsWith("- ")) {
+      seenBullet = true;
+      bullets.push(trimmed);
+    } else if (!seenBullet) {
+      preambleLines.push(lines[i]);
+    } else {
+      // Track structural lines (section headers etc.) to preserve
+      structuralLines.push({ index: bullets.length, text: lines[i] });
+    }
+  }
+
+  // If few bullets, no decay needed
+  if (bullets.length <= DECAY_THRESHOLD) return content;
+
+  // Separate important bullets (marked with ! or *)
+  const importantBullets: string[] = [];
+  const normalBullets: string[] = [];
+
+  for (let i = 0; i < bullets.length; i++) {
+    if (bullets[i].includes("!") || bullets[i].includes("*")) {
+      importantBullets.push(bullets[i]);
+    } else {
+      normalBullets.push(bullets[i]);
+    }
+  }
+
+  // Recent entries = last RECENT_ENTRIES_LIMIT normal bullets
+  const recentStart = Math.max(0, normalBullets.length - RECENT_ENTRIES_LIMIT);
+  const recentBullets = normalBullets.slice(recentStart);
+  const olderCount = normalBullets.length - recentBullets.length;
+
+  // Reconstruct
+  const result = preambleLines.join("\n").replace(/\n+$/, "");
+  const parts: string[] = [result];
+
+  if (importantBullets.length > 0) {
+    parts.push(importantBullets.join("\n"));
+  }
+
+  if (olderCount > 0) {
+    parts.push(`... a ${olderCount} starších záznamov`);
+  }
+
+  if (recentBullets.length > 0) {
+    parts.push(recentBullets.join("\n"));
+  }
+
+  return parts.join("\n");
+}
+

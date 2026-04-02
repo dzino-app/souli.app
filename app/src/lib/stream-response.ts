@@ -1,4 +1,4 @@
-import { getSoulContext } from "@/lib/soul";
+import { getDecayedSoulContext } from "@/lib/soul-retrieval";
 
 const TIMEOUT_MS = 60_000;
 
@@ -12,7 +12,7 @@ export async function streamChatResponse(
   history: ChatMessage[] = [],
   onChunk?: (text: string) => void
 ): Promise<string> {
-  const soulContext = getSoulContext();
+  const soulContext = getDecayedSoulContext(message);
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
