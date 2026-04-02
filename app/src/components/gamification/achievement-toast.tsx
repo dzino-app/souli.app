@@ -71,7 +71,7 @@ export function AchievementToast({
         <span className="text-2xl">{achievement.icon}</span>
         <div className="flex flex-col">
           <span className="text-xs text-muted-foreground font-medium">
-            Nov{"\u00fd"} {"\u00fa"}spech!
+            Nový úspech!
           </span>
           <span className="text-sm font-semibold">{achievement.name}</span>
         </div>

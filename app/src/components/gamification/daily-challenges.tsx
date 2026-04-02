@@ -22,7 +22,7 @@ export function DailyChallenges() {
   return (
     <div className="flex flex-col gap-2">
       <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-        Denn{"\u00e9"} v{"\u00fd"}zvy
+        Denné výzvy
       </h3>
       <div className="flex flex-col gap-2">
         {items.map((ch) => {
@@ -56,10 +56,10 @@ export function DailyChallenges() {
                   {done ? (
                     <>
                       <ShareCompletion challengeText={ch.text} />
-                      <span className="text-success text-sm">{"\u2713"}</span>
+                      <span className="text-success text-sm">✓</span>
                     </>
                   ) : (
-                    <span className="text-xs text-muted-foreground">Splni{"\u0165"}</span>
+                    <span className="text-xs text-muted-foreground">Splniť</span>
                   )}
                 </div>
               </div>

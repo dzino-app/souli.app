@@ -33,7 +33,7 @@ export function XpBar({ xp, level, streak }: XpBarProps) {
       <div className="flex items-center justify-between text-xs">
         <div className="flex items-center gap-1.5">
           <span className="font-semibold text-primary">
-            {"\u00da"}r. {currentLevel}
+            Úr. {currentLevel}
           </span>
           <span className="text-muted-foreground font-mono text-[10px] bg-muted px-1 py-0.5 rounded">
             {resolution.label}
@@ -42,7 +42,7 @@ export function XpBar({ xp, level, streak }: XpBarProps) {
         <div className="flex items-center gap-1.5">
           {currentStreak > 0 && (
             <span className="flex items-center gap-0.5 text-orange-500">
-              <span className="text-sm leading-none">{"\ud83d\udd25"}</span>
+              <span className="text-sm leading-none">🔥</span>
               <span className="font-medium">{currentStreak}</span>
             </span>
           )}

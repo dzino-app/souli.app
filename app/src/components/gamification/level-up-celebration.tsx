@@ -85,7 +85,7 @@ export function LevelUpCelebration({ previousLevel, newLevel, onDismiss }: Level
         <p className="text-4xl font-black text-white tracking-wider"
           style={{ textShadow: "0 0 20px rgba(255,255,255,0.5)" }}
         >
-          NOV{"\u00c1"} {"\u00da"}ROVE{"\u0147"}!
+          NOVÁ ÚROVEŇ!
         </p>
         <div className="text-7xl font-black text-primary"
           style={{ textShadow: "0 0 30px var(--primary)" }}
@@ -93,12 +93,12 @@ export function LevelUpCelebration({ previousLevel, newLevel, onDismiss }: Level
           {newLevel}
         </div>
         <p className="text-sm text-white/80">
-          Dzino z{"\u00ed"}skal viac pixelov!
+          Dzino získal viac pixelov!
         </p>
         {resolutionChanged && (
           <div className="flex items-center gap-2 text-sm text-white/90 bg-white/10 rounded-full px-4 py-1.5">
             <span className="text-muted-foreground">{oldRes.label}</span>
-            <span className="text-white">{"\u2192"}</span>
+            <span className="text-white">→</span>
             <span className="text-primary font-bold">{newRes.label}</span>
           </div>
         )}
