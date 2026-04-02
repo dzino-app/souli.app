@@ -1,6 +1,7 @@
 import { getDecayedSoulContext } from "@/lib/soul-retrieval";
 import { getUserLanguage, setUserLanguage, detectLanguage } from "@/lib/languages";
 import { isAlreadyTranslated, translateSoulFiles } from "@/lib/soul-translator";
+import { getTodayMood } from "@/lib/mood-tracking";
 
 const TIMEOUT_MS = 60_000;
 
@@ -32,6 +33,16 @@ export async function streamChatResponse(
     language = "en";
   }
 
+  // Include today's mood in context
+  const todayMood = getTodayMood();
+  const moodContext = todayMood
+    ? `\n== DNEŠNÁ NÁLADA ==\nPoužívateľ sa dnes cíti: ${
+        todayMood.mood <= 2 ? "zle/smutne" :
+        todayMood.mood === 3 ? "neutrálne" :
+        "dobre/šťastne"
+      }${todayMood.note ? ` (poznámka: "${todayMood.note}")` : ""}\nPrispôsob tón odpovede — ak je smutný, buď empatický a jemný. Ak je šťastný, buď energický a zábavný.`
+    : "";
+
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
@@ -39,7 +50,7 @@ export async function streamChatResponse(
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, soulContext, history, language: getUserLanguage() }),
+      body: JSON.stringify({ message, soulContext: soulContext + moodContext, history, language: getUserLanguage() }),
       signal: controller.signal,
     });
 
