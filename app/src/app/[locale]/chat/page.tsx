@@ -20,7 +20,7 @@ import { addXp, getGamification, saveGamification } from "@/lib/gamification";
 import { checkAchievements, grantAchievement, type Achievement } from "@/lib/achievements";
 import { updateChallengeProgress, completeChallengeById } from "@/lib/challenges";
 
-const POSITIVE_WORDS = ["super", "v\u00fdborne", "splnen\u00e9", "gratuluj", "skvel\u00e9", "parada", "bravo", "hotovo", "dokonal\u00e9", "podarilo"];
+const POSITIVE_WORDS = ["super", "výborne", "splnené", "gratuluj", "skvelé", "paráda", "bravo", "hotovo", "dokonalé", "podarilo"];
 
 export default function ChatPage() {
   const t = useTranslations();
@@ -160,7 +160,7 @@ export default function ChatPage() {
       challengeIdRef.current = challengeId;
       // Small delay to let the component mount fully
       const timer = setTimeout(() => {
-        sendMessage(`Chcem splni\u0165 v\u00fdzvu: ${challengeText}`);
+        sendMessage(`Chcem splniť výzvu: ${challengeText}`);
       }, 300);
       return () => clearTimeout(timer);
     }
@@ -227,14 +227,14 @@ export default function ChatPage() {
           "text-muted-foreground"
         }`}>
           {{
-            thinking: "prem\u00fd\u0161\u013ea...",
-            talking: "p\u00ed\u0161e...",
-            happy: "\u0161\u0165astn\u00fd",
-            sad: "smutn\u00fd",
-            waving: "m\u00e1va",
-            walking: "prech\u00e1dza sa",
+            thinking: "premýšľa...",
+            talking: "píše...",
+            happy: "šťastný",
+            sad: "smutný",
+            waving: "máva",
+            walking: "prechádza sa",
             eating: "je",
-            sleeping: "sp\u00ed",
+            sleeping: "spí",
             idle: "online",
           }[avatarState] || "online"}
         </p>
@@ -294,15 +294,15 @@ export default function ChatPage() {
           <Card key={`soul-${i}`} className="border-primary/30 bg-primary/5">
             <CardContent className="py-3 px-4">
               <p className="text-xs text-muted-foreground mb-1">
-                Dzino sa chce nie{"\u010d"}o zapam{"\u00e4"}ta{"\u0165"} ({update.slug}.md):
+                Dzino sa chce niečo zapamätať ({update.slug}.md):
               </p>
               <p className="text-sm mb-2">{update.content}</p>
               <div className="flex gap-2">
                 <Button size="sm" variant="default" onClick={() => approveSoulUpdate(update)}>
-                  <Check className="h-3 w-3 mr-1" /> Povoli{"\u0165"}
+                  <Check className="h-3 w-3 mr-1" /> Povoliť
                 </Button>
                 <Button size="sm" variant="ghost" onClick={() => rejectSoulUpdate(update)}>
-                  <X className="h-3 w-3 mr-1" /> Odmietnu{"\u0165"}
+                  <X className="h-3 w-3 mr-1" /> Odmietnuť
                 </Button>
               </div>
             </CardContent>
@@ -314,7 +314,7 @@ export default function ChatPage() {
           <Card key={`event-${i}`} className="border-accent/30 bg-accent/5">
             <CardContent className="py-3 px-4">
               <p className="text-xs text-muted-foreground mb-1">
-                Dzino navrhuje udalos{"\u0165"}:
+                Dzino navrhuje udalosť:
               </p>
               <p className="text-sm font-medium">{event.title}</p>
               <p className="text-xs text-muted-foreground">{event.date} {event.time || ""}</p>
@@ -323,10 +323,10 @@ export default function ChatPage() {
               )}
               <div className="flex gap-2 mt-2">
                 <Button size="sm" variant="default" onClick={() => approveEvent(event)}>
-                  <Check className="h-3 w-3 mr-1" /> Prida{"\u0165"}
+                  <Check className="h-3 w-3 mr-1" /> Pridať
                 </Button>
                 <Button size="sm" variant="ghost" onClick={() => rejectEvent(event)}>
-                  <X className="h-3 w-3 mr-1" /> Odmietnu{"\u0165"}
+                  <X className="h-3 w-3 mr-1" /> Odmietnuť
                 </Button>
               </div>
             </CardContent>
@@ -342,7 +342,7 @@ export default function ChatPage() {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Nap\u00ed\u0161te spr\u00e1vu..."
+          placeholder="Napíš správu..."
           disabled={streaming}
           className="flex-1 rounded-full border bg-background px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50"
           autoFocus
