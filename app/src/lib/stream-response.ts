@@ -1,5 +1,6 @@
 import { getDecayedSoulContext } from "@/lib/soul-retrieval";
 import { getUserLanguage, setUserLanguage, detectLanguage } from "@/lib/languages";
+import { isAlreadyTranslated, translateSoulFiles } from "@/lib/soul-translator";
 
 const TIMEOUT_MS = 60_000;
 
@@ -19,12 +20,16 @@ export async function streamChatResponse(
   let language = getUserLanguage();
   const detected = detectLanguage(message);
   if (detected && detected !== language) {
-    // Switch language if confident detection differs from current
     setUserLanguage(detected);
     language = detected;
+
+    // Translate soul files to new language (async, non-blocking for first response)
+    if (!isAlreadyTranslated(language)) {
+      translateSoulFiles(language).catch(() => {});
+    }
   }
   if (!language) {
-    language = "en"; // fallback
+    language = "en";
   }
 
   const controller = new AbortController();
