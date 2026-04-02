@@ -74,21 +74,44 @@ function seededRandom(seed: string): () => number {
 }
 
 // Pick 3 challenges: 1 outdoor/social + 1 mindful/creative + 1 chat
+// Weighted by user profile from Dzino's brain
 function generateChallenges(date: string): DailyChallenge[] {
   const rng = seededRandom(date);
+
+  // Try to load user profile for weighted selection
+  let weights: Map<string, number> | null = null;
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const brain = require("./dzino-brain") as typeof import("./dzino-brain");
+    const profile = brain.analyzeUserProfile();
+    const weighted = brain.weightChallenges(CHALLENGE_POOL, profile);
+    weights = new Map(weighted.map((w) => [w.challengeId, w.weight]));
+  } catch {
+    // Brain not available, use equal weights
+  }
 
   const outdoor = CHALLENGE_POOL.filter((c) => c.type === "outdoor" || c.type === "social");
   const mindful = CHALLENGE_POOL.filter((c) => c.type === "mindful" || c.type === "creative");
   const chat = CHALLENGE_POOL.filter((c) => c.type === "chat");
 
-  function pickRandom<T>(arr: T[]): T {
-    return arr[Math.floor(rng() * arr.length)];
+  function pickWeighted<T extends { id: string }>(arr: T[]): T {
+    if (!weights) {
+      return arr[Math.floor(rng() * arr.length)];
+    }
+    // Weighted random selection
+    const totalWeight = arr.reduce((sum, item) => sum + (weights!.get(item.id) || 1), 0);
+    let r = rng() * totalWeight;
+    for (const item of arr) {
+      r -= weights!.get(item.id) || 1;
+      if (r <= 0) return item;
+    }
+    return arr[arr.length - 1];
   }
 
   return [
-    { ...pickRandom(outdoor), progress: 0, completed: false },
-    { ...pickRandom(mindful), progress: 0, completed: false },
-    { ...pickRandom(chat), progress: 0, completed: false },
+    { ...pickWeighted(outdoor), progress: 0, completed: false },
+    { ...pickWeighted(mindful), progress: 0, completed: false },
+    { ...pickWeighted(chat), progress: 0, completed: false },
   ];
 }
 

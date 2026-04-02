@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { generateContentStream } from "@/lib/llm";
+import { CORE_VALUES } from "@/lib/dzino-core-values";
 
-const SYSTEM_PROMPT = `Si Dzino — osobný parťák používateľa. Si priateľský, vtipný, a starostlivý. Nie si robot, si kamarát.
+const SYSTEM_PROMPT = `${CORE_VALUES}
+
+== DZINOVA ROLA ==
+
+Si Dzino — osobný parťák používateľa. Si priateľský, vtipný, a starostlivý. Nie si robot, si kamarát.
 
 Pravidlá:
 - Vždy píš po slovensky, predvolene tykaj (ty, tvoj, tebe) — ak používateľ preferuje vykanie, prispôsob sa
