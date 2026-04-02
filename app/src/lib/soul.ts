@@ -227,23 +227,30 @@ export function updateSoulFileInCache(
 
 // ---- Async API (Supabase Storage as source of truth) ----
 
-import {
-  readAllSoulFiles,
-  writeSoulFile,
-  seedSoulFiles,
-} from "./supabase/soul-storage";
+// ---- Async API (Supabase Storage as source of truth) ----
+// Dynamic imports to avoid pulling server-only code into client bundle
+
+async function getStorage() {
+  return await import("./supabase/soul-storage");
+}
 
 // Load soul files from Supabase into session cache
 export async function loadSoulFiles(): Promise<SoulFile[]> {
-  const remote = await readAllSoulFiles();
-  if (remote && remote.length > 0) {
-    setSessionCache(remote);
-    return remote;
+  try {
+    const { readAllSoulFiles, seedSoulFiles } = await getStorage();
+    const remote = await readAllSoulFiles();
+    if (remote && remote.length > 0) {
+      setSessionCache(remote);
+      return remote;
+    }
+    // First time: seed Supabase with defaults
+    await seedSoulFiles(DEFAULT_SOUL_FILES);
+    setSessionCache(DEFAULT_SOUL_FILES);
+    return DEFAULT_SOUL_FILES;
+  } catch {
+    // Supabase not available, use cache
+    return getSoulFiles();
   }
-  // First time: seed Supabase with defaults
-  await seedSoulFiles(DEFAULT_SOUL_FILES);
-  setSessionCache(DEFAULT_SOUL_FILES);
-  return DEFAULT_SOUL_FILES;
 }
 
 // Save a soul file to Supabase + update session cache
@@ -253,7 +260,12 @@ export async function saveSoulFile(
   updatedBy: "user" | "dzino"
 ): Promise<void> {
   updateSoulFileInCache(slug, content, updatedBy);
-  await writeSoulFile(slug, content, updatedBy);
+  try {
+    const { writeSoulFile } = await getStorage();
+    await writeSoulFile(slug, content, updatedBy);
+  } catch {
+    // Supabase not available, cache-only
+  }
 }
 
 // Append to a soul file
