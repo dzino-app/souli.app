@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import {
-  FileText,
-  PenLine,
-  HelpCircle,
-  Upload,
-  MousePointer,
-  Zap,
+  MessageCircle,
+  Calendar,
+  Brain,
+  Heart,
+  Sparkles,
+  BookOpen,
+  Target,
   Check,
   ChevronDown,
 } from "lucide-react";
@@ -14,15 +15,22 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 const useCases = [
-  { key: "useCase1", icon: FileText },
-  { key: "useCase2", icon: PenLine },
-  { key: "useCase3", icon: HelpCircle },
+  { key: "useCase1", icon: Heart },
+  { key: "useCase2", icon: Calendar },
+  { key: "useCase3", icon: Brain },
 ] as const;
 
 const steps = [
-  { key: "how1", icon: Upload },
-  { key: "how2", icon: MousePointer },
-  { key: "how3", icon: Zap },
+  { key: "how1", icon: MessageCircle },
+  { key: "how2", icon: BookOpen },
+  { key: "how3", icon: Sparkles },
+] as const;
+
+const features = [
+  { key: "feature1", icon: Sparkles },
+  { key: "feature2", icon: BookOpen },
+  { key: "feature3", icon: Calendar },
+  { key: "feature4", icon: Target },
 ] as const;
 
 const pricing = [
@@ -41,6 +49,7 @@ export default function LandingPage() {
     <div className="flex flex-col gap-16 -mt-2">
       {/* Hero */}
       <section className="text-center py-12">
+        <div className="text-6xl mb-6">🧑‍🤝‍🧑</div>
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
           {t("hero")}
         </h1>
@@ -98,6 +107,32 @@ export default function LandingPage() {
                 <ChevronDown className="h-5 w-5 text-muted-foreground sm:rotate-[-90deg] shrink-0" />
               )}
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Features */}
+      <section>
+        <h2 className="text-2xl font-bold text-center mb-8">
+          {t("featureTitle")}
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {features.map(({ key, icon: Icon }) => (
+            <Card key={key}>
+              <CardContent className="pt-6">
+                <div className="flex items-start gap-3">
+                  <div className="rounded-md bg-primary/10 p-2 shrink-0">
+                    <Icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">{t(key)}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {t(`${key}Desc`)}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </section>
