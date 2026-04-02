@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { generateContentStream } from "@/lib/llm";
-import { CORE_VALUES } from "@/lib/dzino-core-values";
+import { CORE_VALUES } from "@/lib/dzino-genes";
 
 const SYSTEM_PROMPT = `${CORE_VALUES}
 
