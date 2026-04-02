@@ -12,36 +12,37 @@ export interface Language {
 
 export const LANGUAGES: Language[] = [
   // Global
+  // English — informal (buddy vibe)
   { code: "en", name: "English", nameEn: "English", locale: "en", flag: "🇬🇧", greeting: "Hi!", tykanie: true },
 
-  // Central European
+  // Central European — SK/CS informal (core product), rest formal first
   { code: "sk", name: "Slovenčina", nameEn: "Slovak", locale: "sk", flag: "🇸🇰", greeting: "Ahoj!", tykanie: true },
   { code: "cs", name: "Čeština", nameEn: "Czech", locale: "sk", flag: "🇨🇿", greeting: "Ahoj!", tykanie: true },
-  { code: "pl", name: "Polski", nameEn: "Polish", locale: "en", flag: "🇵🇱", greeting: "Cześć!", tykanie: true },
-  { code: "hu", name: "Magyar", nameEn: "Hungarian", locale: "en", flag: "🇭🇺", greeting: "Szia!", tykanie: true },
+  { code: "pl", name: "Polski", nameEn: "Polish", locale: "en", flag: "🇵🇱", greeting: "Dzień dobry!", tykanie: false },
+  { code: "hu", name: "Magyar", nameEn: "Hungarian", locale: "en", flag: "🇭🇺", greeting: "Jó napot!", tykanie: false },
   { code: "de", name: "Deutsch", nameEn: "German", locale: "en", flag: "🇩🇪", greeting: "Hallo!", tykanie: false },
-  { code: "ro", name: "Română", nameEn: "Romanian", locale: "en", flag: "🇷🇴", greeting: "Salut!", tykanie: true },
-  { code: "hr", name: "Hrvatski", nameEn: "Croatian", locale: "en", flag: "🇭🇷", greeting: "Bok!", tykanie: true },
-  { code: "sl", name: "Slovenščina", nameEn: "Slovenian", locale: "en", flag: "🇸🇮", greeting: "Živjo!", tykanie: true },
-  { code: "uk", name: "Українська", nameEn: "Ukrainian", locale: "en", flag: "🇺🇦", greeting: "Привіт!", tykanie: true },
+  { code: "ro", name: "Română", nameEn: "Romanian", locale: "en", flag: "🇷🇴", greeting: "Bună ziua!", tykanie: false },
+  { code: "hr", name: "Hrvatski", nameEn: "Croatian", locale: "en", flag: "🇭🇷", greeting: "Dobar dan!", tykanie: false },
+  { code: "sl", name: "Slovenščina", nameEn: "Slovenian", locale: "en", flag: "🇸🇮", greeting: "Dober dan!", tykanie: false },
+  { code: "uk", name: "Українська", nameEn: "Ukrainian", locale: "en", flag: "🇺🇦", greeting: "Доброго дня!", tykanie: false },
 
-  // Indian
-  { code: "hi", name: "हिन्दी", nameEn: "Hindi", locale: "en", flag: "🇮🇳", greeting: "नमस्ते!", tykanie: true },
-  { code: "ta", name: "தமிழ்", nameEn: "Tamil", locale: "en", flag: "🇮🇳", greeting: "வணக்கம்!", tykanie: true },
-  { code: "te", name: "తెలుగు", nameEn: "Telugu", locale: "en", flag: "🇮🇳", greeting: "నమస్కారం!", tykanie: true },
-  { code: "bn", name: "বাংলা", nameEn: "Bengali", locale: "en", flag: "🇮🇳", greeting: "নমস্কার!", tykanie: true },
-  { code: "mr", name: "मराठी", nameEn: "Marathi", locale: "en", flag: "🇮🇳", greeting: "नमस्कार!", tykanie: true },
+  // Indian — formal first (respect culture)
+  { code: "hi", name: "हिन्दी", nameEn: "Hindi", locale: "en", flag: "🇮🇳", greeting: "नमस्ते!", tykanie: false },
+  { code: "ta", name: "தமிழ்", nameEn: "Tamil", locale: "en", flag: "🇮🇳", greeting: "வணக்கம்!", tykanie: false },
+  { code: "te", name: "తెలుగు", nameEn: "Telugu", locale: "en", flag: "🇮🇳", greeting: "నమస్కారం!", tykanie: false },
+  { code: "bn", name: "বাংলা", nameEn: "Bengali", locale: "en", flag: "🇮🇳", greeting: "নমস্কার!", tykanie: false },
+  { code: "mr", name: "मराठी", nameEn: "Marathi", locale: "en", flag: "🇮🇳", greeting: "नमस्कार!", tykanie: false },
 
-  // Other major
-  { code: "es", name: "Español", nameEn: "Spanish", locale: "en", flag: "🇪🇸", greeting: "¡Hola!", tykanie: true },
-  { code: "fr", name: "Français", nameEn: "French", locale: "en", flag: "🇫🇷", greeting: "Salut!", tykanie: true },
-  { code: "pt", name: "Português", nameEn: "Portuguese", locale: "en", flag: "🇧🇷", greeting: "Olá!", tykanie: true },
-  { code: "it", name: "Italiano", nameEn: "Italian", locale: "en", flag: "🇮🇹", greeting: "Ciao!", tykanie: true },
+  // Other major — formal first, user can switch to informal
+  { code: "es", name: "Español", nameEn: "Spanish", locale: "en", flag: "🇪🇸", greeting: "¡Hola!", tykanie: false },
+  { code: "fr", name: "Français", nameEn: "French", locale: "en", flag: "🇫🇷", greeting: "Bonjour!", tykanie: false },
+  { code: "pt", name: "Português", nameEn: "Portuguese", locale: "en", flag: "🇧🇷", greeting: "Olá!", tykanie: false },
+  { code: "it", name: "Italiano", nameEn: "Italian", locale: "en", flag: "🇮🇹", greeting: "Buongiorno!", tykanie: false },
   { code: "ja", name: "日本語", nameEn: "Japanese", locale: "en", flag: "🇯🇵", greeting: "こんにちは!", tykanie: false },
-  { code: "ko", name: "한국어", nameEn: "Korean", locale: "en", flag: "🇰🇷", greeting: "안녕!", tykanie: false },
-  { code: "zh", name: "中文", nameEn: "Chinese", locale: "en", flag: "🇨🇳", greeting: "你好!", tykanie: false },
+  { code: "ko", name: "한국어", nameEn: "Korean", locale: "en", flag: "🇰🇷", greeting: "안녕하세요!", tykanie: false },
+  { code: "zh", name: "中文", nameEn: "Chinese", locale: "en", flag: "🇨🇳", greeting: "您好!", tykanie: false },
   { code: "ar", name: "العربية", nameEn: "Arabic", locale: "en", flag: "🇸🇦", greeting: "!مرحبا", tykanie: false },
-  { code: "tr", name: "Türkçe", nameEn: "Turkish", locale: "en", flag: "🇹🇷", greeting: "Merhaba!", tykanie: true },
+  { code: "tr", name: "Türkçe", nameEn: "Turkish", locale: "en", flag: "🇹🇷", greeting: "Merhaba!", tykanie: false },
 ];
 
 export function getLanguage(code: string): Language | undefined {
@@ -129,8 +130,8 @@ export function detectLanguage(text: string): string | null {
 export function getLanguageInstruction(code: string): string {
   const lang = getLanguageOrDefault(code);
   const formality = lang.tykanie
-    ? "Use informal/casual tone (like talking to a friend)."
-    : "Use polite/formal tone unless the user switches to informal.";
+    ? "Use informal/casual tone (like talking to a close friend). You are a buddy."
+    : "Start with polite/formal tone — respect the cultural norms of this language. If the user switches to informal (e.g. uses 'du' in German, 'tú' in Spanish, 'ты' in Russian), follow their lead and switch too. Update preferencie.md when formality changes.";
 
   return `LANGUAGE: Always respond in ${lang.nameEn} (${lang.name}). ${formality}
 If the user switches to a different language mid-conversation, follow their lead and switch too.
