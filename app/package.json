@@ -11,10 +11,9 @@
     "test": "bun test --preload ./src/lib/__tests__/setup.ts"
   },
   "dependencies": {
-    "@google-cloud/vertexai": "^1.10.4",
     "@google/generative-ai": "^0.24.1",
-    "@supabase/ssr": "^0.10.0",
-    "@supabase/supabase-js": "^2.101.1",
+    "@supabase/ssr": "0.9.0",
+    "@supabase/supabase-js": "2.95.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.7.0",
