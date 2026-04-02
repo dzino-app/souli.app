@@ -7,11 +7,11 @@ export interface SoulFile {
   updatedBy: "user" | "dzino";
 }
 
-const STORAGE_KEY = "dzino_soul";
+const SESSION_CACHE_KEY = "dzino_soul_cache";
 
 const today = new Date().toISOString().slice(0, 10);
 
-const DEFAULT_SOUL_FILES: SoulFile[] = [
+export const DEFAULT_SOUL_FILES: SoulFile[] = [
   {
     slug: "osobnost",
     displayName: "Osobnosť",
@@ -162,55 +162,33 @@ const DEFAULT_SOUL_FILES: SoulFile[] = [
   },
 ];
 
-export function getSoulFiles(): SoulFile[] {
+// ---- Session cache (in-memory via localStorage, NOT persistence) ----
+// Just avoids re-fetching from Supabase on every render
+
+function getSessionCache(): SoulFile[] {
   if (typeof window === "undefined") return [];
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) {
-    // Seed defaults on first access
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_SOUL_FILES));
-    return DEFAULT_SOUL_FILES;
-  }
-  return JSON.parse(raw);
+  const raw = localStorage.getItem(SESSION_CACHE_KEY);
+  return raw ? JSON.parse(raw) : [];
 }
 
-function saveSoulFiles(files: SoulFile[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(files));
+function setSessionCache(files: SoulFile[]) {
+  if (typeof window !== "undefined") {
+    localStorage.setItem(SESSION_CACHE_KEY, JSON.stringify(files));
+  }
+}
+
+// ---- Sync API (reads from session cache only) ----
+
+export function getSoulFiles(): SoulFile[] {
+  const cached = getSessionCache();
+  if (cached.length > 0) return cached;
+  // If no cache, return defaults (will be replaced by async load)
+  setSessionCache(DEFAULT_SOUL_FILES);
+  return DEFAULT_SOUL_FILES;
 }
 
 export function getSoulFile(slug: string): SoulFile | null {
   return getSoulFiles().find((f) => f.slug === slug) || null;
-}
-
-export function updateSoulFile(
-  slug: string,
-  content: string,
-  updatedBy: "user" | "dzino"
-): SoulFile[] {
-  const files = getSoulFiles();
-  const file = files.find((f) => f.slug === slug);
-  if (file) {
-    file.content = content;
-    file.updatedAt = new Date().toISOString();
-    file.updatedBy = updatedBy;
-    saveSoulFiles(files);
-  }
-  return files;
-}
-
-export function appendToSoulFile(
-  slug: string,
-  text: string,
-  updatedBy: "user" | "dzino"
-): SoulFile[] {
-  const files = getSoulFiles();
-  const file = files.find((f) => f.slug === slug);
-  if (file) {
-    file.content = file.content.trimEnd() + "\n" + text;
-    file.updatedAt = new Date().toISOString();
-    file.updatedBy = updatedBy;
-    saveSoulFiles(files);
-  }
-  return files;
 }
 
 export function getSoulContext(): string {
@@ -229,6 +207,75 @@ export function getSoulFilesByCategory(): Record<string, SoulFile[]> {
     groups[file.category].push(file);
   }
   return groups;
+}
+
+// Update session cache (sync, for immediate UI updates)
+export function updateSoulFileInCache(
+  slug: string,
+  content: string,
+  updatedBy: "user" | "dzino"
+) {
+  const files = getSoulFiles();
+  const file = files.find((f) => f.slug === slug);
+  if (file) {
+    file.content = content;
+    file.updatedAt = new Date().toISOString();
+    file.updatedBy = updatedBy;
+    setSessionCache(files);
+  }
+}
+
+// ---- Async API (Supabase Storage as source of truth) ----
+
+import {
+  readAllSoulFiles,
+  writeSoulFile,
+  seedSoulFiles,
+} from "./supabase/soul-storage";
+
+// Load soul files from Supabase into session cache
+export async function loadSoulFiles(): Promise<SoulFile[]> {
+  const remote = await readAllSoulFiles();
+  if (remote && remote.length > 0) {
+    setSessionCache(remote);
+    return remote;
+  }
+  // First time: seed Supabase with defaults
+  await seedSoulFiles(DEFAULT_SOUL_FILES);
+  setSessionCache(DEFAULT_SOUL_FILES);
+  return DEFAULT_SOUL_FILES;
+}
+
+// Save a soul file to Supabase + update session cache
+export async function saveSoulFile(
+  slug: string,
+  content: string,
+  updatedBy: "user" | "dzino"
+): Promise<void> {
+  updateSoulFileInCache(slug, content, updatedBy);
+  await writeSoulFile(slug, content, updatedBy);
+}
+
+// Append to a soul file
+export async function appendToSoulFile(
+  slug: string,
+  text: string,
+  updatedBy: "user" | "dzino"
+): Promise<void> {
+  const file = getSoulFile(slug);
+  if (file) {
+    const newContent = file.content.trimEnd() + "\n" + text;
+    await saveSoulFile(slug, newContent, updatedBy);
+  }
+}
+
+// Replace full content of a soul file
+export async function updateSoulFile(
+  slug: string,
+  content: string,
+  updatedBy: "user" | "dzino"
+): Promise<void> {
+  await saveSoulFile(slug, content, updatedBy);
 }
 
 export const CATEGORY_LABELS: Record<string, string> = {
