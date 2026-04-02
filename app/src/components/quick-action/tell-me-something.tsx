@@ -5,12 +5,14 @@ import { Sparkles, RefreshCw } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { getRandomAction, getTypeEmoji, type QuickAction } from "@/lib/quick-actions";
+import { getTodayMood } from "@/lib/mood-tracking";
 
 export function TellMeSomething() {
   const [action, setAction] = useState<QuickAction | null>(null);
 
   function handleClick() {
-    setAction(getRandomAction());
+    const todayMood = getTodayMood();
+    setAction(getRandomAction(todayMood?.mood ?? null));
   }
 
   return (
@@ -23,7 +25,7 @@ export function TellMeSomething() {
           onClick={handleClick}
         >
           <Sparkles className="h-4 w-4 mr-2" />
-          Povedz mi nie{"\u010D"}o
+          Povedz mi niečo
         </Button>
       )}
 
@@ -49,7 +51,7 @@ export function TellMeSomething() {
                 className="text-xs"
               >
                 <RefreshCw className="h-3 w-3 mr-1" />
-                {"\u{0110}"}al{"\u0161"}ie
+                Ďalšie
               </Button>
             </div>
           </CardContent>
