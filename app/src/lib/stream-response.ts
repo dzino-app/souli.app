@@ -1,4 +1,5 @@
 import { getDecayedSoulContext } from "@/lib/soul-retrieval";
+import { getUserLanguage } from "@/lib/languages";
 
 const TIMEOUT_MS = 60_000;
 
@@ -20,7 +21,7 @@ export async function streamChatResponse(
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, soulContext, history }),
+      body: JSON.stringify({ message, soulContext, history, language: getUserLanguage() }),
       signal: controller.signal,
     });
 

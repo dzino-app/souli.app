@@ -80,15 +80,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { message, soulContext, history } = await request.json();
+    const { message, soulContext, history, language } = await request.json();
 
     if (!message) {
       return NextResponse.json({ error: "Žiadna správa" }, { status: 400 });
     }
 
+    // Add language instruction if provided
+    let languageInstruction = "";
+    if (language) {
+      const { getLanguageInstruction } = await import("@/lib/languages");
+      languageInstruction = "\n" + getLanguageInstruction(language);
+    }
+
     const systemWithSoul = soulContext
-      ? `${SYSTEM_PROMPT}\n\n== VAŠA DUŠA (čo o používateľovi viete) ==\n${soulContext}`
-      : SYSTEM_PROMPT;
+      ? `${SYSTEM_PROMPT}${languageInstruction}\n\n== VAŠA DUŠA (čo o používateľovi viete) ==\n${soulContext}`
+      : `${SYSTEM_PROMPT}${languageInstruction}`;
 
     const contents: { role: "user" | "model"; parts: { text: string }[] }[] = [];
     if (history && Array.isArray(history)) {
