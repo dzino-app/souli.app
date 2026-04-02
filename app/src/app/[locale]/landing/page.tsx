@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Avatar } from "@/components/avatar/avatar";
 
 const useCases = [
   { key: "useCase1", icon: Heart },
@@ -49,7 +50,24 @@ export default function LandingPage() {
     <div className="flex flex-col gap-16 -mt-2">
       {/* Hero */}
       <section className="text-center py-12">
-        <div className="text-6xl mb-6">🧑‍🤝‍🧑</div>
+        <div className="flex justify-center mb-6">
+          <Avatar
+            state="waving"
+            color="#4F46E5"
+            size="lg"
+            appearance={{
+              species: "cat",
+              bodyShape: "round",
+              eyeStyle: "anime",
+              mouthStyle: "smile",
+              earStyle: "pointy",
+              accessory: "crown",
+              hairStyle: "none",
+              skinColor: "#FFE4C9",
+              bodyColor: "#4F46E5",
+            }}
+          />
+        </div>
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
           {t("hero")}
         </h1>
