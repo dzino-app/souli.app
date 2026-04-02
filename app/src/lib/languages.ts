@@ -132,7 +132,9 @@ export function getLanguageInstruction(code: string): string {
     ? "Use informal/casual tone (like talking to a friend)."
     : "Use polite/formal tone unless the user switches to informal.";
 
-  return `LANGUAGE: Always respond in ${lang.nameEn} (${lang.name}). ${formality}`;
+  return `LANGUAGE: Always respond in ${lang.nameEn} (${lang.name}). ${formality}
+If the user switches to a different language mid-conversation, follow their lead and switch too.
+Soul files may be in a different language — that's ok, use them as context but always respond in the user's current language.`;
 }
 
 // Generate default soul file content in the user's language

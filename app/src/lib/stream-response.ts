@@ -15,14 +15,16 @@ export async function streamChatResponse(
 ): Promise<string> {
   const soulContext = getDecayedSoulContext(message);
 
-  // Auto-detect language from first few messages if not set yet
+  // Detect language from every message — fluid switching
   let language = getUserLanguage();
+  const detected = detectLanguage(message);
+  if (detected && detected !== language) {
+    // Switch language if confident detection differs from current
+    setUserLanguage(detected);
+    language = detected;
+  }
   if (!language) {
-    const detected = detectLanguage(message);
-    if (detected) {
-      setUserLanguage(detected);
-      language = detected;
-    }
+    language = "en"; // fallback
   }
 
   const controller = new AbortController();
