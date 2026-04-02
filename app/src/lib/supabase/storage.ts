@@ -8,7 +8,7 @@ export async function uploadDocument(
 ): Promise<{ path: string; url: string } | null> {
   if (
     !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
   ) {
     return null;
   }
@@ -34,7 +34,7 @@ export async function uploadDocument(
 export async function deleteDocument(path: string): Promise<void> {
   if (
     !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
   ) {
     return;
   }
