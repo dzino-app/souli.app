@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2, Check, X } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MarkdownResponse } from "@/components/chat/markdown-response";
@@ -17,10 +18,13 @@ import { clearFrameCache } from "@/lib/avatar-cache";
 import { createConversation, addMessage } from "@/lib/conversations";
 import { addXp, getGamification, saveGamification } from "@/lib/gamification";
 import { checkAchievements, grantAchievement, type Achievement } from "@/lib/achievements";
-import { updateChallengeProgress } from "@/lib/challenges";
+import { updateChallengeProgress, completeChallengeById } from "@/lib/challenges";
+
+const POSITIVE_WORDS = ["super", "v\u00fdborne", "splnen\u00e9", "gratuluj", "skvel\u00e9", "parada", "bravo", "hotovo", "dokonal\u00e9", "podarilo"];
 
 export default function ChatPage() {
   const t = useTranslations();
+  const searchParams = useSearchParams();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
@@ -38,10 +42,11 @@ export default function ChatPage() {
   const [achievementToast, setAchievementToast] = useState<Achievement | null>(null);
   const convIdRef = useRef<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const challengeSentRef = useRef(false);
+  const challengeIdRef = useRef<string | null>(null);
 
   function showAchievementToasts(newAchievements: Achievement[]) {
     if (newAchievements.length === 0) return;
-    // Show each achievement sequentially
     let delay = 0;
     for (const ach of newAchievements) {
       setTimeout(() => {
@@ -56,7 +61,6 @@ export default function ChatPage() {
     addXp(5, "message");
     updateChallengeProgress("chat");
 
-    // Check time-based achievements
     const hour = new Date().getHours();
     const data = getGamification();
     const allNew: Achievement[] = [];
@@ -69,7 +73,6 @@ export default function ChatPage() {
       if (a) allNew.push(a);
     }
 
-    // Check data-driven achievements
     const dataNew = checkAchievements(data);
     allNew.push(...dataNew);
     if (allNew.length > 0) {
@@ -87,18 +90,16 @@ export default function ChatPage() {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, streamText]);
 
-  async function handleSend(e: React.FormEvent) {
-    e.preventDefault();
-    if (!input.trim() || streaming) return;
+  // Send a message programmatically (used for both form submit and auto-send)
+  const sendMessage = useCallback(async (userMsg: string) => {
+    if (!userMsg.trim() || streaming) return;
 
-    const userMsg = input.trim();
     setInput("");
     setMessages((prev) => [...prev, { role: "user", content: userMsg }]);
     setStreaming(true);
     setStreamText("");
     setAvatarState("thinking");
 
-    // Create conversation on first message
     if (!convIdRef.current) {
       const conv = createConversation(userMsg);
       convIdRef.current = conv.id;
@@ -106,14 +107,11 @@ export default function ChatPage() {
     addMessage(convIdRef.current, "user", userMsg);
 
     try {
-      const history = messages.slice(-10);
-
-      const fullResponse = await streamChatResponse(userMsg, history, (chunk) => {
-        setAvatarState("talking"); // switch to talking once first chunk arrives
+      const fullResponse = await streamChatResponse(userMsg, messages.slice(-10), (chunk) => {
+        setAvatarState("talking");
         setStreamText(chunk);
       });
 
-      // Parse soul updates, events, and mood from response
       const parsed = parseResponse(fullResponse);
       setPendingUpdates(parsed.soulUpdates);
       setPendingEvents(parsed.eventProposals);
@@ -123,14 +121,24 @@ export default function ChatPage() {
       recordInteraction();
       processGamificationOnMessage();
 
-      // Set avatar mood from LLM response, then fade to idle
       setStreaming(false);
       setStreamText("");
       setAvatarState(parsed.mood);
       setTimeout(() => setAvatarState("idle"), 3000);
 
-      // Background memory processing (non-blocking heuristics)
       processConversationInBackground(userMsg, parsed.text);
+
+      // Auto-complete challenge if response seems positive
+      if (challengeIdRef.current) {
+        const responseLower = parsed.text.toLowerCase();
+        const isPositive = POSITIVE_WORDS.some((w) => responseLower.includes(w));
+        if (isPositive) {
+          const proof = `${userMsg} \u2014 Dzino: ${parsed.text.slice(0, 100)}`;
+          completeChallengeById(challengeIdRef.current, proof);
+          addXp(20, "challenge");
+          challengeIdRef.current = null;
+        }
+      }
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : t("common.error");
       setMessages((prev) => [...prev, { role: "assistant", content: errorMsg }]);
@@ -139,6 +147,29 @@ export default function ChatPage() {
       setAvatarState("sad");
       setTimeout(() => setAvatarState("idle"), 3000);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [streaming, messages, t]);
+
+  // Auto-send challenge message from URL params
+  useEffect(() => {
+    if (challengeSentRef.current) return;
+    const challengeId = searchParams.get("challenge");
+    const challengeText = searchParams.get("text");
+    if (challengeId && challengeText) {
+      challengeSentRef.current = true;
+      challengeIdRef.current = challengeId;
+      // Small delay to let the component mount fully
+      const timer = setTimeout(() => {
+        sendMessage(`Chcem splni\u0165 v\u00fdzvu: ${challengeText}`);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [searchParams, sendMessage]);
+
+  async function handleSend(e: React.FormEvent) {
+    e.preventDefault();
+    if (!input.trim() || streaming) return;
+    await sendMessage(input.trim());
   }
 
   function approveSoulUpdate(update: SoulUpdate) {
@@ -151,7 +182,6 @@ export default function ChatPage() {
     updateChallengeProgress("soul");
     setPendingUpdates((prev) => prev.filter((u) => u !== update));
 
-    // If appearance changed, clear frame cache so it regenerates
     if (update.slug === "vzhlad") {
       clearFrameCache();
     }
@@ -183,7 +213,7 @@ export default function ChatPage() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-8rem)] sm:h-[calc(100vh-6rem)]">
-      {/* Avatar — prominent, centered, animated */}
+      {/* Avatar -- prominent, centered, animated */}
       <div className="flex flex-col items-center gap-1 pb-3 border-b mb-3">
         <div className="py-2">
           <CachedAvatar state={avatarState} appearance={avatarData.appearance} size="md" />
@@ -197,14 +227,14 @@ export default function ChatPage() {
           "text-muted-foreground"
         }`}>
           {{
-            thinking: "premýšľa...",
-            talking: "píše...",
-            happy: "šťastný",
-            sad: "smutný",
-            waving: "máva",
-            walking: "prechádza sa",
+            thinking: "prem\u00fd\u0161\u013ea...",
+            talking: "p\u00ed\u0161e...",
+            happy: "\u0161\u0165astn\u00fd",
+            sad: "smutn\u00fd",
+            waving: "m\u00e1va",
+            walking: "prech\u00e1dza sa",
             eating: "je",
-            sleeping: "spí",
+            sleeping: "sp\u00ed",
             idle: "online",
           }[avatarState] || "online"}
         </p>
@@ -264,15 +294,15 @@ export default function ChatPage() {
           <Card key={`soul-${i}`} className="border-primary/30 bg-primary/5">
             <CardContent className="py-3 px-4">
               <p className="text-xs text-muted-foreground mb-1">
-                Dzino sa chce niečo zapamätať ({update.slug}.md):
+                Dzino sa chce nie{"\u010d"}o zapam{"\u00e4"}ta{"\u0165"} ({update.slug}.md):
               </p>
               <p className="text-sm mb-2">{update.content}</p>
               <div className="flex gap-2">
                 <Button size="sm" variant="default" onClick={() => approveSoulUpdate(update)}>
-                  <Check className="h-3 w-3 mr-1" /> Povoliť
+                  <Check className="h-3 w-3 mr-1" /> Povoli{"\u0165"}
                 </Button>
                 <Button size="sm" variant="ghost" onClick={() => rejectSoulUpdate(update)}>
-                  <X className="h-3 w-3 mr-1" /> Odmietnuť
+                  <X className="h-3 w-3 mr-1" /> Odmietnu{"\u0165"}
                 </Button>
               </div>
             </CardContent>
@@ -284,7 +314,7 @@ export default function ChatPage() {
           <Card key={`event-${i}`} className="border-accent/30 bg-accent/5">
             <CardContent className="py-3 px-4">
               <p className="text-xs text-muted-foreground mb-1">
-                Dzino navrhuje udalosť:
+                Dzino navrhuje udalos{"\u0165"}:
               </p>
               <p className="text-sm font-medium">{event.title}</p>
               <p className="text-xs text-muted-foreground">{event.date} {event.time || ""}</p>
@@ -293,10 +323,10 @@ export default function ChatPage() {
               )}
               <div className="flex gap-2 mt-2">
                 <Button size="sm" variant="default" onClick={() => approveEvent(event)}>
-                  <Check className="h-3 w-3 mr-1" /> Pridať
+                  <Check className="h-3 w-3 mr-1" /> Prida{"\u0165"}
                 </Button>
                 <Button size="sm" variant="ghost" onClick={() => rejectEvent(event)}>
-                  <X className="h-3 w-3 mr-1" /> Odmietnuť
+                  <X className="h-3 w-3 mr-1" /> Odmietnu{"\u0165"}
                 </Button>
               </div>
             </CardContent>
@@ -312,7 +342,7 @@ export default function ChatPage() {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Napíšte správu..."
+          placeholder="Nap\u00ed\u0161te spr\u00e1vu..."
           disabled={streaming}
           className="flex-1 rounded-full border bg-background px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50"
           autoFocus

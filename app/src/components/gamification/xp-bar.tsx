@@ -6,6 +6,7 @@ import {
   getXpForNextLevel,
   getProgressToNextLevel,
 } from "@/lib/gamification";
+import { getAvatarResolution } from "@/lib/avatar-resolution";
 
 interface XpBarProps {
   xp?: number;
@@ -25,12 +26,19 @@ export function XpBar({ xp, level, streak }: XpBarProps) {
   const xpInLevel = currentXp - currentLevelXp;
   const xpNeeded = nextLevelXp - currentLevelXp;
 
+  const resolution = getAvatarResolution(currentLevel);
+
   return (
     <div className="w-full flex flex-col gap-1">
       <div className="flex items-center justify-between text-xs">
-        <span className="font-semibold text-primary">
-          {"\u00da"}r. {currentLevel}
-        </span>
+        <div className="flex items-center gap-1.5">
+          <span className="font-semibold text-primary">
+            {"\u00da"}r. {currentLevel}
+          </span>
+          <span className="text-muted-foreground font-mono text-[10px] bg-muted px-1 py-0.5 rounded">
+            {resolution.label}
+          </span>
+        </div>
         <div className="flex items-center gap-1.5">
           {currentStreak > 0 && (
             <span className="flex items-center gap-0.5 text-orange-500">

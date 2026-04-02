@@ -2,6 +2,8 @@
 
 import { useEffect, useState, useRef } from "react";
 import type { AvatarState, AvatarAppearance } from "@/lib/avatar";
+import { getGamification } from "@/lib/gamification";
+import { getAvatarResolution } from "@/lib/avatar-resolution";
 import { ACTIVITY_ANIMATIONS, type AvatarFrame } from "./avatar-frames";
 import "./avatar.css";
 
@@ -107,15 +109,15 @@ function Mouth({ variant }: { variant: AvatarFrame["mouthVariant"] }) {
 function Effects({ frame }: { frame: AvatarFrame }) {
   return (
     <>
-      {frame.zzz && <span className="av-zzz">💤</span>}
-      {frame.sparkle && <span className="av-sparkle">✨</span>}
+      {frame.zzz && <span className="av-zzz">{"\ud83d\udca4"}</span>}
+      {frame.sparkle && <span className="av-sparkle">{"\u2728"}</span>}
       {frame.blush && (
         <>
           <span className="av-blush av-blush--left" />
           <span className="av-blush av-blush--right" />
         </>
       )}
-      {frame.sweatDrop && <span className="av-sweat">💧</span>}
+      {frame.sweatDrop && <span className="av-sweat">{"\ud83d\udca7"}</span>}
     </>
   );
 }
@@ -192,6 +194,10 @@ export function Avatar({ state, color, size = "md", appearance }: AvatarProps) {
   const animKey = STATE_MAP[state] || "idle";
   const animation = ACTIVITY_ANIMATIONS[animKey] || ACTIVITY_ANIMATIONS.idle;
 
+  // Get avatar resolution based on gamification level
+  const gamData = getGamification();
+  const res = getAvatarResolution(gamData.level);
+
   const [frameIndex, setFrameIndex] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -221,32 +227,58 @@ export function Avatar({ state, color, size = "md", appearance }: AvatarProps) {
   const bodyColor = ap.bodyColor || color;
   const skinColor = ap.skinColor || "#FDDCB5";
 
+  // Resolution-scaled styles
+  const borderWidth = res.pixelSize >= 10 ? 6 : res.pixelSize >= 6 ? 4 : 3;
+  const borderRadius = res.pixelSize >= 10 ? 8 : res.pixelSize >= 6 ? 12 : 16;
+
   return (
     <div
       className="avatar-container"
       style={{ transform: `scale(${scale})` }}
     >
-      <Ears style={ap.earStyle} skinColor={skinColor} />
-      <Hair style={ap.hairStyle} color={bodyColor} />
-      <AccessoryLayer
-        type={ap.accessory}
-        color={bodyColor}
-        bounce={currentFrame.accessoryBounce}
-      />
+      {res.showEars && <Ears style={ap.earStyle} skinColor={skinColor} />}
+      {res.showHair && <Hair style={ap.hairStyle} color={bodyColor} />}
+      {res.showAccessory && (
+        <AccessoryLayer
+          type={ap.accessory}
+          color={bodyColor}
+          bounce={currentFrame.accessoryBounce}
+        />
+      )}
       <div
         className={`avatar-body avatar-body--${ap.bodyShape}`}
         style={{
           backgroundColor: bodyColor,
+          width: res.bodyWidth,
+          height: res.bodyHeight,
+          borderWidth,
+          borderRadius,
+          borderStyle: "solid",
+          borderColor: "rgba(0, 0, 0, 0.25)",
+          boxShadow: res.showShading
+            ? `inset -${borderWidth}px -${borderWidth}px 0 rgba(0,0,0,0.15), inset ${borderWidth}px ${borderWidth}px 0 rgba(255,255,255,0.15)`
+            : "none",
           transform: `translateX(${currentFrame.bodyOffsetX}px) translateY(${currentFrame.bodyOffsetY}px) rotate(${currentFrame.bodyRotation}deg)`,
           transition: `transform ${1 / animation.fps * 0.8}s ease-in-out`,
+          imageRendering: res.pixelSize >= 8 ? "pixelated" as const : undefined,
         }}
       >
-        <div className="av-pixel-border" style={{ borderColor: bodyColor }} />
-        {/* Face area — lighter skin tone */}
-        <div className="av-face" style={{ backgroundColor: skinColor }} />
-        <Eyes variant={currentFrame.eyeVariant} />
-        <Mouth variant={currentFrame.mouthVariant} />
-        <Effects frame={currentFrame} />
+        {res.showShading && (
+          <div className="av-pixel-border" style={{ borderColor: bodyColor }} />
+        )}
+        {/* Face area -- lighter skin tone */}
+        {res.showSkin && (
+          <div className="av-face" style={{ backgroundColor: skinColor }} />
+        )}
+        {res.showEyes && <Eyes variant={currentFrame.eyeVariant} />}
+        {res.showMouth && <Mouth variant={currentFrame.mouthVariant} />}
+        {res.showParticles && <Effects frame={currentFrame} />}
+        {res.showBlush && currentFrame.blush && (
+          <>
+            <span className="av-blush av-blush--left" />
+            <span className="av-blush av-blush--right" />
+          </>
+        )}
       </div>
     </div>
   );

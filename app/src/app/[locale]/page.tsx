@@ -17,6 +17,8 @@ import {
 import { XpBar } from "@/components/gamification/xp-bar";
 import { StreakDisplay } from "@/components/gamification/streak-display";
 import { DailyChallenges } from "@/components/gamification/daily-challenges";
+import { LevelUpCelebration } from "@/components/gamification/level-up-celebration";
+import { useLevelUp } from "@/components/gamification/use-level-up";
 import { WeeklyReviewCard } from "@/components/review/weekly-review-card";
 import { DailyGreeting } from "@/components/greeting/daily-greeting";
 import { MoodPicker } from "@/components/mood/mood-picker";
@@ -25,6 +27,7 @@ import { TellMeSomething } from "@/components/quick-action/tell-me-something";
 export default function Home() {
   const { mounted, state, mood, name, appearance } = useAvatarState();
   const [groups, setGroups] = useState<Record<string, Conversation[]>>({});
+  const levelUp = useLevelUp();
 
   useEffect(() => {
     migrateMemoriesToSoul();
@@ -125,6 +128,15 @@ export default function Home() {
         <p className="text-sm text-muted-foreground text-center py-4">
           Za{"\u010d"}nite konverz{"\u00e1"}ciu {"\u2014"} Dzino sa te{"\u0161"}{"\u00ed"}!
         </p>
+      )}
+
+      {/* Level-up celebration overlay */}
+      {levelUp.justLeveledUp && (
+        <LevelUpCelebration
+          previousLevel={levelUp.previousLevel}
+          newLevel={levelUp.newLevel}
+          onDismiss={levelUp.dismiss}
+        />
       )}
     </div>
   );
