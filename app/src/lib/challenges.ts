@@ -1,30 +1,67 @@
 export interface DailyChallenge {
   id: string;
   text: string;
-  type: "chat" | "soul" | "event" | "share";
+  type: "outdoor" | "social" | "mindful" | "creative" | "chat";
   target: number;
   progress: number;
   completed: boolean;
+  emoji: string;
 }
 
 const STORAGE_KEY_PREFIX = "dzino_challenges_";
 
 const CHALLENGE_POOL: Omit<DailyChallenge, "progress" | "completed">[] = [
-  { id: "send_3_messages", text: "Pošli 3 správy Dzinovi", type: "chat", target: 3 },
-  { id: "tell_about_day", text: "Povedz Dzinovi o svojom dni", type: "chat", target: 1 },
-  { id: "add_event", text: "Pridaj udalosť do kalendára", type: "event", target: 1 },
-  { id: "edit_soul", text: "Uprav niečo v duši", type: "soul", target: 1 },
-  { id: "answer_question", text: "Odpovedz na Dzinovu otázku", type: "chat", target: 1 },
+  // Outdoor / nature
+  { id: "walk_15", text: "Choď na 15-minútovú prechádzku", type: "outdoor", target: 1, emoji: "🚶" },
+  { id: "observe_tree", text: "Nájdi strom, ktorý si nikdy nevšimol", type: "outdoor", target: 1, emoji: "🌳" },
+  { id: "photo_sky", text: "Ofoť dnešnú oblohu a povedz Dzinovi, čo vidíš", type: "outdoor", target: 1, emoji: "🌤️" },
+  { id: "new_route", text: "Choď domov inou cestou ako zvyčajne", type: "outdoor", target: 1, emoji: "🗺️" },
+  { id: "sit_outside", text: "Seď 5 minút vonku bez telefónu", type: "outdoor", target: 1, emoji: "🪑" },
+  { id: "count_birds", text: "Spočítaj vtáky, ktoré dnes uvidíš", type: "outdoor", target: 1, emoji: "🐦" },
+  { id: "find_flower", text: "Nájdi kvet alebo rastlinu vo svojom okolí", type: "outdoor", target: 1, emoji: "🌸" },
+  { id: "sunrise_sunset", text: "Pozri si dnes východ alebo západ slnka", type: "outdoor", target: 1, emoji: "🌅" },
+  { id: "rain_walk", text: "Ak prší, vyjdi na 5 minút a počúvaj dážď", type: "outdoor", target: 1, emoji: "🌧️" },
+  { id: "neighborhood", text: "Prejdi ulicu, na ktorej si ešte nebol", type: "outdoor", target: 1, emoji: "🏘️" },
+
+  // Social / people
+  { id: "greet_stranger", text: "Pozdrav niekoho, koho nepoznáš", type: "social", target: 1, emoji: "👋" },
+  { id: "call_friend", text: "Zavolaj alebo napíš priateľovi", type: "social", target: 1, emoji: "📞" },
+  { id: "compliment", text: "Daj niekomu úprimný kompliment", type: "social", target: 1, emoji: "💬" },
+  { id: "ask_neighbor", text: "Opýtaj sa suseda, ako sa má", type: "social", target: 1, emoji: "🏠" },
+  { id: "help_someone", text: "Pomôž dnes niekomu s niečím malým", type: "social", target: 1, emoji: "🤝" },
+  { id: "family_story", text: "Opýtaj sa niekoho z rodiny na starý príbeh", type: "social", target: 1, emoji: "👨‍👩‍👧" },
+  { id: "thank_someone", text: "Poďakuj niekomu, komu si dlho nepoďakoval", type: "social", target: 1, emoji: "🙏" },
+  { id: "listen_deeply", text: "Počúvaj niekoho 5 minút bez prerušenia", type: "social", target: 1, emoji: "👂" },
+
+  // Mindful / self-care
+  { id: "deep_breath", text: "Urob 10 hlbokých nádychov", type: "mindful", target: 1, emoji: "🧘" },
+  { id: "gratitude", text: "Povedz Dzinovi 3 veci, za ktoré si vďačný", type: "mindful", target: 1, emoji: "✨" },
+  { id: "no_phone_hour", text: "Odlož telefón na 1 hodinu", type: "mindful", target: 1, emoji: "📵" },
+  { id: "journal_feeling", text: "Napíš Dzinovi, ako sa cítiš a prečo", type: "mindful", target: 1, emoji: "📝" },
+  { id: "drink_water", text: "Vypi 3 poháre vody", type: "mindful", target: 3, emoji: "💧" },
+  { id: "stretch", text: "Rozcvič sa — 5 minút strečingu", type: "mindful", target: 1, emoji: "🤸" },
+  { id: "tidy_space", text: "Uprac jedno miesto, kde bývaš", type: "mindful", target: 1, emoji: "🧹" },
+  { id: "early_sleep", text: "Choď dnes spať o 30 minút skôr", type: "mindful", target: 1, emoji: "😴" },
+
+  // Creative / fun
+  { id: "draw_something", text: "Nakresli niečo — čokoľvek", type: "creative", target: 1, emoji: "🎨" },
+  { id: "cook_new", text: "Uvar niečo, čo si ešte nevaril", type: "creative", target: 1, emoji: "🍳" },
+  { id: "learn_word", text: "Nauč sa nové slovo v cudzom jazyku", type: "creative", target: 1, emoji: "📚" },
+  { id: "sing_song", text: "Zaspieval si dnes pesničku?", type: "creative", target: 1, emoji: "🎵" },
+  { id: "write_poem", text: "Napíš krátku básničku alebo haiku", type: "creative", target: 1, emoji: "✍️" },
+  { id: "take_photo", text: "Ofoť niečo pekné a povedz Dzinovi prečo", type: "creative", target: 1, emoji: "📸" },
+  { id: "try_new", text: "Vyskúšaj dnes niečo prvýkrát", type: "creative", target: 1, emoji: "🆕" },
+
+  // Chat with Dzino (to keep the app habit)
+  { id: "tell_day", text: "Povedz Dzinovi o svojom dni", type: "chat", target: 1, emoji: "💭" },
+  { id: "ask_advice", text: "Opýtaj sa Dzina na radu", type: "chat", target: 1, emoji: "🤔" },
+  { id: "share_dream", text: "Povedz Dzinovi o svojom sne alebo cieli", type: "chat", target: 1, emoji: "💫" },
 ];
 
 function getToday(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
-/**
- * Simple seeded pseudo-random number generator.
- * Uses the date string as a seed so challenges are deterministic per day.
- */
 function seededRandom(seed: string): () => number {
   let hash = 0;
   for (let i = 0; i < seed.length; i++) {
@@ -36,33 +73,29 @@ function seededRandom(seed: string): () => number {
   };
 }
 
-/**
- * Pick 3 random challenges from the pool, seeded by date.
- */
+// Pick 3 challenges: 1 outdoor/social + 1 mindful/creative + 1 chat
 function generateChallenges(date: string): DailyChallenge[] {
   const rng = seededRandom(date);
-  const indices = Array.from({ length: CHALLENGE_POOL.length }, (_, i) => i);
 
-  // Fisher-Yates shuffle with seeded RNG
-  for (let i = indices.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [indices[i], indices[j]] = [indices[j], indices[i]];
+  const outdoor = CHALLENGE_POOL.filter((c) => c.type === "outdoor" || c.type === "social");
+  const mindful = CHALLENGE_POOL.filter((c) => c.type === "mindful" || c.type === "creative");
+  const chat = CHALLENGE_POOL.filter((c) => c.type === "chat");
+
+  function pickRandom<T>(arr: T[]): T {
+    return arr[Math.floor(rng() * arr.length)];
   }
 
-  return indices.slice(0, 3).map((idx) => ({
-    ...CHALLENGE_POOL[idx],
-    progress: 0,
-    completed: false,
-  }));
+  return [
+    { ...pickRandom(outdoor), progress: 0, completed: false },
+    { ...pickRandom(mindful), progress: 0, completed: false },
+    { ...pickRandom(chat), progress: 0, completed: false },
+  ];
 }
 
 function getStorageKey(date?: string): string {
   return STORAGE_KEY_PREFIX + (date || getToday());
 }
 
-/**
- * Get today's daily challenges. Generates them if not yet created.
- */
 export function getDailyChallenges(): DailyChallenge[] {
   if (typeof window === "undefined") return [];
   const today = getToday();
@@ -78,9 +111,6 @@ export function getDailyChallenges(): DailyChallenge[] {
   return challenges;
 }
 
-/**
- * Update progress for all challenges matching the given type.
- */
 export function updateChallengeProgress(type: string): void {
   if (typeof window === "undefined") return;
   const today = getToday();
@@ -99,9 +129,23 @@ export function updateChallengeProgress(type: string): void {
   localStorage.setItem(key, JSON.stringify(challenges));
 }
 
-/**
- * Check if all daily challenges are complete.
- */
+// Mark a specific challenge as done by ID (for self-reported outdoor/social challenges)
+export function completeChallengeById(id: string): void {
+  if (typeof window === "undefined") return;
+  const today = getToday();
+  const key = getStorageKey(today);
+  const challenges = getDailyChallenges();
+
+  for (const challenge of challenges) {
+    if (challenge.id === id && !challenge.completed) {
+      challenge.progress = challenge.target;
+      challenge.completed = true;
+    }
+  }
+
+  localStorage.setItem(key, JSON.stringify(challenges));
+}
+
 export function areChallengesComplete(): boolean {
   const challenges = getDailyChallenges();
   return challenges.length > 0 && challenges.every((c) => c.completed);
