@@ -1,18 +1,27 @@
-// LLM abstraction — uses @google/generative-ai for both
-// Google AI Studio (API key) and Vertex AI (service account)
+// LLM abstraction using @google/genai — supports both Google AI Studio and Vertex AI
+// Vertex AI: uses GOOGLE_CLOUD_PROJECT + GOOGLE_APPLICATION_CREDENTIALS
+// Google AI Studio: uses GOOGLE_API_KEY
 
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 
-function getClient(): GoogleGenerativeAI {
+function getClient(): GoogleGenAI {
   const apiKey = process.env.GOOGLE_API_KEY;
   if (apiKey) {
-    return new GoogleGenerativeAI(apiKey);
+    return new GoogleGenAI({ apiKey });
   }
 
-  // For Vertex AI via service account, we use the Google AI SDK
-  // with an API key extracted from gcloud. In production, set GOOGLE_API_KEY.
-  // For now, fall back to empty (will error with clear message).
-  return new GoogleGenerativeAI(apiKey || "");
+  // Vertex AI — uses application default credentials
+  const project = process.env.GOOGLE_CLOUD_PROJECT;
+  const location = process.env.GOOGLE_CLOUD_LOCATION || "europe-west1";
+  if (project) {
+    return new GoogleGenAI({
+      vertexai: true,
+      project,
+      location,
+    });
+  }
+
+  throw new Error("Set GOOGLE_API_KEY or GOOGLE_CLOUD_PROJECT in .env.local");
 }
 
 export interface GenerateOptions {
@@ -23,40 +32,43 @@ export interface GenerateOptions {
 }
 
 export async function generateContent(options: GenerateOptions): Promise<string> {
-  const genAI = getClient();
+  const client = getClient();
   const modelName = options.model || "gemini-2.5-flash";
 
-  const model = genAI.getGenerativeModel({
+  const config: Record<string, unknown> = {};
+  if (options.jsonMode) {
+    config.responseMimeType = "application/json";
+  }
+  if (options.systemInstruction) {
+    config.systemInstruction = options.systemInstruction;
+  }
+
+  const response = await client.models.generateContent({
     model: modelName,
-    ...(options.systemInstruction
-      ? { systemInstruction: options.systemInstruction }
-      : {}),
-    ...(options.jsonMode
-      ? { generationConfig: { responseMimeType: "application/json" } }
-      : {}),
+    contents: options.contents,
+    config,
   });
 
-  const result = await model.generateContent({ contents: options.contents });
-  return result.response.text();
+  return response.text || "";
 }
 
 export async function* generateContentStream(options: GenerateOptions) {
-  const genAI = getClient();
+  const client = getClient();
   const modelName = options.model || "gemini-2.5-flash";
 
-  const model = genAI.getGenerativeModel({
+  const config: Record<string, unknown> = {};
+  if (options.systemInstruction) {
+    config.systemInstruction = options.systemInstruction;
+  }
+
+  const response = await client.models.generateContentStream({
     model: modelName,
-    ...(options.systemInstruction
-      ? { systemInstruction: options.systemInstruction }
-      : {}),
-  });
-
-  const result = await model.generateContentStream({
     contents: options.contents,
+    config,
   });
 
-  for await (const chunk of result.stream) {
-    const text = chunk.text();
+  for await (const chunk of response) {
+    const text = chunk.text;
     if (text) yield text;
   }
 }
