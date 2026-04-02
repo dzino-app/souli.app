@@ -14,7 +14,7 @@ import { appendToSoulFile, updateSoulFile } from "@/lib/soul";
 import { processConversationInBackground } from "@/lib/soul-background";
 import { createEvent } from "@/lib/events";
 import { getAvatarData, recordInteraction } from "@/lib/avatar";
-import { clearFrameCache } from "@/lib/avatar-cache";
+// Avatar cache cleared when appearance changes (handled by pixel-avatar)
 import { createConversation, addMessage } from "@/lib/conversations";
 import { addXp, getGamification, saveGamification } from "@/lib/gamification";
 import { checkAchievements, grantAchievement, type Achievement } from "@/lib/achievements";
@@ -183,7 +183,7 @@ export default function ChatPage() {
     setPendingUpdates((prev) => prev.filter((u) => u !== update));
 
     if (update.slug === "vzhlad") {
-      clearFrameCache();
+      // Appearance change — pixel avatar auto-updates from soul
     }
   }
 

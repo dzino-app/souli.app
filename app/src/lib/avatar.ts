@@ -88,8 +88,8 @@ function randomAppearance(): AvatarAppearance {
 
 const STORAGE_KEY = "dzino_avatar";
 
-// DEV MODE: set to true to randomize on every refresh
-const DEV_RANDOMIZE = process.env.NODE_ENV === "development";
+// Set to true to randomize avatar on every refresh (for testing only)
+const DEV_RANDOMIZE = false;
 
 function createDefaultAvatar(): AvatarData {
   const appearance = randomAppearance();
