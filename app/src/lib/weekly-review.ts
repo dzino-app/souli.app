@@ -146,9 +146,9 @@ export function saveWeeklyReview(review: string): void {
   if (typeof window === "undefined") return;
   localStorage.setItem(LAST_REVIEW_KEY, new Date().toISOString());
 
-  // Append to dennik soul file via sync cache update
-  // We import dynamically to avoid circular deps if needed
-  const { getSoulFile, updateSoulFileInCache } = require("./soul") as typeof import("./soul");
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const soul = require("./soul") as typeof import("./soul");
+  const { getSoulFile, updateSoulFileInCache } = soul;
   const dennik = getSoulFile("dennik");
   if (dennik) {
     const newContent = dennik.content.trimEnd() + "\n\n" + review;
