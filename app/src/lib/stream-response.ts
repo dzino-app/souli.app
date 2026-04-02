@@ -1,5 +1,5 @@
 import { getDecayedSoulContext } from "@/lib/soul-retrieval";
-import { getUserLanguage } from "@/lib/languages";
+import { getUserLanguage, setUserLanguage, detectLanguage } from "@/lib/languages";
 
 const TIMEOUT_MS = 60_000;
 
@@ -14,6 +14,17 @@ export async function streamChatResponse(
   onChunk?: (text: string) => void
 ): Promise<string> {
   const soulContext = getDecayedSoulContext(message);
+
+  // Auto-detect language from first few messages if not set yet
+  let language = getUserLanguage();
+  if (!language) {
+    const detected = detectLanguage(message);
+    if (detected) {
+      setUserLanguage(detected);
+      language = detected;
+    }
+  }
+
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
 

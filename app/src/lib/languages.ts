@@ -56,11 +56,73 @@ const STORAGE_KEY = "dzino_language";
 
 export function getUserLanguage(): string {
   if (typeof window === "undefined") return "en";
-  return localStorage.getItem(STORAGE_KEY) || "en";
+  return localStorage.getItem(STORAGE_KEY) || "";
 }
 
 export function setUserLanguage(code: string) {
   localStorage.setItem(STORAGE_KEY, code);
+}
+
+// Auto-detect language from user text using character patterns + common words
+export function detectLanguage(text: string): string | null {
+  const lower = text.toLowerCase().trim();
+  if (!lower || lower.length < 3) return null;
+
+  // Script-based detection (non-latin scripts are unambiguous)
+  if (/[\u0900-\u097F]/.test(text)) return "hi"; // Devanagari (Hindi/Marathi)
+  if (/[\u0B80-\u0BFF]/.test(text)) return "ta"; // Tamil
+  if (/[\u0C00-\u0C7F]/.test(text)) return "te"; // Telugu
+  if (/[\u0980-\u09FF]/.test(text)) return "bn"; // Bengali
+  if (/[\u0400-\u04FF]/.test(text)) return "uk"; // Cyrillic → Ukrainian (default, could be Russian)
+  if (/[\u3040-\u309F\u30A0-\u30FF]/.test(text)) return "ja"; // Japanese
+  if (/[\uAC00-\uD7AF]/.test(text)) return "ko"; // Korean
+  if (/[\u4E00-\u9FFF]/.test(text)) return "zh"; // Chinese
+  if (/[\u0600-\u06FF]/.test(text)) return "ar"; // Arabic
+
+  // Latin-script languages — use common word detection
+  const words = lower.split(/\s+/);
+
+  const signals: Record<string, string[]> = {
+    sk: ["som", "nie", "áno", "ahoj", "prosím", "ďakujem", "ako", "čo", "kde", "prečo", "veľmi", "dobre", "dobrý", "potom", "teraz", "máš", "mám", "chcem"],
+    cs: ["jsem", "není", "ano", "prosím", "děkuji", "proč", "velmi", "dobře", "dobrý", "potom", "teď", "máš", "mám", "chci", "tady", "třeba"],
+    pl: ["jestem", "tak", "nie", "cześć", "proszę", "dziękuję", "dlaczego", "bardzo", "dobrze", "teraz", "masz", "chcę", "tutaj", "może"],
+    hu: ["vagyok", "igen", "nem", "szia", "kérem", "köszönöm", "miért", "nagyon", "most", "aztán", "van", "hogy", "egy", "itt"],
+    de: ["ich", "bin", "nicht", "hallo", "bitte", "danke", "warum", "sehr", "gut", "jetzt", "dann", "hast", "will", "hier", "auch", "aber"],
+    ro: ["sunt", "nu", "da", "salut", "mulțumesc", "foarte", "bine", "acum", "apoi", "aici", "dar", "sau", "pentru"],
+    hr: ["sam", "ne", "da", "bok", "molim", "hvala", "zašto", "vrlo", "dobro", "sada", "onda", "ovdje", "ali"],
+    sl: ["sem", "ne", "ja", "živjo", "prosim", "hvala", "zakaj", "zelo", "dobro", "zdaj", "potem", "tukaj"],
+    es: ["soy", "no", "hola", "por", "favor", "gracias", "muy", "bien", "ahora", "pero", "también", "estoy", "quiero", "tengo"],
+    fr: ["suis", "non", "oui", "salut", "merci", "très", "bien", "maintenant", "mais", "aussi", "je", "tu", "nous", "vous", "est"],
+    pt: ["sou", "não", "sim", "olá", "obrigado", "muito", "bem", "agora", "mas", "também", "estou", "quero", "tenho"],
+    it: ["sono", "non", "ciao", "grazie", "molto", "bene", "adesso", "anche", "voglio", "ho", "che", "per", "questo"],
+    tr: ["ben", "hayır", "evet", "merhaba", "teşekkür", "çok", "iyi", "şimdi", "ama", "da", "için", "bir", "bu", "ne"],
+  };
+
+  let bestLang = "en";
+  let bestScore = 0;
+
+  for (const [lang, keywords] of Object.entries(signals)) {
+    let score = 0;
+    for (const word of words) {
+      if (keywords.includes(word)) score++;
+    }
+    // Also check for diacritics specific to languages
+    if (lang === "sk" && /[ľščťžýáíéúôäň]/.test(lower)) score += 2;
+    if (lang === "cs" && /[ěščřžýáíéúůň]/.test(lower)) score += 2;
+    if (lang === "pl" && /[ąćęłńóśźż]/.test(lower)) score += 2;
+    if (lang === "hu" && /[áéíóöőúüű]/.test(lower)) score += 2;
+    if (lang === "de" && /[äöüß]/.test(lower)) score += 2;
+    if (lang === "ro" && /[ăâîșț]/.test(lower)) score += 2;
+    if (lang === "tr" && /[çğıöşü]/.test(lower)) score += 2;
+
+    if (score > bestScore) {
+      bestScore = score;
+      bestLang = lang;
+    }
+  }
+
+  // Only return if we have reasonable confidence
+  return bestScore >= 2 ? bestLang : null;
 }
 
 // Generate the language instruction for the LLM system prompt
