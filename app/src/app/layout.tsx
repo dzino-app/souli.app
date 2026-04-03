@@ -7,6 +7,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { PWARegister } from "@/components/pwa-register";
+import { LocaleSwitcher } from "@/components/locale-switcher";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -67,6 +68,7 @@ export default function RootLayout({
               >
                 <Calendar className="h-5 w-5" />
               </Link>
+              <LocaleSwitcher />
               <ThemeToggle />
               <Link
                 href="/nastavenia"
