@@ -2,46 +2,78 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Target, ChevronDown, ChevronUp } from "lucide-react";
 import { getDailyChallenges, type DailyChallenge } from "@/lib/challenges";
 import { ShareCompletion } from "./share-completion";
+import { Button } from "@/components/ui/button";
 
 export function DailyChallenges() {
   const router = useRouter();
-  const [items] = useState<DailyChallenge[]>(() => getDailyChallenges());
+  const [expanded, setExpanded] = useState(false);
+  const [items, setItems] = useState<DailyChallenge[] | null>(null);
+
+  function handleExpand() {
+    if (expanded) {
+      setExpanded(false);
+      return;
+    }
+    // Generate challenges on click (lazy) so they reflect latest mood/context
+    setItems(getDailyChallenges());
+    setExpanded(true);
+  }
 
   function handleTapChallenge(ch: DailyChallenge) {
     if (ch.completed) return;
     router.push(`/chat?challenge=${encodeURIComponent(ch.id)}&text=${encodeURIComponent(ch.text)}`);
   }
 
-  // Re-read challenges on mount (in case they were completed from chat)
-  // We use a simple approach: state is initialized from localStorage
-
-  if (!items || items.length === 0) return null;
+  const completedCount = items?.filter((c) => c.completed).length ?? 0;
+  const totalCount = items?.length ?? 3;
 
   return (
     <div className="flex flex-col gap-2">
-      <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
-        Denné výzvy
-      </h3>
-      <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 -mx-1 px-1">
-        {items.map((ch) => {
-          const done = ch.completed;
+      {/* Button to expand/collapse */}
+      <Button
+        variant="outline"
+        className="w-full justify-between h-12 px-4"
+        onClick={handleExpand}
+      >
+        <div className="flex items-center gap-2">
+          <Target className="h-4 w-4 text-primary" />
+          <span className="font-medium">Denné výzvy</span>
+          {items && completedCount > 0 && (
+            <span className="text-xs bg-accent/10 text-accent px-2 py-0.5 rounded-full">
+              {completedCount}/{totalCount}
+            </span>
+          )}
+        </div>
+        {expanded ? (
+          <ChevronUp className="h-4 w-4 text-muted-foreground" />
+        ) : (
+          <ChevronDown className="h-4 w-4 text-muted-foreground" />
+        )}
+      </Button>
 
-          return (
-            <div
-              key={ch.id}
-              className={`flex-shrink-0 snap-start flex flex-col gap-2 rounded-lg border-2 p-3 transition-colors min-w-[200px] max-w-[240px] ${
-                done
-                  ? "bg-success/5 border-accent"
-                  : "bg-card border-border hover:border-primary/40 cursor-pointer"
-              }`}
-              onClick={() => handleTapChallenge(ch)}
-              role={done ? undefined : "button"}
-              tabIndex={done ? undefined : 0}
-              onKeyDown={(e) => { if (!done && (e.key === "Enter" || e.key === " ")) handleTapChallenge(ch); }}
-            >
-              <div className="flex items-start gap-2">
+      {/* Challenge list — only when expanded */}
+      {expanded && items && (
+        <div className="flex flex-col gap-2 animate-in slide-in-from-top-2 fade-in duration-200">
+          {items.map((ch) => {
+            const done = ch.completed;
+            return (
+              <div
+                key={ch.id}
+                className={`flex items-center gap-3 rounded-lg border-2 p-3 transition-colors ${
+                  done
+                    ? "bg-success/5 border-accent"
+                    : "bg-card border-border hover:border-primary/40 cursor-pointer"
+                }`}
+                onClick={() => handleTapChallenge(ch)}
+                role={done ? undefined : "button"}
+                tabIndex={done ? undefined : 0}
+                onKeyDown={(e) => {
+                  if (!done && (e.key === "Enter" || e.key === " ")) handleTapChallenge(ch);
+                }}
+              >
                 <span className="text-2xl shrink-0">{ch.emoji}</span>
                 <div className="flex-1 min-w-0">
                   <p className={`text-sm ${done ? "line-through text-muted-foreground" : "font-medium"}`}>
@@ -53,21 +85,21 @@ export function DailyChallenges() {
                     </p>
                   )}
                 </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  {done ? (
+                    <>
+                      <ShareCompletion challengeText={ch.text} />
+                      <span className="text-accent text-lg font-bold">✓</span>
+                    </>
+                  ) : (
+                    <span className="text-xs text-muted-foreground">Splniť</span>
+                  )}
+                </div>
               </div>
-              <div className="flex items-center justify-end gap-2 shrink-0">
-                {done ? (
-                  <>
-                    <ShareCompletion challengeText={ch.text} />
-                    <span className="text-accent text-lg font-bold">✓</span>
-                  </>
-                ) : (
-                  <span className="text-xs text-muted-foreground">Splniť</span>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

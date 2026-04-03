@@ -102,14 +102,14 @@ export function getRandomAction(currentMood?: number | null): QuickAction {
   let types: QuickActionType[];
 
   if (currentMood !== null && currentMood !== undefined && currentMood <= 2) {
-    // Sad/bad mood — comfort, inspiration, gentle question. NEVER jokes.
+    // Sad/bad mood — comfort, inspiration, gentle question. NEVER jokes or challenges.
     types = ["comfort", "comfort", "inspiration", "inspiration", "question"];
   } else if (currentMood !== null && currentMood !== undefined && currentMood >= 4) {
-    // Happy mood — jokes, facts, challenges, questions
-    types = ["joke", "fact", "challenge", "question"];
+    // Happy mood — jokes, facts, questions (no challenges — those are in Denné výzvy)
+    types = ["joke", "fact", "question", "fact"];
   } else {
-    // Neutral or unknown — mix of everything except comfort
-    types = ["fact", "fact", "challenge", "question", "joke"];
+    // Neutral or unknown — facts, questions, jokes (no challenges)
+    types = ["fact", "fact", "question", "joke"];
   }
 
   const type = pickRandom(types);
