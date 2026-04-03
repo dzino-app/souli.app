@@ -11,8 +11,9 @@ import {
   Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PixelAvatar } from "@/components/avatar/pixel-avatar";
+import { StoredAvatar } from "@/components/avatar/stored-avatar";
 import { getAvatarResolution } from "@/lib/avatar-resolution";
+import { triggerAvatarRender } from "@/lib/avatar-render-trigger";
 import { getSoulFiles, DEFAULT_SLUGS } from "@/lib/soul";
 import type { AvatarRow } from "@/lib/supabase/avatars-db";
 import type { AvatarAppearance } from "@/lib/avatar";
@@ -123,6 +124,17 @@ export function PublishDialog({
           publicSoulContents: filteredContents,
         }),
       });
+
+      // Fire-and-forget: ensure avatar has pre-rendered assets for the library
+      if (!avatar.preview_url) {
+        triggerAvatarRender(
+          avatar.user_id,
+          avatar.id,
+          avatar.appearance as AvatarAppearance,
+          avatar.level,
+        ).catch(() => {});
+      }
+
       onPublished();
       onClose();
     } catch {
@@ -132,6 +144,10 @@ export function PublishDialog({
     }
   }, [
     avatar.id,
+    avatar.user_id,
+    avatar.appearance,
+    avatar.level,
+    avatar.preview_url,
     bio,
     parsedTags,
     selectedSlugs,
@@ -484,11 +500,13 @@ function StepPreview({
           className="relative"
           style={{ animation: "float 3s ease-in-out infinite" }}
         >
-          <PixelAvatar
+          <StoredAvatar
+            previewUrl={avatar.preview_url}
             state="idle"
-            appearance={avatar.appearance as AvatarAppearance}
-            level={avatar.level}
             size="lg"
+            staticOnly
+            fallbackAppearance={avatar.appearance as AvatarAppearance}
+            fallbackLevel={avatar.level}
           />
         </div>
 

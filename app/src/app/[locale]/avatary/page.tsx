@@ -4,10 +4,11 @@ import { useEffect, useState, useCallback } from "react";
 import { ArrowLeft, Plus, Check, Trash2, Globe, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { PixelAvatar } from "@/components/avatar/pixel-avatar";
+import { StoredAvatar } from "@/components/avatar/stored-avatar";
 import { PublishDialog } from "@/components/avatar/publish-dialog";
 import { Link } from "@/i18n/routing";
 import { setActiveAvatarId } from "@/lib/avatars";
+import { triggerAvatarRender } from "@/lib/avatar-render-trigger";
 import type { AvatarRow } from "@/lib/supabase/avatars-db";
 import type { AvatarAppearance } from "@/lib/avatar";
 
@@ -118,7 +119,18 @@ export default function AvatarsPage() {
         body: JSON.stringify({ name, slug, appearance }),
       });
       if (res.ok) {
+        const data = await res.json();
         fetchAvatars();
+
+        // Fire-and-forget: render and upload avatar assets in background
+        if (data.avatar) {
+          triggerAvatarRender(
+            data.avatar.user_id,
+            data.avatar.id,
+            appearance,
+            1,
+          ).catch(() => {});
+        }
       }
     } catch {
       // ignore
@@ -167,11 +179,13 @@ export default function AvatarsPage() {
               <div className="flex items-center gap-3">
                 {/* Pixel preview */}
                 <div className="shrink-0">
-                  <PixelAvatar
+                  <StoredAvatar
+                    previewUrl={a.preview_url}
                     state="idle"
-                    appearance={a.appearance as AvatarAppearance}
-                    level={a.level}
                     size="sm"
+                    staticOnly
+                    fallbackAppearance={a.appearance as AvatarAppearance}
+                    fallbackLevel={a.level}
                   />
                 </div>
 

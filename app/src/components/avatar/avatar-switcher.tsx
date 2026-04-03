@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { ChevronDown, Check } from "lucide-react";
-import { PixelAvatar } from "./pixel-avatar";
+import { StoredAvatar } from "./stored-avatar";
 import { getActiveAvatarId, setActiveAvatarId } from "@/lib/avatars";
 import type { AvatarRow } from "@/lib/supabase/avatars-db";
 import type { AvatarAppearance } from "@/lib/avatar";
@@ -79,11 +79,13 @@ export function AvatarSwitcher({ onSwitch }: AvatarSwitcherProps) {
         className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-secondary/60 hover:bg-secondary transition-colors text-sm"
       >
         <div className="shrink-0">
-          <PixelAvatar
+          <StoredAvatar
+            previewUrl={active.preview_url}
             state="idle"
-            appearance={active.appearance as AvatarAppearance}
-            level={active.level}
             size="sm"
+            staticOnly
+            fallbackAppearance={active.appearance as AvatarAppearance}
+            fallbackLevel={active.level}
           />
         </div>
         <span className="font-medium truncate max-w-[100px]">{active.name}</span>
@@ -100,11 +102,13 @@ export function AvatarSwitcher({ onSwitch }: AvatarSwitcherProps) {
               className="flex items-center gap-3 w-full px-3 py-2 hover:bg-secondary/60 transition-colors text-left"
             >
               <div className="shrink-0">
-                <PixelAvatar
+                <StoredAvatar
+                  previewUrl={a.preview_url}
                   state="idle"
-                  appearance={a.appearance as AvatarAppearance}
-                  level={a.level}
                   size="sm"
+                  staticOnly
+                  fallbackAppearance={a.appearance as AvatarAppearance}
+                  fallbackLevel={a.level}
                 />
               </div>
               <span className="text-sm font-medium truncate flex-1">{a.name}</span>

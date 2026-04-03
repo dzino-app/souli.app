@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { ArrowLeft, Download, Flag, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PixelAvatar } from "@/components/avatar/pixel-avatar";
+import { StoredAvatar } from "@/components/avatar/stored-avatar";
 import { MarkdownResponse } from "@/components/chat/markdown-response";
 import { getAvatarResolution } from "@/lib/avatar-resolution";
 import { Link } from "@/i18n/routing";
@@ -165,11 +165,13 @@ export default function AvatarDetailPage() {
           className="relative"
           style={{ animation: "float 3s ease-in-out infinite" }}
         >
-          <PixelAvatar
+          <StoredAvatar
+            previewUrl={avatar.preview_url}
+            animationUrls={avatar.animation_urls}
             state={activeAnimation}
-            appearance={appearance}
-            level={avatar.level}
             size="lg"
+            fallbackAppearance={appearance}
+            fallbackLevel={avatar.level}
           />
         </div>
 

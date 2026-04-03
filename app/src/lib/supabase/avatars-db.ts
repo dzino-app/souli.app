@@ -27,6 +27,10 @@ export interface AvatarRow {
   is_active: boolean;
   created_at: string;
   updated_at: string;
+  /** Pre-rendered static preview image URL (Supabase Storage) */
+  preview_url: string | null;
+  /** Pre-rendered animation frame URLs per activity (Supabase Storage) */
+  animation_urls: Record<string, string[]> | null;
 }
 
 export interface PublicAvatarFilters {

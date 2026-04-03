@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { PixelAvatar } from "@/components/avatar/pixel-avatar";
+import { StoredAvatar } from "@/components/avatar/stored-avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Download } from "lucide-react";
 import type { AvatarRow } from "@/lib/supabase/avatars-db";
@@ -28,11 +28,13 @@ export function AvatarCard({ avatar, locale }: AvatarCardProps) {
       <Card className="hover:border-primary/40 hover:shadow-md transition-all cursor-pointer overflow-hidden">
         <CardContent className="p-4 flex flex-col items-center gap-2">
           <div className="py-2">
-            <PixelAvatar
+            <StoredAvatar
+              previewUrl={avatar.preview_url}
               state="idle"
-              appearance={avatar.appearance}
-              level={avatar.level}
               size="sm"
+              staticOnly
+              fallbackAppearance={avatar.appearance}
+              fallbackLevel={avatar.level}
             />
           </div>
           <h3 className="text-sm font-semibold truncate w-full text-center">
