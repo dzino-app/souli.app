@@ -12,6 +12,9 @@ export interface AddXpResult {
   newXp: number;
   leveledUp: boolean;
   newLevel: number;
+  xpGained?: number;
+  wasLucky?: boolean;
+  multiplier?: number;
 }
 
 export interface StreakResult {
@@ -99,13 +102,29 @@ export function addXp(amount: number, _source?: string): AddXpResult {
   const today = getToday();
 
   // Reset daily XP if it is a new day
-  if (data.lastActiveDate !== today) {
+  const isNewDay = data.lastActiveDate !== today;
+  if (isNewDay) {
     data.dailyXpEarned = 0;
   }
 
+  // Apply streak multiplier
+  let multiplier = 1.0;
+  if (data.streak >= 14) multiplier = 2.0;
+  else if (data.streak >= 7) multiplier = 1.5;
+
+  // First message of the day bonus
+  let bonusXp = 0;
+  if (isNewDay && data.dailyXpEarned === 0) {
+    bonusXp = 5; // first interaction bonus
+  }
+
+  // Random double XP (10% chance) — variable reward for dopamine
+  const isLucky = Math.random() < 0.1;
+  const finalAmount = Math.round((amount + bonusXp) * multiplier * (isLucky ? 2 : 1));
+
   const oldLevel = data.level;
-  data.xp += amount;
-  data.dailyXpEarned += amount;
+  data.xp += finalAmount;
+  data.dailyXpEarned += finalAmount;
   data.level = getLevel(data.xp);
 
   // Maintain streak (must run before updating lastActiveDate)
@@ -122,7 +141,21 @@ export function addXp(amount: number, _source?: string): AddXpResult {
     newXp: data.xp,
     leveledUp: data.level > oldLevel,
     newLevel: data.level,
+    xpGained: finalAmount,
+    wasLucky: isLucky,
+    multiplier,
   };
+}
+
+// Endowed progress: give 10 XP on first ever session
+export function applyEndowedProgress(): boolean {
+  const data = getGamification();
+  if (data.xp === 0 && data.level === 1) {
+    data.xp = 10; // start at ~20% to level 2
+    saveGamification(data);
+    return true;
+  }
+  return false;
 }
 
 /**
