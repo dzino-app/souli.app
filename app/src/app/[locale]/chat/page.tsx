@@ -259,7 +259,7 @@ export default function ChatPage() {
               className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm ${
                 msg.role === "user"
                   ? "bg-primary text-primary-foreground rounded-br-md"
-                  : "bg-card border rounded-bl-md"
+                  : "bg-secondary border rounded-bl-md"
               }`}
             >
               {msg.role === "assistant" ? (
@@ -274,7 +274,7 @@ export default function ChatPage() {
         {/* Streaming response */}
         {streaming && streamText && (
           <div className="flex justify-start">
-            <div className="max-w-[85%] rounded-2xl rounded-bl-md bg-card border px-4 py-2.5 text-sm">
+            <div className="max-w-[85%] rounded-2xl rounded-bl-md bg-secondary border px-4 py-2.5 text-sm">
               <MarkdownResponse content={streamText} />
               <Loader2 className="h-3 w-3 text-muted-foreground animate-spin mt-1" />
             </div>
@@ -283,7 +283,7 @@ export default function ChatPage() {
 
         {streaming && !streamText && (
           <div className="flex justify-start">
-            <div className="rounded-2xl rounded-bl-md bg-card border px-4 py-3">
+            <div className="rounded-2xl rounded-bl-md bg-secondary border px-4 py-3">
               <Loader2 className="h-4 w-4 text-muted-foreground animate-spin" />
             </div>
           </div>
