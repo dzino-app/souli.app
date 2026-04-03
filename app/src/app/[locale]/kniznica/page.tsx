@@ -68,9 +68,9 @@ export default function LibraryPage() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-xl font-bold">Knižnica avatarov</h1>
+          <h1 className="text-xl font-bold">Pixoci</h1>
           <p className="text-sm text-muted-foreground">
-            Objav avatary vytvorené komunitou
+            Objav nových Soulis
           </p>
         </div>
       </div>
@@ -85,7 +85,7 @@ export default function LibraryPage() {
             setSearch(e.target.value);
             setPage(0);
           }}
-          placeholder="Hľadať avatary..."
+          placeholder="Hľadať Soulis..."
           className="w-full rounded-lg border bg-background pl-10 pr-4 py-2 text-sm"
         />
       </div>
@@ -129,7 +129,7 @@ export default function LibraryPage() {
           Najnovšie
         </button>
         <span className="ml-auto text-xs text-muted-foreground">
-          {total} {total === 1 ? "avatar" : "avatarov"}
+          {total} {total === 1 ? "Souli" : "Soulis"}
         </span>
       </div>
 

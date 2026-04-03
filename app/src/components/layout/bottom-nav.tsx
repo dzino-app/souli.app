@@ -8,9 +8,9 @@ import { cn } from "@/lib/utils";
 const items = [
   { href: "/", icon: Home, label: "Domov" },
   { href: "/chat", icon: MessageCircle, label: "Chat" },
-  { href: "/dusa", icon: BookOpen, label: "Duša" },
+  { href: "/dusa", icon: BookOpen, label: "Souli" },
   { href: "/udalosti", icon: Calendar, label: "Udalosti" },
-  { href: "/kniznica", icon: Library, label: "Knižnica" },
+  { href: "/kniznica", icon: Library, label: "Pixoci" },
 ] as const;
 
 export function BottomNav() {

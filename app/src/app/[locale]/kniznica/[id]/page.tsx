@@ -136,9 +136,9 @@ export default function AvatarDetailPage() {
   if (!avatar) {
     return (
       <div className="flex flex-col items-center gap-4 py-20">
-        <p className="text-muted-foreground">Avatar nebol nájdený</p>
+        <p className="text-muted-foreground">Souli nebol nájdený</p>
         <Link href="/kniznica">
-          <Button variant="outline">Späť do knižnice</Button>
+          <Button variant="outline">Späť do Pixoci</Button>
         </Link>
       </div>
     );
@@ -243,7 +243,7 @@ export default function AvatarDetailPage() {
       {soulFiles.length > 0 && (
         <div className="flex flex-col gap-3">
           <h3 className="text-sm font-semibold text-muted-foreground">
-            Duša
+            Souli
           </h3>
           {soulFiles.map((sf) => {
             const expanded = expandedSlugs.has(sf.slug);
@@ -296,14 +296,14 @@ export default function AvatarDetailPage() {
         {loaded ? (
           <>
             <Check className="h-4 w-4 mr-2" />
-            Načítaný do zbierky!
+            Načítaný do Soulis!
           </>
         ) : loadingAction ? (
           "Načítavam..."
         ) : (
           <>
             <Download className="h-4 w-4 mr-2" />
-            Načítať do mojej zbierky
+            Načítať do mojich Soulis
           </>
         )}
       </Button>

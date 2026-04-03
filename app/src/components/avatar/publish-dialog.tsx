@@ -177,7 +177,7 @@ export function PublishDialog({
               <ArrowLeft className="h-5 w-5" />
             </button>
           )}
-          <h2 className="text-lg font-semibold">Publikovať avatara</h2>
+          <h2 className="text-lg font-semibold">Publikovať do Pixoci</h2>
         </div>
         <div className="flex items-center gap-3">
           <span className="text-sm text-muted-foreground">
@@ -265,15 +265,15 @@ function StepWarning({
           Pozor: Tieto údaje budú verejné
         </h3>
         <p className="text-sm text-muted-foreground">
-          Bude zdieľané: meno, vzhľad, úroveň a vybrané časti duše
+          Bude zdieľané: meno, vzhľad, úroveň a vybrané súbory Souliho
         </p>
       </div>
 
       <div className="rounded-lg border bg-secondary/30 p-4">
         <p className="text-sm leading-relaxed">
-          Skontroluj, či duša neobsahuje osobné údaje (mená, adresy,
+          Skontroluj, či Souli neobsahuje osobné údaje (mená, adresy,
           telefónne čísla). V ďalšom kroku budeš môcť upraviť verejnú
-          verziu každého súboru duše.
+          verziu každého súboru Souliho.
         </p>
       </div>
 
@@ -321,9 +321,9 @@ function StepEditSouls({
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <h3 className="text-lg font-semibold mb-1">Vyber a uprav súbory duše</h3>
+        <h3 className="text-lg font-semibold mb-1">Vyber a uprav súbory Souliho</h3>
         <p className="text-sm text-muted-foreground">
-          Verejná verzia (úpravy sa neprenesú do tvojej duše)
+          Verejná verzia (úpravy sa neprenesú do tvojho Souliho)
         </p>
       </div>
 
@@ -409,14 +409,14 @@ function StepBioTags({
       {/* Bio */}
       <div>
         <label className="text-sm font-medium mb-1.5 block">
-          Krátky popis tvojho Dzina
+          Krátky popis tvojho Souliho
         </label>
         <textarea
           value={bio}
           onChange={(e) => {
             if (e.target.value.length <= 200) setBio(e.target.value);
           }}
-          placeholder="Napr.: Veselý mačací parťák, ktorý miluje prírodu"
+          placeholder="Napr.: Veselý mačací Souli, ktorý miluje prírodu"
           className="w-full rounded-lg border bg-background px-3 py-2 text-sm min-h-[80px] resize-none"
           maxLength={200}
         />
@@ -490,7 +490,7 @@ function StepPreview({
       <div>
         <h3 className="text-lg font-semibold mb-1">Náhľad</h3>
         <p className="text-sm text-muted-foreground">
-          Takto bude tvoj avatar vyzerať v knižnici
+          Takto bude tvoj Souli vyzerať v Pixoci
         </p>
       </div>
 
@@ -545,10 +545,10 @@ function StepPreview({
           <Eye className="h-3.5 w-3.5" />
           {selectedSlugs.length}{" "}
           {selectedSlugs.length === 1
-            ? "súbor duše"
+            ? "súbor Souliho"
             : selectedSlugs.length < 5
-              ? "súbory duše"
-              : "súborov duše"}
+              ? "súbory Souliho"
+              : "súborov Souliho"}
         </div>
       </div>
 
@@ -558,7 +558,7 @@ function StepPreview({
         onClick={onPublish}
         disabled={saving}
       >
-        {saving ? "Publikujem..." : "Publikovať"}
+        {saving ? "Publikujem..." : "Publikovať do Pixoci"}
       </Button>
     </div>
   );

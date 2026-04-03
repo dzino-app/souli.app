@@ -25,14 +25,14 @@ const ACHIEVEMENTS: Achievement[] = [
   },
   {
     id: "streak_7",
-    name: "Týždenný parťák",
+    name: "Týždenný Souli",
     description: "Dosiahni 7-dňový streak",
     icon: "⭐",
     condition: (data) => data.streak >= 7 || data.longestStreak >= 7,
   },
   {
     id: "streak_30",
-    name: "Mesačný parťák",
+    name: "Mesačný Souli",
     description: "Dosiahni 30-dňový streak",
     icon: "🏆",
     condition: (data) => data.streak >= 30 || data.longestStreak >= 30,
@@ -53,8 +53,8 @@ const ACHIEVEMENTS: Achievement[] = [
   },
   {
     id: "soul_filled",
-    name: "Plná duša",
-    description: "Všetky predvolené súbory duše majú viac ako 5 záznamov",
+    name: "Plný Souli",
+    description: "Všetky predvolené súbory Souliho majú viac ako 5 záznamov",
     icon: "💫",
     // This is checked externally — soul data isn't in GamificationData.
     // The achievement is granted by calling code when it detects the condition.
@@ -77,7 +77,7 @@ const ACHIEVEMENTS: Achievement[] = [
   {
     id: "custom_file",
     name: "Vlastný súbor",
-    description: "Vytvor vlastný súbor duše",
+    description: "Vytvor vlastný súbor Souliho",
     icon: "📝",
     // Checked externally — granted when user creates a custom soul file.
     condition: () => false,

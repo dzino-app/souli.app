@@ -51,7 +51,7 @@ export default function AvatarsPage() {
   }
 
   async function handleDelete(id: string) {
-    if (!confirm("Naozaj chceš vymazať tohto avatara?")) return;
+    if (!confirm("Naozaj chceš vymazať tohto Souliho?")) return;
 
     try {
       const res = await fetch(`/api/avatars/${id}`, { method: "DELETE" });
@@ -155,9 +155,9 @@ export default function AvatarsPage() {
           </Button>
         </Link>
         <div className="flex-1">
-          <h1 className="text-xl font-bold">Moji avatary</h1>
+          <h1 className="text-xl font-bold">Tvoji Soulis</h1>
           <p className="text-sm text-muted-foreground">
-            {avatars.length} {avatars.length === 1 ? "avatar" : "avatarov"}
+            {avatars.length} {avatars.length === 1 ? "Souli" : "Soulis"}
           </p>
         </div>
         <Button size="sm" onClick={handleCreateNew}>
@@ -275,7 +275,7 @@ export default function AvatarsPage() {
 
       {avatars.length === 0 && (
         <div className="text-center py-12">
-          <p className="text-muted-foreground mb-4">Zatiaľ nemáš žiadne avatary.</p>
+          <p className="text-muted-foreground mb-4">Zatiaľ nemáš žiadnych Soulis.</p>
           <Button onClick={handleCreateNew}>
             <Plus className="h-4 w-4 mr-1" />
             Vytvoriť prvého
