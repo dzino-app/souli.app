@@ -32,6 +32,11 @@ export function logMood(mood: 1 | 2 | 3 | 4 | 5, note?: string): void {
   }
 
   saveStorage(entries);
+
+  // Async sync mood entry to Supabase
+  import("./supabase/sync")
+    .then(({ syncMoodToSupabase }) => syncMoodToSupabase([entry]))
+    .catch(() => {});
 }
 
 export function getMoodHistory(days?: number): MoodEntry[] {

@@ -50,6 +50,13 @@ export function saveGamification(data: GamificationData): void {
   if (typeof window !== "undefined") {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   }
+
+  // Async sync to Supabase (active avatar row)
+  import("./supabase/sync")
+    .then(({ syncGamificationToSupabase }) =>
+      syncGamificationToSupabase(data)
+    )
+    .catch(() => {});
 }
 
 /**

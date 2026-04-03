@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
+import { syncToSupabase } from "@/lib/supabase/sync";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
@@ -31,6 +32,13 @@ export default function SignupPage() {
       setError(error.message);
       setLoading(false);
       return;
+    }
+
+    // Push any existing localStorage data to Supabase for the new account
+    try {
+      await syncToSupabase();
+    } catch {
+      // Non-critical: data will sync later
     }
 
     router.push("/");

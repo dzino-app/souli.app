@@ -35,6 +35,14 @@ export function createConversation(firstMessage: string): Conversation {
   const all = getConversations();
   all.unshift(conversation);
   saveConversations(all);
+
+  // Async sync to Supabase
+  import("./supabase/sync")
+    .then(({ syncSingleConversationToSupabase }) =>
+      syncSingleConversationToSupabase(conversation)
+    )
+    .catch(() => {});
+
   return conversation;
 }
 
@@ -47,11 +55,13 @@ export function addMessage(
   const conv = all.find((c) => c.id === conversationId);
   if (!conv) return null;
 
-  conv.messages.push({
+  const message: Message = {
     role,
     content,
     timestamp: new Date().toISOString(),
-  });
+  };
+
+  conv.messages.push(message);
   conv.updatedAt = new Date().toISOString();
 
   // Update title from first user message if needed
@@ -60,6 +70,15 @@ export function addMessage(
   }
 
   saveConversations(all);
+
+  // Async sync message + conversation update to Supabase
+  import("./supabase/sync")
+    .then(({ syncMessageToSupabase, syncSingleConversationToSupabase }) => {
+      syncMessageToSupabase(conversationId, message).catch(() => {});
+      syncSingleConversationToSupabase(conv).catch(() => {});
+    })
+    .catch(() => {});
+
   return conv;
 }
 
@@ -72,6 +91,13 @@ export function deleteConversation(id: string) {
   const all = getConversations();
   const filtered = all.filter((c) => c.id !== id);
   saveConversations(filtered);
+
+  // Async delete from Supabase
+  import("./supabase/sync")
+    .then(({ deleteConversationFromSupabase }) =>
+      deleteConversationFromSupabase(id)
+    )
+    .catch(() => {});
 }
 
 export function getConversationsGroupedByDate(): Record<string, Conversation[]> {

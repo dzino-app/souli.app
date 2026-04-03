@@ -34,6 +34,14 @@ export function createEvent(
   const all = getEvents();
   all.push(newEvent);
   saveEvents(all);
+
+  // Async sync to Supabase
+  import("./supabase/sync")
+    .then(({ syncSingleEventToSupabase }) =>
+      syncSingleEventToSupabase(newEvent)
+    )
+    .catch(() => {});
+
   return newEvent;
 }
 
@@ -43,7 +51,16 @@ export function updateEvent(
 ): DzinoEvent[] {
   const all = getEvents();
   const event = all.find((e) => e.id === id);
-  if (event) Object.assign(event, updates);
+  if (event) {
+    Object.assign(event, updates);
+
+    // Async sync updated event to Supabase
+    import("./supabase/sync")
+      .then(({ syncSingleEventToSupabase }) =>
+        syncSingleEventToSupabase(event)
+      )
+      .catch(() => {});
+  }
   saveEvents(all);
   return all;
 }
@@ -52,6 +69,12 @@ export function deleteEvent(id: string): DzinoEvent[] {
   const all = getEvents();
   const filtered = all.filter((e) => e.id !== id);
   saveEvents(filtered);
+
+  // Async delete from Supabase
+  import("./supabase/sync")
+    .then(({ deleteEventFromSupabase }) => deleteEventFromSupabase(id))
+    .catch(() => {});
+
   return filtered;
 }
 
@@ -77,12 +100,25 @@ export function refreshEventStatuses(): DzinoEvent[] {
   const today = new Date().toISOString().split("T")[0];
   const all = getEvents();
   let changed = false;
+  const changedEvents: DzinoEvent[] = [];
   for (const event of all) {
     if (event.type === "plan" && event.status === "upcoming" && event.date < today) {
       event.status = "missed";
       changed = true;
+      changedEvents.push(event);
     }
   }
-  if (changed) saveEvents(all);
+  if (changed) {
+    saveEvents(all);
+
+    // Async sync changed events to Supabase
+    import("./supabase/sync")
+      .then(({ syncSingleEventToSupabase }) => {
+        for (const evt of changedEvents) {
+          syncSingleEventToSupabase(evt).catch(() => {});
+        }
+      })
+      .catch(() => {});
+  }
   return all;
 }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
+import { loadFromSupabase } from "@/lib/supabase/sync";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
@@ -31,6 +32,13 @@ export default function LoginPage() {
       setError(t("invalidCredentials"));
       setLoading(false);
       return;
+    }
+
+    // Load all user data from Supabase into localStorage before redirect
+    try {
+      await loadFromSupabase();
+    } catch {
+      // Non-critical: localStorage will still work
     }
 
     router.push("/");

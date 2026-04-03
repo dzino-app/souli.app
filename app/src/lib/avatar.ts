@@ -130,6 +130,11 @@ export function getAvatarData(): AvatarData {
 
 export function saveAvatarData(data: AvatarData) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+
+  // Async sync to Supabase (active avatar row)
+  import("./supabase/sync")
+    .then(({ syncAvatarToSupabase }) => syncAvatarToSupabase(data))
+    .catch(() => {});
 }
 
 export function setAvatarState(state: AvatarState) {
