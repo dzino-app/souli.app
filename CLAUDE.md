@@ -27,6 +27,21 @@ Align all translation files and soul defaults with the English source of truth.
 4. Report what's missing or outdated
 5. Fix any issues found
 
+### /release
+Release a new version of Dzino.
+1. Run all gates: `cd app && bun run build && bun run typecheck && bun run lint && bun run test`
+2. If any gate fails, fix it before proceeding
+3. Determine version bump from git log since last tag (patch/minor/major)
+4. Merge current branch into main: `git checkout main && git merge <branch> --no-ff`
+5. Create git tag: `git tag v<version> -m "Dzino v<version>"`
+6. Push main + tags: `git push origin main --tags`
+7. Create GitHub release with changelog from commits since last tag
+8. Deploy to Vercel: `cd app && vercel deploy --prod --token $VERCEL_TOKEN --yes`
+9. Verify deployment is live
+10. Report: version, release URL, deployment URL
+
+Environment: VERCEL_TOKEN must be set or passed as argument.
+
 ### /align-genes
 Review and update Dzino's core values (genes) in dzino-core-values.ts.
 1. Read the current CORE_VALUES

@@ -31,3 +31,4 @@ dist/
 out/
 .worktrees/
 credentials.json
+.vercel
