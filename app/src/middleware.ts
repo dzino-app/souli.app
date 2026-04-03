@@ -1,14 +1,13 @@
 import createMiddleware from "next-intl/middleware";
-import { type NextRequest } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { routing } from "@/i18n/routing";
-import { updateSession } from "@/lib/supabase/middleware";
 
 const intlMiddleware = createMiddleware(routing);
 
 export async function middleware(request: NextRequest) {
-  // Skip intl for API routes
+  // API routes: no intl, no auth redirect (auth checked per-route if needed)
   if (request.nextUrl.pathname.startsWith("/api")) {
-    return await updateSession(request);
+    return NextResponse.next({ request });
   }
 
   // Run intl middleware (handles locale detection + redirects)
