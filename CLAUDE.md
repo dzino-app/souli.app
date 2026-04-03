@@ -37,10 +37,12 @@ Release a new version of Dzino.
 6. Push main + tags: `git push origin main --tags`
 7. Create GitHub release with changelog from commits since last tag
 8. Deploy to Vercel: `cd app && vercel deploy --prod --token $VERCEL_TOKEN --yes`
-9. Verify deployment is live
-10. Report: version, release URL, deployment URL
+9. Alias to stable URL: `vercel alias set <deploy-url> dzino-app.vercel.app --token $VERCEL_TOKEN --yes`
+10. Verify deployment is live at https://dzino-app.vercel.app
+11. Report: version, release URL, stable URL (always https://dzino-app.vercel.app)
 
 Environment: VERCEL_TOKEN must be set or passed as argument.
+Stable URL: https://dzino-app.vercel.app (never changes)
 
 ### /align-genes
 Review and update Dzino's core values (genes) in dzino-core-values.ts.
