@@ -29,19 +29,19 @@ export function XpBar({ xp, level, streak }: XpBarProps) {
   const resolution = getAvatarResolution(currentLevel);
 
   return (
-    <div className="w-full flex flex-col gap-1">
+    <div className="w-full flex flex-col gap-1.5">
       <div className="flex items-center justify-between text-xs">
         <div className="flex items-center gap-1.5">
-          <span className="font-semibold text-primary">
+          <span className="font-bold text-primary" style={{ fontFamily: "var(--font-geist-sans), monospace" }}>
             Úr. {currentLevel}
           </span>
-          <span className="text-muted-foreground font-mono text-[10px] bg-muted px-1 py-0.5 rounded">
+          <span className="text-muted-foreground font-mono text-[10px] bg-muted px-1.5 py-0.5 rounded-sm">
             {resolution.label}
           </span>
         </div>
         <div className="flex items-center gap-1.5">
           {currentStreak > 0 && (
-            <span className="flex items-center gap-0.5 text-orange-500">
+            <span className="flex items-center gap-0.5 text-fire">
               <span className="text-sm leading-none">🔥</span>
               <span className="font-medium">{currentStreak}</span>
             </span>
@@ -51,10 +51,14 @@ export function XpBar({ xp, level, streak }: XpBarProps) {
           </span>
         </div>
       </div>
-      <div className="h-2 w-full rounded-full bg-secondary overflow-hidden">
+      <div className="h-1.5 w-full rounded-full bg-secondary overflow-hidden">
         <div
-          className="h-full rounded-full bg-primary transition-all duration-500 ease-out"
-          style={{ width: `${progress}%` }}
+          className="h-full rounded-full transition-all duration-500 ease-out"
+          style={{
+            width: `${progress}%`,
+            background: "linear-gradient(90deg, hsl(var(--xp-gold)), hsl(var(--accent)))",
+            boxShadow: progress > 0 ? "0 0 8px hsl(var(--xp-gold) / 0.4)" : undefined,
+          }}
         />
       </div>
     </div>

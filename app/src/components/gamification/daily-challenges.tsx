@@ -24,24 +24,25 @@ export function DailyChallenges() {
       <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
         Denné výzvy
       </h3>
-      <div className="flex flex-col gap-2">
+      <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 -mx-1 px-1">
         {items.map((ch) => {
           const done = ch.completed;
 
           return (
-            <div key={ch.id} className="flex flex-col">
-              <div
-                className={`flex items-center gap-3 rounded-lg border p-3 transition-colors ${
-                  done
-                    ? "bg-success/5 border-success/30"
-                    : "bg-card hover:bg-secondary cursor-pointer"
-                }`}
-                onClick={() => handleTapChallenge(ch)}
-                role={done ? undefined : "button"}
-                tabIndex={done ? undefined : 0}
-                onKeyDown={(e) => { if (!done && (e.key === "Enter" || e.key === " ")) handleTapChallenge(ch); }}
-              >
-                <span className="text-xl shrink-0">{ch.emoji}</span>
+            <div
+              key={ch.id}
+              className={`flex-shrink-0 snap-start flex flex-col gap-2 rounded-lg border-2 p-3 transition-colors min-w-[200px] max-w-[240px] ${
+                done
+                  ? "bg-success/5 border-accent"
+                  : "bg-card border-border hover:border-primary/40 cursor-pointer"
+              }`}
+              onClick={() => handleTapChallenge(ch)}
+              role={done ? undefined : "button"}
+              tabIndex={done ? undefined : 0}
+              onKeyDown={(e) => { if (!done && (e.key === "Enter" || e.key === " ")) handleTapChallenge(ch); }}
+            >
+              <div className="flex items-start gap-2">
+                <span className="text-2xl shrink-0">{ch.emoji}</span>
                 <div className="flex-1 min-w-0">
                   <p className={`text-sm ${done ? "line-through text-muted-foreground" : "font-medium"}`}>
                     {ch.text}
@@ -52,16 +53,16 @@ export function DailyChallenges() {
                     </p>
                   )}
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  {done ? (
-                    <>
-                      <ShareCompletion challengeText={ch.text} />
-                      <span className="text-success text-sm">✓</span>
-                    </>
-                  ) : (
-                    <span className="text-xs text-muted-foreground">Splniť</span>
-                  )}
-                </div>
+              </div>
+              <div className="flex items-center justify-end gap-2 shrink-0">
+                {done ? (
+                  <>
+                    <ShareCompletion challengeText={ch.text} />
+                    <span className="text-accent text-lg font-bold">✓</span>
+                  </>
+                ) : (
+                  <span className="text-xs text-muted-foreground">Splniť</span>
+                )}
               </div>
             </div>
           );

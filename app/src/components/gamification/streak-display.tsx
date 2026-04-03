@@ -9,10 +9,12 @@ export function StreakDisplay() {
 
   return (
     <div
-      className={`flex items-center gap-1.5 text-sm font-medium ${
-        streak >= 7 ? "text-orange-500" : "text-muted-foreground"
+      className={`inline-flex items-center gap-1.5 text-sm font-medium px-3 py-1 rounded-full ${
+        streak >= 7
+          ? "bg-fire/10 text-fire"
+          : "bg-muted text-muted-foreground"
       }`}
-      style={streak >= 7 ? { textShadow: "0 0 8px rgba(249,115,22,0.4)" } : undefined}
+      style={streak >= 7 ? { animation: "xp-pop 0.5s ease-out, twinkle 2s ease-in-out infinite" } : undefined}
     >
       <span>🔥</span>
       <span>{streak}</span>

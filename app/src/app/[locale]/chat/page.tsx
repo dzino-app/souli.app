@@ -133,7 +133,7 @@ export default function ChatPage() {
         const responseLower = parsed.text.toLowerCase();
         const isPositive = POSITIVE_WORDS.some((w) => responseLower.includes(w));
         if (isPositive) {
-          const proof = `${userMsg} \u2014 Dzino: ${parsed.text.slice(0, 100)}`;
+          const proof = `${userMsg} — Dzino: ${parsed.text.slice(0, 100)}`;
           completeChallengeById(challengeIdRef.current, proof);
           addXp(20, "challenge");
           challengeIdRef.current = null;
@@ -215,7 +215,7 @@ export default function ChatPage() {
     <div className="flex flex-col h-[calc(100vh-8rem)] sm:h-[calc(100vh-6rem)]">
       {/* Avatar -- prominent, centered, animated */}
       <div className="flex flex-col items-center gap-1 pb-3 border-b mb-3">
-        <div className="py-2">
+        <div className="py-2" style={{ animation: "float 3s ease-in-out infinite" }}>
           <PixelAvatar state={avatarState} appearance={avatarData.appearance} size="md" />
         </div>
         <h1 className="text-sm font-semibold">{avatarData.name}</h1>
@@ -259,7 +259,7 @@ export default function ChatPage() {
               className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm ${
                 msg.role === "user"
                   ? "bg-primary text-primary-foreground rounded-br-md"
-                  : "bg-secondary border rounded-bl-md"
+                  : "bg-secondary border-2 border-border rounded-bl-md"
               }`}
             >
               {msg.role === "assistant" ? (
@@ -274,7 +274,7 @@ export default function ChatPage() {
         {/* Streaming response */}
         {streaming && streamText && (
           <div className="flex justify-start">
-            <div className="max-w-[85%] rounded-2xl rounded-bl-md bg-secondary border px-4 py-2.5 text-sm">
+            <div className="max-w-[85%] rounded-2xl rounded-bl-md bg-secondary border-2 border-border px-4 py-2.5 text-sm">
               <MarkdownResponse content={streamText} />
               <Loader2 className="h-3 w-3 text-muted-foreground animate-spin mt-1" />
             </div>
@@ -283,7 +283,7 @@ export default function ChatPage() {
 
         {streaming && !streamText && (
           <div className="flex justify-start">
-            <div className="rounded-2xl rounded-bl-md bg-secondary border px-4 py-3">
+            <div className="rounded-2xl rounded-bl-md bg-secondary border-2 border-border px-4 py-3">
               <Loader2 className="h-4 w-4 text-muted-foreground animate-spin" />
             </div>
           </div>
@@ -344,7 +344,7 @@ export default function ChatPage() {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Napíš správu..."
           disabled={streaming}
-          className="flex-1 rounded-full border bg-background px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50"
+          className="flex-1 rounded-full border bg-background px-4 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 shadow-sm shadow-border/50"
           autoFocus
         />
         <Button
@@ -364,7 +364,7 @@ export default function ChatPage() {
             <CardContent className="py-3 px-5 flex items-center gap-3">
               <span className="text-2xl">{achievementToast.icon}</span>
               <div>
-                <p className="text-xs text-muted-foreground">Novy uspech!</p>
+                <p className="text-xs text-muted-foreground">Nový úspech!</p>
                 <p className="text-sm font-semibold">{achievementToast.name}</p>
                 <p className="text-xs text-muted-foreground">{achievementToast.description}</p>
               </div>

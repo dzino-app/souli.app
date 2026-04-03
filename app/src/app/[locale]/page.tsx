@@ -49,12 +49,20 @@ export default function Home() {
       {/* Daily greeting — shows once per day */}
       <DailyGreeting />
 
-      {/* Avatar — compact, centered */}
-      <div className="flex flex-col items-center gap-2 py-4">
-        <PixelAvatar state={state} appearance={appearance} size="lg" />
-        <SpeechBubble />
-        <h1 className="text-lg font-bold">{name}</h1>
-        <p className="text-xs text-muted-foreground">
+      {/* Avatar — compact, centered, with warm gradient behind */}
+      <div className="relative flex flex-col items-center gap-2 py-4">
+        {/* Warm gradient glow behind avatar in dark mode */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-40 h-40 rounded-full bg-primary/10 dark:bg-primary/20 blur-3xl" />
+        </div>
+        <div className="relative" style={{ animation: "float 3s ease-in-out infinite" }}>
+          <PixelAvatar state={state} appearance={appearance} size="lg" />
+        </div>
+        <div className="relative ml-6">
+          <SpeechBubble />
+        </div>
+        <h1 className="text-lg font-bold relative">{name}</h1>
+        <p className="text-xs text-muted-foreground relative">
           {getMoodEmoji(mood)} {getMoodLabel(mood)}
         </p>
       </div>
@@ -79,9 +87,9 @@ export default function Home() {
 
       {/* New chat button */}
       <Link href="/chat">
-        <Button size="lg" className="w-full">
+        <Button size="lg" className="w-full bg-primary hover:bg-primary/90 shadow-md shadow-primary/20">
           <Plus className="h-4 w-4 mr-2" />
-          Nov{"\u00e1"} konverz{"\u00e1"}cia
+          Nová konverzácia
         </Button>
       </Link>
 
@@ -89,7 +97,7 @@ export default function Home() {
       {dateKeys.length > 0 && (
         <div className="flex flex-col gap-4">
           <h2 className="text-sm font-semibold text-muted-foreground">
-            Predch{"\u00e1"}dzaj{"\u00fa"}ce konverz{"\u00e1"}cie
+            Predchádzajúce konverzácie
           </h2>
           {dateKeys.map((dateKey) => (
             <div key={dateKey}>
@@ -104,7 +112,7 @@ export default function Home() {
                           <div className="min-w-0">
                             <p className="text-sm font-medium truncate">{conv.title}</p>
                             <p className="text-xs text-muted-foreground">
-                              {conv.messages.length} {conv.messages.length === 1 ? "spr\u00e1va" : "spr\u00e1v"}
+                              {conv.messages.length} {conv.messages.length === 1 ? "správa" : "správ"}
                             </p>
                           </div>
                         </Link>
@@ -128,7 +136,7 @@ export default function Home() {
 
       {dateKeys.length === 0 && (
         <p className="text-sm text-muted-foreground text-center py-4">
-          Za{"\u010d"}nite konverz{"\u00e1"}ciu {"\u2014"} Dzino sa te{"\u0161"}{"\u00ed"}!
+          Začnite konverzáciu — Dzino sa teší!
         </p>
       )}
 

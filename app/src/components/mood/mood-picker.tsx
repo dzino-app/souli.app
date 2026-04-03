@@ -6,11 +6,11 @@ import { Button } from "@/components/ui/button";
 import { logMood, getTodayMood } from "@/lib/mood-tracking";
 
 const MOODS = [
-  { value: 1 as const, emoji: "😢", label: "Zle" },
-  { value: 2 as const, emoji: "😕", label: "Nie najlepšie" },
-  { value: 3 as const, emoji: "😐", label: "Ujde to" },
-  { value: 4 as const, emoji: "🙂", label: "Dobre" },
-  { value: 5 as const, emoji: "😊", label: "Super!" },
+  { value: 1 as const, emoji: "😢", label: "Zle", ring: "ring-blue-400" },
+  { value: 2 as const, emoji: "😕", label: "Nie najlepšie", ring: "ring-orange-400" },
+  { value: 3 as const, emoji: "😐", label: "Ujde to", ring: "ring-muted-foreground" },
+  { value: 4 as const, emoji: "🙂", label: "Dobre", ring: "ring-energy" },
+  { value: 5 as const, emoji: "😊", label: "Super!", ring: "ring-gold" },
 ];
 
 const ENCOURAGEMENTS = [
@@ -59,7 +59,7 @@ export function MoodPicker() {
       <Card className="border-muted">
         <CardContent className="py-3 px-4">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <span>{moodItem?.emoji}</span>
+            <span className="text-xl">{moodItem?.emoji}</span>
             <span>Dnes sa cítiš: {moodItem?.label}</span>
           </div>
         </CardContent>
@@ -82,17 +82,17 @@ export function MoodPicker() {
   return (
     <Card className="border-muted">
       <CardContent className="py-3 px-4">
-        <p className="text-sm text-muted-foreground mb-2">
+        <p className="text-sm text-muted-foreground mb-3">
           Ako sa dnes cítiš?
         </p>
-        <div className="flex justify-center gap-2 mb-2">
+        <div className="flex justify-center gap-2 mb-2 bg-secondary/50 rounded-full px-3 py-2">
           {MOODS.map((m) => (
             <button
               key={m.value}
               onClick={() => handleSelect(m.value)}
-              className={`text-2xl p-1.5 rounded-lg transition-all hover:scale-110 ${
+              className={`text-3xl p-1.5 rounded-full transition-all hover:scale-110 ${
                 selected === m.value
-                  ? "bg-primary/10 ring-2 ring-primary scale-110"
+                  ? `ring-2 ${m.ring} scale-110 bg-card shadow-md`
                   : "hover:bg-muted"
               }`}
               title={m.label}
@@ -104,7 +104,7 @@ export function MoodPicker() {
         </div>
 
         {showNote && !saved && (
-          <div className="flex flex-col gap-2 mt-2">
+          <div className="flex flex-col gap-2 mt-3">
             <input
               type="text"
               placeholder="Chceš pridať poznámku? (voliteľné)"
