@@ -71,7 +71,7 @@ Vyber podľa kontextu — veselé=happy, smutné=sad, zamyslené=thinking, lúč
 
 export async function POST(request: NextRequest) {
   try {
-    const ip = request.headers.get("x-forwarded-for") || "anonymous";
+    const ip = request.headers.get("x-real-ip") || request.headers.get("x-forwarded-for") || "anonymous";
     const { allowed } = checkRateLimit(ip);
     if (!allowed) {
       return NextResponse.json(
@@ -82,31 +82,41 @@ export async function POST(request: NextRequest) {
 
     const { message, soulContext, history, language } = await request.json();
 
-    if (!message) {
+    if (!message || typeof message !== "string") {
       return NextResponse.json({ error: "Žiadna správa" }, { status: 400 });
     }
 
+    // Validate + sanitize inputs
+    const safeMessage = message.slice(0, 5000); // max 5K chars per message
+    const safeSoulContext = typeof soulContext === "string"
+      ? soulContext.slice(0, 10000) // max 10K chars for soul context
+      : "";
+    const safeHistory = Array.isArray(history)
+      ? history.slice(-10).map((m: { role: string; content: string }) => ({
+          role: m.role === "model" ? "model" : "user",
+          content: typeof m.content === "string" ? m.content.slice(0, 3000) : "",
+        }))
+      : [];
+
     // Add language instruction if provided
     let languageInstruction = "";
-    if (language) {
+    if (language && typeof language === "string" && language.length <= 5) {
       const { getLanguageInstruction } = await import("@/lib/languages");
       languageInstruction = "\n" + getLanguageInstruction(language);
     }
 
-    const systemWithSoul = soulContext
-      ? `${SYSTEM_PROMPT}${languageInstruction}\n\n== VAŠA DUŠA (čo o používateľovi viete) ==\n${soulContext}`
+    const systemWithSoul = safeSoulContext
+      ? `${SYSTEM_PROMPT}${languageInstruction}\n\n== VAŠA DUŠA ==\n${safeSoulContext}`
       : `${SYSTEM_PROMPT}${languageInstruction}`;
 
     const contents: { role: "user" | "model"; parts: { text: string }[] }[] = [];
-    if (history && Array.isArray(history)) {
-      for (const msg of history.slice(-10)) {
-        contents.push({
-          role: msg.role === "assistant" ? "model" : "user",
-          parts: [{ text: msg.content }],
-        });
-      }
+    for (const msg of safeHistory) {
+      contents.push({
+        role: msg.role as "user" | "model",
+        parts: [{ text: msg.content }],
+      });
     }
-    contents.push({ role: "user", parts: [{ text: message }] });
+    contents.push({ role: "user", parts: [{ text: safeMessage }] });
 
     const stream = generateContentStream({
       systemInstruction: systemWithSoul,

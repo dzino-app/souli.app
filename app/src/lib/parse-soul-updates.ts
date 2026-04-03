@@ -23,9 +23,7 @@ export interface ParsedResponse {
 }
 
 // Parse :::aktualizacia, :::udalost, :::nalada blocks from response
-const SOUL_UPDATE_REGEX = /:::aktualizacia\s*([\s\S]*?):::/g;
-const EVENT_REGEX = /:::udalost\s*([\s\S]*?):::/g;
-const MOOD_REGEX = /:::nalada\s*([\s\S]*?):::/g;
+// Regex created per-call to avoid stale lastIndex with global flag
 
 const VALID_MOODS: MoodState[] = ["idle", "happy", "sad", "thinking", "waving", "eating", "walking"];
 
@@ -74,6 +72,11 @@ function parseKeyValue(block: string): Record<string, string> {
 export function parseResponse(fullText: string): ParsedResponse {
   const soulUpdates: SoulUpdate[] = [];
   const eventProposals: EventProposal[] = [];
+
+  // Create fresh regex per call to avoid stale lastIndex
+  const SOUL_UPDATE_REGEX = /:::aktualizacia\s*([\s\S]*?):::/g;
+  const EVENT_REGEX = /:::udalost\s*([\s\S]*?):::/g;
+  const MOOD_REGEX = /:::nalada\s*([\s\S]*?):::/g;
 
   // Extract soul updates
   let match;
