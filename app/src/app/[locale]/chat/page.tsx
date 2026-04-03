@@ -268,7 +268,7 @@ export default function ChatPage() {
               className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm ${
                 msg.role === "user"
                   ? "bg-primary text-primary-foreground rounded-br-md"
-                  : "bg-secondary border-2 border-border rounded-bl-md"
+                  : "bg-card border-2 border-border shadow-sm rounded-bl-md"
               }`}
             >
               {msg.role === "assistant" ? (
@@ -297,8 +297,8 @@ export default function ChatPage() {
 
         {streaming && !streamText && (
           <div className="flex justify-start">
-            <div className="rounded-2xl rounded-bl-md bg-secondary border-2 border-border px-4 py-3">
-              <Loader2 className="h-4 w-4 text-muted-foreground animate-spin" />
+            <div className="rounded-2xl rounded-bl-md bg-card border-2 border-border shadow-sm px-5 py-3.5">
+              <Loader2 className="h-5 w-5 text-muted-foreground animate-spin" />
             </div>
           </div>
         )}
