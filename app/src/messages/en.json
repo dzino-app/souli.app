@@ -233,6 +233,21 @@
     "saving": "Saving...",
     "cancel": "Cancel"
   },
+  "privacy": {
+    "exportTitle": "Download all data",
+    "exportDesc": "All your data in one file. Soul, conversations, events, settings.",
+    "exportButton": "Download ZIP",
+    "exportLoading": "Preparing...",
+    "llmTitle": "Custom LLM",
+    "llmDesc": "Use your own API key. Conversations go directly through your account.",
+    "llmProvider": "Provider",
+    "llmApiKey": "API key",
+    "llmModel": "Model",
+    "llmTest": "Test",
+    "llmTestSuccess": "Works!",
+    "llmTestFail": "Doesn't work",
+    "llmKeyWarning": "Key is stored only in your browser."
+  },
   "common": {
     "error": "Something went wrong",
     "retry": "Try again",

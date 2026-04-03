@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { checkRateLimit } from "@/lib/rate-limit";
-import { generateContentStream } from "@/lib/llm";
+import {
+  generateContentStream,
+  generateContentStreamCustom,
+  type CustomLlmConfig,
+} from "@/lib/llm";
 import { CORE_VALUES } from "@/lib/dzino-genes";
 
 const SYSTEM_PROMPT = `${CORE_VALUES}
@@ -118,10 +122,32 @@ export async function POST(request: NextRequest) {
     }
     contents.push({ role: "user", parts: [{ text: safeMessage }] });
 
-    const stream = generateContentStream({
+    // Check for custom LLM headers (key is used for this request only, never stored)
+    const customProvider = request.headers.get("X-Custom-LLM-Provider");
+    const customKey = request.headers.get("X-Custom-LLM-Key");
+    const customModel = request.headers.get("X-Custom-LLM-Model");
+
+    let customConfig: CustomLlmConfig | null = null;
+    if (
+      customProvider &&
+      customKey &&
+      ["gemini", "openai", "anthropic"].includes(customProvider)
+    ) {
+      customConfig = {
+        provider: customProvider as CustomLlmConfig["provider"],
+        apiKey: customKey,
+        model: customModel || undefined,
+      };
+    }
+
+    const generateOptions = {
       systemInstruction: systemWithSoul,
       contents,
-    });
+    };
+
+    const stream = customConfig
+      ? generateContentStreamCustom(customConfig, generateOptions)
+      : generateContentStream(generateOptions);
 
     const encoder = new TextEncoder();
     const readable = new ReadableStream({

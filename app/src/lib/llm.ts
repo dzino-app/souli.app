@@ -1,5 +1,6 @@
 // LLM abstraction using @google/genai
 // Supports: Google AI Studio (GOOGLE_API_KEY) or Vertex AI (service account)
+// Custom providers: Gemini (user key), OpenAI, Anthropic — via request headers
 // For Vercel: pass GOOGLE_CLOUD_CREDENTIALS_JSON env var (JSON string)
 
 import { GoogleGenAI } from "@google/genai";
@@ -52,6 +53,13 @@ export interface GenerateOptions {
   jsonMode?: boolean;
 }
 
+/** Custom LLM config passed from request headers — never stored server-side. */
+export interface CustomLlmConfig {
+  provider: "gemini" | "openai" | "anthropic";
+  apiKey: string;
+  model?: string;
+}
+
 export async function generateContent(options: GenerateOptions): Promise<string> {
   const client = getClient();
   const config: Record<string, unknown> = {};
@@ -81,5 +89,154 @@ export async function* generateContentStream(options: GenerateOptions) {
   for await (const chunk of response) {
     const text = chunk.text;
     if (text) yield text;
+  }
+}
+
+// ---- Custom provider streaming ----
+
+function buildMessagesForOpenAI(
+  options: GenerateOptions
+): { role: string; content: string }[] {
+  const messages: { role: string; content: string }[] = [];
+  if (options.systemInstruction) {
+    messages.push({ role: "system", content: options.systemInstruction });
+  }
+  for (const c of options.contents) {
+    messages.push({
+      role: c.role === "model" ? "assistant" : "user",
+      content: c.parts.map((p) => p.text).join(""),
+    });
+  }
+  return messages;
+}
+
+export async function* generateContentStreamCustom(
+  config: CustomLlmConfig,
+  options: GenerateOptions
+) {
+  if (config.provider === "gemini") {
+    // Use Google AI Studio with user's own API key
+    const client = new GoogleGenAI({ apiKey: config.apiKey });
+    const genConfig: Record<string, unknown> = {};
+    if (options.systemInstruction)
+      genConfig.systemInstruction = options.systemInstruction;
+
+    const response = await client.models.generateContentStream({
+      model: config.model || "gemini-2.5-flash",
+      contents: options.contents,
+      config: genConfig,
+    });
+
+    for await (const chunk of response) {
+      const text = chunk.text;
+      if (text) yield text;
+    }
+  } else if (config.provider === "openai") {
+    const messages = buildMessagesForOpenAI(options);
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${config.apiKey}`,
+      },
+      body: JSON.stringify({
+        model: config.model || "gpt-4o",
+        messages,
+        stream: true,
+      }),
+    });
+
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error(`OpenAI error: ${response.status} ${err}`);
+    }
+
+    const reader = response.body?.getReader();
+    if (!reader) throw new Error("No response body");
+    const decoder = new TextDecoder();
+    let buffer = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split("\n");
+      buffer = lines.pop() || "";
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed.startsWith("data: ")) continue;
+        const data = trimmed.slice(6);
+        if (data === "[DONE]") return;
+        try {
+          const parsed = JSON.parse(data);
+          const text = parsed.choices?.[0]?.delta?.content;
+          if (text) yield text;
+        } catch {
+          // skip malformed chunks
+        }
+      }
+    }
+  } else if (config.provider === "anthropic") {
+    const messages = buildMessagesForOpenAI(options);
+    const systemMsg = messages.find((m) => m.role === "system");
+    const chatMessages = messages
+      .filter((m) => m.role !== "system")
+      .map((m) => ({
+        role: m.role as "user" | "assistant",
+        content: m.content,
+      }));
+
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": config.apiKey,
+        "anthropic-version": "2023-06-01",
+      },
+      body: JSON.stringify({
+        model: config.model || "claude-sonnet-4-20250514",
+        max_tokens: 4096,
+        system: systemMsg?.content || "",
+        messages: chatMessages,
+        stream: true,
+      }),
+    });
+
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error(`Anthropic error: ${response.status} ${err}`);
+    }
+
+    const reader = response.body?.getReader();
+    if (!reader) throw new Error("No response body");
+    const decoder = new TextDecoder();
+    let buffer = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split("\n");
+      buffer = lines.pop() || "";
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed.startsWith("data: ")) continue;
+        const data = trimmed.slice(6);
+        try {
+          const parsed = JSON.parse(data);
+          if (
+            parsed.type === "content_block_delta" &&
+            parsed.delta?.type === "text_delta"
+          ) {
+            yield parsed.delta.text;
+          }
+        } catch {
+          // skip malformed chunks
+        }
+      }
+    }
   }
 }

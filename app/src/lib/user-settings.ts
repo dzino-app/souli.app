@@ -7,7 +7,16 @@ export interface UserSettings {
   challengeNotifications: boolean;
 }
 
+export type LlmProvider = "gemini" | "openai" | "anthropic";
+
+export interface CustomLlmSettings {
+  customLlmProvider?: LlmProvider;
+  customLlmApiKey?: string;
+  customLlmModel?: string;
+}
+
 const STORAGE_KEY = "dzino_settings";
+const LLM_STORAGE_KEY = "dzino_llm_settings";
 
 const DEFAULT_SETTINGS: UserSettings = {
   dailyGreeting: true,
@@ -39,4 +48,27 @@ export function updateSetting(
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
   }
   return updated;
+}
+
+// ---- Custom LLM settings (stored separately — never sent to server for storage) ----
+
+export function getLlmSettings(): CustomLlmSettings {
+  if (typeof window === "undefined") return {};
+  const raw = localStorage.getItem(LLM_STORAGE_KEY);
+  if (!raw) return {};
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return {};
+  }
+}
+
+export function saveLlmSettings(settings: CustomLlmSettings): void {
+  if (typeof window === "undefined") return;
+  // Only persist if there's actually a key; otherwise clear
+  if (settings.customLlmApiKey) {
+    localStorage.setItem(LLM_STORAGE_KEY, JSON.stringify(settings));
+  } else {
+    localStorage.removeItem(LLM_STORAGE_KEY);
+  }
 }

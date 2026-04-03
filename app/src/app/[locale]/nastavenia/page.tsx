@@ -20,6 +20,8 @@ import {
   updateSetting,
   type UserSettings,
 } from "@/lib/user-settings";
+import { ExportData } from "@/components/settings/export-data";
+import { LlmSettings } from "@/components/settings/llm-settings";
 
 const NAV_ITEMS = [
   { href: "/", icon: Home, label: "Domov" },
@@ -157,17 +159,47 @@ export default function SettingsPage() {
         </Card>
       </div>
 
+      {/* Custom LLM */}
+      <div>
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-3">
+          {"Vlastn\u00fd LLM"}
+        </h2>
+        <LlmSettings
+          translations={{
+            title: "Vlastn\u00fd LLM",
+            desc: "Pou\u017ei vlastn\u00fd API k\u013e\u00fa\u010d. Konverz\u00e1cie p\u00f4jdu priamo cez tvoj \u00fa\u010det.",
+            provider: "Poskytovate\u013e",
+            apiKey: "API k\u013e\u00fa\u010d",
+            model: "Model",
+            test: "Otestova\u0165",
+            testSuccess: "Funguje!",
+            testFail: "Nefunguje",
+            keyWarning: "K\u013e\u00fa\u010d je ulo\u017een\u00fd len v tvojom prehliada\u010di.",
+          }}
+        />
+      </div>
+
       {/* Account */}
       <div>
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-3">
           {"\u00DA\u010det"}
         </h2>
-        <form action="/api/auth/signout" method="POST">
-          <Button type="submit" variant="outline" className="w-full justify-start">
-            <LogOut className="h-4 w-4 mr-2" />
-            {"Odhl\u00e1si\u0165 sa"}
-          </Button>
-        </form>
+        <div className="space-y-3">
+          <ExportData
+            translations={{
+              title: "Stiahnu\u0165 v\u0161etky d\u00e1ta",
+              desc: "V\u0161etky tvoje d\u00e1ta v jednom s\u00fabore. Du\u0161a, konverz\u00e1cie, udalosti, nastavenia.",
+              button: "Stiahnu\u0165 ZIP",
+              loading: "Pripravujem...",
+            }}
+          />
+          <form action="/api/auth/signout" method="POST">
+            <Button type="submit" variant="outline" className="w-full justify-start">
+              <LogOut className="h-4 w-4 mr-2" />
+              {"Odhl\u00e1si\u0165 sa"}
+            </Button>
+          </form>
+        </div>
       </div>
 
       {/* Danger zone */}

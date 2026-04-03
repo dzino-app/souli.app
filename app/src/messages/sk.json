@@ -360,6 +360,21 @@
     "saving": "Ukladám...",
     "cancel": "Zrušiť"
   },
+  "privacy": {
+    "exportTitle": "Stiahnuť všetky dáta",
+    "exportDesc": "Všetky tvoje dáta v jednom súbore. Duša, konverzácie, udalosti, nastavenia.",
+    "exportButton": "Stiahnuť ZIP",
+    "exportLoading": "Pripravujem...",
+    "llmTitle": "Vlastný LLM",
+    "llmDesc": "Použi vlastný API kľúč. Konverzácie pôjdu priamo cez tvoj účet.",
+    "llmProvider": "Poskytovateľ",
+    "llmApiKey": "API kľúč",
+    "llmModel": "Model",
+    "llmTest": "Otestovať",
+    "llmTestSuccess": "Funguje!",
+    "llmTestFail": "Nefunguje",
+    "llmKeyWarning": "Kľúč je uložený len v tvojom prehliadači."
+  },
   "common": {
     "error": "Niečo sa nepodarilo",
     "retry": "Skúsiť znova",

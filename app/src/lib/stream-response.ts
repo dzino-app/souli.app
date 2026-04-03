@@ -2,6 +2,7 @@ import { getDecayedSoulContext } from "@/lib/soul-retrieval";
 import { getUserLanguage, setUserLanguage, detectLanguage } from "@/lib/languages";
 import { isAlreadyTranslated, translateSoulFiles } from "@/lib/soul-translator";
 import { getTodayMood } from "@/lib/mood-tracking";
+import { getLlmSettings } from "@/lib/user-settings";
 
 const TIMEOUT_MS = 60_000;
 
@@ -47,9 +48,20 @@ export async function streamChatResponse(
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
   try {
+    // Include custom LLM headers if the user has configured their own key
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    const llmSettings = getLlmSettings();
+    if (llmSettings.customLlmApiKey && llmSettings.customLlmProvider) {
+      headers["X-Custom-LLM-Provider"] = llmSettings.customLlmProvider;
+      headers["X-Custom-LLM-Key"] = llmSettings.customLlmApiKey;
+      if (llmSettings.customLlmModel) {
+        headers["X-Custom-LLM-Model"] = llmSettings.customLlmModel;
+      }
+    }
+
     const response = await fetch("/api/chat", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers,
       body: JSON.stringify({ message, soulContext: soulContext + moodContext, history, language: getUserLanguage() }),
       signal: controller.signal,
     });
