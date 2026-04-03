@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Send, Loader2, Check, X } from "lucide-react";
+import { VoiceInput } from "@/components/chat/voice-input";
+import { VoiceOutput } from "@/components/chat/voice-output";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -166,6 +168,13 @@ export default function ChatPage() {
     }
   }, [searchParams, sendMessage]);
 
+  // Voice input: receive transcript and auto-send
+  const handleVoiceTranscript = useCallback((text: string) => {
+    if (text.trim()) {
+      sendMessage(text.trim());
+    }
+  }, [sendMessage]);
+
   async function handleSend(e: React.FormEvent) {
     e.preventDefault();
     if (!input.trim() || streaming) return;
@@ -263,7 +272,12 @@ export default function ChatPage() {
               }`}
             >
               {msg.role === "assistant" ? (
-                <MarkdownResponse content={msg.content} />
+                <>
+                  <MarkdownResponse content={msg.content} />
+                  <div className="flex justify-end mt-1">
+                    <VoiceOutput text={msg.content} />
+                  </div>
+                </>
               ) : (
                 msg.content
               )}
@@ -338,6 +352,7 @@ export default function ChatPage() {
 
       {/* Input */}
       <form onSubmit={handleSend} className="flex gap-2 pt-2 border-t">
+        <VoiceInput onTranscript={handleVoiceTranscript} disabled={streaming} />
         <input
           type="text"
           value={input}
