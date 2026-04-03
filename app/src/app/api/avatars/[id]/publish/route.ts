@@ -27,7 +27,19 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
   }
 
   const body = await request.json();
-  const { isPublic, description, tags, publicSoulSlugs } = body;
+  const {
+    isPublic,
+    description,
+    tags,
+    publicSoulSlugs,
+    publicSoulContents,
+  } = body as {
+    isPublic: boolean;
+    description?: string;
+    tags?: string[];
+    publicSoulSlugs?: string[];
+    publicSoulContents?: Record<string, string>;
+  };
 
   if (typeof isPublic !== "boolean") {
     return NextResponse.json(
@@ -36,7 +48,13 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
     );
   }
 
-  await publishAvatar(id, { isPublic, description, tags, publicSoulSlugs });
+  await publishAvatar(id, {
+    isPublic,
+    description,
+    tags,
+    publicSoulSlugs,
+    publicSoulContents,
+  });
 
   return NextResponse.json({ ok: true });
 }

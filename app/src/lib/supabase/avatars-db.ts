@@ -192,16 +192,23 @@ export async function getPublicAvatarDetail(
     return { avatar: null, soulFiles: [] };
   }
 
-  // Get public soul files for this avatar
+  // Get public soul files for this avatar — include public_content
   const { data: soulFiles } = await supabase
     .from("soul_files")
-    .select("slug, display_name, category")
+    .select("slug, display_name, category, public_content")
     .eq("avatar_id", avatarId)
     .eq("is_public", true);
 
+  const mapped = (soulFiles ?? []).map((sf) => ({
+    slug: sf.slug as string,
+    display_name: sf.display_name as string,
+    category: sf.category as string,
+    content: (sf.public_content as string | null) ?? undefined,
+  }));
+
   return {
     avatar: avatar as AvatarRow,
-    soulFiles: (soulFiles ?? []) as Array<{ slug: string; display_name: string; category: string }>,
+    soulFiles: mapped,
   };
 }
 
@@ -306,6 +313,7 @@ export async function publishAvatar(
     description?: string;
     tags?: string[];
     publicSoulSlugs?: string[];
+    publicSoulContents?: Record<string, string>;
   }
 ): Promise<void> {
   const supabase = createClient();
@@ -335,6 +343,17 @@ export async function publishAvatar(
         .update({ is_public: true })
         .eq("avatar_id", avatarId)
         .in("slug", opts.publicSoulSlugs);
+    }
+  }
+
+  // Store edited public soul contents separately
+  if (opts.publicSoulContents) {
+    for (const [slug, content] of Object.entries(opts.publicSoulContents)) {
+      await supabase
+        .from("soul_files")
+        .update({ public_content: content })
+        .eq("avatar_id", avatarId)
+        .eq("slug", slug);
     }
   }
 }
