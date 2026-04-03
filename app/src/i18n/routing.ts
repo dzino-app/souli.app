@@ -3,8 +3,8 @@ import { createNavigation } from "next-intl/navigation";
 
 export const routing = defineRouting({
   locales: ["sk", "en"],
-  defaultLocale: "sk",
-  localeDetection: false,
+  defaultLocale: "en",
+  localeDetection: true,
   pathnames: {
     "/": "/",
     "/chat": "/chat",

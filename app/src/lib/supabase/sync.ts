@@ -231,10 +231,12 @@ export async function loadEventsFromSupabase(): Promise<DzinoEvent[] | null> {
 
   const supabase = createClient();
 
+  // Exclude mood pseudo-events (title like "mood:X")
   const { data } = await supabase
     .from("events")
     .select("*")
     .eq("user_id", userId)
+    .not("title", "like", "mood:%")
     .order("event_date", { ascending: false });
 
   if (!data || data.length === 0) return null;
@@ -449,12 +451,10 @@ export async function loadFromSupabase(): Promise<void> {
       );
     }
 
-    // Load events
+    // Load events (mood pseudo-events are excluded by the query)
     const events = await loadEventsFromSupabase();
     if (events && events.length > 0) {
-      // Filter out mood pseudo-events from the events list
-      const realEvents = events.filter((e) => !e.title.startsWith("mood:"));
-      localStorage.setItem("dzino_events", JSON.stringify(realEvents));
+      localStorage.setItem("dzino_events", JSON.stringify(events));
     }
 
     // Load gamification from active avatar

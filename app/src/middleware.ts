@@ -21,25 +21,9 @@ export async function middleware(request: NextRequest) {
   // Run intl middleware first (handles locale detection + redirects)
   const intlResponse = intlMiddleware(request);
 
-  // Now refresh the Supabase session on the intl response so cookies are set
-  const response = await refreshSession(request, intlResponse);
-
-  // Determine the resolved pathname (after locale prefix removal)
-  // The intl middleware may have added a locale prefix. We check the final URL.
-  const resolvedPathname =
-    intlResponse.headers.get("x-middleware-rewrite") ??
-    intlResponse.headers.get("location") ??
-    pathname;
-
-  // Check if this is a public page (no auth required)
-  const isPublicPage =
-    /\/(prihlasenie|registracia|landing|login|signup)(\/|$)/.test(
-      resolvedPathname
-    ) || /\/(prihlasenie|registracia|landing|login|signup)(\/|$)/.test(pathname);
-
-  // If the intl middleware issued a redirect, just pass it through with refreshed cookies
+  // If the intl middleware issued a redirect, refresh session cookies and pass through
   if (intlResponse.status >= 300 && intlResponse.status < 400) {
-    return response;
+    return refreshSession(request, intlResponse);
   }
 
   // Dev mode: skip auth when Supabase is not configured
@@ -47,10 +31,10 @@ export async function middleware(request: NextRequest) {
     !process.env.NEXT_PUBLIC_SUPABASE_URL ||
     !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
   ) {
-    return response;
+    return intlResponse;
   }
 
-  // Check auth status
+  // Create Supabase client that reads/writes cookies on the intl response
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
@@ -64,16 +48,30 @@ export async function middleware(request: NextRequest) {
             request.cookies.set(name, value)
           );
           cookiesToSet.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options)
+            intlResponse.cookies.set(name, value, options)
           );
         },
       },
     }
   );
 
+  // Single getUser() call: refreshes session + tells us auth status
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  // Determine the resolved pathname (intl middleware may rewrite the URL)
+  const resolvedPathname =
+    intlResponse.headers.get("x-middleware-rewrite") ??
+    intlResponse.headers.get("location") ??
+    pathname;
+
+  // Check if this is a public page (no auth required)
+  const isPublicPage =
+    /\/(prihlasenie|registracia|landing|login|signup)(\/|$)/.test(
+      resolvedPathname
+    ) ||
+    /\/(prihlasenie|registracia|landing|login|signup)(\/|$)/.test(pathname);
 
   // Redirect unauthenticated users to landing (except public pages)
   if (!user && !isPublicPage) {
@@ -81,7 +79,7 @@ export async function middleware(request: NextRequest) {
     url.pathname = "/landing";
     const redirectResponse = NextResponse.redirect(url);
     // Copy session cookies to the redirect response
-    response.cookies.getAll().forEach((cookie) => {
+    intlResponse.cookies.getAll().forEach((cookie) => {
       redirectResponse.cookies.set(cookie.name, cookie.value);
     });
     return redirectResponse;
@@ -92,18 +90,18 @@ export async function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = "/";
     const redirectResponse = NextResponse.redirect(url);
-    response.cookies.getAll().forEach((cookie) => {
+    intlResponse.cookies.getAll().forEach((cookie) => {
       redirectResponse.cookies.set(cookie.name, cookie.value);
     });
     return redirectResponse;
   }
 
-  return response;
+  return intlResponse;
 }
 
 /**
  * Refresh the Supabase session by reading/writing auth cookies.
- * Works on any NextResponse (intl response, plain response, etc.)
+ * Used for API routes and intl redirects where we don't need auth checking.
  */
 async function refreshSession(
   request: NextRequest,
