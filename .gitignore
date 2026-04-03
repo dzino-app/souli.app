@@ -15,6 +15,7 @@ __pycache__/
 .env
 .env.local
 .env.production
+.envrc
 
 # IDE
 .idea/
@@ -28,3 +29,5 @@ Thumbs.db
 # Build
 dist/
 out/
+.worktrees/
+credentials.json

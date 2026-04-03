@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 34 47% 97%;
+    --foreground: 16 16% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 16 16% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 16 16% 15%;
+    --primary: 249 75% 64%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 34 30% 92%;
+    --secondary-foreground: 26 16% 25%;
+    --muted: 34 30% 92%;
+    --muted-foreground: 26 10% 50%;
+    --accent: 166 100% 36%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 13 70% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 166 100% 36%;
+    --success-foreground: 0 0% 100%;
+    --border: 30 28% 87%;
+    --input: 30 28% 87%;
+    --ring: 249 75% 64%;
+    --radius: 1rem;
+
+    --xp-gold: 45 97% 71%;
+    --streak-fire: 13 70% 60%;
+    --energy: 160 82% 64%;
+  }
+
+  .dark {
+    --background: 20 10% 10%;
+    --foreground: 60 9% 98%;
+    --card: 20 8% 15%;
+    --card-foreground: 60 9% 98%;
+    --popover: 20 8% 15%;
+    --popover-foreground: 60 9% 98%;
+    --primary: 243 97% 81%;
+    --primary-foreground: 20 10% 10%;
+    --secondary: 24 10% 19%;
+    --secondary-foreground: 30 22% 88%;
+    --muted: 24 10% 19%;
+    --muted-foreground: 30 5% 64%;
+    --accent: 160 82% 64%;
+    --accent-foreground: 20 10% 10%;
+    --destructive: 13 70% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 160 82% 64%;
+    --success-foreground: 20 10% 10%;
+    --border: 20 12% 21%;
+    --input: 20 12% 21%;
+    --ring: 243 97% 81%;
+    --radius: 1rem;
+
+    --xp-gold: 45 97% 71%;
+    --streak-fire: 13 70% 60%;
+    --energy: 160 82% 64%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes bounce-in {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+@keyframes xp-pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}

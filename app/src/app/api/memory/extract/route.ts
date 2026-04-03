@@ -1,0 +1,38 @@
+import { NextRequest, NextResponse } from "next/server";
+import { checkRateLimit } from "@/lib/rate-limit";
+import { generateContent } from "@/lib/llm";
+
+const EXTRACTION_PROMPT = `Analyzujte nasledujúcu konverzáciu a extrahujte fakty o používateľovi.
+
+Vráťte JSON pole faktov. Každý fakt má:
+- "fact": krátky popis faktu v slovenčine
+- "category": kategória — "personal", "work", "preferences", "documents"
+
+Ak žiadne fakty nie sú, vráťte prázdne pole [].
+
+Konverzácia:
+{conversation}
+
+Vráťte IBA validný JSON (pole objektov), nič iné.`;
+
+export async function POST(request: NextRequest) {
+  const ip = request.headers.get("x-forwarded-for") || "anonymous";
+  const { allowed } = checkRateLimit(ip);
+  if (!allowed) return NextResponse.json({ facts: [] });
+
+  const { conversation } = await request.json();
+
+  try {
+    const text = await generateContent({
+      contents: [{
+        role: "user",
+        parts: [{ text: EXTRACTION_PROMPT.replace("{conversation}", conversation) }],
+      }],
+    });
+    const jsonMatch = text.match(/\[[\s\S]*\]/);
+    const facts = jsonMatch ? JSON.parse(jsonMatch[0]) : [];
+    return NextResponse.json({ facts });
+  } catch {
+    return NextResponse.json({ facts: [] });
+  }
+}
