@@ -86,6 +86,22 @@ export default function ChatPage() {
   useEffect(() => {
     const data = getAvatarData();
     setAvatarData({ name: data.name, appearance: data.appearance });
+
+    // Load existing conversation if ID provided
+    const convId = searchParams.get("id");
+    if (convId) {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const { getConversation } = require("@/lib/conversations") as typeof import("@/lib/conversations");
+      const conv = getConversation(convId);
+      if (conv && conv.messages.length > 0) {
+        convIdRef.current = convId;
+        setMessages(conv.messages.map((m: { role: string; content: string }) => ({
+          role: m.role as "user" | "assistant",
+          content: m.content,
+        })));
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
