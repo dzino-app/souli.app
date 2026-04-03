@@ -24,6 +24,10 @@ import { WeeklyReviewCard } from "@/components/review/weekly-review-card";
 import { DailyGreeting } from "@/components/greeting/daily-greeting";
 import { MoodPicker } from "@/components/mood/mood-picker";
 import { TellMeSomething } from "@/components/quick-action/tell-me-something";
+import { AvatarSwitcher } from "@/components/avatar/avatar-switcher";
+import { needsMigration } from "@/lib/avatars";
+import { buildMigrationPayload } from "@/lib/migrate-to-multi-avatar";
+import { setActiveAvatarId } from "@/lib/avatars";
 
 export default function Home() {
   const { mounted, state, mood, name, appearance } = useAvatarState();
@@ -33,6 +37,25 @@ export default function Home() {
   useEffect(() => {
     migrateMemoriesToSoul();
     setGroups(getConversationsGroupedByDate());
+
+    // One-time migration to multi-avatar system
+    if (needsMigration()) {
+      const payload = buildMigrationPayload();
+      if (payload) {
+        fetch("/api/avatars/migrate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            if (data.avatarId) {
+              setActiveAvatarId(data.avatarId);
+            }
+          })
+          .catch(() => {});
+      }
+    }
   }, []);
 
   function handleDelete(id: string) {
@@ -48,6 +71,11 @@ export default function Home() {
     <div className="flex flex-col gap-6">
       {/* Daily greeting — shows once per day */}
       <DailyGreeting />
+
+      {/* Avatar switcher */}
+      <div className="flex justify-center">
+        <AvatarSwitcher onSwitch={() => window.location.reload()} />
+      </div>
 
       {/* Avatar — compact, centered, with warm gradient behind */}
       <div className="relative flex flex-col items-center gap-2 py-4">

@@ -17,6 +17,9 @@ export const routing = defineRouting({
     "/prihlasenie": { sk: "/prihlasenie", en: "/login" },
     "/registracia": { sk: "/registracia", en: "/signup" },
     "/landing": "/landing",
+    "/kniznica": { sk: "/kniznica", en: "/library" },
+    "/kniznica/[id]": { sk: "/kniznica/[id]", en: "/library/[id]" },
+    "/avatary": { sk: "/avatary", en: "/avatars" },
   },
 });
 
