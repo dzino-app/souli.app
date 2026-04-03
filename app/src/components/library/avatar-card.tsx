@@ -1,10 +1,12 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { StoredAvatar } from "@/components/avatar/stored-avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Download } from "lucide-react";
 import type { AvatarRow } from "@/lib/supabase/avatars-db";
+import type { AvatarState } from "@/lib/avatar";
 
 interface AvatarCardProps {
   avatar: AvatarRow;
@@ -20,8 +22,32 @@ const SPECIES_LABELS: Record<string, string> = {
   fox: "Líška",
 };
 
+const ACTIVITY_STATES: AvatarState[] = [
+  "idle", "happy", "waving", "walking", "talking", "thinking", "eating", "sad",
+];
+
 export function AvatarCard({ avatar, locale }: AvatarCardProps) {
   const speciesLabel = SPECIES_LABELS[avatar.appearance.species] ?? avatar.appearance.species;
+  const [currentState, setCurrentState] = useState<AvatarState>("idle");
+
+  // Randomly cycle through activities
+  useEffect(() => {
+    // Start with a random offset so all cards don't sync
+    const initialDelay = Math.random() * 3000;
+    let intervalId: ReturnType<typeof setInterval>;
+
+    const timeout = setTimeout(() => {
+      intervalId = setInterval(() => {
+        const nextState = ACTIVITY_STATES[Math.floor(Math.random() * ACTIVITY_STATES.length)];
+        setCurrentState(nextState);
+      }, 3000 + Math.random() * 2000); // switch every 3-5 seconds
+    }, initialDelay);
+
+    return () => {
+      clearTimeout(timeout);
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <Link href={`/${locale}/kniznica/${avatar.id}`}>
@@ -30,9 +56,9 @@ export function AvatarCard({ avatar, locale }: AvatarCardProps) {
           <div className="py-2">
             <StoredAvatar
               previewUrl={avatar.preview_url}
-              state="idle"
+              animationUrls={avatar.animation_urls}
+              state={currentState}
               size="sm"
-              staticOnly
               fallbackAppearance={avatar.appearance}
               fallbackLevel={avatar.level}
             />
@@ -40,7 +66,11 @@ export function AvatarCard({ avatar, locale }: AvatarCardProps) {
           <h3 className="text-sm font-semibold truncate w-full text-center">
             {avatar.name}
           </h3>
-          <p className="text-xs text-muted-foreground">{speciesLabel}</p>
+          <div className="flex items-center gap-1.5">
+            <span className="text-xs text-muted-foreground">{speciesLabel}</span>
+            <span className="text-xs text-muted-foreground">·</span>
+            <span className="text-xs text-muted-foreground">Úr. {avatar.level}</span>
+          </div>
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
             <Download className="h-3 w-3" />
             <span>{avatar.times_loaded}</span>
