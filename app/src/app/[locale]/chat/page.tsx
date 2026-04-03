@@ -152,17 +152,25 @@ export default function ChatPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [streaming, messages, t]);
 
-  // Auto-send challenge message from URL params
+  // Auto-send message from URL params (challenge or plain text)
   useEffect(() => {
     if (challengeSentRef.current) return;
     const challengeId = searchParams.get("challenge");
-    const challengeText = searchParams.get("text");
-    if (challengeId && challengeText) {
+    const text = searchParams.get("text");
+
+    if (challengeId && text) {
+      // Challenge flow
       challengeSentRef.current = true;
       challengeIdRef.current = challengeId;
-      // Small delay to let the component mount fully
       const timer = setTimeout(() => {
-        sendMessage(`Chcem splniť výzvu: ${challengeText}`);
+        sendMessage(`Chcem splniť výzvu: ${text}`);
+      }, 300);
+      return () => clearTimeout(timer);
+    } else if (text && !challengeId) {
+      // Plain text (from "Povedz mi niečo" or other sources)
+      challengeSentRef.current = true;
+      const timer = setTimeout(() => {
+        sendMessage(text);
       }, 300);
       return () => clearTimeout(timer);
     }

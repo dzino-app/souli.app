@@ -1,18 +1,29 @@
 "use client";
 
 import { useState } from "react";
-import { Sparkles, RefreshCw } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Sparkles, RefreshCw, MessageCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { getRandomAction, getTypeEmoji, type QuickAction } from "@/lib/quick-actions";
 import { getTodayMood } from "@/lib/mood-tracking";
 
 export function TellMeSomething() {
+  const router = useRouter();
   const [action, setAction] = useState<QuickAction | null>(null);
 
   function handleClick() {
     const todayMood = getTodayMood();
     setAction(getRandomAction(todayMood?.mood ?? null));
+  }
+
+  function handleAnswer() {
+    if (!action) return;
+    // Open chat with the question/fact as starting message
+    const text = action.type === "question"
+      ? action.content  // send the question itself
+      : `Povedz mi viac o: ${action.content}`;  // for facts/inspiration, ask for more
+    router.push(`/chat?text=${encodeURIComponent(text)}`);
   }
 
   return (
@@ -43,7 +54,15 @@ export function TellMeSomething() {
                 <p className="text-sm leading-relaxed">{action.content}</p>
               </div>
             </div>
-            <div className="flex justify-end mt-2">
+            <div className="flex justify-between mt-3">
+              <Button
+                variant="default"
+                size="sm"
+                onClick={handleAnswer}
+              >
+                <MessageCircle className="h-3 w-3 mr-1" />
+                Odpovedať
+              </Button>
               <Button
                 variant="ghost"
                 size="sm"
