@@ -22,6 +22,7 @@ export const routing = defineRouting({
     "/avatary": { sk: "/avatary", en: "/avatars" },
     "/ochrana-sukromia": { sk: "/ochrana-sukromia", en: "/privacy" },
     "/podmienky": { sk: "/podmienky", en: "/terms" },
+    "/quiz": "/quiz",
   },
 });
 
