@@ -71,6 +71,11 @@ export function AvatarCard({ avatar, locale }: AvatarCardProps) {
             <span className="text-xs text-muted-foreground">·</span>
             <span className="text-xs text-muted-foreground">Úr. {avatar.level}</span>
           </div>
+          {avatar.public_description && (
+            <p className="text-[11px] text-muted-foreground text-center line-clamp-2 leading-snug">
+              {avatar.public_description}
+            </p>
+          )}
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
             <Download className="h-3 w-3" />
             <span>{avatar.times_loaded}</span>

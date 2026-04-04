@@ -325,6 +325,7 @@ export async function syncAvatarToSupabase(data: AvatarData): Promise<void> {
       appearance: data.appearance,
       mood: data.mood,
       last_interaction: data.lastInteraction,
+      sound_dna: data.soundDNA ?? null,
       updated_at: new Date().toISOString(),
     })
     .eq("user_id", userId)

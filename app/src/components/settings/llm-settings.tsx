@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Eye, EyeOff, CheckCircle, XCircle, Loader2, Sparkles } from "lucide-react";
+import { Eye, EyeOff, CheckCircle, XCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -34,9 +34,6 @@ interface Props {
     testSuccess: string;
     testFail: string;
     keyWarning: string;
-    defaultActive: string;
-    defaultInactive: string;
-    defaultBadge: string;
   };
 }
 
@@ -124,31 +121,8 @@ export function LlmSettings({ translations: t }: Props) {
     }
   }
 
-  const isCustomActive = !!settings.customLlmApiKey;
-
   return (
     <div className="space-y-3">
-      {/* Default LLM info */}
-      <Card className={!isCustomActive ? "border-primary/30 bg-primary/5" : ""}>
-        <CardContent className="py-4">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center h-10 w-10 rounded-full bg-primary/10">
-              <Sparkles className="h-5 w-5 text-primary" />
-            </div>
-            <div className="flex-1">
-              <p className="text-sm font-medium">Gemini 2.5 Flash</p>
-              <p className="text-xs text-muted-foreground">Google AI &middot; {!isCustomActive ? t.defaultActive : t.defaultInactive}</p>
-            </div>
-            {!isCustomActive && (
-              <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full">
-                {t.defaultBadge}
-              </span>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Custom LLM */}
       <Card>
         <CardContent className="py-4 space-y-4">
           <div>

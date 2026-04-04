@@ -68,10 +68,10 @@ export async function middleware(request: NextRequest) {
 
   // Check if this is a public page (no auth required)
   const isPublicPage =
-    /\/(prihlasenie|registracia|landing|login|signup)(\/|$)/.test(
+    /\/(prihlasenie|registracia|landing|login|signup|kniznica|library)(\/|$)/.test(
       resolvedPathname
     ) ||
-    /\/(prihlasenie|registracia|landing|login|signup)(\/|$)/.test(pathname);
+    /\/(prihlasenie|registracia|landing|login|signup|kniznica|library)(\/|$)/.test(pathname);
 
   // Redirect unauthenticated users to landing (except public pages)
   if (!user && !isPublicPage) {

@@ -28,6 +28,7 @@ import { AvatarSwitcher } from "@/components/avatar/avatar-switcher";
 import { needsMigration } from "@/lib/avatars";
 import { buildMigrationPayload } from "@/lib/migrate-to-multi-avatar";
 import { setActiveAvatarId } from "@/lib/avatars";
+import { DailyLesson } from "@/components/learn/daily-lesson";
 
 export default function Home() {
   const { mounted, state, mood, name, appearance } = useAvatarState();
@@ -112,6 +113,9 @@ export default function Home() {
 
       {/* Daily challenges */}
       <DailyChallenges />
+
+      {/* Daily micro-lesson */}
+      <DailyLesson />
 
       {/* New chat button */}
       <Link href="/chat">

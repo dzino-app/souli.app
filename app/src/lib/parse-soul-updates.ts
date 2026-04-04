@@ -126,3 +126,14 @@ export function parseResponse(fullText: string): ParsedResponse {
 
   return { text, soulUpdates, eventProposals, mood };
 }
+
+/**
+ * Strip special blocks from streaming text for display.
+ * Removes complete :::...:::\n blocks and any trailing incomplete ::: block.
+ */
+export function stripBlocksForDisplay(text: string): string {
+  return text
+    .replace(/:::(aktualizacia|udalost|nalada)[\s\S]*?:::/g, "")
+    .replace(/:::(aktualizacia|udalost|nalada)[\s\S]*$/, "") // incomplete trailing block
+    .trim();
+}

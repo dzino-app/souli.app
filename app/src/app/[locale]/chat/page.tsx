@@ -12,7 +12,7 @@ import { MarkdownResponse } from "@/components/chat/markdown-response";
 import { PixelAvatar } from "@/components/avatar/pixel-avatar";
 import { PixelBackground } from "@/components/avatar/pixel-background";
 import { streamChatResponse, type ChatMessage } from "@/lib/stream-response";
-import { parseResponse, type SoulUpdate, type EventProposal } from "@/lib/parse-soul-updates";
+import { parseResponse, stripBlocksForDisplay, type SoulUpdate, type EventProposal } from "@/lib/parse-soul-updates";
 import { appendToSoulFile, updateSoulFile } from "@/lib/soul";
 import { processConversationInBackground } from "@/lib/soul-background";
 import { createEvent } from "@/lib/events";
@@ -368,7 +368,7 @@ export default function ChatPage() {
         {streaming && streamText && (
           <div className="flex justify-start">
             <div className="max-w-[85%] rounded-2xl rounded-bl-md bg-secondary border-2 border-border px-4 py-2.5 text-sm">
-              <MarkdownResponse content={streamText} />
+              <MarkdownResponse content={stripBlocksForDisplay(streamText)} />
               <Loader2 className="h-3 w-3 text-muted-foreground animate-spin mt-1" />
             </div>
           </div>

@@ -27,6 +27,8 @@ export interface AvatarRow {
   is_active: boolean;
   created_at: string;
   updated_at: string;
+  /** Unique 8-bit sound parameters */
+  sound_dna: Record<string, unknown> | null;
   /** Pre-rendered static preview image URL (Supabase Storage) */
   preview_url: string | null;
   /** Pre-rendered animation frame URLs per activity (Supabase Storage) */
@@ -145,6 +147,17 @@ export async function getPublicAvatars(
   const from = page * pageSize;
   const to = from + pageSize - 1;
 
+  // Try hybrid search (semantic + keyword) when search query exists
+  if (filters.search && filters.search.trim().length > 2) {
+    try {
+      const result = await hybridSearch(supabase, filters, from, to);
+      if (result) return result;
+    } catch {
+      // Fall through to standard search
+    }
+  }
+
+  // Standard search (keyword only)
   let query = supabase
     .from("avatars")
     .select("*", { count: "exact" })
@@ -177,6 +190,36 @@ export async function getPublicAvatars(
   }
 
   return { avatars: (data ?? []) as AvatarRow[], total: count ?? 0 };
+}
+
+/**
+ * Hybrid search: combine keyword (full-text) + dense (vector) results.
+ * Falls back to null if embeddings aren't available.
+ */
+async function hybridSearch(
+  supabase: ReturnType<typeof createClient>,
+  filters: PublicAvatarFilters,
+  from: number,
+  to: number,
+): Promise<{ avatars: AvatarRow[]; total: number } | null> {
+  const { getEmbedding } = await import("../embeddings");
+  const queryEmbedding = await getEmbedding(filters.search!);
+
+  // RPC call for hybrid search — keyword + vector combined
+  const { data, error } = await supabase.rpc("hybrid_search_avatars", {
+    query_text: filters.search!,
+    query_embedding: JSON.stringify(queryEmbedding),
+    species_filter: filters.species || null,
+    match_limit: to - from + 1,
+    match_offset: from,
+  });
+
+  if (error || !data) return null;
+
+  return {
+    avatars: data as AvatarRow[],
+    total: data.length,
+  };
 }
 
 export async function getPublicAvatarDetail(
@@ -359,5 +402,52 @@ export async function publishAvatar(
         .eq("avatar_id", avatarId)
         .eq("slug", slug);
     }
+  }
+
+  // Generate and store embedding for hybrid search (async, non-blocking)
+  if (opts.isPublic) {
+    generateAvatarEmbedding(avatarId, supabase).catch(() => {});
+  }
+}
+
+async function generateAvatarEmbedding(
+  avatarId: string,
+  supabase: ReturnType<typeof createClient>,
+) {
+  try {
+    const { data: avatar } = await supabase
+      .from("avatars")
+      .select("name, public_description, tags")
+      .eq("id", avatarId)
+      .single();
+
+    const { data: soulFiles } = await supabase
+      .from("soul_files")
+      .select("slug, content, public_content")
+      .eq("avatar_id", avatarId)
+      .eq("is_public", true);
+
+    if (!avatar) return;
+
+    const { buildEmbeddingText, getEmbedding } = await import("../embeddings");
+
+    const text = buildEmbeddingText(
+      avatar.name,
+      avatar.public_description,
+      avatar.tags ?? [],
+      (soulFiles ?? []).map((f) => ({
+        slug: f.slug,
+        content: f.public_content || f.content || "",
+      })),
+    );
+
+    const embedding = await getEmbedding(text);
+
+    await supabase
+      .from("avatars")
+      .update({ embedding: JSON.stringify(embedding) })
+      .eq("id", avatarId);
+  } catch (err) {
+    console.warn("[embedding] Failed to generate embedding:", err);
   }
 }
