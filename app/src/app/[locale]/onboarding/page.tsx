@@ -1,217 +1,288 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { addMemories } from "@/lib/memory";
+import { PixelAvatar } from "@/components/avatar/pixel-avatar";
+import { playAvatarSound } from "@/lib/pixel-sounds";
+import { getAvatarData, saveAvatarData, randomAppearance, generateSoundDNA } from "@/lib/avatar";
+import { saveSoulFile } from "@/lib/soul";
+import { addXp } from "@/lib/gamification";
+import type { AvatarState, AvatarAppearance } from "@/lib/avatar";
 
-const TOTAL_STEPS = 5;
+// Dzino's appearance (the original mascot)
+const DZINO_APPEARANCE: AvatarAppearance = {
+  species: "cat",
+  bodyShape: "round",
+  eyeStyle: "anime",
+  mouthStyle: "smile",
+  earStyle: "pointy",
+  accessory: "crown",
+  hairStyle: "none",
+  skinColor: "#FFE4C9",
+  bodyColor: "#4F46E5",
+};
+
+const DZINO_SOUND_DNA = {
+  basePitch: 550,
+  timbre: "square" as OscillatorType,
+  tempo: 1.0,
+  chirpRange: 120,
+  harmonicShift: 50,
+};
+
+type Phase = "intro" | "story" | "name" | "about" | "interests" | "style" | "birth" | "meet";
 
 export default function OnboardingPage() {
   const t = useTranslations("onboarding");
   const router = useRouter();
-  const [step, setStep] = useState(1);
-  const [answers, setAnswers] = useState({
-    name: "",
-    profession: "",
-    needs: "",
-    documentTypes: "",
-    style: "" as "brief" | "detailed" | "",
-  });
+  const [phase, setPhase] = useState<Phase>("intro");
+  const [dzState, setDzState] = useState<AvatarState>("waving");
+  const [name, setName] = useState("");
+  const [about, setAbout] = useState("");
+  const [interests, setInterests] = useState("");
+  const [style, setStyle] = useState<"brief" | "detailed" | "">("");
+  const [newAppearance, setNewAppearance] = useState<AvatarAppearance | null>(null);
+  const [newSouliState, setNewSouliState] = useState<AvatarState>("idle");
+  const [typedText, setTypedText] = useState("");
+  const [typing, setTyping] = useState(false);
 
-  function updateAnswer(key: keyof typeof answers, value: string) {
-    setAnswers((prev) => ({ ...prev, [key]: value }));
+  // Typewriter effect for Dzino's messages
+  function typeText(text: string, onDone?: () => void) {
+    setTyping(true);
+    setTypedText("");
+    let i = 0;
+    const interval = setInterval(() => {
+      setTypedText(text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) {
+        clearInterval(interval);
+        setTyping(false);
+        onDone?.();
+      }
+    }, 30);
+    return () => clearInterval(interval);
+  }
+
+  // Phase transitions with Dzino reactions
+  useEffect(() => {
+    if (phase === "intro") {
+      setDzState("waving");
+      playAvatarSound("waving", DZINO_SOUND_DNA);
+      typeText(t("storyIntro"));
+    } else if (phase === "story") {
+      setDzState("talking");
+      typeText(t("storyOrigin"));
+    } else if (phase === "name") {
+      setDzState("happy");
+      playAvatarSound("happy", DZINO_SOUND_DNA);
+      typeText(t("storyName"));
+    } else if (phase === "about") {
+      setDzState("thinking");
+      typeText(t("storyAbout"));
+    } else if (phase === "interests") {
+      setDzState("talking");
+      typeText(t("storyInterests"));
+    } else if (phase === "style") {
+      setDzState("thinking");
+      typeText(t("storyStyle"));
+    } else if (phase === "birth") {
+      setDzState("happy");
+      playAvatarSound("happy", DZINO_SOUND_DNA);
+      // Generate the new Souli
+      const app = randomAppearance();
+      setNewAppearance(app);
+      typeText(t("storyBirth"), () => {
+        setTimeout(() => setNewSouliState("waving"), 500);
+      });
+    } else if (phase === "meet") {
+      setDzState("waving");
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
+
+  function handleNext() {
+    const order: Phase[] = ["intro", "story", "name", "about", "interests", "style", "birth", "meet"];
+    const idx = order.indexOf(phase);
+    if (idx < order.length - 1) {
+      setPhase(order[idx + 1]);
+    }
+  }
+
+  function handleSkipTo(p: Phase) {
+    setPhase(p);
   }
 
   function handleFinish() {
-    localStorage.setItem("dzino_onboarding", JSON.stringify(answers));
+    // Save the new Souli
+    const data = getAvatarData();
+    if (newAppearance) {
+      data.appearance = newAppearance;
+    }
+    data.name = name || "Souli";
+    data.soundDNA = generateSoundDNA();
+    saveAvatarData(data);
 
-    // Store answers as memories so the bot remembers from the start
-    const memories: { fact: string; category: string }[] = [];
-    if (answers.name) {
-      memories.push({ fact: `Volá sa ${answers.name}`, category: "personal" });
+    // Save soul files from onboarding answers
+    if (name) {
+      saveSoulFile("preferencie", `# Preferencie\n\n- Meno používateľa: ${name}\n- Štýl: ${style === "brief" ? "stručné odpovede" : style === "detailed" ? "podrobné odpovede" : "predvolený"}\n`, "dzino");
     }
-    if (answers.profession) {
-      memories.push({ fact: `Profesia: ${answers.profession}`, category: "work" });
+    if (about) {
+      saveSoulFile("osobnost", `# Osobnosť\n\n- ${about}\n`, "dzino");
     }
-    if (answers.needs) {
-      memories.push({ fact: `Potrebuje pomoc s: ${answers.needs}`, category: "preferences" });
-    }
-    if (answers.documentTypes) {
-      memories.push({ fact: `Najčastejšie rieši dokumenty: ${answers.documentTypes}`, category: "documents" });
-    }
-    if (answers.style) {
-      const styleText = answers.style === "brief" ? "stručné odpovede" : "podrobné odpovede s vysvetlením";
-      memories.push({ fact: `Preferuje ${styleText}`, category: "preferences" });
-    }
-    if (memories.length > 0) {
-      addMemories(memories);
+    if (interests) {
+      saveSoulFile("zaujmy", `# Záujmy\n\n- ${interests}\n`, "dzino");
     }
 
+    addXp(50, "onboarding");
+    localStorage.setItem("dzino_onboarding", "done");
     router.push("/");
   }
 
+  const progress = ["intro", "story", "name", "about", "interests", "style", "birth", "meet"].indexOf(phase);
+  const total = 8;
+
   return (
-    <div className="flex min-h-[60vh] items-center justify-center">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          {step === 1 && (
-            <>
-              <div className="text-2xl font-bold text-primary mb-2">Dzino</div>
-              <CardTitle className="text-xl">{t("welcome")}</CardTitle>
-              <CardDescription>{t("welcomeDesc")}</CardDescription>
-            </>
-          )}
-          {step > 1 && (
-            <CardDescription>
-              {t("step", { current: step, total: TOTAL_STEPS })}
-            </CardDescription>
-          )}
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col gap-4">
-            {/* Step 1: Name */}
-            {step === 1 && (
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">{t("q1")}</label>
-                <input
-                  type="text"
-                  value={answers.name}
-                  onChange={(e) => updateAnswer("name", e.target.value)}
-                  placeholder={t("q1placeholder")}
-                  className="rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                  autoFocus
-                />
-              </div>
-            )}
+    <div className="flex flex-col items-center justify-center min-h-[70vh] gap-6 px-4">
+      {/* Dzino (always visible until birth phase) */}
+      {phase !== "birth" && phase !== "meet" && (
+        <div style={{ animation: "float 3s ease-in-out infinite" }}>
+          <PixelAvatar state={dzState} appearance={DZINO_APPEARANCE} level={10} size="lg" />
+        </div>
+      )}
 
-            {/* Step 2: Profession */}
-            {step === 2 && (
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">{t("q2")}</label>
-                <input
-                  type="text"
-                  value={answers.profession}
-                  onChange={(e) => updateAnswer("profession", e.target.value)}
-                  placeholder={t("q2placeholder")}
-                  className="rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                  autoFocus
-                />
-              </div>
-            )}
-
-            {/* Step 3: Needs */}
-            {step === 3 && (
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">{t("q3")}</label>
-                <textarea
-                  value={answers.needs}
-                  onChange={(e) => updateAnswer("needs", e.target.value)}
-                  placeholder={t("q3placeholder")}
-                  rows={3}
-                  className="rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-                  autoFocus
-                />
-              </div>
-            )}
-
-            {/* Step 4: Document types */}
-            {step === 4 && (
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">{t("q4")}</label>
-                <input
-                  type="text"
-                  value={answers.documentTypes}
-                  onChange={(e) => updateAnswer("documentTypes", e.target.value)}
-                  placeholder={t("q4placeholder")}
-                  className="rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-                  autoFocus
-                />
-              </div>
-            )}
-
-            {/* Step 5: Communication style */}
-            {step === 5 && (
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">{t("q5")}</label>
-                <div className="flex flex-col gap-2 mt-1">
-                  <button
-                    onClick={() => updateAnswer("style", "brief")}
-                    className={`rounded-lg border p-4 text-left text-sm transition-colors ${
-                      answers.style === "brief"
-                        ? "border-primary bg-primary/5 text-primary"
-                        : "hover:bg-secondary"
-                    }`}
-                  >
-                    {t("q5option1")}
-                  </button>
-                  <button
-                    onClick={() => updateAnswer("style", "detailed")}
-                    className={`rounded-lg border p-4 text-left text-sm transition-colors ${
-                      answers.style === "detailed"
-                        ? "border-primary bg-primary/5 text-primary"
-                        : "hover:bg-secondary"
-                    }`}
-                  >
-                    {t("q5option2")}
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Progress bar */}
-            <div className="flex gap-1 mt-2">
-              {Array.from({ length: TOTAL_STEPS }, (_, i) => (
-                <div
-                  key={i}
-                  className={`h-1 flex-1 rounded-full transition-colors ${
-                    i < step ? "bg-primary" : "bg-border"
-                  }`}
-                />
-              ))}
-            </div>
-
-            {/* Navigation */}
-            <div className="flex justify-between mt-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setStep((s) => Math.max(1, s - 1))}
-                disabled={step === 1}
-              >
-                <ChevronLeft className="h-4 w-4 mr-1" />
-                {t("previous")}
-              </Button>
-
-              {step < TOTAL_STEPS ? (
-                <div className="flex gap-2">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setStep((s) => s + 1)}
-                  >
-                    {t("skip")}
-                  </Button>
-                  <Button
-                    size="sm"
-                    onClick={() => setStep((s) => s + 1)}
-                  >
-                    {t("next")}
-                    <ChevronRight className="h-4 w-4 ml-1" />
-                  </Button>
-                </div>
-              ) : (
-                <Button onClick={handleFinish}>
-                  {t("finish")}
-                </Button>
-              )}
-            </div>
+      {/* Birth phase: show both Dzino and new Souli */}
+      {(phase === "birth" || phase === "meet") && newAppearance && (
+        <div className="flex items-end gap-6">
+          <div style={{ animation: "float 3s ease-in-out infinite" }}>
+            <PixelAvatar state={dzState} appearance={DZINO_APPEARANCE} level={10} size="md" />
           </div>
-        </CardContent>
-      </Card>
+          <div style={{ animation: "float 3s ease-in-out infinite 0.5s" }}>
+            <PixelAvatar state={newSouliState} appearance={newAppearance} level={1} size="lg" />
+          </div>
+        </div>
+      )}
+
+      {/* Speech bubble */}
+      <div className="max-w-md w-full">
+        <div className="bg-card border-2 border-border rounded-2xl px-5 py-4 shadow-sm relative">
+          <p className="text-sm leading-relaxed min-h-[3rem]">
+            {typedText}
+            {typing && <span className="animate-pulse">|</span>}
+          </p>
+        </div>
+      </div>
+
+      {/* Input area (only for relevant phases) */}
+      {phase === "name" && !typing && (
+        <div className="max-w-md w-full">
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder={t("q1placeholder")}
+            className="w-full rounded-xl border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+            autoFocus
+            onKeyDown={(e) => { if (e.key === "Enter" && name.trim()) handleNext(); }}
+          />
+        </div>
+      )}
+
+      {phase === "about" && !typing && (
+        <div className="max-w-md w-full">
+          <textarea
+            value={about}
+            onChange={(e) => setAbout(e.target.value)}
+            placeholder={t("q2placeholder")}
+            rows={2}
+            className="w-full rounded-xl border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+            autoFocus
+          />
+        </div>
+      )}
+
+      {phase === "interests" && !typing && (
+        <div className="max-w-md w-full">
+          <input
+            type="text"
+            value={interests}
+            onChange={(e) => setInterests(e.target.value)}
+            placeholder={t("q4placeholder")}
+            className="w-full rounded-xl border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+            autoFocus
+            onKeyDown={(e) => { if (e.key === "Enter") handleNext(); }}
+          />
+        </div>
+      )}
+
+      {phase === "style" && !typing && (
+        <div className="max-w-md w-full flex gap-3">
+          <button
+            onClick={() => { setStyle("brief"); handleSkipTo("birth"); }}
+            className={`flex-1 rounded-xl border p-4 text-sm transition-all hover:border-primary hover:bg-primary/5 ${
+              style === "brief" ? "border-primary bg-primary/5" : ""
+            }`}
+          >
+            {t("q5option1")}
+          </button>
+          <button
+            onClick={() => { setStyle("detailed"); handleSkipTo("birth"); }}
+            className={`flex-1 rounded-xl border p-4 text-sm transition-all hover:border-primary hover:bg-primary/5 ${
+              style === "detailed" ? "border-primary bg-primary/5" : ""
+            }`}
+          >
+            {t("q5option2")}
+          </button>
+        </div>
+      )}
+
+      {/* Meet phase: name your Souli + finish */}
+      {phase === "meet" && !typing && (
+        <div className="max-w-md w-full text-center space-y-4">
+          <p className="text-lg font-bold">{t("storyMeet")}</p>
+          <div className="flex gap-2 justify-center">
+            <Button size="lg" onClick={handleFinish} className="px-8">
+              {t("finish")}
+            </Button>
+          </div>
+          <button
+            onClick={() => { setNewAppearance(randomAppearance()); setNewSouliState("happy"); }}
+            className="text-xs text-muted-foreground hover:text-primary transition-colors"
+          >
+            {t("storyReroll")}
+          </button>
+        </div>
+      )}
+
+      {/* Progress + next */}
+      <div className="max-w-md w-full space-y-3">
+        {/* Progress dots */}
+        <div className="flex justify-center gap-1.5">
+          {Array.from({ length: total }, (_, i) => (
+            <div
+              key={i}
+              className={`h-1.5 w-1.5 rounded-full transition-colors ${
+                i <= progress ? "bg-primary" : "bg-border"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Next / Skip */}
+        {phase !== "meet" && phase !== "style" && !typing && (
+          <div className="flex justify-center gap-3">
+            <Button onClick={handleNext} size="sm">
+              {t("next")}
+            </Button>
+            {(phase === "name" || phase === "about" || phase === "interests") && (
+              <Button variant="ghost" size="sm" onClick={handleNext}>
+                {t("skip")}
+              </Button>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

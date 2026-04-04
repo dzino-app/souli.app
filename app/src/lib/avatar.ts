@@ -79,7 +79,7 @@ function pick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function randomAppearance(): AvatarAppearance {
+export function randomAppearance(): AvatarAppearance {
   const species = pick(SPECIES_LIST);
   const config = SPECIES_CONFIG[species];
   return {
@@ -100,7 +100,7 @@ const STORAGE_KEY = "dzino_avatar";
 // Set to true to randomize avatar on every refresh (for testing only)
 const DEV_RANDOMIZE = false;
 
-function generateSoundDNA(): SoundDNA {
+export function generateSoundDNA(): SoundDNA {
   const timbres: OscillatorType[] = ["square", "sawtooth", "triangle"];
   return {
     basePitch: 350 + Math.floor(Math.random() * 400),

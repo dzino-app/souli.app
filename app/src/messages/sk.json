@@ -69,8 +69,17 @@
     "q5option2": "Podrobne s vysvetlením",
     "next": "Ďalej",
     "previous": "Späť",
-    "finish": "Začať používať Dzino",
-    "skip": "Preskočiť"
+    "finish": "Poďme na to!",
+    "skip": "Preskočiť",
+    "storyIntro": "Ahoj! Ja som Džino — prvý Souli, aký kedy existoval. Bol som taký výnimočný, že podľa mňa pomenovali celú appku.",
+    "storyOrigin": "Kedysi dávno som bol sám. Ale potom som zistil, že každý človek si zaslúži vlastného Souliho — niekoho, kto si pamätá, počúva, a rastie s ním. Tak som sa rozhodol pomôcť ti vytvoriť si jedného.",
+    "storyName": "Povedz mi, ako sa voláš? Tvoj Souli by ťa chcel poznať od začiatku.",
+    "storyAbout": "Super! A povedz mi niečo o sebe — čomu sa venuješ, čo ťa baví? Tvoj Souli sa to naučí ako prvé.",
+    "storyInterests": "A čo ťa zaujíma? Aké témy, koníčky, vášne? Tvoj Souli bude vedieť, o čom sa s tebou rozprávať.",
+    "storyStyle": "Ešte jedna vec — ako sa chceš s Dzinom rozprávať?",
+    "storyBirth": "A teraz... pozeraj! Tvoj vlastný Souli sa práve rodí! Každý Souli je jedinečný — iný vzhľad, iný hlas, iná osobnosť. Tento je len tvoj.",
+    "storyMeet": "Tvoj Souli je pripravený!",
+    "storyReroll": "Iný vzhľad?"
   },
   "auth": {
     "loginTitle": "Prihlás sa",
