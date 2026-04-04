@@ -287,19 +287,33 @@ export async function getPublicAvatarDetail(
     return { avatar: null, soulFiles: [] };
   }
 
-  // Get public soul files for this avatar — include public_content
+  // Get public soul files with content
   const { data: soulFiles } = await supabase
     .from("soul_files")
-    .select("slug, display_name, category, public_content")
+    .select("slug, display_name, category, content, public_content, user_id")
     .eq("avatar_id", avatarId)
     .eq("is_public", true);
 
-  const mapped = (soulFiles ?? []).map((sf) => ({
-    slug: sf.slug as string,
-    display_name: sf.display_name as string,
-    category: sf.category as string,
-    content: (sf.public_content as string | null) ?? undefined,
-  }));
+  const mapped: Array<{ slug: string; display_name: string; category: string; content?: string }> = [];
+  for (const sf of soulFiles ?? []) {
+    // Prefer public_content, then content column, then fetch from storage
+    let content = (sf.public_content as string | null) || (sf.content as string | null) || undefined;
+    if (!content) {
+      const storagePath = `${sf.user_id}/${avatarId}/${sf.slug}.md`;
+      const { data: fileData } = await supabase.storage
+        .from("souls")
+        .download(storagePath);
+      if (fileData) {
+        content = await fileData.text();
+      }
+    }
+    mapped.push({
+      slug: sf.slug as string,
+      display_name: sf.display_name as string,
+      category: sf.category as string,
+      content,
+    });
+  }
 
   return {
     avatar: avatar as AvatarRow,

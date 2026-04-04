@@ -66,8 +66,8 @@ export default function AvatarDetailPage() {
   // Animation gallery state
   const [activeAnimation, setActiveAnimation] = useState<AvatarState>("idle");
 
-  // Collapsible soul file sections
-  const [expandedSlugs, setExpandedSlugs] = useState<Set<string>>(new Set());
+  // Soul files expanded by default
+  const [expandedSlugs, setExpandedSlugs] = useState<Set<string>>(new Set(["osobnost", "zaujmy", "humor", "ciele", "filozofia", "vztahy", "praca", "vyzvy"]));
 
   useEffect(() => {
     if (!id) return;
