@@ -2,7 +2,7 @@
 
 /**
  * Generate animated GIFs from pixel avatar frames.
- * Uses modern-gif for encoding, canvas for rendering.
+ * Canvas is auto-sized to fit the avatar across ALL frames (no cropping).
  */
 
 import { encodeAnimatedGif } from "./gif-encoder";
@@ -11,33 +11,68 @@ import { getResolution, generateCharacter } from "./pixel-art";
 import { ACTIVITY_ANIMATIONS } from "@/components/avatar/avatar-frames";
 import type { AvatarFrame } from "@/components/avatar/avatar-frames";
 
-const GIF_SIZE = 240;
+const BASE_SIZE = 200; // base avatar render size (pixels)
+
+/**
+ * Calculate the bounding box needed across all frames of an animation.
+ * Returns the total canvas size that ensures no frame is ever cropped.
+ */
+function calculateCanvasSize(
+  frames: AvatarFrame[],
+  resolution: number,
+): number {
+  const pixelSize = BASE_SIZE / resolution;
+  let maxExtent = BASE_SIZE / 2; // half-size from center
+
+  for (const frame of frames) {
+    const offsetX = Math.abs(frame.bodyOffsetX * (pixelSize / 8));
+    const offsetY = Math.abs(frame.bodyOffsetY * (pixelSize / 8));
+    const rotRad = Math.abs(frame.bodyRotation * Math.PI) / 180;
+
+    // Rotation expands the bounding box: rotated square corner distance
+    const diagonal = (BASE_SIZE / 2) * Math.SQRT2;
+    const rotExpand = diagonal * Math.sin(rotRad + Math.PI / 4);
+
+    const extent = Math.max(
+      BASE_SIZE / 2 + offsetX,
+      BASE_SIZE / 2 + offsetY,
+      rotExpand + Math.max(offsetX, offsetY),
+    );
+    maxExtent = Math.max(maxExtent, extent);
+  }
+
+  // Round up to even number, add small padding
+  return Math.ceil(maxExtent * 2) + 16;
+}
 
 function renderFrameToImageData(
   appearance: AvatarAppearance,
   level: number,
   frame: AvatarFrame,
+  canvasSize: number,
 ): ImageData {
   const resolution = getResolution(level);
   const grid = generateCharacter(appearance, resolution, frame, level);
-  const pixelSize = GIF_SIZE / resolution;
+  const pixelSize = BASE_SIZE / resolution;
 
   const canvas = document.createElement("canvas");
-  canvas.width = GIF_SIZE;
-  canvas.height = GIF_SIZE;
+  canvas.width = canvasSize;
+  canvas.height = canvasSize;
   const ctx = canvas.getContext("2d")!;
 
-  // Transparent background
-  ctx.clearRect(0, 0, GIF_SIZE, GIF_SIZE);
+  ctx.clearRect(0, 0, canvasSize, canvasSize);
 
-  // Apply frame transform
   const offsetX = frame.bodyOffsetX * (pixelSize / 8);
   const offsetY = frame.bodyOffsetY * (pixelSize / 8);
 
+  // Center the avatar in the (potentially larger) canvas
+  const centerX = canvasSize / 2;
+  const centerY = canvasSize / 2;
+
   ctx.save();
-  ctx.translate(GIF_SIZE / 2, GIF_SIZE / 2);
+  ctx.translate(centerX, centerY);
   ctx.rotate((frame.bodyRotation * Math.PI) / 180);
-  ctx.translate(-GIF_SIZE / 2 + offsetX, -GIF_SIZE / 2 + offsetY);
+  ctx.translate(-BASE_SIZE / 2 + offsetX, -BASE_SIZE / 2 + offsetY);
 
   for (let row = 0; row < resolution; row++) {
     for (let col = 0; col < resolution; col++) {
@@ -51,7 +86,7 @@ function renderFrameToImageData(
 
   ctx.restore();
 
-  return ctx.getImageData(0, 0, GIF_SIZE, GIF_SIZE);
+  return ctx.getImageData(0, 0, canvasSize, canvasSize);
 }
 
 export async function generateAvatarGif(
@@ -59,22 +94,20 @@ export async function generateAvatarGif(
   level: number,
   activity: AvatarState,
 ): Promise<Blob> {
-  const animKey = activity;
-  const animation = ACTIVITY_ANIMATIONS[animKey] || ACTIVITY_ANIMATIONS.idle;
+  const animation = ACTIVITY_ANIMATIONS[activity] || ACTIVITY_ANIMATIONS.idle;
   const delay = Math.round(1000 / animation.fps);
+  const resolution = getResolution(level);
+  const canvasSize = calculateCanvasSize(animation.frames, resolution);
 
   const frames = animation.frames.map((frame) => ({
-    imageData: renderFrameToImageData(appearance, level, frame),
+    imageData: renderFrameToImageData(appearance, level, frame, canvasSize),
     delay,
   }));
 
-  const gif = encodeAnimatedGif(frames, GIF_SIZE, GIF_SIZE);
+  const gif = encodeAnimatedGif(frames, canvasSize, canvasSize);
   return new Blob([gif.buffer as ArrayBuffer], { type: "image/gif" });
 }
 
-/**
- * Generate and trigger download of a GIF
- */
 export async function downloadAvatarGif(
   name: string,
   appearance: AvatarAppearance,
@@ -90,9 +123,6 @@ export async function downloadAvatarGif(
   URL.revokeObjectURL(url);
 }
 
-/**
- * Generate GIF and share via Web Share API (mobile messengers)
- */
 export async function shareAvatarGif(
   name: string,
   appearance: AvatarAppearance,
@@ -115,14 +145,10 @@ export async function shareAvatarGif(
     }
   }
 
-  // Fallback: download
   downloadAvatarGif(name, appearance, level, activity);
   return false;
 }
 
-/**
- * Generate GIF and upload to Supabase Storage for public URL
- */
 export async function uploadAvatarGif(
   avatarId: string,
   appearance: AvatarAppearance,
