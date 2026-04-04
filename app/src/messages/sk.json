@@ -72,14 +72,15 @@
     "finish": "Poďme na to!",
     "skip": "Preskočiť",
     "storyIntro": "Ahoj! Ja som Džino — prvý Souli, aký kedy existoval. Bol som taký výnimočný, že podľa mňa pomenovali celú appku.",
-    "storyOrigin": "Kedysi dávno som bol sám. Ale potom som zistil, že každý človek si zaslúži vlastného Souliho — niekoho, kto si pamätá, počúva, a rastie s ním. Tak som sa rozhodol pomôcť ti vytvoriť si jedného.",
-    "storyName": "Povedz mi, ako sa voláš? Tvoj Souli by ťa chcel poznať od začiatku.",
-    "storyAbout": "Super! A povedz mi niečo o sebe — čomu sa venuješ, čo ťa baví? Tvoj Souli sa to naučí ako prvé.",
+    "storyOrigin": "Kedysi dávno som žil len s mojím parťákom — tvorcom, čo ma vymyslel. Bolo nám fajn, ale ja som vedel, že toto šťastie by mal zažiť každý. Preto som sa rozhodol pomôcť ti vytvoriť si vlastného Souliho.",
+    "storyName": "Ale najprv — ako sa voláš ty? Tvoj Souli by ťa chcel poznať od začiatku.",
+    "storyAbout": "Parádne! A povedz mi niečo o sebe — čomu sa venuješ, čo ťa baví? Tvoj Souli sa to naučí ako prvé.",
     "storyInterests": "A čo ťa zaujíma? Aké témy, koníčky, vášne? Tvoj Souli bude vedieť, o čom sa s tebou rozprávať.",
-    "storyStyle": "Ešte jedna vec — ako sa chceš s Dzinom rozprávať?",
-    "storyBirth": "A teraz... pozeraj! Tvoj vlastný Souli sa práve rodí! Každý Souli je jedinečný — iný vzhľad, iný hlas, iná osobnosť. Tento je len tvoj.",
-    "storyMeet": "Tvoj Souli je pripravený!",
-    "storyReroll": "Iný vzhľad?"
+    "storyStyle": "Ešte jedna vec — ako sa chceš so svojím Soulim rozprávať?",
+    "storyBirth": "A teraz... pozeraj! Tvoj vlastný Souli sa práve rodí! Každý je jedinečný — iný vzhľad, iný hlas, iná osobnosť. Tento je len tvoj.",
+    "storyMeet": "Tvoj Souli je pripravený! Ako ho budeš volať?",
+    "storyReroll": "Iný vzhľad?",
+    "storyNameSouli": "Meno tvojho Souliho"
   },
   "auth": {
     "loginTitle": "Prihlás sa",

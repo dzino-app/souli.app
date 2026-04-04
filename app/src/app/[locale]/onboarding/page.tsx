@@ -34,12 +34,22 @@ const DZINO_SOUND_DNA = {
 
 type Phase = "intro" | "story" | "name" | "about" | "interests" | "style" | "birth" | "meet";
 
+// Generate a cute, pronounceable name from syllable combinations
+function randomSouliName(): string {
+  const starts = ["Ki", "Lu", "Mo", "No", "Pi", "Zu", "Ba", "To", "Mi", "Ri", "Su", "Yu", "Ko", "Ta", "Na", "Bu", "Fi", "Zo", "Ma", "Ni"];
+  const ends = ["ki", "lo", "mi", "ri", "ko", "ni", "po", "chi", "bi", "to", "shi", "ra", "li", "ka", "no", "ba", "fi", "zu"];
+  const s = starts[Math.floor(Math.random() * starts.length)];
+  const e = ends[Math.floor(Math.random() * ends.length)];
+  return s + e;
+}
+
 export default function OnboardingPage() {
   const t = useTranslations("onboarding");
   const router = useRouter();
   const [phase, setPhase] = useState<Phase>("intro");
   const [dzState, setDzState] = useState<AvatarState>("waving");
   const [name, setName] = useState("");
+  const [souliName, setSouliName] = useState(() => randomSouliName());
   const [about, setAbout] = useState("");
   const [interests, setInterests] = useState("");
   const [style, setStyle] = useState<"brief" | "detailed" | "">("");
@@ -120,7 +130,7 @@ export default function OnboardingPage() {
     if (newAppearance) {
       data.appearance = newAppearance;
     }
-    data.name = name || "Souli";
+    data.name = souliName || "Souli";
     data.soundDNA = generateSoundDNA();
     saveAvatarData(data);
 
@@ -240,8 +250,17 @@ export default function OnboardingPage() {
       {/* Meet phase: name your Souli + finish */}
       {phase === "meet" && !typing && (
         <div className="max-w-md w-full text-center space-y-4">
-          <p className="text-lg font-bold">{t("storyMeet")}</p>
-          <div className="flex gap-2 justify-center">
+          <input
+            type="text"
+            value={souliName}
+            onChange={(e) => setSouliName(e.target.value)}
+            placeholder={t("storyNameSouli")}
+            className="w-full rounded-xl border bg-background px-4 py-3 text-center text-lg font-bold focus:outline-none focus:ring-2 focus:ring-primary"
+            autoFocus
+            maxLength={20}
+            onKeyDown={(e) => { if (e.key === "Enter" && souliName.trim()) handleFinish(); }}
+          />
+          <div className="flex gap-3 justify-center">
             <Button size="lg" onClick={handleFinish} className="px-8">
               {t("finish")}
             </Button>

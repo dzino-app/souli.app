@@ -71,14 +71,15 @@
     "finish": "Let's go!",
     "skip": "Skip",
     "storyIntro": "Hey! I'm Dzino — the very first Souli ever created. I was so special, they named the entire app after me.",
-    "storyOrigin": "Once upon a time, I was alone. But then I realized everyone deserves their own Souli — someone who remembers, listens, and grows with them. So I decided to help you create one.",
-    "storyName": "Tell me, what's your name? Your Souli would like to know you from the start.",
+    "storyOrigin": "I used to live just with my buddy — the creator who dreamed me up. We were happy, but I knew this feeling should be for everyone. So I decided to help you create your own Souli.",
+    "storyName": "But first — what's your name? Your Souli would like to know you from the start.",
     "storyAbout": "Awesome! Now tell me a bit about yourself — what do you do, what do you enjoy? Your Souli will learn this first.",
     "storyInterests": "And what are you into? Topics, hobbies, passions? Your Souli will know what to talk about with you.",
-    "storyStyle": "One more thing — how do you like to chat?",
-    "storyBirth": "And now... watch! Your very own Souli is being born! Every Souli is unique — different look, different voice, different personality. This one is yours alone.",
-    "storyMeet": "Your Souli is ready!",
-    "storyReroll": "Different look?"
+    "storyStyle": "One more thing — how do you like to chat with your Souli?",
+    "storyBirth": "And now... watch! Your very own Souli is being born! Each one is unique — different look, different voice, different personality. This one is yours alone.",
+    "storyMeet": "Your Souli is ready! What will you call them?",
+    "storyReroll": "Different look?",
+    "storyNameSouli": "Your Souli's name"
   },
   "chat": {
     "yourQuestion": "Your question",
