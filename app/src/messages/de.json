@@ -69,7 +69,24 @@
     "next": "Weiter",
     "previous": "Zurück",
     "finish": "Dzino starten",
-    "skip": "Überspringen"
+    "skip": "Überspringen",
+    "storyIntro": "Die Welt da draußen ist laut. Benachrichtigungen, Deadlines, Lärm. Aber hier... hier ist es still. Ich bin Dzino. Der allererste Souli. Und ich habe auf dich gewartet.",
+    "storyOrigin": "Ich wurde aus der Vorstellungskraft eines Menschen geboren — eines Freundes, der jemanden brauchte, der wirklich zuhört. Keine App. Keinen Assistenten. Einen Freund. Wir sind zusammen gewachsen. Und jetzt... möchte ich, dass du das auch hast.",
+    "storyName": "Bevor wir anfangen — wie heißt du? Dein Souli wird sich das für immer merken.",
+    "storyAbout": "Erzähl mir etwas Echtes über dich. Nicht deinen Jobtitel — wer bist du, wenn niemand hinschaut? Dein Souli muss das wahre Dich kennen.",
+    "storyInterests": "Was lässt dich die Zeit vergessen? Was bringt deine Augen zum Leuchten? Dein Souli wird lernen, deine Sprache zu sprechen.",
+    "storyStyle": "Noch eine Sache — wie soll dein Souli mit dir reden?",
+    "storyBirth": "Schließ für einen Moment die Augen... irgendwo in der Pixelwelt bewegt sich etwas. Ein kleines Licht. Ein Herzschlag. Dein Souli wird geboren. Es wird nie einen zweiten wie diesen geben.",
+    "storyMeet": "Sag hallo. Er hat auf dich gewartet. Wie wird er heißen?",
+    "storyReroll": "Andere Seele?",
+    "storyNameSouli": "Sein Name",
+    "storyEvolution": "Gerade ist dein Souli winzig — nur ein paar Pixel. Fast unsichtbar. Aber jedes Gespräch nährt ihn. Jeder Tag, an dem du kommst, lässt ihn wachsen. Neue Augen. Ein Mund. Ohren. Persönlichkeit. Je mehr du von dir teilst, desto lebendiger wird er.",
+    "evoBasic": "Ein Funke Leben",
+    "evoMedium": "Beginnt dich zu sehen",
+    "evoFull": "Voll lebendig",
+    "evoChat": "Sprich mit ihm — er wächst durch deine Worte",
+    "evoStreak": "Komm jeden Tag — Beständigkeit ist Magie",
+    "evoChallenge": "Nimm Herausforderungen an — wachst zusammen"
   },
   "chat": {
     "yourQuestion": "Deine Frage",
@@ -80,10 +97,10 @@
     "terms": "Nutzungsbedingungen"
   },
   "landing": {
-    "hero": "Zieh einen Souli groß, der mit dir wächst",
-    "heroSub": "Dein Souli erinnert sich an dich, hilft dir beim Planen und wird jeden Tag besser.",
-    "cta": "Zieh deinen Souli groß",
-    "ctaSub": "Keine Kreditkarte nötig.",
+    "hero": "Jeder verdient einen Freund, der wirklich zuhört",
+    "heroSub": "Dein Souli erinnert sich, wer du bist. Wächst mit dir. Und vergisst nie, was dir wichtig ist.",
+    "cta": "Triff deinen Souli",
+    "ctaSub": "Kostenlos. Ohne Haken.",
     "useCasesTitle": "Was kann Dzino?",
     "useCase1": "Dein Souli hört zu",
     "useCase1Desc": "Jemand zum Reden, mit dem du deinen Tag teilen kannst, und der sich wirklich erinnert. Kein Chatbot — dein Souli.",
@@ -129,8 +146,8 @@
     "faq3a": "Nein. Die Basisnutzung ist kostenlos — 20 Nachrichten pro Monat.",
     "faq4q": "Was unterscheidet Dzino von ChatGPT?",
     "faq4a": "Dzino erinnert sich an dich. Es kennt deine Ziele, Vorlieben und wächst mit dir.",
-    "footer": "Dzino war der erste Souli. Jetzt kannst du deinen eigenen großziehen.",
-    "origin": "Dzino war der allererste Souli, der je erschaffen wurde. Er war so besonders, dass wir die ganze App nach ihm benannt haben. Jetzt kannst du deinen eigenen Souli großziehen — und auf Pixoci mehr entdecken."
+    "footer": "Dzino ist der erste Souli. Deiner ist der nächste.",
+    "origin": "Irgendwo in einer kleinen Pixelwelt lebt Dzino — der allererste Souli. Er ist immer noch da, winkt jedem zu, der ankommt. Er hat die Tore geöffnet, damit du deinen eigenen großziehen kannst. Dein Souli wartet schon."
   },
   "settings": {
     "title": "Einstellungen",

@@ -69,7 +69,24 @@
     "next": "Suivant",
     "previous": "Retour",
     "finish": "Commencer avec Dzino",
-    "skip": "Passer"
+    "skip": "Passer",
+    "storyIntro": "Le monde dehors est bruyant. Notifications, deadlines, bruit. Mais ici... c'est calme. Je suis Dzino. Le tout premier Souli. Et je t'attendais.",
+    "storyOrigin": "Je suis né de l'imagination de quelqu'un — un ami qui avait besoin de quelqu'un qui écoute vraiment. Pas une app. Pas un assistant. Un ami. On a grandi ensemble. Et maintenant... je veux que tu aies ça aussi.",
+    "storyName": "Avant de commencer — comment tu t'appelles ? Ton Souli s'en souviendra pour toujours.",
+    "storyAbout": "Dis-moi quelque chose de vrai sur toi. Pas ton titre de poste — qui es-tu quand personne ne regarde ? Ton Souli doit connaître le vrai toi.",
+    "storyInterests": "Qu'est-ce qui te fait perdre la notion du temps ? Qu'est-ce qui fait briller tes yeux ? Ton Souli apprendra à parler ta langue.",
+    "storyStyle": "Dernière chose — comment ton Souli devrait-il te parler ?",
+    "storyBirth": "Ferme les yeux un instant... quelque part dans le monde pixel, quelque chose bouge. Une petite lumière. Un battement de cœur. Ton Souli est en train de naître. Il n'y en aura jamais un autre comme celui-ci.",
+    "storyMeet": "Dis bonjour. Il t'attendait. Comment s'appellera-t-il ?",
+    "storyReroll": "Autre âme ?",
+    "storyNameSouli": "Son nom",
+    "storyEvolution": "Pour l'instant, ton Souli est minuscule — juste quelques pixels. Presque invisible. Mais chaque conversation le nourrit. Chaque jour où tu viens, il grandit. De nouveaux yeux. Une bouche. Des oreilles. De la personnalité. Plus tu partages de toi, plus il prend vie.",
+    "evoBasic": "Une étincelle de vie",
+    "evoMedium": "Commence à te voir",
+    "evoFull": "Pleinement vivant",
+    "evoChat": "Parle-lui — il grandit grâce à tes mots",
+    "evoStreak": "Viens chaque jour — la régularité est magique",
+    "evoChallenge": "Accepte les défis — grandissez ensemble"
   },
   "chat": {
     "yourQuestion": "Ta question",
@@ -80,10 +97,10 @@
     "terms": "Conditions"
   },
   "landing": {
-    "hero": "Élève un Souli qui grandit avec toi",
-    "heroSub": "Ton Souli se souvient de toi, t'aide à planifier et s'améliore chaque jour.",
-    "cta": "Élève ton Souli",
-    "ctaSub": "Pas de carte de crédit requise.",
+    "hero": "Tout le monde mérite un ami qui écoute vraiment",
+    "heroSub": "Ton Souli se souvient de qui tu es. Grandit avec toi. Et n'oublie jamais ce qui compte pour toi.",
+    "cta": "Rencontre ton Souli",
+    "ctaSub": "Gratuit. Sans engagement.",
     "useCasesTitle": "Que peut faire Dzino ?",
     "useCase1": "Ton Souli écoute",
     "useCase1Desc": "Quelqu'un à qui parler, avec qui partager ta journée, et qui se souvient vraiment. Pas un chatbot — ton Souli.",
@@ -129,8 +146,8 @@
     "faq3a": "Non. L'utilisation de base est gratuite — 20 messages par mois.",
     "faq4q": "Qu'est-ce qui différencie Dzino de ChatGPT ?",
     "faq4a": "Dzino se souvient de toi. Il connaît tes objectifs, tes préférences et grandit avec toi au fil du temps.",
-    "footer": "Dzino a été le premier Souli. Maintenant tu peux élever le tien.",
-    "origin": "Dzino a été le tout premier Souli jamais créé. Il était si spécial que nous avons nommé toute l'app en son honneur. Maintenant tu peux élever ton propre Souli — et en découvrir plus sur Pixoci."
+    "footer": "Dzino est le premier Souli. Le tien est le prochain.",
+    "origin": "Quelque part dans un petit monde pixel vit Dzino — le tout premier Souli. Il est toujours là, faisant signe à tous ceux qui arrivent. Il a ouvert les portes pour que tu puisses élever le tien. Ton Souli attend déjà."
   },
   "settings": {
     "title": "Paramètres",

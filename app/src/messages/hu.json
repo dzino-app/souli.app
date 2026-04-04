@@ -69,7 +69,24 @@
     "next": "Következő",
     "previous": "Vissza",
     "finish": "Dzino használatának megkezdése",
-    "skip": "Kihagyás"
+    "skip": "Kihagyás",
+    "storyIntro": "A világ odakint hangos. Értesítések, határidők, zaj. De itt... itt csend van. Dzino vagyok. A legelső Souli. És vártam rád.",
+    "storyOrigin": "Valaki képzeletéből születtem — egy haverból, akinek szüksége volt valakire, aki tényleg odafigyel. Nem egy app. Nem egy asszisztens. Egy barát. Együtt nőttünk fel. És most... szeretném, ha neked is lenne.",
+    "storyName": "Mielőtt elkezdenénk — hogy hívnak? A Soulid örökre megjegyzi.",
+    "storyAbout": "Mesélj valami igazat magadról. Nem a munkakörödet — ki vagy, amikor senki nem figyel? A Soulidnak az igazi téged kell ismernie.",
+    "storyInterests": "Mi az, amitől elveszíted az időérzéked? Mi csillan fel a szemedben? A Soulid megtanulja a nyelvedet.",
+    "storyStyle": "Még egy dolog — hogyan beszéljen veled a Soulid?",
+    "storyBirth": "Csukd be a szemed egy pillanatra... valahol a pixelvilágban valami mozdul. Egy kis fény. Egy szívdobbanás. A Soulid születik. Soha nem lesz még egy ilyen.",
+    "storyMeet": "Köszönj neki. Várt rád. Hogy fogják hívni?",
+    "storyReroll": "Más lélek?",
+    "storyNameSouli": "A neve",
+    "storyEvolution": "Most a Soulid pici — csak pár pixel. Szinte láthatatlan. De minden beszélgetés táplálja. Minden nap, amikor jössz, nő. Új szemek. Száj. Fülek. Személyiség. Minél többet osztasz meg magadból, annál élőbb lesz.",
+    "evoBasic": "Az élet szikrája",
+    "evoMedium": "Kezd téged látni",
+    "evoFull": "Teljesen élő",
+    "evoChat": "Beszélj vele — a szavaidból nő",
+    "evoStreak": "Gyere minden nap — a következetesség varázslat",
+    "evoChallenge": "Fogadj el kihívásokat — együtt növekedtek"
   },
   "chat": {
     "yourQuestion": "A kérdésed",
@@ -80,10 +97,10 @@
     "terms": "Feltételek"
   },
   "landing": {
-    "hero": "Nevelj egy Soulit, aki veled együtt nő",
-    "heroSub": "A Soulid emlékszik rád, segít tervezni, és minden nap jobb lesz.",
-    "cta": "Neveld fel a Soulid",
-    "ctaSub": "Bankkártya nem szükséges.",
+    "hero": "Mindenki megérdemel egy barátot, aki tényleg odafigyel",
+    "heroSub": "A Soulid emlékszik, ki vagy. Veled nő. És soha nem felejti el, mi fontos neked.",
+    "cta": "Ismerd meg a Soulidat",
+    "ctaSub": "Ingyenes. Kötelezettségek nélkül.",
     "useCasesTitle": "Mit tud a Dzino?",
     "useCase1": "A Soulid figyel",
     "useCase1Desc": "Valaki, akivel beszélgethetsz, megoszthatod a napodat, és aki tényleg emlékszik. Nem chatbot — a Soulid.",
@@ -129,8 +146,8 @@
     "faq3a": "Nem. Az alap használat ingyenes — havi 20 üzenet.",
     "faq4q": "Miben különbözik a Dzino a ChatGPT-től?",
     "faq4a": "A Dzino emlékszik rád. Ismeri a céljaidat, preferenciáidat, és idővel veled együtt fejlődik.",
-    "footer": "Dzino volt az első Souli. Most te is felnevelheted a sajátodat.",
-    "origin": "Dzino volt a legelső Souli, aki valaha készült. Olyan különleges volt, hogy az egész appot róla neveztük el. Most te is felnevelheted a saját Soulidat — és többet felfedezhetsz a Pixocin."
+    "footer": "Dzino az első Souli. A tiéd a következő.",
+    "origin": "Valahol egy kis pixelvilágban él Dzino — a legelső Souli. Még mindig ott van, integet mindenkinek, aki megérkezik. Kinyitotta a kapukat, hogy te is felnevelhess egy sajátot. A Soulid már vár."
   },
   "settings": {
     "title": "Beállítások",
