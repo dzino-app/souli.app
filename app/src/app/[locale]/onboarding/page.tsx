@@ -9,6 +9,7 @@ import { playAvatarSound } from "@/lib/pixel-sounds";
 import { getAvatarData, saveAvatarData, randomAppearance, generateSoundDNA } from "@/lib/avatar";
 import { saveSoulFile } from "@/lib/soul";
 import { addXp } from "@/lib/gamification";
+import { HatchingEgg } from "@/components/avatar/hatching-egg";
 import type { AvatarState, AvatarAppearance } from "@/lib/avatar";
 
 // Dzino's appearance (the original mascot)
@@ -32,7 +33,7 @@ const DZINO_SOUND_DNA = {
   harmonicShift: 50,
 };
 
-type Phase = "intro" | "story" | "name" | "about" | "interests" | "style" | "birth" | "meet";
+type Phase = "intro" | "story" | "name" | "about" | "interests" | "style" | "birth" | "evolution" | "meet";
 
 // Generate a cute, pronounceable name from syllable combinations
 function randomSouliName(): string {
@@ -55,6 +56,7 @@ export default function OnboardingPage() {
   const [style, setStyle] = useState<"brief" | "detailed" | "">("");
   const [newAppearance, setNewAppearance] = useState<AvatarAppearance | null>(null);
   const [newSouliState, setNewSouliState] = useState<AvatarState>("idle");
+  const [hatched, setHatched] = useState(false);
   const [typedText, setTypedText] = useState("");
   const [typing, setTyping] = useState(false);
 
@@ -100,20 +102,22 @@ export default function OnboardingPage() {
     } else if (phase === "birth") {
       setDzState("happy");
       playAvatarSound("happy", DZINO_SOUND_DNA);
-      // Generate the new Souli
       const app = randomAppearance();
       setNewAppearance(app);
-      typeText(t("storyBirth"), () => {
-        setTimeout(() => setNewSouliState("waving"), 500);
-      });
+      setHatched(false);
+      typeText(t("storyBirth"));
+    } else if (phase === "evolution") {
+      setDzState("talking");
+      typeText(t("storyEvolution"));
     } else if (phase === "meet") {
       setDzState("waving");
+      typeText(t("storyMeet"));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
 
   function handleNext() {
-    const order: Phase[] = ["intro", "story", "name", "about", "interests", "style", "birth", "meet"];
+    const order: Phase[] = ["intro", "story", "name", "about", "interests", "style", "birth", "evolution", "meet"];
     const idx = order.indexOf(phase);
     if (idx < order.length - 1) {
       setPhase(order[idx + 1]);
@@ -150,8 +154,8 @@ export default function OnboardingPage() {
     router.push("/");
   }
 
-  const progress = ["intro", "story", "name", "about", "interests", "style", "birth", "meet"].indexOf(phase);
-  const total = 8;
+  const progress = ["intro", "story", "name", "about", "interests", "style", "birth", "evolution", "meet"].indexOf(phase);
+  const total = 9;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[70vh] gap-6 px-4">
@@ -162,8 +166,21 @@ export default function OnboardingPage() {
         </div>
       )}
 
-      {/* Birth phase: show both Dzino and new Souli */}
-      {(phase === "birth" || phase === "meet") && newAppearance && (
+      {/* Birth phase: hatching egg */}
+      {phase === "birth" && newAppearance && (
+        <div className="flex items-end gap-6">
+          <div style={{ animation: "float 3s ease-in-out infinite" }}>
+            <PixelAvatar state={dzState} appearance={DZINO_APPEARANCE} level={10} size="md" />
+          </div>
+          <HatchingEgg
+            appearance={newAppearance}
+            onHatched={() => setHatched(true)}
+          />
+        </div>
+      )}
+
+      {/* Evolution + Meet phases: show Dzino and hatched Souli */}
+      {(phase === "evolution" || phase === "meet") && newAppearance && (
         <div className="flex items-end gap-6">
           <div style={{ animation: "float 3s ease-in-out infinite" }}>
             <PixelAvatar state={dzState} appearance={DZINO_APPEARANCE} level={10} size="md" />
@@ -248,6 +265,43 @@ export default function OnboardingPage() {
       )}
 
       {/* Meet phase: name your Souli + finish */}
+      {/* Evolution explainer */}
+      {phase === "evolution" && !typing && (
+        <div className="max-w-md w-full">
+          <div className="grid grid-cols-3 gap-3 text-center">
+            <div className="bg-card border rounded-xl p-3">
+              <div className="text-2xl mb-1">4x4</div>
+              <p className="text-[10px] text-muted-foreground font-medium">Level 1-2</p>
+              <p className="text-[10px] text-muted-foreground">{t("evoBasic")}</p>
+            </div>
+            <div className="bg-card border rounded-xl p-3">
+              <div className="text-2xl mb-1">8x8</div>
+              <p className="text-[10px] text-muted-foreground font-medium">Level 6-10</p>
+              <p className="text-[10px] text-muted-foreground">{t("evoMedium")}</p>
+            </div>
+            <div className="bg-card border rounded-xl p-3">
+              <div className="text-2xl mb-1">16x16</div>
+              <p className="text-[10px] text-muted-foreground font-medium">Level 16+</p>
+              <p className="text-[10px] text-muted-foreground">{t("evoFull")}</p>
+            </div>
+          </div>
+          <div className="mt-3 space-y-1.5 px-1">
+            <div className="flex items-center gap-2 text-xs">
+              <span>💬</span>
+              <span className="text-muted-foreground">{t("evoChat")}</span>
+            </div>
+            <div className="flex items-center gap-2 text-xs">
+              <span>🔥</span>
+              <span className="text-muted-foreground">{t("evoStreak")}</span>
+            </div>
+            <div className="flex items-center gap-2 text-xs">
+              <span>🎯</span>
+              <span className="text-muted-foreground">{t("evoChallenge")}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {phase === "meet" && !typing && (
         <div className="max-w-md w-full text-center space-y-4">
           <input
@@ -289,7 +343,7 @@ export default function OnboardingPage() {
         </div>
 
         {/* Next / Skip */}
-        {phase !== "meet" && phase !== "style" && !typing && (
+        {phase !== "meet" && phase !== "style" && !(phase === "birth" && !hatched) && !typing && (
           <div className="flex justify-center gap-3">
             <Button onClick={handleNext} size="sm">
               {t("next")}

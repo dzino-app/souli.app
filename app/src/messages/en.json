@@ -79,7 +79,14 @@
     "storyBirth": "And now... watch! Your very own Souli is being born! Each one is unique — different look, different voice, different personality. This one is yours alone.",
     "storyMeet": "Your Souli is ready! What will you call them?",
     "storyReroll": "Different look?",
-    "storyNameSouli": "Your Souli's name"
+    "storyNameSouli": "Your Souli's name",
+    "storyEvolution": "Your Souli is tiny right now — just 4x4 pixels. But the more you chat, the more it grows. Each level adds details — eyes, mouth, ears, accessories. At level 16, it'll be 16x16 pixels and look completely different!",
+    "evoBasic": "Simple shape",
+    "evoMedium": "Face, ears, accessories",
+    "evoFull": "Full detail",
+    "evoChat": "Messages = XP points",
+    "evoStreak": "Daily streaks = bonus XP",
+    "evoChallenge": "Challenges = big boost"
   },
   "chat": {
     "yourQuestion": "Your question",

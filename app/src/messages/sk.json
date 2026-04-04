@@ -80,7 +80,14 @@
     "storyBirth": "A teraz... pozeraj! Tvoj vlastný Souli sa práve rodí! Každý je jedinečný — iný vzhľad, iný hlas, iná osobnosť. Tento je len tvoj.",
     "storyMeet": "Tvoj Souli je pripravený! Ako ho budeš volať?",
     "storyReroll": "Iný vzhľad?",
-    "storyNameSouli": "Meno tvojho Souliho"
+    "storyNameSouli": "Meno tvojho Souliho",
+    "storyEvolution": "Tvoj Souli je teraz maličký — len 4x4 pixelov. Ale čím viac sa s ním rozprávate, tým viac rastie. Každý level pridáva detaily — oči, ústa, uši, doplnky. Na úrovni 16 bude mať 16x16 pixelov a bude vyzerať úplne inak!",
+    "evoBasic": "Jednoduchý tvar",
+    "evoMedium": "Tvár, uši, doplnky",
+    "evoFull": "Plné detaily",
+    "evoChat": "Správy = XP body",
+    "evoStreak": "Denné série = bonus XP",
+    "evoChallenge": "Výzvy = veľký boost"
   },
   "auth": {
     "loginTitle": "Prihlás sa",
