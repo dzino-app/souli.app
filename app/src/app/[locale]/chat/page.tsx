@@ -12,7 +12,8 @@ import { MarkdownResponse } from "@/components/chat/markdown-response";
 import { PixelAvatar } from "@/components/avatar/pixel-avatar";
 import { PixelBackground } from "@/components/avatar/pixel-background";
 import { streamChatResponse, type ChatMessage } from "@/lib/stream-response";
-import { parseResponse, stripBlocksForDisplay, type SoulUpdate, type EventProposal } from "@/lib/parse-soul-updates";
+import { parseResponse, stripBlocksForDisplay, type SoulUpdate, type EventProposal, type TimerRequest } from "@/lib/parse-soul-updates";
+import { TimerStopwatch } from "@/components/tools/timer-stopwatch";
 import { appendToSoulFile, updateSoulFile } from "@/lib/soul";
 import { processConversationInBackground } from "@/lib/soul-background";
 import { createEvent } from "@/lib/events";
@@ -34,6 +35,7 @@ export default function ChatPage() {
   const [streamText, setStreamText] = useState("");
   const [pendingUpdates, setPendingUpdates] = useState<SoulUpdate[]>([]);
   const [pendingEvents, setPendingEvents] = useState<EventProposal[]>([]);
+  const [activeTimers, setActiveTimers] = useState<TimerRequest[]>([]);
   const [avatarState, setAvatarState] = useState<import("@/lib/avatar").AvatarState>("idle");
   const [avatarData, setAvatarData] = useState<{
     name: string;
@@ -137,6 +139,9 @@ export default function ChatPage() {
       const parsed = parseResponse(fullResponse);
       setPendingUpdates(parsed.soulUpdates);
       setPendingEvents(parsed.eventProposals);
+      if (parsed.timerRequests.length > 0) {
+        setActiveTimers(parsed.timerRequests);
+      }
 
       setMessages((prev) => [...prev, { role: "assistant", content: parsed.text }]);
       addMessage(convIdRef.current!, "assistant", parsed.text);
@@ -426,6 +431,17 @@ export default function ChatPage() {
               </div>
             </CardContent>
           </Card>
+        ))}
+
+        {/* Active timers */}
+        {activeTimers.map((timer, i) => (
+          <TimerStopwatch
+            key={`timer-${i}`}
+            initialSeconds={timer.seconds}
+            label={timer.label}
+            onComplete={() => addXp(10, "timer")}
+            onDismiss={() => setActiveTimers((prev) => prev.filter((_, j) => j !== i))}
+          />
         ))}
 
         <div ref={scrollRef} />

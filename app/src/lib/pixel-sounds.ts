@@ -4,6 +4,7 @@
 // Each Souli gets a unique "voice" — SoundDNA stored with avatar data
 
 import type { SoundDNA } from "@/lib/avatar";
+import { getUserSettings } from "@/lib/user-settings";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -158,6 +159,61 @@ const SOUND_MAP: Record<string, (dna: SoundDNA) => void> = {
 };
 
 export function playAvatarSound(state: string, dna: SoundDNA) {
+  if (!getUserSettings().soundEnabled) return;
   const fn = SOUND_MAP[state];
   if (fn) fn(dna);
+}
+
+// Timer/stopwatch sounds
+export function playTimerTick() {
+  if (!getUserSettings().soundEnabled) return;
+  const ctx = getCtx();
+  if (!ctx) return;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = "square";
+  osc.frequency.setValueAtTime(800, ctx.currentTime);
+  gain.gain.setValueAtTime(0.05, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start(ctx.currentTime);
+  osc.stop(ctx.currentTime + 0.05);
+}
+
+export function playTimerComplete() {
+  if (!getUserSettings().soundEnabled) return;
+  const ctx = getCtx();
+  if (!ctx) return;
+  // Victory fanfare
+  const notes = [523, 659, 784, 1047, 1319];
+  notes.forEach((freq, i) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "square";
+    osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.12);
+    gain.gain.setValueAtTime(0.12, ctx.currentTime + i * 0.12);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.12 + 0.2);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(ctx.currentTime + i * 0.12);
+    osc.stop(ctx.currentTime + i * 0.12 + 0.2);
+  });
+}
+
+export function playStopwatchLap() {
+  if (!getUserSettings().soundEnabled) return;
+  const ctx = getCtx();
+  if (!ctx) return;
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = "triangle";
+  osc.frequency.setValueAtTime(1200, ctx.currentTime);
+  osc.frequency.linearRampToValueAtTime(600, ctx.currentTime + 0.1);
+  gain.gain.setValueAtTime(0.1, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start(ctx.currentTime);
+  osc.stop(ctx.currentTime + 0.15);
 }

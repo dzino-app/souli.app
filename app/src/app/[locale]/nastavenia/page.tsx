@@ -68,6 +68,11 @@ const FEATURE_TOGGLES: FeatureToggle[] = [
     label: "Upozornenia na v\u00fdzvy",
     description: "Pripomienky o denn\u00fdch v\u00fdzvach",
   },
+  {
+    key: "soundEnabled",
+    label: "Zvuky",
+    description: "8-bitov\u00e9 zvuky avat\u00e1ra a \u010dasova\u010da",
+  },
 ];
 
 export default function SettingsPage() {

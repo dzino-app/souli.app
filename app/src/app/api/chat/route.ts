@@ -61,6 +61,17 @@ popis: <popis>
 pripomienka: <minúty pred>
 :::
 
+== ČASOVAČ ==
+
+Ak výzva alebo aktivita vyžaduje časovanie (meditácia, dýchanie, strečing, pauza):
+
+:::casovac
+sekundy: <počet sekúnd>
+nazov: <krátky popis>
+:::
+
+Príklady: 5 minút ticha = sekundy: 300, box breathing = sekundy: 240
+
 == NÁLADA ==
 
 Na konci KAŽDEJ odpovede pridaj blok nálady:

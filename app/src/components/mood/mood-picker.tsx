@@ -13,12 +13,33 @@ const MOODS = [
   { value: 5 as const, emoji: "😊", label: "Super!", ring: "ring-gold" },
 ];
 
-const ENCOURAGEMENTS = [
-  "Ďakujem, že si sa podelil!",
-  "Zapísal som si to!",
-  "Díky za zdieľanie!",
-  "Fajn, že mi to hovoríš!",
-];
+const RESPONSES: Record<number, string[]> = {
+  1: [
+    "Hej, som tu s tebou. Bude lepšie. 💙",
+    "Drž sa, zajtra je nový deň. 🤗",
+    "Ťažké dni sú súčasťou života. Si silný/á.",
+  ],
+  2: [
+    "Rozumiem. Dúfam, že sa to zlepší. 🌤️",
+    "Nie každý deň je super — a to je ok.",
+    "Nechceš mi o tom povedať viac? 🤔",
+  ],
+  3: [
+    "Neutrálny deň tiež nie je zlý! ☀️",
+    "Niekedy je 'ok' úplne dosť. 👍",
+    "Fajn! Čo by ti dnes spravilo radosť?",
+  ],
+  4: [
+    "Rád to počujem! Užívaj si to. 😊",
+    "Super! Čo ťa dnes potešilo?",
+    "Paráda! Dobrý deň sa ráta. ✨",
+  ],
+  5: [
+    "To je úžasné! Tešíš ma! 🎉",
+    "Wow, to je energia! Využi to! 🔥",
+    "Super nálada! Pozor, je to nákazlivé! 😄",
+  ],
+};
 
 function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -27,9 +48,9 @@ function pickRandom<T>(arr: T[]): T {
 export function MoodPicker() {
   const [selected, setSelected] = useState<1 | 2 | 3 | 4 | 5 | null>(null);
   const [note, setNote] = useState("");
+  const [response, setResponse] = useState("");
   const [showNote, setShowNote] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const [encouragement, setEncouragement] = useState("");
+  const [noteSaved, setNoteSaved] = useState(false);
   const [alreadyLogged, setAlreadyLogged] = useState(false);
 
   useEffect(() => {
@@ -42,18 +63,20 @@ export function MoodPicker() {
 
   function handleSelect(mood: 1 | 2 | 3 | 4 | 5) {
     setSelected(mood);
+    logMood(mood);
+    setAlreadyLogged(true);
+    setResponse(pickRandom(RESPONSES[mood]));
     setShowNote(true);
   }
 
-  function handleSave() {
+  function handleSaveNote() {
     if (selected === null) return;
     logMood(selected, note || undefined);
-    setSaved(true);
-    setAlreadyLogged(true);
-    setEncouragement(pickRandom(ENCOURAGEMENTS));
+    setNoteSaved(true);
   }
 
-  if (alreadyLogged && !showNote) {
+  // Already logged today — compact display
+  if (alreadyLogged && !response) {
     const moodItem = MOODS.find((m) => m.value === selected);
     return (
       <Card className="border-muted">
@@ -67,54 +90,57 @@ export function MoodPicker() {
     );
   }
 
-  if (saved) {
-    return (
-      <Card className="border-muted">
-        <CardContent className="py-3 px-4">
-          <p className="text-sm text-center text-muted-foreground">
-            {encouragement}
-          </p>
-        </CardContent>
-      </Card>
-    );
-  }
-
   return (
     <Card className="border-muted">
       <CardContent className="py-3 px-4">
-        <p className="text-sm text-muted-foreground mb-3">
-          Ako sa dnes cítiš?
-        </p>
-        <div className="flex justify-center gap-2 mb-2 bg-secondary/50 rounded-full px-3 py-2">
-          {MOODS.map((m) => (
-            <button
-              key={m.value}
-              onClick={() => handleSelect(m.value)}
-              className={`text-3xl p-1.5 rounded-full transition-all hover:scale-110 ${
-                selected === m.value
-                  ? `ring-2 ${m.ring} scale-110 bg-card shadow-md`
-                  : "hover:bg-muted"
-              }`}
-              title={m.label}
-              type="button"
-            >
-              {m.emoji}
-            </button>
-          ))}
-        </div>
+        {!response ? (
+          <>
+            <p className="text-sm text-muted-foreground mb-3">
+              Ako sa dnes cítiš?
+            </p>
+            <div className="flex justify-center gap-2 bg-secondary/50 rounded-full px-3 py-2">
+              {MOODS.map((m) => (
+                <button
+                  key={m.value}
+                  onClick={() => handleSelect(m.value)}
+                  className="text-3xl p-1.5 rounded-full transition-all hover:scale-125 active:scale-95"
+                  title={m.label}
+                  type="button"
+                >
+                  {m.emoji}
+                </button>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="space-y-3">
+            {/* Souli reaction */}
+            <div className="flex items-start gap-2">
+              <span className="text-xl">{MOODS.find((m) => m.value === selected)?.emoji}</span>
+              <p className="text-sm leading-relaxed pt-0.5">{response}</p>
+            </div>
 
-        {showNote && !saved && (
-          <div className="flex flex-col gap-2 mt-3">
-            <input
-              type="text"
-              placeholder="Chceš pridať poznámku? (voliteľné)"
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-              className="w-full text-sm px-3 py-2 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-            <Button size="sm" onClick={handleSave} className="self-end">
-              Uložiť
-            </Button>
+            {/* Optional note */}
+            {showNote && !noteSaved && (
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Pridaj poznámku... (voliteľné)"
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === "Enter" && note.trim()) handleSaveNote(); }}
+                  className="flex-1 text-xs px-3 py-1.5 rounded-md border bg-background focus:outline-none focus:ring-1 focus:ring-primary"
+                />
+                {note.trim() && (
+                  <Button size="sm" variant="outline" className="text-xs h-8" onClick={handleSaveNote}>
+                    Uložiť
+                  </Button>
+                )}
+              </div>
+            )}
+            {noteSaved && (
+              <p className="text-xs text-muted-foreground">Poznámka uložená! ✓</p>
+            )}
           </div>
         )}
       </CardContent>

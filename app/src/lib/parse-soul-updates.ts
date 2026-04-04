@@ -15,10 +15,16 @@ export interface EventProposal {
 
 export type MoodState = "idle" | "happy" | "sad" | "thinking" | "waving" | "eating" | "walking";
 
+export interface TimerRequest {
+  seconds: number;
+  label: string;
+}
+
 export interface ParsedResponse {
   text: string; // cleaned response without update blocks
   soulUpdates: SoulUpdate[];
   eventProposals: EventProposal[];
+  timerRequests: TimerRequest[];
   mood: MoodState; // avatar state after response
 }
 
@@ -94,14 +100,38 @@ export function parseResponse(fullText: string): ParsedResponse {
   // Extract event proposals
   while ((match = EVENT_REGEX.exec(fullText)) !== null) {
     const kv = parseKeyValue(match[1]);
-    if (kv.nazov && kv.datum) {
+    if (kv.nazov) {
+      // Fix placeholder dates from LLM ({{DATE}}, YYYY-MM-DD, etc.)
+      let date = kv.datum || "";
+      if (!date || /\{\{|YYYY|DATE/i.test(date)) {
+        date = new Date().toISOString().slice(0, 10);
+      }
+      let time = kv.cas || "";
+      if (/\{\{|HH|TIME/i.test(time)) {
+        time = new Date().toTimeString().slice(0, 5);
+      }
       eventProposals.push({
         type: (kv.typ as "diary" | "plan") || "plan",
-        date: kv.datum,
-        time: kv.cas,
+        date,
+        time,
         title: kv.nazov,
         description: kv.popis || "",
         remindBefore: kv.pripomienka ? parseInt(kv.pripomienka, 10) : undefined,
+      });
+    }
+  }
+
+  // Extract timer requests
+  const TIMER_REGEX = /:::casovac\n([\s\S]*?):::/g;
+  const timerRequests: TimerRequest[] = [];
+  let timerMatch;
+  while ((timerMatch = TIMER_REGEX.exec(fullText)) !== null) {
+    const kv = parseKeyValue(timerMatch[1]);
+    const seconds = parseInt(kv.sekundy || kv.seconds || "0", 10);
+    if (seconds > 0) {
+      timerRequests.push({
+        seconds,
+        label: kv.nazov || kv.label || "",
       });
     }
   }
@@ -121,10 +151,11 @@ export function parseResponse(fullText: string): ParsedResponse {
   const text = fullText
     .replace(SOUL_UPDATE_REGEX, "")
     .replace(EVENT_REGEX, "")
+    .replace(TIMER_REGEX, "")
     .replace(MOOD_REGEX, "")
     .trim();
 
-  return { text, soulUpdates, eventProposals, mood };
+  return { text, soulUpdates, eventProposals, timerRequests, mood };
 }
 
 /**
@@ -133,7 +164,7 @@ export function parseResponse(fullText: string): ParsedResponse {
  */
 export function stripBlocksForDisplay(text: string): string {
   return text
-    .replace(/:::(aktualizacia|udalost|nalada)[\s\S]*?:::/g, "")
-    .replace(/:::(aktualizacia|udalost|nalada)[\s\S]*$/, "") // incomplete trailing block
+    .replace(/:::(aktualizacia|udalost|nalada|casovac)[\s\S]*?:::/g, "")
+    .replace(/:::(aktualizacia|udalost|nalada|casovac)[\s\S]*$/, "") // incomplete trailing block
     .trim();
 }

@@ -5,6 +5,7 @@ export interface UserSettings {
   healthNudges: boolean;
   interestingFacts: boolean;
   challengeNotifications: boolean;
+  soundEnabled: boolean;
 }
 
 export type LlmProvider = "gemini" | "openai" | "anthropic";
@@ -25,6 +26,7 @@ const DEFAULT_SETTINGS: UserSettings = {
   healthNudges: true,
   interestingFacts: true,
   challengeNotifications: true,
+  soundEnabled: true,
 };
 
 export function getUserSettings(): UserSettings {
