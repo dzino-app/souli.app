@@ -10,6 +10,7 @@ import { getAvatarResolution } from "@/lib/avatar-resolution";
 import { Link } from "@/i18n/routing";
 import type { AvatarRow } from "@/lib/supabase/avatars-db";
 import type { AvatarAppearance, AvatarState } from "@/lib/avatar";
+import { ShareGif } from "@/components/avatar/share-gif";
 
 const SPECIES_EMOJI: Record<string, string> = {
   human: "\ud83e\uddd1",
@@ -307,6 +308,16 @@ export default function AvatarDetailPage() {
           </>
         )}
       </Button>
+
+      {/* Share GIF */}
+      {avatar && (
+        <ShareGif
+          name={avatar.name}
+          appearance={avatar.appearance}
+          level={avatar.level}
+          avatarId={avatar.id}
+        />
+      )}
 
       {/* Report */}
       <div className="pt-4 border-t">
