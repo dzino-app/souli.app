@@ -23,6 +23,7 @@ export const routing = defineRouting({
     "/ochrana-sukromia": { sk: "/ochrana-sukromia", en: "/privacy" },
     "/podmienky": { sk: "/podmienky", en: "/terms" },
     "/quiz": "/quiz",
+    "/nalepky": { sk: "/nalepky", en: "/stickers" },
   },
 });
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { MessageCircle, Plus, Trash2 } from "lucide-react";
+import { MessageCircle, Plus, Sticker, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PixelAvatar } from "@/components/avatar/pixel-avatar";
@@ -95,6 +95,17 @@ export default function Home() {
         <p className="text-xs text-muted-foreground relative">
           {getMoodEmoji(mood)} {getMoodLabel(mood)}
         </p>
+      </div>
+
+      {/* Sticker pack link */}
+      <div className="flex justify-center">
+        <Link
+          href="/nalepky"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-full bg-secondary text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <Sticker className="h-3.5 w-3.5" />
+          Sticker Pack
+        </Link>
       </div>
 
       {/* Mood picker */}

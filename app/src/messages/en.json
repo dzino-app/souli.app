@@ -453,5 +453,20 @@
     "xp": "XP",
     "topUpdates": "Top updates",
     "tagline": "Raise your own Souli"
+  },
+  "stickers": {
+    "pageTitle": "Sticker Pack",
+    "title": "Souli Stickers",
+    "description": "Generate a personalized sticker pack from your Souli. Download as ZIP and import into WhatsApp or any messenger.",
+    "stickersCount": "stickers",
+    "generate": "Generate",
+    "regenerate": "Regenerate",
+    "download": "Download ZIP",
+    "whatsappTitle": "Add to WhatsApp",
+    "whatsappStep1": "Download the sticker pack ZIP above",
+    "whatsappStep2": "Open Sticker Maker for WhatsApp (or similar app)",
+    "whatsappStep3": "Import the images and create your pack",
+    "openStickerMaker": "Open Sticker Maker",
+    "link": "Sticker Pack"
   }
 }

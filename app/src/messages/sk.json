@@ -571,5 +571,20 @@
     "xp": "XP",
     "topUpdates": "Najčastejšie aktualizácie",
     "tagline": "Vychovaj si vlastného Souliho"
+  },
+  "stickers": {
+    "pageTitle": "Balík nálepiek",
+    "title": "Nálepky Souliho",
+    "description": "Vygeneruj si personalizovaný balík nálepiek z tvojho Souliho. Stiahni ako ZIP a importuj do WhatsAppu alebo iného messengera.",
+    "stickersCount": "nálepiek",
+    "generate": "Vygenerovať",
+    "regenerate": "Znova",
+    "download": "Stiahnuť ZIP",
+    "whatsappTitle": "Pridať do WhatsApp",
+    "whatsappStep1": "Stiahni si balík nálepiek (ZIP) vyššie",
+    "whatsappStep2": "Otvor aplikáciu Sticker Maker for WhatsApp (alebo podobnú)",
+    "whatsappStep3": "Importuj obrázky a vytvor si balík",
+    "openStickerMaker": "Otvoriť Sticker Maker",
+    "link": "Balík nálepiek"
   }
 }
