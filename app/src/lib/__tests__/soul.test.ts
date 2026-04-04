@@ -86,17 +86,17 @@ describe("soul", () => {
     expect(getSoulFile("nonexistent")).toBeNull();
   });
 
-  it("updates a soul file", () => {
+  it("updates a soul file", async () => {
     getSoulFiles(); // seed
-    updateSoulFile("osobnost", "# Nový obsah", "user");
+    await updateSoulFile("osobnost", "# Nový obsah", "user");
     const file = getSoulFile("osobnost");
     expect(file!.content).toBe("# Nový obsah");
     expect(file!.updatedBy).toBe("user");
   });
 
-  it("appends to a soul file", () => {
+  it("appends to a soul file", async () => {
     getSoulFiles(); // seed
-    appendToSoulFile("zaujmy", "- Behanie", "dzino");
+    await appendToSoulFile("zaujmy", "- Behanie", "dzino");
     const file = getSoulFile("zaujmy");
     expect(file!.content).toContain("- Behanie");
     expect(file!.updatedBy).toBe("dzino");

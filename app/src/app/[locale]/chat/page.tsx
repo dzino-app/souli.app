@@ -46,6 +46,7 @@ export default function ChatPage() {
     appearance: { species: "human", bodyShape: "round", eyeStyle: "dots", mouthStyle: "smile", earStyle: "none", accessory: "none", hairStyle: "none", skinColor: "#FDDCB5", bodyColor: "#4F46E5" },
   });
   const [achievementToast, setAchievementToast] = useState<Achievement | null>(null);
+  const [soulToast, setSoulToast] = useState(false);
   const [renaming, setRenaming] = useState(false);
   const [renameValue, setRenameValue] = useState("");
   const convIdRef = useRef<string | null>(null);
@@ -223,6 +224,15 @@ export default function ChatPage() {
     addXp(10, "soul_update");
     updateChallengeProgress("soul");
     setPendingUpdates((prev) => prev.filter((u) => u !== update));
+
+    // Avatar sparkle reaction + toast
+    setAvatarState("happy");
+    if (avatarData.soundDNA) playAvatarSound("happy", avatarData.soundDNA);
+    setSoulToast(true);
+    setTimeout(() => {
+      setAvatarState("idle");
+      setSoulToast(false);
+    }, 2000);
 
     if (update.slug === "vzhlad") {
       // Appearance change — pixel avatar auto-updates from soul
@@ -475,9 +485,19 @@ export default function ChatPage() {
         <a href="/podmienky" className="underline hover:text-muted-foreground">{t("chat.terms")}</a>
       </p>
 
+      {/* Soul update toast */}
+      {soulToast && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-top fade-in duration-300">
+          <div className="rounded-full bg-primary/15 border border-primary/30 shadow-lg px-4 py-2 flex items-center gap-2">
+            <span className="text-base animate-pulse">&#10024;</span>
+            <span className="text-sm font-medium">Zapam&#228;tan&#233; &#10024;</span>
+          </div>
+        </div>
+      )}
+
       {/* Achievement toast */}
       {achievementToast && (
-        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-top fade-in duration-300">
+        <div className="fixed top-14 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-top fade-in duration-300">
           <Card className="border-primary/50 bg-primary/10 shadow-lg">
             <CardContent className="py-3 px-5 flex items-center gap-3">
               <span className="text-2xl">{achievementToast.icon}</span>

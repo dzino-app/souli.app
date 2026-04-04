@@ -287,6 +287,14 @@ export async function saveSoulFile(
   content: string,
   updatedBy: "user" | "dzino"
 ): Promise<void> {
+  // Log the change before writing
+  const oldFile = getSoulFile(slug);
+  const oldContent = oldFile?.content ?? "";
+  if (oldContent !== content) {
+    const { logSoulChange } = await import("./soul-changelog");
+    logSoulChange(slug, oldFile ? "update" : "add", oldContent, content, updatedBy);
+  }
+
   updateSoulFileInCache(slug, content, updatedBy);
   try {
     const { writeSoulFile } = await getStorage();
@@ -362,6 +370,11 @@ export function createCustomSoulFile(
     isCustom: true,
   };
 
+  // Log the creation
+  import("./soul-changelog").then(({ logSoulChange }) => {
+    logSoulChange(slug, "add", "", file.content, "user");
+  });
+
   const files = getSoulFiles();
   files.push(file);
   setSessionCache(files);
@@ -374,6 +387,13 @@ export function createCustomSoulFile(
 
 export function deleteCustomSoulFile(slug: string): void {
   if (isDefaultFile(slug)) return;
+
+  const oldFile = getSoulFile(slug);
+  if (oldFile) {
+    import("./soul-changelog").then(({ logSoulChange }) => {
+      logSoulChange(slug, "delete", oldFile.content, "", "user");
+    });
+  }
 
   const files = getSoulFiles().filter((f) => f.slug !== slug);
   setSessionCache(files);

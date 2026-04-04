@@ -13,11 +13,15 @@ import {
   Plus,
   Trash2,
   X,
+  ChevronDown,
+  ChevronRight,
+  History,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   getSoulFilesByCategory,
+  getSoulFile,
   CATEGORY_LABELS,
   isDefaultFile,
   createCustomSoulFile,
@@ -25,6 +29,13 @@ import {
   type SoulFile,
   type SoulCategory,
 } from "@/lib/soul";
+import {
+  getChangelogGrouped,
+  simpleDiff,
+  relativeTime,
+  type ChangelogGroup,
+  type SoulChangeEntry,
+} from "@/lib/soul-changelog";
 
 const CATEGORY_ICONS: Record<string, typeof BookOpen> = {
   jadro: User,
@@ -53,14 +64,187 @@ function slugify(text: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
+// ---- Change type emoji ----
+function changeTypeEmoji(type: SoulChangeEntry["type"]): string {
+  switch (type) {
+    case "add": return "\u2795";
+    case "update": return "\u270f\ufe0f";
+    case "delete": return "\ud83d\uddd1\ufe0f";
+  }
+}
+
+// ---- Diff display ----
+function DiffView({ before, after }: { before: string; after: string }) {
+  const lines = simpleDiff(before, after);
+  if (lines.length === 0) return null;
+
+  // Show at most 6 diff lines
+  const visible = lines.slice(0, 6);
+  const more = lines.length - visible.length;
+
+  return (
+    <div className="mt-1.5 text-xs font-mono leading-relaxed space-y-0.5 max-w-full overflow-hidden">
+      {visible.map((line, i) => (
+        <div
+          key={i}
+          className={`truncate px-1 rounded-sm ${
+            line.type === "add"
+              ? "text-green-600 dark:text-green-400 bg-green-500/10"
+              : "text-red-600 dark:text-red-400 bg-red-500/10"
+          }`}
+        >
+          {line.type === "add" ? "+ " : "- "}
+          {line.text || " "}
+        </div>
+      ))}
+      {more > 0 && (
+        <p className="text-muted-foreground">... a {more} dalsich riadkov</p>
+      )}
+    </div>
+  );
+}
+
+// ---- Changelog section ----
+function ChangelogSection({ changelogGroups }: { changelogGroups: ChangelogGroup[] }) {
+  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({ 0: true });
+  const [showAll, setShowAll] = useState(false);
+  const [expandedDiffs, setExpandedDiffs] = useState<Record<string, boolean>>({});
+
+  if (changelogGroups.length === 0) return null;
+
+  // Flatten all entries for counting
+  const allEntries = changelogGroups.flatMap((g) => g.entries);
+  const visibleLimit = 10;
+  let shown = 0;
+
+  function toggleGroup(idx: number) {
+    setExpandedGroups((prev) => ({ ...prev, [idx]: !prev[idx] }));
+  }
+
+  function toggleDiff(id: string) {
+    setExpandedDiffs((prev) => ({ ...prev, [id]: !prev[id] }));
+  }
+
+  function getFileName(slug: string): string {
+    const file = getSoulFile(slug);
+    return file?.displayName ?? slug;
+  }
+
+  function summarizeChange(entry: SoulChangeEntry): string {
+    if (entry.type === "delete") return `Subor ${entry.slug}.md bol odstraneny`;
+    if (entry.type === "add" && !entry.before) return `Novy subor ${entry.slug}.md`;
+
+    const diff = simpleDiff(entry.before, entry.after);
+    const adds = diff.filter((d) => d.type === "add").length;
+    const removes = diff.filter((d) => d.type === "remove").length;
+
+    const parts: string[] = [];
+    if (adds > 0) parts.push(`+${adds}`);
+    if (removes > 0) parts.push(`-${removes}`);
+    return parts.length > 0 ? `${parts.join(", ")} riadkov` : "Zmena obsahu";
+  }
+
+  return (
+    <div className="mb-4">
+      <div className="flex items-center gap-2 mb-3">
+        <History className="h-4 w-4 text-muted-foreground" />
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+          Posledne zmeny
+        </h2>
+      </div>
+
+      <div className="space-y-2">
+        {changelogGroups.map((group, groupIdx) => {
+          const isExpanded = !!expandedGroups[groupIdx];
+          const entries = showAll ? group.entries : group.entries.slice(0, Math.max(0, visibleLimit - shown));
+
+          if (!showAll && shown >= visibleLimit) return null;
+
+          const element = (
+            <div key={groupIdx}>
+              <button
+                onClick={() => toggleGroup(groupIdx)}
+                className="flex items-center gap-1.5 w-full text-left py-1"
+              >
+                {isExpanded ? (
+                  <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
+                ) : (
+                  <ChevronRight className="h-3.5 w-3.5 text-muted-foreground" />
+                )}
+                <span className="text-xs font-medium text-muted-foreground">
+                  {group.label} ({group.entries.length})
+                </span>
+              </button>
+
+              {isExpanded && (
+                <div className="ml-5 space-y-1.5">
+                  {entries.map((entry) => {
+                    const isDiffOpen = !!expandedDiffs[entry.id];
+                    return (
+                      <button
+                        key={entry.id}
+                        onClick={() => toggleDiff(entry.id)}
+                        className="w-full text-left"
+                      >
+                        <div className="flex items-start gap-2 py-1 px-2 rounded-md hover:bg-secondary/50 transition-colors">
+                          <span className="text-sm shrink-0">{changeTypeEmoji(entry.type)}</span>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-medium truncate">
+                                {getFileName(entry.slug)}
+                              </span>
+                              <span className="text-[10px] text-muted-foreground shrink-0">
+                                {entry.source === "dzino" ? "Dzino" : "Vy"}
+                              </span>
+                              <span className="text-[10px] text-muted-foreground shrink-0 ml-auto">
+                                {relativeTime(entry.timestamp)}
+                              </span>
+                            </div>
+                            <p className="text-xs text-muted-foreground truncate">
+                              {summarizeChange(entry)}
+                            </p>
+                            {isDiffOpen && entry.type !== "delete" && (
+                              <DiffView before={entry.before} after={entry.after} />
+                            )}
+                          </div>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          );
+
+          shown += entries.length;
+          return element;
+        })}
+      </div>
+
+      {!showAll && allEntries.length > visibleLimit && (
+        <Button
+          variant="ghost"
+          size="sm"
+          className="mt-2 w-full text-xs"
+          onClick={() => setShowAll(true)}
+        >
+          Zobrazit viac ({allEntries.length - visibleLimit} dalsich)
+        </Button>
+      )}
+    </div>
+  );
+}
+
 export default function SoulPage() {
   const [groups, setGroups] = useState<Record<string, SoulFile[]>>({});
   const [showForm, setShowForm] = useState(false);
   const [newName, setNewName] = useState("");
   const [newCategory, setNewCategory] = useState<SoulCategory>("custom");
+  const [changelogGroups, setChangelogGroups] = useState<ChangelogGroup[]>([]);
 
   const refreshGroups = useCallback(() => {
     setGroups(getSoulFilesByCategory());
+    setChangelogGroups(getChangelogGrouped());
   }, []);
 
   useEffect(() => {
@@ -159,6 +343,9 @@ export default function SoulPage() {
           </CardContent>
         </Card>
       )}
+
+      {/* Changelog section */}
+      <ChangelogSection changelogGroups={changelogGroups} />
 
       {/* File tree by category */}
       {categories.map((category) => {
