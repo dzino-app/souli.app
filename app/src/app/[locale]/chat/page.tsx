@@ -12,7 +12,7 @@ import { MarkdownResponse } from "@/components/chat/markdown-response";
 import { PixelAvatar } from "@/components/avatar/pixel-avatar";
 import { PixelBackground } from "@/components/avatar/pixel-background";
 import { streamChatResponse, type ChatMessage } from "@/lib/stream-response";
-import { parseResponse, stripBlocksForDisplay, type SoulUpdate, type EventProposal, type TimerRequest } from "@/lib/parse-soul-updates";
+import { parseResponse, stripBlocksForDisplay, type EventProposal, type TimerRequest } from "@/lib/parse-soul-updates";
 import { TimerStopwatch } from "@/components/tools/timer-stopwatch";
 import { appendToSoulFile, updateSoulFile } from "@/lib/soul";
 import { processConversationInBackground } from "@/lib/soul-background";
@@ -33,7 +33,7 @@ export default function ChatPage() {
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
   const [streamText, setStreamText] = useState("");
-  const [pendingUpdates, setPendingUpdates] = useState<SoulUpdate[]>([]);
+  // Soul updates are now auto-saved (no pending approval)
   const [pendingEvents, setPendingEvents] = useState<EventProposal[]>([]);
   const [activeTimers, setActiveTimers] = useState<TimerRequest[]>([]);
   const [avatarState, setAvatarState] = useState<import("@/lib/avatar").AvatarState>("idle");
@@ -138,7 +138,20 @@ export default function ChatPage() {
       });
 
       const parsed = parseResponse(fullResponse);
-      setPendingUpdates(parsed.soulUpdates);
+      // Auto-save soul updates silently
+      if (parsed.soulUpdates.length > 0) {
+        for (const update of parsed.soulUpdates) {
+          if (update.operation === "nahradit") {
+            updateSoulFile(update.slug, update.content, "dzino");
+          } else {
+            appendToSoulFile(update.slug, update.content, "dzino");
+          }
+        }
+        addXp(10, "soul_update");
+        updateChallengeProgress("soul");
+        setSoulToast(true);
+        setTimeout(() => setSoulToast(false), 2000);
+      }
       setPendingEvents(parsed.eventProposals);
       if (parsed.timerRequests.length > 0) {
         setActiveTimers(parsed.timerRequests);
@@ -213,34 +226,6 @@ export default function ChatPage() {
     e.preventDefault();
     if (!input.trim() || streaming) return;
     await sendMessage(input.trim());
-  }
-
-  function approveSoulUpdate(update: SoulUpdate) {
-    if (update.operation === "nahradit") {
-      updateSoulFile(update.slug, update.content, "dzino");
-    } else {
-      appendToSoulFile(update.slug, update.content, "dzino");
-    }
-    addXp(10, "soul_update");
-    updateChallengeProgress("soul");
-    setPendingUpdates((prev) => prev.filter((u) => u !== update));
-
-    // Avatar sparkle reaction + toast
-    setAvatarState("happy");
-    if (avatarData.soundDNA) playAvatarSound("happy", avatarData.soundDNA);
-    setSoulToast(true);
-    setTimeout(() => {
-      setAvatarState("idle");
-      setSoulToast(false);
-    }, 2000);
-
-    if (update.slug === "vzhlad") {
-      // Appearance change — pixel avatar auto-updates from soul
-    }
-  }
-
-  function rejectSoulUpdate(update: SoulUpdate) {
-    setPendingUpdates((prev) => prev.filter((u) => u !== update));
   }
 
   function approveEvent(proposal: EventProposal) {
@@ -398,26 +383,6 @@ export default function ChatPage() {
             </div>
           </div>
         )}
-
-        {/* Pending soul updates */}
-        {pendingUpdates.map((update, i) => (
-          <Card key={`soul-${i}`} className="border-primary/30 bg-primary/5">
-            <CardContent className="py-3 px-4">
-              <p className="text-xs text-muted-foreground mb-1">
-                Dzino sa chce niečo zapamätať ({update.slug}.md):
-              </p>
-              <p className="text-sm mb-2">{update.content}</p>
-              <div className="flex gap-2">
-                <Button size="sm" variant="default" onClick={() => approveSoulUpdate(update)}>
-                  <Check className="h-3 w-3 mr-1" /> Povoliť
-                </Button>
-                <Button size="sm" variant="ghost" onClick={() => rejectSoulUpdate(update)}>
-                  <X className="h-3 w-3 mr-1" /> Odmietnuť
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
 
         {/* Pending events */}
         {pendingEvents.map((event, i) => (
