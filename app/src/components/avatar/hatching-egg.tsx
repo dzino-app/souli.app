@@ -116,7 +116,8 @@ export function HatchingEgg({ appearance, onHatched }: HatchingEggProps) {
   if (stage === "reveal") {
     return (
       <div className="flex flex-col items-center gap-2 animate-in fade-in zoom-in duration-500">
-        <div style={{ animation: "float 3s ease-in-out infinite" }}>
+        <div className="relative w-[180px] h-[180px] flex items-center justify-center" style={{ animation: "float 3s ease-in-out infinite" }}>
+          {/* Large canvas, tiny Souli inside — emphasizes how small they start */}
           <PixelAvatar state={souliState} appearance={appearance} level={1} size="lg" />
         </div>
       </div>
