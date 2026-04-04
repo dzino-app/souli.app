@@ -31,6 +31,7 @@ const CATEGORY_ICONS: Record<string, typeof BookOpen> = {
   zaujmy: Heart,
   vztahy: Heart,
   praca: Briefcase,
+  rast: Target,
   custom: Target,
 };
 
@@ -39,6 +40,7 @@ const CATEGORY_OPTIONS: { value: SoulCategory; label: string }[] = [
   { value: "zaujmy", label: "Záujmy" },
   { value: "vztahy", label: "Vzťahy" },
   { value: "praca", label: "Práca" },
+  { value: "rast", label: "Rast" },
   { value: "custom", label: "Vlastné" },
 ];
 

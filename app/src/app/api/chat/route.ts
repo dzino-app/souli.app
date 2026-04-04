@@ -32,6 +32,7 @@ Dostupné súbory a kedy ich aktualizovať:
 - preferencie.md — keď zistíš komunikačné preferencie, návyky
 - praca.md — keď hovorí o práci, štúdiu, projekte
 - vyzvy.md — keď sa dohodnete na výzve alebo ju splní
+- filozofia.md — keď hovorí o hodnotách, presvedčeniach, životnej filozofii, pohľade na svet
 - vzhlad.md — keď chce zmeniť tvoj vzhľad
 - dennik.md — po zaujímavej konverzácii pridaj krátky denníkový zápis
 
@@ -97,7 +98,7 @@ export async function POST(request: NextRequest) {
       : "";
     const safeHistory = Array.isArray(history)
       ? history.slice(-10).map((m: { role: string; content: string }) => ({
-          role: m.role === "model" ? "model" : "user",
+          role: (m.role === "model" || m.role === "assistant") ? "model" : "user",
           content: typeof m.content === "string" ? m.content.slice(0, 3000) : "",
         }))
       : [];

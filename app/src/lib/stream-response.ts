@@ -96,12 +96,17 @@ export async function streamChatResponse(
           if (data === "[DONE]") break;
           try {
             const parsed = JSON.parse(data);
+            if (parsed.error) {
+              throw new Error(parsed.error);
+            }
             if (parsed.text) {
               fullText += parsed.text;
               onChunk?.(fullText);
             }
-          } catch {
-            // skip parse errors
+          } catch (e) {
+            if (e instanceof Error && e.message !== "Unexpected end of JSON input") {
+              throw e;
+            }
           }
         }
       }

@@ -1,4 +1,4 @@
-export type SoulCategory = "jadro" | "zaujmy" | "vztahy" | "praca" | (string & {});
+export type SoulCategory = "jadro" | "zaujmy" | "vztahy" | "praca" | "rast" | (string & {});
 
 export interface SoulFile {
   slug: string;
@@ -83,7 +83,7 @@ export const DEFAULT_SOUL_FILES: SoulFile[] = [
   {
     slug: "ciele",
     displayName: "Ciele",
-    category: "praca",
+    category: "rast",
     content: [
       "# Ciele",
       "",
@@ -130,7 +130,7 @@ export const DEFAULT_SOUL_FILES: SoulFile[] = [
   {
     slug: "vyzvy",
     displayName: "Výzvy",
-    category: "zaujmy",
+    category: "rast",
     content: [
       "# Výzvy",
       "",
@@ -143,6 +143,20 @@ export const DEFAULT_SOUL_FILES: SoulFile[] = [
       "## Splnené výzvy",
       "",
       "_Ešte som nič nesplnil, ale to sa zmení!_",
+    ].join("\n"),
+    updatedAt: new Date().toISOString(),
+    updatedBy: "dzino",
+  },
+  {
+    slug: "filozofia",
+    displayName: "Filozofia",
+    category: "rast",
+    content: [
+      "# Filozofia",
+      "",
+      "Hodnoty, presvedčenia a pohľad na svet:",
+      "",
+      "_Čomu veríš? Čo je pre teba dôležité? Povedz mi — rád si zapamätám._",
     ].join("\n"),
     updatedAt: new Date().toISOString(),
     updatedBy: "dzino",
@@ -307,6 +321,7 @@ export const CATEGORY_LABELS: Record<string, string> = {
   zaujmy: "Záujmy",
   vztahy: "Vzťahy",
   praca: "Práca",
+  rast: "Rast",
   custom: "Vlastné",
 };
 
@@ -321,6 +336,7 @@ export const DEFAULT_SLUGS = [
   "preferencie",
   "praca",
   "vyzvy",
+  "filozofia",
   "vzhlad",
   "dennik",
 ] as const;

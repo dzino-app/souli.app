@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Send, Loader2, Check, X } from "lucide-react";
+import { Send, Loader2, Check, X, Pencil } from "lucide-react";
 import { VoiceInput } from "@/components/chat/voice-input";
 import { VoiceOutput } from "@/components/chat/voice-output";
 import { useTranslations } from "next-intl";
@@ -10,13 +10,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MarkdownResponse } from "@/components/chat/markdown-response";
 import { PixelAvatar } from "@/components/avatar/pixel-avatar";
+import { PixelBackground } from "@/components/avatar/pixel-background";
 import { streamChatResponse, type ChatMessage } from "@/lib/stream-response";
 import { parseResponse, type SoulUpdate, type EventProposal } from "@/lib/parse-soul-updates";
 import { appendToSoulFile, updateSoulFile } from "@/lib/soul";
 import { processConversationInBackground } from "@/lib/soul-background";
 import { createEvent } from "@/lib/events";
-import { getAvatarData, recordInteraction } from "@/lib/avatar";
-// Avatar cache cleared when appearance changes (handled by pixel-avatar)
+import { getAvatarData, saveAvatarData, recordInteraction } from "@/lib/avatar";
+import { playAvatarSound } from "@/lib/pixel-sounds";
 import { createConversation, addMessage } from "@/lib/conversations";
 import { addXp, getGamification, saveGamification } from "@/lib/gamification";
 import { checkAchievements, grantAchievement, type Achievement } from "@/lib/achievements";
@@ -37,11 +38,14 @@ export default function ChatPage() {
   const [avatarData, setAvatarData] = useState<{
     name: string;
     appearance: import("@/lib/avatar").AvatarAppearance;
+    soundDNA?: import("@/lib/avatar").SoundDNA;
   }>({
     name: "Dzino",
     appearance: { species: "human", bodyShape: "round", eyeStyle: "dots", mouthStyle: "smile", earStyle: "none", accessory: "none", hairStyle: "none", skinColor: "#FDDCB5", bodyColor: "#4F46E5" },
   });
   const [achievementToast, setAchievementToast] = useState<Achievement | null>(null);
+  const [renaming, setRenaming] = useState(false);
+  const [renameValue, setRenameValue] = useState("");
   const convIdRef = useRef<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const challengeSentRef = useRef(false);
@@ -85,7 +89,7 @@ export default function ChatPage() {
 
   useEffect(() => {
     const data = getAvatarData();
-    setAvatarData({ name: data.name, appearance: data.appearance });
+    setAvatarData({ name: data.name, appearance: data.appearance, soundDNA: data.soundDNA });
 
     // Load existing conversation if ID provided
     const convId = searchParams.get("id");
@@ -248,10 +252,61 @@ export default function ChatPage() {
     <div className="flex flex-col h-[calc(100vh-8rem)] sm:h-[calc(100vh-6rem)]">
       {/* Avatar -- prominent, centered, animated */}
       <div className="flex flex-col items-center gap-1 pb-3 border-b mb-3">
-        <div className="py-2" style={{ animation: "float 3s ease-in-out infinite" }}>
-          <PixelAvatar state={avatarState} appearance={avatarData.appearance} size="md" />
-        </div>
-        <h1 className="text-sm font-semibold">{avatarData.name}</h1>
+        <button
+          type="button"
+          className="relative cursor-pointer w-full max-w-lg mx-auto overflow-hidden rounded-xl"
+          onClick={() => {
+            if (streaming) return;
+            const reactions: import("@/lib/avatar").AvatarState[] = ["waving", "happy", "waving", "happy", "eating", "walking"];
+            const pick = reactions[Math.floor(Math.random() * reactions.length)];
+            setAvatarState(pick);
+            if (avatarData.soundDNA) playAvatarSound(pick, avatarData.soundDNA);
+            setTimeout(() => setAvatarState("idle"), 2500);
+          }}
+        >
+          <PixelBackground />
+          <div
+            className="absolute inset-0 flex items-end justify-center pb-1"
+            style={{ animation: "float 3s ease-in-out infinite" }}
+          >
+            <PixelAvatar state={avatarState} appearance={avatarData.appearance} size="md" />
+          </div>
+        </button>
+        {renaming ? (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const name = renameValue.trim();
+              if (name) {
+                const data = getAvatarData();
+                data.name = name;
+                saveAvatarData(data);
+                setAvatarData((prev) => ({ ...prev, name }));
+              }
+              setRenaming(false);
+            }}
+            className="flex items-center gap-1"
+          >
+            <input
+              type="text"
+              value={renameValue}
+              onChange={(e) => setRenameValue(e.target.value)}
+              className="text-sm font-semibold text-center border-b border-primary bg-transparent outline-none w-28"
+              autoFocus
+              maxLength={20}
+              onKeyDown={(e) => { if (e.key === "Escape") setRenaming(false); }}
+              onBlur={() => setRenaming(false)}
+            />
+          </form>
+        ) : (
+          <button
+            onClick={() => { setRenameValue(avatarData.name); setRenaming(true); }}
+            className="flex items-center gap-1 group"
+          >
+            <h1 className="text-sm font-semibold">{avatarData.name}</h1>
+            <Pencil className="h-3 w-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+          </button>
+        )}
         <p className={`text-xs ${
           avatarState === "thinking" ? "text-primary animate-pulse" :
           avatarState === "talking" ? "text-accent" :

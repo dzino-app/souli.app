@@ -175,6 +175,9 @@ export default function SettingsPage() {
             testSuccess: "Funguje!",
             testFail: "Nefunguje",
             keyWarning: "K\u013e\u00fa\u010d je ulo\u017een\u00fd len v tvojom prehliada\u010di.",
+            defaultActive: "Predvolen\u00fd model Dzina",
+            defaultInactive: "Nepou\u017e\u00edva sa (vlastn\u00fd LLM je akt\u00edvny)",
+            defaultBadge: "Akt\u00edvny",
           }}
         />
       </div>

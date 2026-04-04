@@ -23,6 +23,12 @@ const TRIGGER_MAP: Record<string, string[]> = {
     "denník",
     "diary",
   ],
+  filozofia: [
+    "hodnoty", "values", "verím", "believe", "filozofia", "philosophy",
+    "zmysel", "meaning", "purpose", "presvedčenie", "belief",
+    "princíp", "principle", "morálka", "moral", "etika", "ethics",
+    "spiritualita", "viera", "faith", "múdrosť", "wisdom",
+  ],
   vztahy: [
     "kamarát",
     "priateľ",

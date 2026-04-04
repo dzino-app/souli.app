@@ -29,6 +29,14 @@ export interface AvatarAppearance {
   bodyColor: string;   // main body color
 }
 
+export interface SoundDNA {
+  basePitch: number;
+  timbre: OscillatorType;
+  tempo: number;
+  chirpRange: number;
+  harmonicShift: number;
+}
+
 export interface AvatarData {
   state: AvatarState;
   mood: number;
@@ -36,6 +44,7 @@ export interface AvatarData {
   color: string;
   name: string;
   appearance: AvatarAppearance;
+  soundDNA?: SoundDNA;
 }
 
 // Species define ear + default body shape combos
@@ -91,6 +100,17 @@ const STORAGE_KEY = "dzino_avatar";
 // Set to true to randomize avatar on every refresh (for testing only)
 const DEV_RANDOMIZE = false;
 
+function generateSoundDNA(): SoundDNA {
+  const timbres: OscillatorType[] = ["square", "sawtooth", "triangle"];
+  return {
+    basePitch: 350 + Math.floor(Math.random() * 400),
+    timbre: timbres[Math.floor(Math.random() * timbres.length)],
+    tempo: 0.8 + Math.random() * 0.5,
+    chirpRange: 50 + Math.floor(Math.random() * 150),
+    harmonicShift: Math.floor(Math.random() * 100),
+  };
+}
+
 function createDefaultAvatar(): AvatarData {
   const appearance = randomAppearance();
   return {
@@ -100,6 +120,7 @@ function createDefaultAvatar(): AvatarData {
     color: appearance.bodyColor,
     name: "Dzino",
     appearance,
+    soundDNA: generateSoundDNA(),
   };
 }
 
@@ -124,6 +145,11 @@ export function getAvatarData(): AvatarData {
     const data = createDefaultAvatar();
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     return data;
+  }
+  // Backfill soundDNA for existing avatars
+  if (!parsed.soundDNA) {
+    parsed.soundDNA = generateSoundDNA();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
   }
   return parsed as AvatarData;
 }

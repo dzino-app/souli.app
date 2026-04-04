@@ -13,18 +13,25 @@ const items = [
   { href: "/kniznica", icon: Library, label: "Pixoci" },
 ] as const;
 
+function getLocalePrefix(pathname: string): string {
+  const match = pathname.match(/^\/([a-z]{2})\//);
+  return match ? `/${match[1]}` : "";
+}
+
 export function BottomNav() {
   const pathname = usePathname();
+  const localePrefix = getLocalePrefix(pathname);
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/80 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60 sm:hidden">
       <div className="flex items-center justify-around h-[4.5rem] px-2">
         {items.map(({ href, icon: Icon, label }) => {
-          const active = href === "/" ? pathname === "/" : pathname.startsWith(href);
+          const fullHref = href === "/" ? `${localePrefix}/` : `${localePrefix}${href}`;
+          const active = href === "/" ? pathname === `${localePrefix}/` || pathname === localePrefix : pathname.includes(href);
           return (
             <Link
               key={href}
-              href={href}
+              href={fullHref}
               className={cn(
                 "flex flex-col items-center justify-center gap-1 w-16 py-1.5 rounded-md transition-colors",
                 active

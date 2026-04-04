@@ -33,6 +33,7 @@ export function VoiceInput({ onTranscript, disabled }: VoiceInputProps) {
   const recognitionRef = useRef<any>(null);
   const transcriptRef = useRef<string>("");
   const sentRef = useRef(false);
+  const manualStopRef = useRef(false);
 
   useEffect(() => {
     setSupported(getSpeechRecognitionCtor() !== null);
@@ -54,12 +55,12 @@ export function VoiceInput({ onTranscript, disabled }: VoiceInputProps) {
     recognitionRef.current = recognition;
     transcriptRef.current = "";
     sentRef.current = false;
+    manualStopRef.current = false;
 
-    // Set language
     const lang = getUserLanguage() || "en";
     recognition.lang = SPEECH_LOCALE_MAP[lang] || `${lang}-${lang.toUpperCase()}`;
-    recognition.continuous = false;
-    recognition.interimResults = false; // only final results — more reliable
+    recognition.continuous = true;
+    recognition.interimResults = true;
 
     recognition.onresult = (event: any) => {
       let transcript = "";
@@ -70,17 +71,27 @@ export function VoiceInput({ onTranscript, disabled }: VoiceInputProps) {
     };
 
     recognition.onend = () => {
+      if (!manualStopRef.current) {
+        // Browser stopped recognition unexpectedly (e.g. silence timeout)
+        // Restart it to keep listening
+        try {
+          recognition.start();
+          return;
+        } catch {
+          // Can't restart — fall through to cleanup
+        }
+      }
       setListening(false);
-      // Send whatever we have when recognition ends
       sendTranscript();
       recognitionRef.current = null;
     };
 
     recognition.onerror = (event: any) => {
-      // "no-speech" is common — not a real error
-      if (event.error !== "no-speech") {
-        console.warn("Speech recognition error:", event.error);
+      if (event.error === "no-speech" || event.error === "aborted") {
+        // Not real errors — ignore
+        return;
       }
+      console.warn("Speech recognition error:", event.error);
       setListening(false);
       recognitionRef.current = null;
     };
@@ -89,12 +100,12 @@ export function VoiceInput({ onTranscript, disabled }: VoiceInputProps) {
       recognition.start();
       setListening(true);
     } catch {
-      // Already started or not available
       setListening(false);
     }
   }, [sendTranscript]);
 
   const stopListening = useCallback(() => {
+    manualStopRef.current = true;
     if (recognitionRef.current) {
       recognitionRef.current.stop();
     }
@@ -110,7 +121,7 @@ export function VoiceInput({ onTranscript, disabled }: VoiceInputProps) {
       className={`rounded-full h-10 w-10 shrink-0 ${listening ? "animate-pulse" : ""}`}
       disabled={disabled}
       onClick={listening ? stopListening : startListening}
-      aria-label={listening ? "Zastaviť nahrávanie" : "Hlasový vstup"}
+      aria-label={listening ? "Stop recording" : "Voice input"}
     >
       {listening ? (
         <MicOff className="h-4 w-4" />
