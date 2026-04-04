@@ -29,6 +29,7 @@ import { needsMigration } from "@/lib/avatars";
 import { buildMigrationPayload } from "@/lib/migrate-to-multi-avatar";
 import { setActiveAvatarId } from "@/lib/avatars";
 import { DailyLesson } from "@/components/learn/daily-lesson";
+import { WeeklyReportShare } from "@/components/report/weekly-report-share";
 
 export default function Home() {
   const { mounted, state, mood, name, appearance } = useAvatarState();
@@ -110,6 +111,9 @@ export default function Home() {
 
       {/* Weekly review */}
       <WeeklyReviewCard />
+
+      {/* Weekly shareable report */}
+      <WeeklyReportShare />
 
       {/* Daily challenges */}
       <DailyChallenges />

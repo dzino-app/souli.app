@@ -439,5 +439,19 @@
     "moodAwful": "Awful",
     "moodThanks": "Thanks for sharing!",
     "weeklyReview": "Weekly review"
+  },
+  "report": {
+    "title": "Weekly Souli Report",
+    "share": "Share Report",
+    "download": "Download",
+    "shared": "Shared!",
+    "messages": "Messages",
+    "learned": "Learned",
+    "mood": "Mood",
+    "streak": "Streak",
+    "level": "Level",
+    "xp": "XP",
+    "topUpdates": "Top updates",
+    "tagline": "Raise your own Souli"
   }
 }

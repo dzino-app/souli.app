@@ -557,5 +557,19 @@
     "moodAwful": "Zle",
     "moodThanks": "Ďakujem, že si sa podelil!",
     "weeklyReview": "Týždenný prehľad"
+  },
+  "report": {
+    "title": "Týždenný report Souliho",
+    "share": "Zdieľať report",
+    "download": "Stiahnuť",
+    "shared": "Zdieľané!",
+    "messages": "Správy",
+    "learned": "Naučené",
+    "mood": "Nálada",
+    "streak": "Séria",
+    "level": "Úroveň",
+    "xp": "XP",
+    "topUpdates": "Najčastejšie aktualizácie",
+    "tagline": "Vychovaj si vlastného Souliho"
   }
 }
