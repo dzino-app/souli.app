@@ -53,6 +53,16 @@ export function MarkdownResponse({ content }: MarkdownResponseProps) {
               </code>
             );
           },
+          a: ({ href, children }) => (
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
+            >
+              {children}
+            </a>
+          ),
           table: ({ children }) => (
             <div className="overflow-x-auto my-2">
               <table className="w-full text-sm border-collapse">{children}</table>

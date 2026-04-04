@@ -79,6 +79,8 @@ export async function* generateContentStream(options: GenerateOptions) {
   const client = getClient();
   const config: Record<string, unknown> = {};
   if (options.systemInstruction) config.systemInstruction = options.systemInstruction;
+  // Enable Google Search grounding — Gemini can search the web and cite sources
+  config.tools = [{ googleSearch: {} }];
 
   const response = await client.models.generateContentStream({
     model: options.model || "gemini-2.5-flash",

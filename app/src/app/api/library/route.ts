@@ -17,6 +17,9 @@ export async function GET(request: NextRequest) {
   const search = searchParams.get("search");
   if (search) filters.search = search;
 
+  const soulType = searchParams.get("soulType");
+  if (soulType) filters.soulType = soulType;
+
   const page = searchParams.get("page");
   if (page) filters.page = parseInt(page, 10) || 0;
 

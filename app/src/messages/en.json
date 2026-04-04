@@ -36,7 +36,20 @@
     "createAccount": "Create account",
     "loginLink": "Sign in",
     "invalidCredentials": "Incorrect email or password",
-    "signupSuccess": "Account created"
+    "signupSuccess": "Account created",
+    "forgotPassword": "Forgot password?",
+    "enterEmailFirst": "Enter your email first",
+    "resetSent": "Password reset link sent to your email.",
+    "resetTitle": "New password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "passwordTooShort": "Password must be at least 6 characters",
+    "passwordsMismatch": "Passwords do not match",
+    "resetButton": "Change password",
+    "resetSuccess": "Password changed! Redirecting...",
+    "confirmEmailTitle": "Check your email",
+    "confirmEmailDesc": "We sent a confirmation link to {email}. Click it to get started.",
+    "confirmEmailHint": "Check your spam folder too."
   },
   "onboarding": {
     "welcome": "Welcome to Dzino!",
@@ -61,7 +74,10 @@
   "chat": {
     "yourQuestion": "Your question",
     "thinking": "Thinking...",
-    "followUpPlaceholder": "Ask a follow-up question..."
+    "followUpPlaceholder": "Ask a follow-up question...",
+    "disclaimer": "Dzino can make mistakes.",
+    "privacy": "Privacy",
+    "terms": "Terms"
   },
   "landing": {
     "hero": "Raise a Souli that grows with you",
@@ -286,6 +302,36 @@
     "animWaving": "Waving",
     "animEating": "Eating",
     "animSleeping": "Sleeping"
+  },
+  "legal": {
+    "privacyTitle": "Privacy Policy",
+    "privacyIntro": "We built Dzino to be your personal companion — and we take your privacy seriously. Here's the short version.",
+    "privacyDataTitle": "Your data",
+    "privacyData": "Your data is stored in Supabase (EU servers) and encrypted at rest. Soul files, conversations, events, and settings — it all belongs to you.",
+    "privacyLlmTitle": "AI processing",
+    "privacyLlm": "Messages are processed by Gemini (Google) to generate responses, but they are not stored by the LLM provider. If you use a custom API key, it is stored only in your browser — we never see it.",
+    "privacyExportTitle": "Export & delete",
+    "privacyExport": "You can export all your data as a ZIP file anytime from Settings. You can also delete everything permanently — no questions asked.",
+    "privacyThirdPartyTitle": "Third parties",
+    "privacyThirdParty": "We do not sell, share, or give your data to third parties. Period.",
+    "privacyAnalyticsTitle": "Analytics",
+    "privacyAnalytics": "We use minimal analytics to understand how the app is used. No tracking cookies, no ad networks, no fingerprinting.",
+    "privacyContactTitle": "Contact",
+    "privacyContact": "Questions about your data? Write to us at",
+    "termsTitle": "Terms of Use",
+    "termsIntro": "Short, friendly terms for using Dzino. No legal tricks.",
+    "termsAccuracyTitle": "AI-generated content",
+    "termsAccuracy": "Dzino uses AI to generate responses. While we do our best, the content may not always be accurate or complete. Always double-check important information.",
+    "termsAgeTitle": "Minimum age",
+    "termsAge": "You must be at least 13 years old to use Dzino. If you're under 18, please use the app with a parent's or guardian's knowledge.",
+    "termsHealthTitle": "Not a therapist",
+    "termsHealth": "Dzino is a friendly companion, not a mental health professional. If you're going through something serious, please reach out to a real person — a therapist, counselor, or helpline.",
+    "termsContentTitle": "Your content",
+    "termsContent": "You are responsible for what you share with Dzino. Please don't use the app for anything illegal or harmful.",
+    "termsFreeTitle": "Free tier",
+    "termsFree": "The free plan includes 20 messages per month. Need more? You can buy message packs or subscribe.",
+    "termsSuspensionTitle": "Account suspension",
+    "termsSuspension": "We may suspend accounts that violate our safety rules — for example, attempting to misuse the AI or harass others. We'll always try to reach out first."
   },
   "common": {
     "error": "Something went wrong",

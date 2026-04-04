@@ -6,13 +6,20 @@ export async function GET(request: Request) {
   const code = searchParams.get("code");
   const next = searchParams.get("next") ?? "/";
 
+  const type = searchParams.get("type");
+  const locale = searchParams.get("locale") || "";
+  const localePrefix = locale ? `/${locale}` : "";
+
   if (code) {
     const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`);
+      if (type === "recovery") {
+        return NextResponse.redirect(`${origin}${localePrefix}/reset-hesla`);
+      }
+      return NextResponse.redirect(`${origin}${localePrefix}${next === "/" ? "" : next}`);
     }
   }
 
-  return NextResponse.redirect(`${origin}/prihlasenie`);
+  return NextResponse.redirect(`${origin}${localePrefix}/prihlasenie`);
 }

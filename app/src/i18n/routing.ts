@@ -2,7 +2,7 @@ import { defineRouting } from "next-intl/routing";
 import { createNavigation } from "next-intl/navigation";
 
 export const routing = defineRouting({
-  locales: ["sk", "en"],
+  locales: ["sk", "en", "cs", "de", "es", "fr", "hi", "hu", "pl"],
   defaultLocale: "en",
   localeDetection: true,
   pathnames: {
@@ -20,6 +20,8 @@ export const routing = defineRouting({
     "/kniznica": { sk: "/kniznica", en: "/library" },
     "/kniznica/[id]": { sk: "/kniznica/[id]", en: "/library/[id]" },
     "/avatary": { sk: "/avatary", en: "/avatars" },
+    "/ochrana-sukromia": { sk: "/ochrana-sukromia", en: "/privacy" },
+    "/podmienky": { sk: "/podmienky", en: "/terms" },
   },
 });
 

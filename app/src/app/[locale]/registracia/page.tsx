@@ -2,20 +2,20 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { Mail } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
-import { syncToSupabase } from "@/lib/supabase/sync";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
 export default function SignupPage() {
   const t = useTranslations("auth");
-  const router = useRouter();
+  const locale = useLocale();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [confirmScreen, setConfirmScreen] = useState(false);
 
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault();
@@ -26,6 +26,9 @@ export default function SignupPage() {
     const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback?locale=${locale}`,
+      },
     });
 
     if (error) {
@@ -34,15 +37,36 @@ export default function SignupPage() {
       return;
     }
 
-    // Push any existing localStorage data to Supabase for the new account
-    try {
-      await syncToSupabase();
-    } catch {
-      // Non-critical: data will sync later
-    }
+    setLoading(false);
+    setConfirmScreen(true);
+  }
 
-    router.push("/");
-    router.refresh();
+  if (confirmScreen) {
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <Card className="w-full max-w-sm">
+          <CardContent className="py-8 text-center space-y-4">
+            <div className="flex justify-center">
+              <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
+                <Mail className="h-8 w-8 text-primary" />
+              </div>
+            </div>
+            <h2 className="text-lg font-bold">{t("confirmEmailTitle")}</h2>
+            <p className="text-sm text-muted-foreground">
+              {t("confirmEmailDesc", { email })}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              {t("confirmEmailHint")}
+            </p>
+            <Link href="/prihlasenie">
+              <Button variant="outline" size="sm" className="mt-2">
+                {t("loginLink")}
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+      </div>
+    );
   }
 
   return (

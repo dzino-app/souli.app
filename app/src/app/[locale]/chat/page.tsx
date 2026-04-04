@@ -254,7 +254,7 @@ export default function ChatPage() {
       <div className="flex flex-col items-center gap-1 pb-3 border-b mb-3">
         <button
           type="button"
-          className="relative cursor-pointer w-full max-w-lg mx-auto overflow-hidden rounded-xl"
+          className="relative cursor-pointer w-full max-w-lg mx-auto rounded-xl overflow-visible"
           onClick={() => {
             if (streaming) return;
             const reactions: import("@/lib/avatar").AvatarState[] = ["waving", "happy", "waving", "happy", "eating", "walking"];
@@ -264,9 +264,11 @@ export default function ChatPage() {
             setTimeout(() => setAvatarState("idle"), 2500);
           }}
         >
-          <PixelBackground />
+          <div className="overflow-hidden rounded-xl">
+            <PixelBackground />
+          </div>
           <div
-            className="absolute inset-0 flex items-end justify-center pb-1"
+            className="absolute inset-0 flex items-end justify-center pb-1 z-[60]"
             style={{ animation: "float 3s ease-in-out infinite" }}
           >
             <PixelAvatar state={avatarState} appearance={avatarData.appearance} size="md" />
@@ -450,6 +452,12 @@ export default function ChatPage() {
           <Send className="h-4 w-4" />
         </Button>
       </form>
+      <p className="text-[10px] text-muted-foreground/60 text-center pt-1">
+        {t("chat.disclaimer")}{" "}
+        <a href="/ochrana-sukromia" className="underline hover:text-muted-foreground">{t("chat.privacy")}</a>
+        {" · "}
+        <a href="/podmienky" className="underline hover:text-muted-foreground">{t("chat.terms")}</a>
+      </p>
 
       {/* Achievement toast */}
       {achievementToast && (

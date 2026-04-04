@@ -37,6 +37,7 @@ export interface AvatarRow {
 
 export interface PublicAvatarFilters {
   species?: string;
+  soulType?: string; // filter by avatars that have a specific public soul file slug
   sort?: "popular" | "recent";
   search?: string;
   page?: number;
@@ -157,6 +158,11 @@ export async function getPublicAvatars(
     }
   }
 
+  // If filtering by soul type, use a subquery approach
+  if (filters.soulType) {
+    return getAvatarsBySoulType(supabase, filters);
+  }
+
   // Standard search (keyword only)
   let query = supabase
     .from("avatars")
@@ -220,6 +226,48 @@ async function hybridSearch(
     avatars: data as AvatarRow[],
     total: data.length,
   };
+}
+
+async function getAvatarsBySoulType(
+  supabase: ReturnType<typeof createClient>,
+  filters: PublicAvatarFilters,
+): Promise<{ avatars: AvatarRow[]; total: number }> {
+  const pageSize = filters.pageSize ?? 20;
+  const page = filters.page ?? 0;
+  const from = page * pageSize;
+
+  // Find avatar IDs that have this public soul file
+  const { data: soulRows } = await supabase
+    .from("soul_files")
+    .select("avatar_id")
+    .eq("slug", filters.soulType!)
+    .eq("is_public", true);
+
+  const ids = (soulRows ?? []).map((r: { avatar_id: string }) => r.avatar_id);
+  const avatarIds = Array.from(new Set(ids));
+  if (avatarIds.length === 0) return { avatars: [], total: 0 };
+
+  let query = supabase
+    .from("avatars")
+    .select("*", { count: "exact" })
+    .eq("is_public", true)
+    .eq("moderation_status", "approved")
+    .in("id", avatarIds);
+
+  if (filters.species) {
+    query = query.eq("appearance->>species", filters.species);
+  }
+
+  if (filters.sort === "popular") {
+    query = query.order("times_loaded", { ascending: false });
+  } else {
+    query = query.order("created_at", { ascending: false });
+  }
+
+  query = query.range(from, from + pageSize - 1);
+
+  const { data, count } = await query;
+  return { avatars: (data ?? []) as AvatarRow[], total: count ?? 0 };
 }
 
 export async function getPublicAvatarDetail(

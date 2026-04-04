@@ -88,7 +88,20 @@
     "createAccount": "Vytvoriť účet",
     "loginLink": "Prihlásiť sa",
     "invalidCredentials": "Nesprávny e-mail alebo heslo",
-    "signupSuccess": "Účet bol vytvorený"
+    "signupSuccess": "Účet bol vytvorený",
+    "forgotPassword": "Zabudnuté heslo?",
+    "enterEmailFirst": "Najprv zadaj email",
+    "resetSent": "Link na obnovenie hesla bol odoslaný na tvoj email.",
+    "resetTitle": "Nové heslo",
+    "newPassword": "Nové heslo",
+    "confirmPassword": "Zopakuj heslo",
+    "passwordTooShort": "Heslo musí mať aspoň 6 znakov",
+    "passwordsMismatch": "Heslá sa nezhodujú",
+    "resetButton": "Zmeniť heslo",
+    "resetSuccess": "Heslo bolo zmenené! Presmerúvam...",
+    "confirmEmailTitle": "Skontroluj si email",
+    "confirmEmailDesc": "Poslali sme ti potvrdzovací link na {email}. Klikni naň a môžeš začať.",
+    "confirmEmailHint": "Skontroluj aj spam priečinok."
   },
   "memory": {
     "title": "Čo o tebe viem",
@@ -107,7 +120,10 @@
   "chat": {
     "yourQuestion": "Tvoja otázka",
     "thinking": "Premýšľam...",
-    "followUpPlaceholder": "Opýtaj sa ďalšiu otázku..."
+    "followUpPlaceholder": "Opýtaj sa ďalšiu otázku...",
+    "disclaimer": "Dzino môže robiť chyby.",
+    "privacy": "Súkromie",
+    "terms": "Podmienky"
   },
   "write": {
     "title": "Napíš to za mňa",
@@ -404,6 +420,36 @@
     "animWaving": "Máva",
     "animEating": "Je",
     "animSleeping": "Spí"
+  },
+  "legal": {
+    "privacyTitle": "Ochrana sukromia",
+    "privacyIntro": "Dzino sme vytvorili ako tvojho osobneho spolocnika — a tvoje sukromie berieme vazne. Tu je kratka verzia.",
+    "privacyDataTitle": "Tvoje data",
+    "privacyData": "Tvoje data su ulozene v Supabase (EU servery) a sifrovane. Subory Souliho, konverzacie, udalosti a nastavenia — to vsetko patri tebe.",
+    "privacyLlmTitle": "Spracovanie AI",
+    "privacyLlm": "Spravy spracovava Gemini (Google) na generovanie odpovedi, ale poskytovatel LLM ich neuklada. Ak pouzivas vlastny API kluc, je ulozeny len v tvojom prehliadaci — my ho nikdy nevidime.",
+    "privacyExportTitle": "Export a vymazanie",
+    "privacyExport": "Vsetky svoje data si mozes kedykolvek stiahnut ako ZIP subor v Nastaveniach. Mozes tiez vsetko trvalo vymazat — bez otazok.",
+    "privacyThirdPartyTitle": "Tretie strany",
+    "privacyThirdParty": "Tvoje data nepredavame, nezdielame ani neposkytujeme tretim stranam. Bodka.",
+    "privacyAnalyticsTitle": "Analytika",
+    "privacyAnalytics": "Pouzivame minimalnu analytiku, aby sme pochopili, ako sa appka pouziva. Ziadne sledovacie cookies, ziadne reklamne siete, ziadny fingerprinting.",
+    "privacyContactTitle": "Kontakt",
+    "privacyContact": "Otazky ohladom tvojich dat? Napis nam na",
+    "termsTitle": "Podmienky pouzivania",
+    "termsIntro": "Kratke a priatelske podmienky pouzivania Dzina. Ziadne pravnicke triky.",
+    "termsAccuracyTitle": "Obsah generovany AI",
+    "termsAccuracy": "Dzino pouziva AI na generovanie odpovedi. Aj ked sa snazime, obsah nemusi byt vzdy presny alebo uplny. Dolezite informacie si vzdy over.",
+    "termsAgeTitle": "Minimalny vek",
+    "termsAge": "Na pouzivanie Dzina musis mat aspon 13 rokov. Ak mas menej ako 18, prosim pouzivaj appku s vedomim rodica alebo opatrovnika.",
+    "termsHealthTitle": "Nie je terapeut",
+    "termsHealth": "Dzino je priatelsky spolocnik, nie odbornik na dusevne zdravie. Ak prechádzas niecim vaznym, prosim obrat sa na skutocneho cloveka — terapeuta, poradcu alebo linku pomoci.",
+    "termsContentTitle": "Tvoj obsah",
+    "termsContent": "Si zodpovedny za to, co s Dzinom zdielaz. Prosim nepouzivaj appku na nic nezakonne alebo skodlive.",
+    "termsFreeTitle": "Bezplatny plan",
+    "termsFree": "Bezplatny plan obsahuje 20 sprav mesacne. Potrebujes viac? Mozes si kupit balicky sprav alebo si predplatit.",
+    "termsSuspensionTitle": "Pozastavenie uctu",
+    "termsSuspension": "Mozeme pozastavit ucty, ktore porusuju nase bezpecnostne pravidla — napriklad pokus o zneuzitie AI alebo obtazovanie inych. Vzdy sa najprv pokusime ozval."
   },
   "common": {
     "error": "Niečo sa nepodarilo",

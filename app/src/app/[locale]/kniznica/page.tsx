@@ -19,6 +19,16 @@ const SPECIES_LIST: { value: Species | ""; label: string }[] = [
   { value: "fox", label: "Líška" },
 ];
 
+const SOUL_TYPE_FILTERS: { value: string; label: string }[] = [
+  { value: "", label: "Všetky" },
+  { value: "osobnost", label: "Osobnosť" },
+  { value: "zaujmy", label: "Záujmy" },
+  { value: "humor", label: "Humor" },
+  { value: "filozofia", label: "Filozofia" },
+  { value: "ciele", label: "Ciele" },
+  { value: "vyzvy", label: "Výzvy" },
+];
+
 export default function LibraryPage() {
   const params = useParams();
   const locale = (params?.locale as string) ?? "sk";
@@ -27,6 +37,7 @@ export default function LibraryPage() {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [species, setSpecies] = useState("");
+  const [soulType, setSoulType] = useState("");
   const [sort, setSort] = useState<"popular" | "recent">("popular");
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(0);
@@ -35,6 +46,7 @@ export default function LibraryPage() {
     setLoading(true);
     const params = new URLSearchParams();
     if (species) params.set("species", species);
+    if (soulType) params.set("soulType", soulType);
     params.set("sort", sort);
     if (search) params.set("search", search);
     params.set("page", String(page));
@@ -49,7 +61,7 @@ export default function LibraryPage() {
     } finally {
       setLoading(false);
     }
-  }, [species, sort, search, page]);
+  }, [species, soulType, sort, search, page]);
 
   useEffect(() => {
     fetchAvatars();
@@ -104,6 +116,27 @@ export default function LibraryPage() {
               species === s.value
                 ? "bg-primary text-primary-foreground border-primary"
                 : "bg-secondary border-border hover:border-primary/40"
+            }`}
+          >
+            {s.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Soul type filter */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1">
+        {SOUL_TYPE_FILTERS.map((s) => (
+          <button
+            key={s.value}
+            type="button"
+            onClick={() => {
+              setSoulType(s.value);
+              setPage(0);
+            }}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium border whitespace-nowrap transition-colors ${
+              soulType === s.value
+                ? "bg-accent text-accent-foreground border-accent"
+                : "bg-secondary border-border hover:border-accent/40"
             }`}
           >
             {s.label}

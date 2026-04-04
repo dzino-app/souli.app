@@ -16,6 +16,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [resetSent, setResetSent] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -43,6 +45,25 @@ export default function LoginPage() {
 
     router.push("/");
     router.refresh();
+  }
+
+  async function handleResetPassword() {
+    if (!email.trim()) {
+      setError(t("enterEmailFirst"));
+      return;
+    }
+    setResetLoading(true);
+    setError("");
+    const supabase = createClient();
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/auth/callback?type=recovery`,
+    });
+    setResetLoading(false);
+    if (error) {
+      setError(error.message);
+      return;
+    }
+    setResetSent(true);
   }
 
   return (
@@ -86,9 +107,20 @@ export default function LoginPage() {
             {error && (
               <p className="text-sm text-destructive">{error}</p>
             )}
+            {resetSent && (
+              <p className="text-sm text-green-600">{t("resetSent")}</p>
+            )}
             <Button type="submit" size="lg" disabled={loading}>
               {loading ? "..." : t("login")}
             </Button>
+            <button
+              type="button"
+              onClick={handleResetPassword}
+              disabled={resetLoading}
+              className="text-xs text-muted-foreground hover:text-primary transition-colors text-center"
+            >
+              {resetLoading ? "..." : t("forgotPassword")}
+            </button>
           </form>
           <p className="mt-4 text-center text-sm text-muted-foreground">
             {t("noAccount")}{" "}
