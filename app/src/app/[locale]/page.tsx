@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { MessageCircle, Plus, Sticker, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -32,6 +33,7 @@ import { DailyLesson } from "@/components/learn/daily-lesson";
 import { WeeklyReportShare } from "@/components/report/weekly-report-share";
 
 export default function Home() {
+  const t = useTranslations("stickers");
   const { mounted, state, mood, name, appearance } = useAvatarState();
   const [groups, setGroups] = useState<Record<string, Conversation[]>>({});
   const levelUp = useLevelUp();
@@ -104,7 +106,7 @@ export default function Home() {
           className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-full bg-secondary text-muted-foreground hover:text-foreground transition-colors"
         >
           <Sticker className="h-3.5 w-3.5" />
-          Sticker Pack
+          {t("pageTitle")}
         </Link>
       </div>
 
