@@ -9,6 +9,7 @@ import { playAvatarSound } from "@/lib/pixel-sounds";
 import { getAvatarData, saveAvatarData, randomAppearance, generateSoundDNA } from "@/lib/avatar";
 import { saveSoulFile } from "@/lib/soul";
 import { addXp } from "@/lib/gamification";
+import { persistPendingSalt } from "@/lib/crypto-salt-persist";
 import { HatchingEgg } from "@/components/avatar/hatching-egg";
 import type { AvatarState, AvatarAppearance } from "@/lib/avatar";
 
@@ -83,6 +84,11 @@ export default function OnboardingPage() {
     }, 30);
     return () => clearInterval(interval);
   }
+
+  // Persist the encryption salt for new users (generated during signup, stored after email confirmation)
+  useEffect(() => {
+    persistPendingSalt().catch(() => {});
+  }, []);
 
   // Phase transitions with Dzino reactions
   useEffect(() => {

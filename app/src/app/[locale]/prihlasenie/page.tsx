@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { loadFromSupabase } from "@/lib/supabase/sync";
+import { initCryptoSession } from "@/lib/crypto-session";
+import { fromBase64 } from "@/lib/crypto";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
@@ -34,6 +36,24 @@ export default function LoginPage() {
       setError(t("invalidCredentials"));
       setLoading(false);
       return;
+    }
+
+    // Initialize client-side encryption from the user's password + stored salt
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: cryptoRow } = await supabase
+          .from("user_crypto")
+          .select("salt")
+          .eq("user_id", user.id)
+          .single();
+
+        if (cryptoRow?.salt) {
+          await initCryptoSession(password, fromBase64(cryptoRow.salt));
+        }
+      }
+    } catch {
+      // Crypto init failed — proceed without encryption (graceful degradation)
     }
 
     // Load all user data from Supabase into localStorage before redirect

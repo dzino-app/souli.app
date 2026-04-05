@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { Mail } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { initCryptoSession } from "@/lib/crypto-session";
+import { generateSalt, toBase64 } from "@/lib/crypto";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
@@ -35,6 +37,19 @@ export default function SignupPage() {
       setError(error.message);
       setLoading(false);
       return;
+    }
+
+    // Generate salt and initialize client-side encryption
+    // The salt is stored in Supabase after email confirmation via the auth callback.
+    // For now, store it temporarily so we can init the crypto session.
+    try {
+      const salt = generateSalt();
+      // Store salt temporarily for post-confirmation initialization
+      sessionStorage.setItem("dzino_pending_salt", toBase64(salt));
+      // Pre-derive the key so it's ready if the user confirms quickly
+      await initCryptoSession(password, salt);
+    } catch {
+      // Crypto init failed — proceed without encryption
     }
 
     setLoading(false);

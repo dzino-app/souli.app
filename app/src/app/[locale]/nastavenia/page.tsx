@@ -20,6 +20,7 @@ import {
   updateSetting,
   type UserSettings,
 } from "@/lib/user-settings";
+import { clearCryptoSession } from "@/lib/crypto-session";
 import { ExportData } from "@/components/settings/export-data";
 import { LlmSettings } from "@/components/settings/llm-settings";
 
@@ -198,7 +199,11 @@ export default function SettingsPage() {
               loading: "Pripravujem...",
             }}
           />
-          <form action="/api/auth/signout" method="POST">
+          <form
+            action="/api/auth/signout"
+            method="POST"
+            onSubmit={() => clearCryptoSession()}
+          >
             <Button type="submit" variant="outline" className="w-full justify-start">
               <LogOut className="h-4 w-4 mr-2" />
               {"Odhl\u00e1si\u0165 sa"}

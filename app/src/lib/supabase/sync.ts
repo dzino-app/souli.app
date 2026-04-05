@@ -7,6 +7,7 @@
  */
 
 import { createClient } from "./client";
+import { encryptIfActive, decryptIfActive } from "../crypto-session";
 import type { Conversation, Message } from "../conversations";
 import type { GamificationData } from "../gamification";
 import type { DzinoEvent } from "../events";
@@ -63,12 +64,15 @@ export async function syncConversationsToSupabase(
         .delete()
         .eq("conversation_id", conv.id);
 
-      const messageRows = conv.messages.map((m) => ({
-        conversation_id: conv.id,
-        role: m.role,
-        content: m.content,
-        created_at: m.timestamp,
-      }));
+      // Encrypt message content before storing at rest
+      const messageRows = await Promise.all(
+        conv.messages.map(async (m) => ({
+          conversation_id: conv.id,
+          role: m.role,
+          content: await encryptIfActive(m.content),
+          created_at: m.timestamp,
+        }))
+      );
 
       await supabase.from("messages").insert(messageRows);
     }
@@ -105,7 +109,7 @@ export async function syncMessageToSupabase(
   await supabase.from("messages").insert({
     conversation_id: conversationId,
     role: message.role,
-    content: message.content,
+    content: await encryptIfActive(message.content),
     created_at: message.timestamp,
   });
 }
@@ -145,11 +149,14 @@ export async function loadConversationsFromSupabase(): Promise<
       .eq("conversation_id", c.id)
       .order("created_at");
 
-    const messages: Message[] = (msgRows ?? []).map((m) => ({
-      role: m.role as "user" | "assistant",
-      content: m.content as string,
-      timestamp: m.created_at as string,
-    }));
+    // Decrypt message content that was encrypted at rest
+    const messages: Message[] = await Promise.all(
+      (msgRows ?? []).map(async (m) => ({
+        role: m.role as "user" | "assistant",
+        content: await decryptIfActive(m.content as string),
+        timestamp: m.created_at as string,
+      }))
+    );
 
     conversations.push({
       id: c.id,

@@ -1,4 +1,5 @@
 import { createClient } from "./client";
+import { encryptIfActive, decryptIfActive } from "../crypto-session";
 import type { SoulFile } from "../soul";
 
 const BUCKET = "souls";
@@ -28,7 +29,9 @@ export async function readSoulFile(slug: string): Promise<string | null> {
     .download(`${userId}/${slug}.md`);
 
   if (error || !data) return null;
-  return await data.text();
+  const raw = await data.text();
+  // Decrypt content if it was encrypted at rest
+  return await decryptIfActive(raw);
 }
 
 // Write a soul file to storage
@@ -43,10 +46,13 @@ export async function writeSoulFile(
   const supabase = createClient();
   const path = `${userId}/${slug}.md`;
 
+  // Encrypt content before storing at rest
+  const encryptedContent = await encryptIfActive(content);
+
   // Upload (upsert) the file
   const { error: uploadError } = await supabase.storage
     .from(BUCKET)
-    .upload(path, new Blob([content], { type: "text/markdown" }), {
+    .upload(path, new Blob([encryptedContent], { type: "text/markdown" }), {
       upsert: true,
     });
 
@@ -116,12 +122,15 @@ export async function seedSoulFiles(defaults: SoulFile[]): Promise<boolean> {
 
   // Insert metadata + upload files
   for (const file of defaults) {
+    // Encrypt content before storing at rest
+    const encryptedContent = await encryptIfActive(file.content);
+
     // Upload content
     await supabase.storage
       .from(BUCKET)
       .upload(
         `${userId}/${file.slug}.md`,
-        new Blob([file.content], { type: "text/markdown" }),
+        new Blob([encryptedContent], { type: "text/markdown" }),
         { upsert: true }
       );
 
