@@ -16,7 +16,7 @@ import {
   ChevronDown,
   ChevronRight,
   History,
-  Cpu,
+  Sparkles,
   Loader2,
   Lightbulb,
   MessageCircle,
@@ -272,15 +272,15 @@ function CompilationSection({ onCompiled }: { onCompiled: () => void }) {
 
   return (
     <div className="space-y-3">
-      {/* Compilation status bar */}
+      {/* Soul memory status */}
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 min-w-0">
-          <Cpu className="h-4 w-4 text-muted-foreground shrink-0" />
+          <Sparkles className="h-4 w-4 text-primary shrink-0" />
           <div className="min-w-0">
             <p className="text-xs text-muted-foreground">
               {lastCompiledLabel
-                ? `Kompilacia: ${lastCompiledLabel} (v${state?.version ?? 0})`
-                : "Nikdy nekompilovane"}
+                ? `Posledná spomienka: ${lastCompiledLabel}`
+                : "Tvoj Souli si ešte nespomína"}
             </p>
           </div>
         </div>
@@ -289,14 +289,14 @@ function CompilationSection({ onCompiled }: { onCompiled: () => void }) {
           variant="outline"
           onClick={handleCompile}
           disabled={compiling}
-          className="shrink-0"
+          className="shrink-0 gap-1"
         >
           {compiling ? (
-            <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />
+            <Loader2 className="h-3.5 w-3.5 animate-spin" />
           ) : (
-            <Cpu className="h-3.5 w-3.5 mr-1" />
+            <Sparkles className="h-3.5 w-3.5" />
           )}
-          {compiling ? "Kompilacia..." : "Kompilovat"}
+          {compiling ? "Premýšľa..." : "Spomínaj"}
         </Button>
       </div>
 
