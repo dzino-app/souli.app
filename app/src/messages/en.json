@@ -147,6 +147,7 @@
     "faq3a": "No. Basic usage is free — 20 messages per month.",
     "faq4q": "What makes Dzino different from ChatGPT?",
     "faq4a": "Dzino remembers you. It knows your goals, preferences, and grows with you over time.",
+    "eggTease": "Something is stirring inside... your Souli is waiting to hatch.",
     "footer": "Dzino is the first Souli. Yours is next.",
     "origin": "Somewhere in a tiny pixel world lives Dzino — the very first Souli. He's still there, waving at everyone who arrives. He opened the gates so you could raise your own. Your Souli is already waiting."
   },
@@ -390,8 +391,9 @@
     "q5d": "Playful and silly",
     "revealing": "Your Souli is waking up...",
     "hatching": "Your Souli is hatching...",
+    "hatchingTease": "Your Souli is trying to break free... sign up to meet them!",
     "resultTitle": "Your Souli has arrived!",
-    "resultCta": "Create your Souli",
+    "resultCta": "Sign up to meet your Souli",
     "resultShare": "Share my result",
     "retake": "Retake quiz",
     "shareTitle": "My Souli Quiz Result",

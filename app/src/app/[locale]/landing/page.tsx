@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeroAvatar } from "@/components/landing/hero-avatar";
+import { PreHatchingEgg } from "@/components/avatar/pre-hatching-egg";
 
 const useCases = [
   { key: "useCase1", icon: Heart },
@@ -192,6 +193,10 @@ export default function LandingPage() {
 
       {/* Final CTA */}
       <section className="text-center py-8">
+        <div className="flex justify-center mb-4">
+          <PreHatchingEgg glowColor="#6C5CE7" size="md" />
+        </div>
+        <p className="text-sm text-muted-foreground mb-4 animate-pulse">{t("eggTease")}</p>
         <Link href="/registracia">
           <Button size="lg" className="text-base px-8 py-6">
             {t("cta")}

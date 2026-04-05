@@ -3,8 +3,7 @@
 import { useState, useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
-import { PixelAvatar } from "@/components/avatar/pixel-avatar";
-import { HatchingEgg } from "@/components/avatar/hatching-egg";
+import { PreHatchingEgg } from "@/components/avatar/pre-hatching-egg";
 import { Button } from "@/components/ui/button";
 import {
   SOULI_TYPES,
@@ -45,7 +44,6 @@ export default function QuizPage() {
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [phase, setPhase] = useState<"quiz" | "revealing" | "result">("quiz");
-  const [hatched, setHatched] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [sharing, setSharing] = useState(false);
 
@@ -169,74 +167,46 @@ export default function QuizPage() {
   if (phase === "result" && souliType && appearance) {
     return (
       <div className="flex flex-col items-center text-center gap-6 py-4 animate-in fade-in zoom-in-95 duration-700">
-        {/* Hatching egg → then revealed Souli */}
-        {!hatched ? (
-          <>
-            <h1 className="text-xl font-bold animate-pulse">{t("hatching")}</h1>
-            <HatchingEgg appearance={appearance} onHatched={() => setHatched(true)} />
-          </>
-        ) : (
-          <>
-            <h1 className="text-2xl font-bold">{t("resultTitle")}</h1>
-            <div className="relative">
-              <div
-                className="absolute inset-0 rounded-full blur-2xl opacity-30"
-                style={{ backgroundColor: souliType.bodyColor }}
-              />
-              <div
-                className="relative"
-                style={{ animation: "float 3s ease-in-out infinite" }}
-              >
-                <PixelAvatar
-                  state="happy"
-                  appearance={appearance}
-                  level={10}
-                  size="lg"
-                />
-              </div>
-            </div>
-          </>
-        )}
+        {/* Pre-hatching egg — wobbles and cracks but never opens */}
+        <PreHatchingEgg glowColor={souliType.bodyColor} size="lg" />
 
-        {/* Everything below only shows after hatching */}
-        {hatched && (
-          <>
-            {/* Type name + emoji */}
-            <div>
-              <span className="text-4xl">{souliType.emoji}</span>
-              <h2
-                className="text-2xl font-bold mt-2"
-                style={{ color: souliType.bodyColor }}
-              >
-                {t(souliType.nameKey)}
-              </h2>
-            </div>
+        {/* Personality type revealed (but not the avatar!) */}
+        <div>
+          <span className="text-4xl">{souliType.emoji}</span>
+          <h2
+            className="text-2xl font-bold mt-2"
+            style={{ color: souliType.bodyColor }}
+          >
+            {t(souliType.nameKey)}
+          </h2>
+        </div>
 
-            {/* Description */}
-            <p className="text-muted-foreground max-w-sm">
-              {t(souliType.descriptionKey)}
-            </p>
+        <p className="text-muted-foreground max-w-sm">
+          {t(souliType.descriptionKey)}
+        </p>
 
-            {/* Traits */}
-            <div className="flex flex-wrap justify-center gap-2">
-              {souliType.traits.map((trait) => (
-                <span
-                  key={trait}
-                  className="px-3 py-1 rounded-full text-sm font-medium"
-                  style={{
-                    backgroundColor: souliType.bodyColor + "20",
-                    color: souliType.bodyColor,
-                  }}
-                >
-                  {t(trait)}
-                </span>
-              ))}
-            </div>
-          </>
-        )}
+        <div className="flex flex-wrap justify-center gap-2">
+          {souliType.traits.map((trait) => (
+            <span
+              key={trait}
+              className="px-3 py-1 rounded-full text-sm font-medium"
+              style={{
+                backgroundColor: souliType.bodyColor + "20",
+                color: souliType.bodyColor,
+              }}
+            >
+              {t(trait)}
+            </span>
+          ))}
+        </div>
 
-        {/* CTA buttons — only after hatching */}
-        {!hatched ? null : (
+        {/* Urgency text */}
+        <p className="text-sm text-muted-foreground animate-pulse">
+          {t("hatchingTease")}
+        </p>
+
+        {/* CTA */}
+        {(
         <div className="flex flex-col gap-3 w-full max-w-xs mt-4">
           <a
             href={`/${locale}/registracia`}
