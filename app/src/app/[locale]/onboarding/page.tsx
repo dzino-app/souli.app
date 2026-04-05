@@ -47,16 +47,23 @@ function randomSouliName(): string {
 export default function OnboardingPage() {
   const t = useTranslations("onboarding");
   const router = useRouter();
-  const [phase, setPhase] = useState<Phase>("intro");
-  const [dzState, setDzState] = useState<AvatarState>("waving");
+
+  // Detect quiz fast-track: skip to birth if quiz result exists
+  const quizResult = typeof window !== "undefined"
+    ? (() => { try { const r = localStorage.getItem("dzino_quiz_result"); return r ? JSON.parse(r) : null; } catch { return null; } })()
+    : null;
+
+  const [phase, setPhase] = useState<Phase>(quizResult ? "birth" : "intro");
+  const [dzState, setDzState] = useState<AvatarState>(quizResult ? "happy" : "waving");
   const [name, setName] = useState("");
   const [souliName, setSouliName] = useState(() => randomSouliName());
   const [about, setAbout] = useState("");
   const [interests, setInterests] = useState("");
   const [style, setStyle] = useState<"brief" | "detailed" | "">("");
-  const [newAppearance, setNewAppearance] = useState<AvatarAppearance | null>(null);
+  const [newAppearance, setNewAppearance] = useState<AvatarAppearance | null>(quizResult?.appearance ?? null);
   const [newSouliState, setNewSouliState] = useState<AvatarState>("idle");
   const [hatched, setHatched] = useState(false);
+  const [isQuizFastTrack] = useState(!!quizResult);
   const [typedText, setTypedText] = useState("");
   const [typing, setTyping] = useState(false);
 
@@ -102,23 +109,13 @@ export default function OnboardingPage() {
     } else if (phase === "birth") {
       setDzState("happy");
       playAvatarSound("happy", DZINO_SOUND_DNA);
-      // Use quiz result if available, otherwise random
-      let app: AvatarAppearance;
-      const quizRaw = localStorage.getItem("dzino_quiz_result");
-      if (quizRaw) {
-        try {
-          const quiz = JSON.parse(quizRaw);
-          app = quiz.appearance;
-          localStorage.removeItem("dzino_quiz_result");
-        } catch {
-          app = randomAppearance();
-        }
-      } else {
-        app = randomAppearance();
+      if (!newAppearance) {
+        setNewAppearance(randomAppearance());
       }
-      setNewAppearance(app);
+      // Clear quiz result from localStorage
+      localStorage.removeItem("dzino_quiz_result");
       setHatched(false);
-      typeText(t("storyBirth"));
+      typeText(isQuizFastTrack ? t("storyBirthQuiz") : t("storyBirth"));
     } else if (phase === "evolution") {
       setDzState("talking");
       typeText(t("storyEvolution"));
@@ -130,7 +127,9 @@ export default function OnboardingPage() {
   }, [phase]);
 
   function handleNext() {
-    const order: Phase[] = ["intro", "story", "name", "about", "interests", "style", "birth", "evolution", "meet"];
+    const order: Phase[] = isQuizFastTrack
+      ? ["birth", "meet"]
+      : ["intro", "story", "name", "about", "interests", "style", "birth", "evolution", "meet"];
     const idx = order.indexOf(phase);
     if (idx < order.length - 1) {
       setPhase(order[idx + 1]);

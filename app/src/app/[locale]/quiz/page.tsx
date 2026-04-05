@@ -4,6 +4,7 @@ import { useState, useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { PixelAvatar } from "@/components/avatar/pixel-avatar";
+import { HatchingEgg } from "@/components/avatar/hatching-egg";
 import { Button } from "@/components/ui/button";
 import {
   SOULI_TYPES,
@@ -44,6 +45,7 @@ export default function QuizPage() {
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [phase, setPhase] = useState<"quiz" | "revealing" | "result">("quiz");
+  const [hatched, setHatched] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [sharing, setSharing] = useState(false);
 
@@ -167,61 +169,74 @@ export default function QuizPage() {
   if (phase === "result" && souliType && appearance) {
     return (
       <div className="flex flex-col items-center text-center gap-6 py-4 animate-in fade-in zoom-in-95 duration-700">
-        {/* Result title */}
-        <h1 className="text-2xl font-bold">{t("resultTitle")}</h1>
+        {/* Hatching egg → then revealed Souli */}
+        {!hatched ? (
+          <>
+            <h1 className="text-xl font-bold animate-pulse">{t("hatching")}</h1>
+            <HatchingEgg appearance={appearance} onHatched={() => setHatched(true)} />
+          </>
+        ) : (
+          <>
+            <h1 className="text-2xl font-bold">{t("resultTitle")}</h1>
+            <div className="relative">
+              <div
+                className="absolute inset-0 rounded-full blur-2xl opacity-30"
+                style={{ backgroundColor: souliType.bodyColor }}
+              />
+              <div
+                className="relative"
+                style={{ animation: "float 3s ease-in-out infinite" }}
+              >
+                <PixelAvatar
+                  state="happy"
+                  appearance={appearance}
+                  level={10}
+                  size="lg"
+                />
+              </div>
+            </div>
+          </>
+        )}
 
-        {/* Avatar with glow */}
-        <div className="relative">
-          <div
-            className="absolute inset-0 rounded-full blur-2xl opacity-30"
-            style={{ backgroundColor: souliType.bodyColor }}
-          />
-          <div
-            className="relative"
-            style={{ animation: "float 3s ease-in-out infinite" }}
-          >
-            <PixelAvatar
-              state="happy"
-              appearance={appearance}
-              level={10}
-              size="lg"
-            />
-          </div>
-        </div>
+        {/* Everything below only shows after hatching */}
+        {hatched && (
+          <>
+            {/* Type name + emoji */}
+            <div>
+              <span className="text-4xl">{souliType.emoji}</span>
+              <h2
+                className="text-2xl font-bold mt-2"
+                style={{ color: souliType.bodyColor }}
+              >
+                {t(souliType.nameKey)}
+              </h2>
+            </div>
 
-        {/* Type name + emoji */}
-        <div>
-          <span className="text-4xl">{souliType.emoji}</span>
-          <h2
-            className="text-2xl font-bold mt-2"
-            style={{ color: souliType.bodyColor }}
-          >
-            {t(souliType.nameKey)}
-          </h2>
-        </div>
+            {/* Description */}
+            <p className="text-muted-foreground max-w-sm">
+              {t(souliType.descriptionKey)}
+            </p>
 
-        {/* Description */}
-        <p className="text-muted-foreground max-w-sm">
-          {t(souliType.descriptionKey)}
-        </p>
+            {/* Traits */}
+            <div className="flex flex-wrap justify-center gap-2">
+              {souliType.traits.map((trait) => (
+                <span
+                  key={trait}
+                  className="px-3 py-1 rounded-full text-sm font-medium"
+                  style={{
+                    backgroundColor: souliType.bodyColor + "20",
+                    color: souliType.bodyColor,
+                  }}
+                >
+                  {t(trait)}
+                </span>
+              ))}
+            </div>
+          </>
+        )}
 
-        {/* Traits */}
-        <div className="flex flex-wrap justify-center gap-2">
-          {souliType.traits.map((trait) => (
-            <span
-              key={trait}
-              className="px-3 py-1 rounded-full text-sm font-medium"
-              style={{
-                backgroundColor: souliType.bodyColor + "20",
-                color: souliType.bodyColor,
-              }}
-            >
-              {t(trait)}
-            </span>
-          ))}
-        </div>
-
-        {/* CTA buttons */}
+        {/* CTA buttons — only after hatching */}
+        {!hatched ? null : (
         <div className="flex flex-col gap-3 w-full max-w-xs mt-4">
           <a
             href={`/${locale}/registracia`}
@@ -254,6 +269,7 @@ export default function QuizPage() {
             {t("retake")}
           </button>
         </div>
+        )}
       </div>
     );
   }
