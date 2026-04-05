@@ -18,7 +18,19 @@ function ensureCredentials() {
   const jsonStr = process.env.GOOGLE_CLOUD_CREDENTIALS_JSON;
   if (jsonStr && !process.env.GOOGLE_APPLICATION_CREDENTIALS) {
     const tmpPath = path.join(os.tmpdir(), "gcp-credentials.json");
-    fs.writeFileSync(tmpPath, jsonStr);
+    let content = jsonStr;
+    // Try parsing as JSON first, if that fails try base64 decode
+    try {
+      JSON.parse(content);
+    } catch {
+      try {
+        content = Buffer.from(jsonStr, "base64").toString("utf-8");
+        JSON.parse(content); // validate it's valid JSON after decode
+      } catch {
+        content = jsonStr;
+      }
+    }
+    fs.writeFileSync(tmpPath, content);
     process.env.GOOGLE_APPLICATION_CREDENTIALS = tmpPath;
   }
 
