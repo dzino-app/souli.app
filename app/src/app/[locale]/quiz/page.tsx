@@ -225,6 +225,15 @@ export default function QuizPage() {
         <div className="flex flex-col gap-3 w-full max-w-xs mt-4">
           <a
             href={`/${locale}/registracia`}
+            onClick={() => {
+              if (appearance && species) {
+                localStorage.setItem("dzino_quiz_result", JSON.stringify({
+                  appearance,
+                  species,
+                  type: souliType?.nameKey,
+                }));
+              }
+            }}
             className="inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium h-12 px-8 text-base bg-primary text-primary-foreground hover:bg-primary/90 transition-colors w-full"
           >
             {t("resultCta")}

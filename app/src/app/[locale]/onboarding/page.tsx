@@ -102,7 +102,20 @@ export default function OnboardingPage() {
     } else if (phase === "birth") {
       setDzState("happy");
       playAvatarSound("happy", DZINO_SOUND_DNA);
-      const app = randomAppearance();
+      // Use quiz result if available, otherwise random
+      let app: AvatarAppearance;
+      const quizRaw = localStorage.getItem("dzino_quiz_result");
+      if (quizRaw) {
+        try {
+          const quiz = JSON.parse(quizRaw);
+          app = quiz.appearance;
+          localStorage.removeItem("dzino_quiz_result");
+        } catch {
+          app = randomAppearance();
+        }
+      } else {
+        app = randomAppearance();
+      }
       setNewAppearance(app);
       setHatched(false);
       typeText(t("storyBirth"));
