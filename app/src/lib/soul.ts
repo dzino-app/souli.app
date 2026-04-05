@@ -257,6 +257,17 @@ export function updateSoulFileInCache(
     file.updatedAt = new Date().toISOString();
     file.updatedBy = updatedBy;
     setSessionCache(files);
+  } else if (isSystemFile(slug)) {
+    // Auto-create system files in cache when they don't exist yet
+    files.push({
+      slug,
+      displayName: slug === "_index" ? "Index" : "Log",
+      category: "system",
+      content,
+      updatedAt: new Date().toISOString(),
+      updatedBy,
+    });
+    setSessionCache(files);
   }
 }
 
@@ -331,7 +342,15 @@ export const CATEGORY_LABELS: Record<string, string> = {
   praca: "Práca",
   rast: "Rast",
   custom: "Vlastné",
+  system: "System",
 };
+
+// System soul file slugs — not shown as regular editable files
+export const SYSTEM_SLUGS = ["_index", "_log"] as const;
+
+export function isSystemFile(slug: string): boolean {
+  return (SYSTEM_SLUGS as readonly string[]).includes(slug);
+}
 
 // ---- Default file slugs ----
 

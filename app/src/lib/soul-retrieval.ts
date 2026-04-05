@@ -1,4 +1,5 @@
-import { getSoulFiles, applyDecay, type SoulFile } from "./soul";
+import { getSoulFiles, getSoulFile, applyDecay, type SoulFile } from "./soul";
+import { getIndexContent } from "./soul-compiler";
 
 // Slugs that are always included regardless of relevance score
 const ALWAYS_INCLUDE: string[] = ["osobnost", "preferencie"];
@@ -157,4 +158,157 @@ export function getDecayedSoulContext(message: string): string {
       return `--- ${f.slug}.md ---\n${decayedContent}`;
     })
     .join("\n\n");
+}
+
+// ---- Cross-reference pattern ----
+const CROSS_REF_PATTERN = /\[->\s*([a-z0-9_-]+)\s*\]/g;
+
+/**
+ * Parse cross-references from _index.md content.
+ * Cross-references use the format [-> slug].
+ */
+function parseCrossReferences(indexContent: string): string[] {
+  const refs: string[] = [];
+  let match;
+  CROSS_REF_PATTERN.lastIndex = 0;
+  while ((match = CROSS_REF_PATTERN.exec(indexContent)) !== null) {
+    const slug = match[1];
+    if (!refs.includes(slug)) {
+      refs.push(slug);
+    }
+  }
+  return refs;
+}
+
+/**
+ * Extract the "Open Threads" section from _index.md.
+ */
+export function extractOpenThreads(indexContent: string): string {
+  const marker = "## Open Threads";
+  const startIdx = indexContent.indexOf(marker);
+  if (startIdx === -1) return "";
+
+  const afterMarker = indexContent.slice(startIdx + marker.length);
+  // Find the next ## heading or end of content
+  const nextHeading = afterMarker.indexOf("\n## ");
+  const section = nextHeading === -1
+    ? afterMarker.trim()
+    : afterMarker.slice(0, nextHeading).trim();
+
+  return section;
+}
+
+/**
+ * Extract the "Insights" section from _index.md.
+ */
+export function extractInsights(indexContent: string): string {
+  const marker = "## Insights";
+  const startIdx = indexContent.indexOf(marker);
+  if (startIdx === -1) return "";
+
+  const afterMarker = indexContent.slice(startIdx + marker.length);
+  const nextHeading = afterMarker.indexOf("\n## ");
+  const section = nextHeading === -1
+    ? afterMarker.trim()
+    : afterMarker.slice(0, nextHeading).trim();
+
+  return section;
+}
+
+/**
+ * Index-based context retrieval (Karpathy's LLM-Wiki pattern).
+ *
+ * Strategy:
+ * 1. Always include: _index.md + osobnost + preferencie
+ * 2. Parse cross-references from index to find connected files
+ * 3. Keyword match against index summaries to pick 2-3 additional files
+ * 4. Append "Open Threads" as temporal context
+ *
+ * Falls back to getDecayedSoulContext() if _index.md doesn't exist.
+ */
+export function getIndexBasedContext(message: string): string {
+  const indexContent = getIndexContent();
+
+  // Fall back to keyword-based retrieval if no index exists
+  if (!indexContent) {
+    return getDecayedSoulContext(message);
+  }
+
+  const parts: string[] = [];
+  const includedSlugs = new Set<string>();
+
+  // 1. Include the index itself (compact version)
+  parts.push(`--- _index.md ---\n${indexContent}`);
+  includedSlugs.add("_index");
+
+  // 2. Always include osobnost + preferencie
+  for (const slug of ALWAYS_INCLUDE) {
+    const file = getSoulFile(slug);
+    if (file) {
+      parts.push(`--- ${slug}.md ---\n${applyDecay(file.content)}`);
+      includedSlugs.add(slug);
+    }
+  }
+
+  // 3. Parse cross-references from index — these are pre-computed connections
+  const crossRefs = parseCrossReferences(indexContent);
+
+  // 4. Keyword match against index to pick relevant files
+  const messageTokens = new Set(tokenize(message));
+  const allFiles = getSoulFiles();
+
+  // Score files based on keyword match + cross-reference bonus
+  const scored: { slug: string; score: number }[] = [];
+
+  for (const file of allFiles) {
+    if (includedSlugs.has(file.slug)) continue;
+    if (file.slug === "_index" || file.slug === "_log") continue;
+
+    let score = 0;
+
+    // Keyword match against the file content
+    const fileTokens = new Set(tokenize(file.content));
+    const messageTokenArray = Array.from(messageTokens);
+    for (let ti = 0; ti < messageTokenArray.length; ti++) {
+      if (fileTokens.has(messageTokenArray[ti])) score += 1;
+    }
+
+    // Bonus for trigger keywords
+    const triggers = TRIGGER_MAP[file.slug];
+    if (triggers) {
+      for (const t of triggers) {
+        if (messageTokens.has(t.toLowerCase())) score += 3;
+      }
+    }
+
+    // Bonus if the file is cross-referenced in the index
+    if (crossRefs.includes(file.slug)) {
+      score += 2;
+    }
+
+    scored.push({ slug: file.slug, score });
+  }
+
+  // Take top 2-3 additional files
+  scored.sort((a, b) => b.score - a.score);
+  const additionalCount = 3;
+  const topAdditional = scored.slice(0, additionalCount);
+
+  for (const item of topAdditional) {
+    if (item.score > 0) {
+      const file = getSoulFile(item.slug);
+      if (file) {
+        parts.push(`--- ${item.slug}.md ---\n${applyDecay(file.content)}`);
+        includedSlugs.add(item.slug);
+      }
+    }
+  }
+
+  // 5. Append open threads as temporal context
+  const openThreads = extractOpenThreads(indexContent);
+  if (openThreads) {
+    parts.push(`--- open_threads ---\n${openThreads}`);
+  }
+
+  return parts.join("\n\n");
 }

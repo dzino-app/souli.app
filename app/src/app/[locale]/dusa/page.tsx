@@ -16,6 +16,10 @@ import {
   ChevronDown,
   ChevronRight,
   History,
+  Cpu,
+  Loader2,
+  Lightbulb,
+  MessageCircle,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -36,6 +40,12 @@ import {
   type ChangelogGroup,
   type SoulChangeEntry,
 } from "@/lib/soul-changelog";
+import {
+  getCompilationState,
+  triggerCompilation,
+  getIndexContent,
+} from "@/lib/soul-compiler";
+import { extractInsights, extractOpenThreads } from "@/lib/soul-retrieval";
 
 const CATEGORY_ICONS: Record<string, typeof BookOpen> = {
   jadro: User,
@@ -235,6 +245,94 @@ function ChangelogSection({ changelogGroups }: { changelogGroups: ChangelogGroup
   );
 }
 
+// ---- Compilation status section ----
+function CompilationSection({ onCompiled }: { onCompiled: () => void }) {
+  const [compiling, setCompiling] = useState(false);
+  const [state, setState] = useState(getCompilationState());
+  const [indexContent, setIndexContent] = useState(getIndexContent());
+
+  const insights = indexContent ? extractInsights(indexContent) : "";
+  const openThreads = indexContent ? extractOpenThreads(indexContent) : "";
+
+  async function handleCompile() {
+    setCompiling(true);
+    try {
+      await triggerCompilation();
+      setState(getCompilationState());
+      setIndexContent(getIndexContent());
+      onCompiled();
+    } finally {
+      setCompiling(false);
+    }
+  }
+
+  const lastCompiledLabel = state?.lastCompiledAt
+    ? relativeTime(state.lastCompiledAt)
+    : null;
+
+  return (
+    <div className="space-y-3">
+      {/* Compilation status bar */}
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2 min-w-0">
+          <Cpu className="h-4 w-4 text-muted-foreground shrink-0" />
+          <div className="min-w-0">
+            <p className="text-xs text-muted-foreground">
+              {lastCompiledLabel
+                ? `Kompilacia: ${lastCompiledLabel} (v${state?.version ?? 0})`
+                : "Nikdy nekompilovane"}
+            </p>
+          </div>
+        </div>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={handleCompile}
+          disabled={compiling}
+          className="shrink-0"
+        >
+          {compiling ? (
+            <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" />
+          ) : (
+            <Cpu className="h-3.5 w-3.5 mr-1" />
+          )}
+          {compiling ? "Kompilacia..." : "Kompilovat"}
+        </Button>
+      </div>
+
+      {/* Insights card */}
+      {insights && (
+        <Card className="border-primary/20 bg-primary/5">
+          <CardContent className="py-3 px-4">
+            <div className="flex items-center gap-2 mb-2">
+              <Lightbulb className="h-4 w-4 text-primary" />
+              <h3 className="text-sm font-semibold">Postrehy</h3>
+            </div>
+            <div className="text-xs text-muted-foreground whitespace-pre-line leading-relaxed">
+              {insights}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Open Threads card */}
+      {openThreads && (
+        <Card className="border-accent/20 bg-accent/5">
+          <CardContent className="py-3 px-4">
+            <div className="flex items-center gap-2 mb-2">
+              <MessageCircle className="h-4 w-4 text-accent-foreground" />
+              <h3 className="text-sm font-semibold">Otvorene temy</h3>
+            </div>
+            <div className="text-xs text-muted-foreground whitespace-pre-line leading-relaxed">
+              {openThreads}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+}
+
 export default function SoulPage() {
   const [groups, setGroups] = useState<Record<string, SoulFile[]>>({});
   const [showForm, setShowForm] = useState(false);
@@ -243,7 +341,19 @@ export default function SoulPage() {
   const [changelogGroups, setChangelogGroups] = useState<ChangelogGroup[]>([]);
 
   const refreshGroups = useCallback(() => {
-    setGroups(getSoulFilesByCategory());
+    // Filter out system files (_index, _log) from the display
+    const allGroups = getSoulFilesByCategory();
+    const filtered: Record<string, SoulFile[]> = {};
+    for (const [cat, files] of Object.entries(allGroups)) {
+      if (cat === "system") continue; // Don't show system category
+      const nonSystem = files.filter(
+        (f) => f.slug !== "_index" && f.slug !== "_log"
+      );
+      if (nonSystem.length > 0) {
+        filtered[cat] = nonSystem;
+      }
+    }
+    setGroups(filtered);
     setChangelogGroups(getChangelogGrouped());
   }, []);
 
@@ -343,6 +453,9 @@ export default function SoulPage() {
           </CardContent>
         </Card>
       )}
+
+      {/* Compilation section */}
+      <CompilationSection onCompiled={refreshGroups} />
 
       {/* Changelog section */}
       <ChangelogSection changelogGroups={changelogGroups} />

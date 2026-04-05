@@ -1,4 +1,4 @@
-import { getDecayedSoulContext } from "@/lib/soul-retrieval";
+import { getIndexBasedContext } from "@/lib/soul-retrieval";
 import { getUserLanguage, setUserLanguage, detectLanguage } from "@/lib/languages";
 import { isAlreadyTranslated, translateSoulFiles } from "@/lib/soul-translator";
 import { getTodayMood } from "@/lib/mood-tracking";
@@ -16,7 +16,8 @@ export async function streamChatResponse(
   history: ChatMessage[] = [],
   onChunk?: (text: string) => void
 ): Promise<string> {
-  const soulContext = getDecayedSoulContext(message);
+  // Use index-based retrieval (falls back to keyword-based if no _index.md)
+  const soulContext = getIndexBasedContext(message);
 
   // Detect language from every message — fluid switching
   let language = getUserLanguage();

@@ -23,6 +23,7 @@ import { createConversation, addMessage } from "@/lib/conversations";
 import { addXp, getGamification, saveGamification } from "@/lib/gamification";
 import { checkAchievements, grantAchievement, type Achievement } from "@/lib/achievements";
 import { updateChallengeProgress, completeChallengeById } from "@/lib/challenges";
+import { incrementCompileCounter, shouldCompile, triggerCompilation } from "@/lib/soul-compiler";
 
 const POSITIVE_WORDS = ["super", "výborne", "splnené", "gratuluj", "skvelé", "paráda", "bravo", "hotovo", "dokonalé", "podarilo"];
 
@@ -168,6 +169,12 @@ export default function ChatPage() {
       setTimeout(() => setAvatarState("idle"), 3000);
 
       processConversationInBackground(userMsg, parsed.text);
+
+      // Soul KB compilation: increment counter + trigger if needed
+      incrementCompileCounter();
+      if (shouldCompile()) {
+        triggerCompilation().catch(() => {});
+      }
 
       // Auto-complete challenge if response seems positive
       if (challengeIdRef.current) {
