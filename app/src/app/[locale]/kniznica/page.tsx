@@ -102,41 +102,32 @@ export default function LibraryPage() {
         />
       </div>
 
-      {/* Filters */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1">
+      {/* Filters — single scrollable row */}
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 -mx-1 px-1">
         {SPECIES_LIST.map((s) => (
           <button
-            key={s.value}
+            key={`sp-${s.value}`}
             type="button"
-            onClick={() => {
-              setSpecies(s.value);
-              setPage(0);
-            }}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium border whitespace-nowrap transition-colors ${
+            onClick={() => { setSpecies(s.value); setPage(0); }}
+            className={`px-2.5 py-1 rounded-full text-[11px] font-medium whitespace-nowrap transition-colors ${
               species === s.value
-                ? "bg-primary text-primary-foreground border-primary"
-                : "bg-secondary border-border hover:border-primary/40"
+                ? "bg-primary text-primary-foreground"
+                : "bg-secondary/70 text-muted-foreground hover:text-foreground"
             }`}
           >
             {s.label}
           </button>
         ))}
-      </div>
-
-      {/* Soul type filter */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1">
-        {SOUL_TYPE_FILTERS.map((s) => (
+        <div className="w-px h-4 bg-border shrink-0 mx-0.5" />
+        {SOUL_TYPE_FILTERS.filter((s) => s.value).map((s) => (
           <button
-            key={s.value}
+            key={`st-${s.value}`}
             type="button"
-            onClick={() => {
-              setSoulType(s.value);
-              setPage(0);
-            }}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium border whitespace-nowrap transition-colors ${
+            onClick={() => { setSoulType(soulType === s.value ? "" : s.value); setPage(0); }}
+            className={`px-2.5 py-1 rounded-full text-[11px] font-medium whitespace-nowrap transition-colors ${
               soulType === s.value
-                ? "bg-accent text-accent-foreground border-accent"
-                : "bg-secondary border-border hover:border-accent/40"
+                ? "bg-accent text-accent-foreground"
+                : "bg-secondary/70 text-muted-foreground hover:text-foreground"
             }`}
           >
             {s.label}
