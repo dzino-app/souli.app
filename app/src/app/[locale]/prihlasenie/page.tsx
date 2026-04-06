@@ -44,11 +44,12 @@ export default function LoginPage() {
       if (user) {
         const { data: cryptoRow } = await supabase
           .from("user_crypto")
-          .select("salt")
+          .select("salt, encryption_enabled")
           .eq("user_id", user.id)
           .single();
 
-        if (cryptoRow?.salt) {
+        // Only derive key if encryption is enabled for this user
+        if (cryptoRow?.salt && cryptoRow?.encryption_enabled !== false) {
           await initCryptoSession(password, fromBase64(cryptoRow.salt));
         }
       }

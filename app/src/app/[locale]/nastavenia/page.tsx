@@ -23,6 +23,7 @@ import {
 import { clearCryptoSession } from "@/lib/crypto-session";
 import { ExportData } from "@/components/settings/export-data";
 import { LlmSettings } from "@/components/settings/llm-settings";
+import { EncryptionToggle } from "@/components/settings/encryption-toggle";
 
 const NAV_ITEMS = [
   { href: "/", icon: Home, label: "Domov" },
@@ -183,6 +184,14 @@ export default function SettingsPage() {
             keyWarning: "K\u013e\u00fa\u010d je ulo\u017een\u00fd len v tvojom prehliada\u010bi.",
           }}
         />
+      </div>
+
+      {/* Privacy */}
+      <div>
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-3">
+          {"S\u00fakromie"}
+        </h2>
+        <EncryptionToggle />
       </div>
 
       {/* Account */}
