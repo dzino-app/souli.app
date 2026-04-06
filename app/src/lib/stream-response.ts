@@ -16,6 +16,10 @@ export async function streamChatResponse(
   history: ChatMessage[] = [],
   onChunk?: (text: string) => void
 ): Promise<string> {
+  // Safety: filter out any ciphertext from history before sending to LLM.
+  // If decryption failed somewhere, we never want to send enc:base64... to Gemini.
+  const safeHistory = history.filter((m) => !m.content.startsWith("enc:"));
+
   // Use index-based retrieval (falls back to keyword-based if no _index.md)
   const soulContext = getIndexBasedContext(message);
 
@@ -63,7 +67,7 @@ export async function streamChatResponse(
     const response = await fetch("/api/chat", {
       method: "POST",
       headers,
-      body: JSON.stringify({ message, soulContext: soulContext + moodContext, history, language: getUserLanguage() }),
+      body: JSON.stringify({ message, soulContext: soulContext + moodContext, history: safeHistory, language: getUserLanguage() }),
       signal: controller.signal,
     });
 

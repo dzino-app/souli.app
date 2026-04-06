@@ -1,6 +1,21 @@
 import { getSoulFiles, getSoulFile, applyDecay, type SoulFile } from "./soul";
 import { getIndexContent } from "./soul-compiler";
 
+/**
+ * Safety filter: ensure no ciphertext leaks into LLM context.
+ * If content starts with "enc:" prefix, it's unreadable ciphertext — return empty.
+ */
+function sanitizeForLlm(content: string): string {
+  if (!content) return "";
+  // If the whole content is a single ciphertext blob
+  if (content.trim().startsWith("enc:")) return "";
+  // Strip any lines that contain ciphertext
+  return content
+    .split("\n")
+    .filter((line) => !line.trim().startsWith("enc:"))
+    .join("\n");
+}
+
 // Slugs that are always included regardless of relevance score
 const ALWAYS_INCLUDE: string[] = ["osobnost", "preferencie"];
 
@@ -154,9 +169,10 @@ export function getDecayedSoulContext(message: string): string {
 
   return files
     .map((f) => {
-      const decayedContent = applyDecay(f.content);
+      const decayedContent = sanitizeForLlm(applyDecay(f.content));
       return `--- ${f.slug}.md ---\n${decayedContent}`;
     })
+    .filter((block) => !block.endsWith("---\n"))
     .join("\n\n");
 }
 
@@ -234,19 +250,28 @@ export function getIndexBasedContext(message: string): string {
     return getDecayedSoulContext(message);
   }
 
+  const safeIndex = sanitizeForLlm(indexContent);
+  // If the index itself is ciphertext, fall back to keyword retrieval
+  if (!safeIndex) {
+    return getDecayedSoulContext(message);
+  }
+
   const parts: string[] = [];
   const includedSlugs = new Set<string>();
 
   // 1. Include the index itself (compact version)
-  parts.push(`--- _index.md ---\n${indexContent}`);
+  parts.push(`--- _index.md ---\n${safeIndex}`);
   includedSlugs.add("_index");
 
   // 2. Always include osobnost + preferencie
   for (const slug of ALWAYS_INCLUDE) {
     const file = getSoulFile(slug);
     if (file) {
-      parts.push(`--- ${slug}.md ---\n${applyDecay(file.content)}`);
-      includedSlugs.add(slug);
+      const safe = sanitizeForLlm(applyDecay(file.content));
+      if (safe) {
+        parts.push(`--- ${slug}.md ---\n${safe}`);
+        includedSlugs.add(slug);
+      }
     }
   }
 
@@ -298,8 +323,11 @@ export function getIndexBasedContext(message: string): string {
     if (item.score > 0) {
       const file = getSoulFile(item.slug);
       if (file) {
-        parts.push(`--- ${item.slug}.md ---\n${applyDecay(file.content)}`);
-        includedSlugs.add(item.slug);
+        const safe = sanitizeForLlm(applyDecay(file.content));
+        if (safe) {
+          parts.push(`--- ${item.slug}.md ---\n${safe}`);
+          includedSlugs.add(item.slug);
+        }
       }
     }
   }

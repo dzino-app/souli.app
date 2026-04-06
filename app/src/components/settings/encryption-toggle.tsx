@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/client";
 import { clearCryptoSession } from "@/lib/crypto-session";
 import { readAllSoulFiles, writeSoulFile } from "@/lib/supabase/soul-storage";
+import { loadConversationsFromSupabase, syncConversationsToSupabase } from "@/lib/supabase/sync";
 
 export function EncryptionToggle() {
   const [enabled, setEnabled] = useState<boolean | null>(null);
@@ -35,8 +36,9 @@ export function EncryptionToggle() {
     if (!user) { setMigrating(false); return; }
 
     try {
-      // Read all soul files with current key (decrypts automatically)
+      // Read all data with current key (decrypts automatically)
       const files = (await readAllSoulFiles()) ?? [];
+      const conversations = await loadConversationsFromSupabase();
 
       // Mark encryption as disabled
       await supabase
@@ -50,6 +52,11 @@ export function EncryptionToggle() {
       // Re-write all files as plaintext
       for (const file of files) {
         await writeSoulFile(file.slug, file.content, file.updatedBy);
+      }
+
+      // Re-write all conversations as plaintext
+      if (conversations && conversations.length > 0) {
+        await syncConversationsToSupabase(conversations);
       }
 
       setEnabled(false);

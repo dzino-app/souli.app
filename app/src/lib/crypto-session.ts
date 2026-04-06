@@ -120,14 +120,19 @@ export async function encryptIfActive(plaintext: string): Promise<string> {
 export async function decryptIfActive(ciphertext: string): Promise<string> {
   // If it's not encrypted data, return as-is
   if (!isEncrypted(ciphertext)) return ciphertext;
-  // If we don't have a key, we can't decrypt — return as-is
-  if (!sessionKey) return ciphertext;
+  // If we don't have a key, we can't decrypt — return EMPTY to prevent
+  // ciphertext from leaking to the LLM or being displayed to the user.
+  // This is intentional: losing the key means losing access to encrypted data.
+  if (!sessionKey) {
+    console.warn("[crypto] Encrypted data encountered without session key — returning empty");
+    return "";
+  }
 
   try {
     return await decrypt(ciphertext, sessionKey);
   } catch {
-    // Decryption failed (wrong key, corrupted data) — return as-is
-    console.warn("[crypto] Decryption failed for content, returning as-is");
-    return ciphertext;
+    // Decryption failed (wrong key, corrupted data) — return empty, never the ciphertext
+    console.warn("[crypto] Decryption failed for content, returning empty");
+    return "";
   }
 }
