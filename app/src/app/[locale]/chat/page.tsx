@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import Link from "next/link";
 import { Send, Loader2, Check, X, Pencil } from "lucide-react";
 import { VoiceInput } from "@/components/chat/voice-input";
 import { VoiceOutput } from "@/components/chat/voice-output";
@@ -452,9 +453,9 @@ export default function ChatPage() {
       </form>
       <p className="text-[10px] text-muted-foreground/60 text-center pt-1">
         {t("chat.disclaimer")}{" "}
-        <a href="/ochrana-sukromia" className="underline hover:text-muted-foreground">{t("chat.privacy")}</a>
+        <Link href="/ochrana-sukromia" className="underline hover:text-muted-foreground">{t("chat.privacy")}</Link>
         {" · "}
-        <a href="/podmienky" className="underline hover:text-muted-foreground">{t("chat.terms")}</a>
+        <Link href="/podmienky" className="underline hover:text-muted-foreground">{t("chat.terms")}</Link>
       </p>
 
       {/* Soul update toast */}
