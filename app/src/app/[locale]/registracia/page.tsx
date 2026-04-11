@@ -168,6 +168,9 @@ export default function SignupPage() {
                 required
                 className="rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
               />
+              <p className="text-[11px] text-muted-foreground/60 mt-0.5">
+                {t("passwordDeviceHint")}
+              </p>
             </div>
             {error && (
               <p className="text-sm text-destructive">{error}</p>
