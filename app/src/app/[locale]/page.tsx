@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { MessageCircle, Plus, Sticker, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -13,10 +14,13 @@ import { useRandomIdleBehavior } from "@/components/avatar/use-random-idle";
 import { getMoodLabel, getMoodEmoji } from "@/lib/avatar-mood";
 import { migrateMemoriesToSoul } from "@/lib/migrate-memories-to-soul";
 import {
+  getConversations,
   getConversationsGroupedByDate,
   deleteConversation,
   type Conversation,
 } from "@/lib/conversations";
+import { SearchBar } from "@/components/search/search-bar";
+import type { SearchableItem } from "@/lib/client-search";
 import { XpBar } from "@/components/gamification/xp-bar";
 import { StreakDisplay } from "@/components/gamification/streak-display";
 import { DailyChallenges } from "@/components/gamification/daily-challenges";
@@ -35,14 +39,28 @@ import { WeeklyReportShare } from "@/components/report/weekly-report-share";
 
 export default function Home() {
   const t = useTranslations("stickers");
+  const router = useRouter();
   const { mounted, state, mood, name, appearance, playState } = useAvatarState();
   useRandomIdleBehavior(playState);
   const [groups, setGroups] = useState<Record<string, Conversation[]>>({});
+  const [allConversations, setAllConversations] = useState<Conversation[]>([]);
   const levelUp = useLevelUp();
+
+  // Build searchable items from conversations (title + all message content)
+  const searchableItems: SearchableItem[] = useMemo(
+    () =>
+      allConversations.map((conv) => ({
+        id: conv.id,
+        title: conv.title,
+        content: conv.messages.map((m) => m.content).join("\n"),
+      })),
+    [allConversations],
+  );
 
   useEffect(() => {
     migrateMemoriesToSoul();
     setGroups(getConversationsGroupedByDate());
+    setAllConversations(getConversations());
 
     // One-time migration to multi-avatar system
     if (needsMigration()) {
@@ -67,6 +85,7 @@ export default function Home() {
   function handleDelete(id: string) {
     deleteConversation(id);
     setGroups(getConversationsGroupedByDate());
+    setAllConversations(getConversations());
   }
 
   const dateKeys = Object.keys(groups);
@@ -143,6 +162,14 @@ export default function Home() {
           Nová konverzácia
         </Button>
       </Link>
+
+      {/* Search conversations */}
+      {allConversations.length > 0 && (
+        <SearchBar
+          items={searchableItems}
+          onSelect={(id) => router.push(`/chat?id=${id}`)}
+        />
+      )}
 
       {/* Chat sessions */}
       {dateKeys.length > 0 && (
