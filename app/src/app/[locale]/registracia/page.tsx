@@ -5,10 +5,20 @@ import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { Mail } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
-import { initCryptoSession } from "@/lib/crypto-session";
+import { initCryptoSessionV2 } from "@/lib/crypto-session";
 import { generateSalt, toBase64 } from "@/lib/crypto";
+import {
+  generateMasterKey,
+  deriveWrappingKey,
+  deriveRecoveryWrappingKey,
+  wrapMasterKey,
+  generateRecoverySalt,
+} from "@/lib/crypto-keys";
+import { generateMnemonic, mnemonicToEntropy } from "@/lib/bip39";
+import { storePendingCrypto } from "@/lib/crypto-salt-persist";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { RecoveryPhraseDisplay } from "@/components/crypto/recovery-phrase-display";
 
 export default function SignupPage() {
   const t = useTranslations("auth");
@@ -17,6 +27,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [mnemonic, setMnemonic] = useState<string | null>(null);
   const [confirmScreen, setConfirmScreen] = useState(false);
 
   async function handleSignup(e: React.FormEvent) {
@@ -39,23 +50,57 @@ export default function SignupPage() {
       return;
     }
 
-    // Generate salt and initialize client-side encryption
-    // The salt is stored in Supabase after email confirmation via the auth callback.
-    // For now, store it temporarily so we can init the crypto session.
+    // Generate v2 crypto: master key + recovery phrase
     try {
       const salt = generateSalt();
-      // Store salt temporarily for post-confirmation initialization
-      sessionStorage.setItem("dzino_pending_salt", toBase64(salt));
-      // Pre-derive the key so it's ready if the user confirms quickly
-      await initCryptoSession(password, salt);
-    } catch {
-      // Crypto init failed — proceed without encryption
+      const masterKey = await generateMasterKey();
+
+      // Wrap under password
+      const passwordWrappingKey = await deriveWrappingKey(password, salt);
+      const wrappedByPassword = await wrapMasterKey(masterKey, passwordWrappingKey);
+
+      // Wrap under recovery phrase
+      const phrase = await generateMnemonic();
+      const entropy = await mnemonicToEntropy(phrase);
+      const recoverySalt = generateRecoverySalt();
+      const recoveryWrappingKey = await deriveRecoveryWrappingKey(entropy, recoverySalt);
+      const wrappedByRecovery = await wrapMasterKey(masterKey, recoveryWrappingKey);
+
+      // Store in sessionStorage for post-confirmation persistence
+      storePendingCrypto({
+        salt: toBase64(salt),
+        wrappedKeyPassword: wrappedByPassword,
+        wrappedKeyRecovery: wrappedByRecovery,
+        recoverySalt: toBase64(recoverySalt),
+        cryptoVersion: 2,
+      });
+
+      // Init the session with the master key
+      initCryptoSessionV2(masterKey, salt);
+
+      // Show recovery phrase before email confirmation
+      setMnemonic(phrase);
+    } catch (err) {
+      console.warn("[signup] Crypto init failed:", err);
+      // Fallback: no encryption
     }
 
     setLoading(false);
-    setConfirmScreen(true);
   }
 
+  // Step 2: recovery phrase display
+  if (mnemonic && !confirmScreen) {
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center py-8">
+        <RecoveryPhraseDisplay
+          mnemonic={mnemonic}
+          onConfirm={() => setConfirmScreen(true)}
+        />
+      </div>
+    );
+  }
+
+  // Step 3: email confirmation
   if (confirmScreen) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
@@ -84,6 +129,7 @@ export default function SignupPage() {
     );
   }
 
+  // Step 1: signup form
   return (
     <div className="flex min-h-[60vh] items-center justify-center">
       <Card className="w-full max-w-sm">

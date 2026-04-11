@@ -1,28 +1,53 @@
 /**
- * Persist the encryption salt generated during signup.
+ * Persist encryption data generated during signup.
  *
- * During signup, a random salt is generated and stored in sessionStorage
- * (temporary). After the user confirms their email and is redirected to
- * the onboarding page, this function reads the pending salt and stores
- * it permanently in the user_crypto table.
- *
- * This two-step approach is needed because:
- * 1. Signup generates the salt (client-side, before email confirmation)
- * 2. The user_crypto table requires an authenticated user (after confirmation)
- * 3. The auth callback is server-side and can't access sessionStorage
+ * During signup, salt + wrapped keys are stored in sessionStorage
+ * (temporary). After email confirmation and redirect, this function
+ * reads the pending data and stores it permanently in user_crypto.
  */
 
 import { createClient } from "./supabase/client";
 
 const PENDING_SALT_KEY = "dzino_pending_salt";
+const PENDING_WRAPPED_PWD = "dzino_pending_wrapped_password";
+const PENDING_WRAPPED_REC = "dzino_pending_wrapped_recovery";
+const PENDING_REC_SALT = "dzino_pending_recovery_salt";
+const PENDING_VERSION = "dzino_pending_crypto_version";
 
 /**
- * Store the pending salt from signup into the user_crypto table.
- *
- * Safe to call multiple times — it's a no-op if:
- * - No pending salt exists in sessionStorage
- * - The user already has a salt in user_crypto
- * - The user is not authenticated
+ * Store pending signup fields in sessionStorage.
+ * Called from the signup page after key generation.
+ */
+export function storePendingCrypto(fields: {
+  salt: string;
+  wrappedKeyPassword?: string;
+  wrappedKeyRecovery?: string;
+  recoverySalt?: string;
+  cryptoVersion?: number;
+}): void {
+  if (typeof window === "undefined") return;
+  sessionStorage.setItem(PENDING_SALT_KEY, fields.salt);
+  if (fields.wrappedKeyPassword)
+    sessionStorage.setItem(PENDING_WRAPPED_PWD, fields.wrappedKeyPassword);
+  if (fields.wrappedKeyRecovery)
+    sessionStorage.setItem(PENDING_WRAPPED_REC, fields.wrappedKeyRecovery);
+  if (fields.recoverySalt)
+    sessionStorage.setItem(PENDING_REC_SALT, fields.recoverySalt);
+  if (fields.cryptoVersion)
+    sessionStorage.setItem(PENDING_VERSION, String(fields.cryptoVersion));
+}
+
+function clearPending(): void {
+  sessionStorage.removeItem(PENDING_SALT_KEY);
+  sessionStorage.removeItem(PENDING_WRAPPED_PWD);
+  sessionStorage.removeItem(PENDING_WRAPPED_REC);
+  sessionStorage.removeItem(PENDING_REC_SALT);
+  sessionStorage.removeItem(PENDING_VERSION);
+}
+
+/**
+ * Persist pending crypto data from signup into user_crypto.
+ * Safe to call multiple times — no-op if already persisted.
  */
 export async function persistPendingSalt(): Promise<void> {
   if (typeof window === "undefined") return;
@@ -34,7 +59,6 @@ export async function persistPendingSalt(): Promise<void> {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return;
 
-  // Check if salt already exists
   const { data: existing } = await supabase
     .from("user_crypto")
     .select("user_id")
@@ -42,17 +66,28 @@ export async function persistPendingSalt(): Promise<void> {
     .single();
 
   if (existing) {
-    // Salt already stored — clean up sessionStorage
-    sessionStorage.removeItem(PENDING_SALT_KEY);
+    clearPending();
     return;
   }
 
-  // Store the salt
-  const { error } = await supabase
-    .from("user_crypto")
-    .insert({ user_id: user.id, salt: pendingSalt });
+  const version = parseInt(sessionStorage.getItem(PENDING_VERSION) || "1", 10);
 
-  if (!error) {
-    sessionStorage.removeItem(PENDING_SALT_KEY);
+  const row: Record<string, unknown> = {
+    user_id: user.id,
+    salt: pendingSalt,
+    crypto_version: version,
+  };
+
+  if (version === 2) {
+    const wrappedPwd = sessionStorage.getItem(PENDING_WRAPPED_PWD);
+    const wrappedRec = sessionStorage.getItem(PENDING_WRAPPED_REC);
+    const recSalt = sessionStorage.getItem(PENDING_REC_SALT);
+    if (wrappedPwd) row.wrapped_key_password = wrappedPwd;
+    if (wrappedRec) row.wrapped_key_recovery = wrappedRec;
+    if (recSalt) row.recovery_salt = recSalt;
+    if (wrappedRec) row.recovery_created_at = new Date().toISOString();
   }
+
+  const { error } = await supabase.from("user_crypto").insert(row);
+  if (!error) clearPending();
 }

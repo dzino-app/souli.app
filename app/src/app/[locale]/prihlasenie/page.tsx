@@ -6,8 +6,9 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { loadFromSupabase } from "@/lib/supabase/sync";
-import { initCryptoSession } from "@/lib/crypto-session";
+import { initCryptoSession, initCryptoSessionV2 } from "@/lib/crypto-session";
 import { fromBase64 } from "@/lib/crypto";
+import { deriveWrappingKey, unwrapMasterKey } from "@/lib/crypto-keys";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
@@ -38,30 +39,38 @@ export default function LoginPage() {
       return;
     }
 
-    // Initialize client-side encryption from the user's password + stored salt
+    // Initialize client-side encryption
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         const { data: cryptoRow } = await supabase
           .from("user_crypto")
-          .select("salt, encryption_enabled")
+          .select("salt, encryption_enabled, crypto_version, wrapped_key_password")
           .eq("user_id", user.id)
           .single();
 
-        // Only derive key if encryption is enabled for this user
         if (cryptoRow?.salt && cryptoRow?.encryption_enabled !== false) {
-          await initCryptoSession(password, fromBase64(cryptoRow.salt));
+          const salt = fromBase64(cryptoRow.salt);
+
+          if (cryptoRow.crypto_version === 2 && cryptoRow.wrapped_key_password) {
+            // v2: unwrap master key
+            const wrappingKey = await deriveWrappingKey(password, salt);
+            const masterKey = await unwrapMasterKey(cryptoRow.wrapped_key_password, wrappingKey);
+            initCryptoSessionV2(masterKey, salt);
+          } else {
+            // v1: derive key directly from password
+            await initCryptoSession(password, salt);
+          }
         }
       }
     } catch {
-      // Crypto init failed — proceed without encryption (graceful degradation)
+      // Crypto init failed — proceed without encryption
     }
 
-    // Load all user data from Supabase into localStorage before redirect
     try {
       await loadFromSupabase();
     } catch {
-      // Non-critical: localStorage will still work
+      // Non-critical
     }
 
     router.push("/");

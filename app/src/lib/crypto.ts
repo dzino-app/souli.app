@@ -20,7 +20,7 @@
  * Higher iteration counts increase brute-force resistance at the cost
  * of slower key derivation (~300-500ms on modern devices).
  */
-const PBKDF2_ITERATIONS = 600_000;
+export const PBKDF2_ITERATIONS = 600_000;
 
 /**
  * AES-GCM IV length in bytes.

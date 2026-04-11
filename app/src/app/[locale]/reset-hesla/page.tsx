@@ -1,11 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
+import { fromBase64 } from "@/lib/crypto";
+import { initCryptoSessionV2 } from "@/lib/crypto-session";
+import {
+  deriveWrappingKey,
+  deriveRecoveryWrappingKey,
+  unwrapMasterKey,
+  wrapMasterKey,
+  importSessionKey,
+} from "@/lib/crypto-keys";
+import { mnemonicToEntropy } from "@/lib/bip39";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { RecoveryPhraseInput } from "@/components/crypto/recovery-phrase-input";
 
 export default function ResetPasswordPage() {
   const t = useTranslations("auth");
@@ -15,6 +26,69 @@ export default function ResetPasswordPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  const [isV2, setIsV2] = useState<boolean | null>(null);
+  const [needsPhrase, setNeedsPhrase] = useState(false);
+  const [recoveryError, setRecoveryError] = useState("");
+
+  // Extractable master key — held in memory only during the reset flow
+  const extractableMK = useRef<CryptoKey | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      const { data } = await supabase
+        .from("user_crypto")
+        .select("crypto_version, wrapped_key_recovery")
+        .eq("user_id", user.id)
+        .single();
+      if (data?.crypto_version === 2 && data.wrapped_key_recovery) {
+        setIsV2(true);
+        setNeedsPhrase(true);
+      } else {
+        setIsV2(false);
+      }
+    })();
+  }, []);
+
+  async function handleRecoverySubmit(mnemonic: string) {
+    setLoading(true);
+    setRecoveryError("");
+    try {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+
+      const { data: row } = await supabase
+        .from("user_crypto")
+        .select("salt, wrapped_key_recovery, recovery_salt")
+        .eq("user_id", user.id)
+        .single();
+      if (!row?.wrapped_key_recovery || !row.recovery_salt) {
+        throw new Error("No recovery data");
+      }
+
+      const entropy = await mnemonicToEntropy(mnemonic);
+      const recoverySalt = fromBase64(row.recovery_salt);
+      const recoveryWrappingKey = await deriveRecoveryWrappingKey(entropy, recoverySalt);
+
+      // Unwrap as extractable so we can re-wrap under new password later
+      const mk = await unwrapMasterKey(row.wrapped_key_recovery, recoveryWrappingKey, true);
+      extractableMK.current = mk;
+
+      // Init session with a non-extractable copy
+      const sessionMK = await importSessionKey(mk);
+      initCryptoSessionV2(sessionMK, fromBase64(row.salt));
+
+      setNeedsPhrase(false);
+    } catch {
+      setRecoveryError("Neplatná obnovovacia fráza alebo poškodené dáta");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   async function handleReset(e: React.FormEvent) {
     e.preventDefault();
@@ -31,16 +105,55 @@ export default function ResetPasswordPage() {
 
     setLoading(true);
     const supabase = createClient();
-    const { error } = await supabase.auth.updateUser({ password });
-    setLoading(false);
 
-    if (error) {
-      setError(error.message);
+    const { error: authErr } = await supabase.auth.updateUser({ password });
+    if (authErr) {
+      setError(authErr.message);
+      setLoading(false);
       return;
     }
 
+    // For v2: re-wrap master key under the new password
+    if (isV2 && extractableMK.current) {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: row } = await supabase
+            .from("user_crypto")
+            .select("salt")
+            .eq("user_id", user.id)
+            .single();
+          if (row) {
+            const salt = fromBase64(row.salt);
+            const newWrappingKey = await deriveWrappingKey(password, salt);
+            const newWrapped = await wrapMasterKey(extractableMK.current, newWrappingKey);
+            await supabase
+              .from("user_crypto")
+              .update({ wrapped_key_password: newWrapped })
+              .eq("user_id", user.id);
+          }
+        }
+        extractableMK.current = null;
+      } catch (err) {
+        console.warn("[reset-hesla] Re-wrap failed:", err);
+      }
+    }
+
+    setLoading(false);
     setSuccess(true);
     setTimeout(() => router.push("/"), 2000);
+  }
+
+  if (needsPhrase) {
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center py-8">
+        <RecoveryPhraseInput
+          onSubmit={handleRecoverySubmit}
+          loading={loading}
+          error={recoveryError}
+        />
+      </div>
+    );
   }
 
   return (
