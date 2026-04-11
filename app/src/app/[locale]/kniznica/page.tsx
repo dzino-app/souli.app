@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Search, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AvatarGrid } from "@/components/library/avatar-grid";
@@ -32,6 +33,7 @@ const SOUL_TYPE_FILTERS: { value: string; label: string }[] = [
 export default function LibraryPage() {
   const params = useParams();
   const locale = (params?.locale as string) ?? "sk";
+  const t = useTranslations("library");
 
   const [avatars, setAvatars] = useState<AvatarRow[]>([]);
   const [total, setTotal] = useState(0);
@@ -80,9 +82,9 @@ export default function LibraryPage() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-xl font-bold">Pixoci</h1>
-          <p className="text-sm text-muted-foreground">
-            Objav nových Soulis
+          <h1 className="text-xl font-bold">{t("title")}</h1>
+          <p className="text-sm text-muted-foreground leading-snug max-w-md">
+            {t("subtitle")}
           </p>
         </div>
       </div>
