@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { PixelAvatar } from "@/components/avatar/pixel-avatar";
 import { SpeechBubble } from "@/components/avatar/speech-bubble";
 import { useAvatarState } from "@/components/avatar/use-avatar-state";
+import { useRandomIdleBehavior } from "@/components/avatar/use-random-idle";
 import { getMoodLabel, getMoodEmoji } from "@/lib/avatar-mood";
 import { migrateMemoriesToSoul } from "@/lib/migrate-memories-to-soul";
 import {
@@ -34,7 +35,8 @@ import { WeeklyReportShare } from "@/components/report/weekly-report-share";
 
 export default function Home() {
   const t = useTranslations("stickers");
-  const { mounted, state, mood, name, appearance } = useAvatarState();
+  const { mounted, state, mood, name, appearance, playState } = useAvatarState();
+  useRandomIdleBehavior(playState);
   const [groups, setGroups] = useState<Record<string, Conversation[]>>({});
   const levelUp = useLevelUp();
 
