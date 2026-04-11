@@ -218,16 +218,17 @@ describe("crypto-session", () => {
       expect(decrypted).toBe(original);
     });
 
-    it("decryptIfActive returns encrypted data as-is when no session", async () => {
+    it("decryptIfActive returns empty when no session — never leaks ciphertext", async () => {
       const salt = generateSalt();
       await initCryptoSession("session-password", salt);
 
       const encrypted = await encryptIfActive("secret");
       clearCryptoSession();
 
-      // Without session, encrypted data is returned as-is
+      // Without session, ciphertext must NOT be returned to callers — they could
+      // forward it to the LLM or render it. We return empty instead.
       const result = await decryptIfActive(encrypted);
-      expect(result).toBe(encrypted);
+      expect(result).toBe("");
     });
   });
 });

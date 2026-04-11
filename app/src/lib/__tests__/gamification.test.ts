@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "bun:test";
+import { describe, it, expect, beforeEach, afterEach } from "bun:test";
 import {
   getGamification,
   addXp,
@@ -23,8 +23,15 @@ import {
 // --- XP and Level ---
 
 describe("gamification - XP and levels", () => {
+  // addXp has a 10% random "lucky double" — pin Math.random so tests are
+  // deterministic. 0.5 is well above the 0.1 lucky threshold.
+  const realRandom = Math.random;
   beforeEach(() => {
     localStorage.clear();
+    Math.random = () => 0.5;
+  });
+  afterEach(() => {
+    Math.random = realRandom;
   });
 
   it("starts with empty gamification data", () => {
@@ -35,18 +42,20 @@ describe("gamification - XP and levels", () => {
     expect(data.achievements).toEqual([]);
   });
 
+  // Note: addXp adds a one-time +5 "first interaction of the day" bonus, so
+  // the first call yields amount+5 XP, subsequent same-day calls yield amount.
   it("adds XP correctly", () => {
     const result = addXp(5, "message");
-    expect(result.newXp).toBe(5);
+    expect(result.newXp).toBe(10); // 5 + 5 first-interaction bonus
     expect(result.newLevel).toBe(1);
     expect(result.leveledUp).toBe(false);
   });
 
   it("accumulates XP across calls", () => {
-    addXp(5, "message");
-    addXp(10, "soul_update");
-    const result = addXp(5, "message");
-    expect(result.newXp).toBe(20);
+    addXp(5, "message");        // 5 + 5 bonus = 10
+    addXp(10, "soul_update");   // 10 → 20
+    const result = addXp(5, "message"); // 5 → 25
+    expect(result.newXp).toBe(25);
   });
 
   it("levels up when enough XP is earned", () => {
@@ -102,10 +111,10 @@ describe("gamification - XP and levels", () => {
   });
 
   it("tracks daily XP earned", () => {
-    addXp(5, "message");
-    addXp(10, "soul_update");
+    addXp(5, "message");      // 5 + 5 bonus = 10
+    addXp(10, "soul_update"); // 10 → 20
     const data = getGamification();
-    expect(data.dailyXpEarned).toBe(15);
+    expect(data.dailyXpEarned).toBe(20);
   });
 });
 
