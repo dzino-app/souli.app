@@ -273,14 +273,17 @@ function CompilationSection({ onCompiled }: { onCompiled: () => void }) {
   return (
     <div className="space-y-3">
       {/* Soul memory status */}
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2 min-w-0">
-          <Sparkles className="h-4 w-4 text-primary shrink-0" />
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start gap-2 min-w-0">
+          <Sparkles className="h-4 w-4 text-primary shrink-0 mt-0.5" />
           <div className="min-w-0">
             <p className="text-xs text-muted-foreground">
               {lastCompiledLabel
                 ? `Posledná spomienka: ${lastCompiledLabel}`
                 : "Tvoj Souli si ešte nespomína"}
+            </p>
+            <p className="text-[11px] text-muted-foreground/70 leading-snug mt-0.5">
+              Pripraví nové postrehy z posledných rozhovorov
             </p>
           </div>
         </div>
@@ -290,6 +293,7 @@ function CompilationSection({ onCompiled }: { onCompiled: () => void }) {
           onClick={handleCompile}
           disabled={compiling}
           className="shrink-0 gap-1"
+          title="Souli prejde najnovšie rozhovory a pripraví nové postrehy"
         >
           {compiling ? (
             <Loader2 className="h-3.5 w-3.5 animate-spin" />
