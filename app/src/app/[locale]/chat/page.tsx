@@ -333,6 +333,7 @@ export default function ChatPage() {
             walking: "prechádza sa",
             eating: "je",
             sleeping: "spí",
+            dancing: "tancuje",
             idle: "online",
           }[avatarState] || "online"}
         </p>

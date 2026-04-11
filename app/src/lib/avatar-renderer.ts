@@ -18,6 +18,7 @@ import {
 const ALL_ACTIVITIES: AvatarState[] = [
   "idle",
   "happy",
+  "dancing",
   "sad",
   "walking",
   "talking",

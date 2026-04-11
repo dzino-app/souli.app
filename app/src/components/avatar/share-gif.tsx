@@ -9,6 +9,7 @@ import type { AvatarAppearance, AvatarState } from "@/lib/avatar";
 const ACTIVITIES: { value: AvatarState; label: string }[] = [
   { value: "idle", label: "Idle" },
   { value: "happy", label: "Happy" },
+  { value: "dancing", label: "Dancing" },
   { value: "sad", label: "Sad" },
   { value: "waving", label: "Waving" },
   { value: "walking", label: "Walking" },

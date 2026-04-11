@@ -7,7 +7,8 @@ export type AvatarState =
   | "happy"
   | "sad"
   | "thinking"
-  | "waving";
+  | "waving"
+  | "dancing";
 
 export type Species = "human" | "cat" | "dog" | "bunny" | "bear" | "fox";
 export type BodyShape = "round" | "square" | "tall";

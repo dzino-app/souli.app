@@ -138,4 +138,19 @@ export const ACTIVITY_ANIMATIONS: Record<string, ActivityAnimation> = {
       frame({ eyeVariant: "closed", mouthVariant: "closed", bodyOffsetY: 3, zzz: true }),
     ],
   },
+
+  dancing: {
+    fps: 8,
+    loop: true,
+    frames: [
+      frame({ eyeVariant: "squeezed", mouthVariant: "big-smile", bodyOffsetX: -3, bodyOffsetY: -4, bodyRotation: -8, blush: true, sparkle: true }),
+      frame({ eyeVariant: "wide",     mouthVariant: "big-smile", bodyOffsetX: -2, bodyOffsetY: -8, bodyRotation: -4, blush: true }),
+      frame({ eyeVariant: "squeezed", mouthVariant: "open",      bodyOffsetX:  0, bodyOffsetY: -2, bodyRotation:  0, blush: true, sparkle: true }),
+      frame({ eyeVariant: "wide",     mouthVariant: "big-smile", bodyOffsetX:  2, bodyOffsetY: -8, bodyRotation:  4, blush: true }),
+      frame({ eyeVariant: "squeezed", mouthVariant: "big-smile", bodyOffsetX:  3, bodyOffsetY: -4, bodyRotation:  8, blush: true, sparkle: true }),
+      frame({ eyeVariant: "wide",     mouthVariant: "o-shape",   bodyOffsetX:  2, bodyOffsetY: -1, bodyRotation:  4, blush: true }),
+      frame({ eyeVariant: "squeezed", mouthVariant: "big-smile", bodyOffsetX:  0, bodyOffsetY: -6, bodyRotation:  0, blush: true, sparkle: true }),
+      frame({ eyeVariant: "wide",     mouthVariant: "tongue",    bodyOffsetX: -2, bodyOffsetY: -1, bodyRotation: -4, blush: true }),
+    ],
+  },
 };

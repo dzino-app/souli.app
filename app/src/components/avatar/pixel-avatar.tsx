@@ -30,6 +30,7 @@ const STATE_MAP: Record<AvatarState, string> = {
   walking: "walking",
   eating: "eating",
   sleeping: "sleeping",
+  dancing: "dancing",
 };
 
 export function PixelAvatar({
