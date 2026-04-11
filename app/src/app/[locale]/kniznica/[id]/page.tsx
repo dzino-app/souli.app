@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ArrowLeft, Download, Flag, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StoredAvatar } from "@/components/avatar/stored-avatar";
@@ -21,25 +22,26 @@ const SPECIES_EMOJI: Record<string, string> = {
   fox: "\ud83e\udd8a",
 };
 
-const SPECIES_LABELS: Record<string, string> = {
-  human: "Človek",
-  cat: "Mačka",
-  dog: "Pes",
-  bunny: "Zajac",
-  bear: "Medveď",
-  fox: "Líška",
+const SPECIES_KEY: Record<string, string> = {
+  human: "speciesHuman",
+  cat: "speciesCat",
+  dog: "speciesDog",
+  bunny: "speciesBunny",
+  bear: "speciesBear",
+  fox: "speciesFox",
 };
 
-const ANIMATION_STATES: Array<{ state: AvatarState; emoji: string; label: string }> = [
-  { state: "idle", emoji: "\ud83d\ude0c", label: "Pokojný" },
-  { state: "happy", emoji: "\ud83d\ude04", label: "Šťastný" },
-  { state: "sad", emoji: "\ud83d\ude22", label: "Smutný" },
-  { state: "walking", emoji: "\ud83d\udeb6", label: "Kráča" },
-  { state: "talking", emoji: "\ud83d\udde3\ufe0f", label: "Rozpráva" },
-  { state: "thinking", emoji: "\ud83e\udd14", label: "Premýšľa" },
-  { state: "waving", emoji: "\ud83d\udc4b", label: "Máva" },
-  { state: "eating", emoji: "\ud83c\udf7d\ufe0f", label: "Je" },
-  { state: "sleeping", emoji: "\ud83d\ude34", label: "Spí" },
+const ANIMATION_STATES: Array<{ state: AvatarState; emoji: string; key: string }> = [
+  { state: "idle",     emoji: "\ud83d\ude0c",         key: "animIdle" },
+  { state: "happy",    emoji: "\ud83d\ude04",         key: "animHappy" },
+  { state: "dancing",  emoji: "\ud83d\udd7a",         key: "animDancing" },
+  { state: "sad",      emoji: "\ud83d\ude22",         key: "animSad" },
+  { state: "walking",  emoji: "\ud83d\udeb6",         key: "animWalking" },
+  { state: "talking",  emoji: "\ud83d\udde3\ufe0f",   key: "animTalking" },
+  { state: "thinking", emoji: "\ud83e\udd14",         key: "animThinking" },
+  { state: "waving",   emoji: "\ud83d\udc4b",         key: "animWaving" },
+  { state: "eating",   emoji: "\ud83c\udf7d\ufe0f",   key: "animEating" },
+  { state: "sleeping", emoji: "\ud83d\ude34",         key: "animSleeping" },
 ];
 
 interface SoulFileInfo {
@@ -53,6 +55,8 @@ export default function AvatarDetailPage() {
   const params = useParams();
   const router = useRouter();
   const id = params?.id as string;
+  const t = useTranslations("library");
+  const tp = useTranslations("publish");
 
   const [avatar, setAvatar] = useState<AvatarRow | null>(null);
   const [soulFiles, setSoulFiles] = useState<SoulFileInfo[]>([]);
@@ -137,9 +141,9 @@ export default function AvatarDetailPage() {
   if (!avatar) {
     return (
       <div className="flex flex-col items-center gap-4 py-20">
-        <p className="text-muted-foreground">Souli nebol nájdený</p>
+        <p className="text-muted-foreground">{t("notFound")}</p>
         <Link href="/kniznica">
-          <Button variant="outline">Späť do Pixoci</Button>
+          <Button variant="outline">{t("backToLibrary")}</Button>
         </Link>
       </div>
     );
@@ -147,7 +151,7 @@ export default function AvatarDetailPage() {
 
   const appearance = avatar.appearance as AvatarAppearance;
   const speciesEmoji = SPECIES_EMOJI[appearance.species] ?? "";
-  const speciesLabel = SPECIES_LABELS[appearance.species] ?? appearance.species;
+  const speciesLabel = t(SPECIES_KEY[appearance.species] ?? "speciesHuman");
   const resolution = getAvatarResolution(avatar.level);
 
   return (
@@ -157,7 +161,7 @@ export default function AvatarDetailPage() {
         <button type="button" onClick={() => router.back()}>
           <ArrowLeft className="h-5 w-5" />
         </button>
-        <span className="text-sm text-muted-foreground">Späť</span>
+        <span className="text-sm text-muted-foreground">{t("back")}</span>
       </div>
 
       {/* Hero: Avatar + info */}
@@ -183,7 +187,7 @@ export default function AvatarDetailPage() {
             {speciesEmoji} {speciesLabel}
           </span>
           <span className="text-muted-foreground/50">·</span>
-          <span>Úr. {avatar.level}</span>
+          <span>{t("levelShort")} {avatar.level}</span>
           <span className="text-muted-foreground/50">·</span>
           <span>{resolution.label}</span>
         </div>
@@ -212,17 +216,17 @@ export default function AvatarDetailPage() {
         {/* Times loaded */}
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <Download className="h-3.5 w-3.5" />
-          Načítaný {avatar.times_loaded}×
+          {tp("loadedTimes", { count: avatar.times_loaded })}
         </div>
       </div>
 
       {/* Animation gallery */}
       <div className="flex flex-col gap-3">
         <h3 className="text-sm font-semibold text-muted-foreground">
-          Animácie
+          {tp("animations")}
         </h3>
         <div className="flex flex-wrap gap-2">
-          {ANIMATION_STATES.map(({ state, emoji, label }) => (
+          {ANIMATION_STATES.map(({ state, emoji, key }) => (
             <button
               key={state}
               type="button"
@@ -234,7 +238,7 @@ export default function AvatarDetailPage() {
               }`}
             >
               <span>{emoji}</span>
-              <span>{label}</span>
+              <span>{tp(key)}</span>
             </button>
           ))}
         </div>
@@ -244,7 +248,7 @@ export default function AvatarDetailPage() {
       {soulFiles.length > 0 && (
         <div className="flex flex-col gap-3">
           <h3 className="text-sm font-semibold text-muted-foreground">
-            Souli
+            {tp("soul")}
           </h3>
           {soulFiles.map((sf) => {
             const expanded = expandedSlugs.has(sf.slug);
@@ -277,7 +281,7 @@ export default function AvatarDetailPage() {
                 {expanded && !sf.content && (
                   <div className="px-4 pb-4 border-t">
                     <p className="pt-3 text-xs text-muted-foreground italic">
-                      Obsah nie je dostupný
+                      {t("contentUnavailable")}
                     </p>
                   </div>
                 )}
@@ -297,14 +301,14 @@ export default function AvatarDetailPage() {
         {loaded ? (
           <>
             <Check className="h-4 w-4 mr-2" />
-            Načítaný do Soulis!
+            {t("loaded")}
           </>
         ) : loadingAction ? (
-          "Načítavam..."
+          t("loading")
         ) : (
           <>
             <Download className="h-4 w-4 mr-2" />
-            Načítať do mojich Soulis
+            {tp("loadButton")}
           </>
         )}
       </Button>
@@ -324,7 +328,7 @@ export default function AvatarDetailPage() {
       <div className="pt-4 border-t">
         {reportSent ? (
           <p className="text-xs text-muted-foreground text-center">
-            Nahlásenie bolo odoslané. Ďakujeme.
+            {t("reportSent")}
           </p>
         ) : reporting ? (
           <div className="flex flex-col gap-2">
@@ -332,19 +336,19 @@ export default function AvatarDetailPage() {
               type="text"
               value={reportReason}
               onChange={(e) => setReportReason(e.target.value)}
-              placeholder="Dôvod nahlásenia..."
+              placeholder={t("reportPlaceholder")}
               className="w-full rounded-lg border bg-background px-3 py-2 text-sm"
             />
             <div className="flex gap-2">
               <Button size="sm" variant="destructive" onClick={handleReport}>
-                Odoslať
+                {t("reportSubmit")}
               </Button>
               <Button
                 size="sm"
                 variant="outline"
                 onClick={() => setReporting(false)}
               >
-                Zrušiť
+                {t("cancel")}
               </Button>
             </div>
           </div>
@@ -355,7 +359,7 @@ export default function AvatarDetailPage() {
             className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-destructive transition-colors mx-auto"
           >
             <Flag className="h-3 w-3" />
-            Nahlásiť
+            {t("report")}
           </button>
         )}
       </div>
