@@ -9,7 +9,7 @@ import { MarkdownResponse } from "@/components/chat/markdown-response";
 import { getAvatarResolution } from "@/lib/avatar-resolution";
 import { Link } from "@/i18n/routing";
 import type { AvatarRow } from "@/lib/supabase/avatars-db";
-import type { AvatarAppearance, AvatarState } from "@/lib/avatar";
+import type { AvatarAppearance, AvatarState, SoundDNA } from "@/lib/avatar";
 import { ShareGif } from "@/components/avatar/share-gif";
 
 const SPECIES_EMOJI: Record<string, string> = {
@@ -315,6 +315,7 @@ export default function AvatarDetailPage() {
           name={avatar.name}
           appearance={avatar.appearance}
           level={avatar.level}
+          soundDNA={avatar.sound_dna as unknown as SoundDNA | undefined}
           avatarId={avatar.id}
         />
       )}

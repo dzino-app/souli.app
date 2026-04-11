@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Share2, Download, Loader2 } from "lucide-react";
+import { Share2, Download, Loader2, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import type { AvatarAppearance, AvatarState } from "@/lib/avatar";
+import type { AvatarAppearance, AvatarState, SoundDNA } from "@/lib/avatar";
+import { playAvatarSound } from "@/lib/pixel-sounds";
 
 const ACTIVITIES: { value: AvatarState; label: string }[] = [
   { value: "idle", label: "Idle" },
@@ -23,10 +24,11 @@ interface ShareGifProps {
   name: string;
   appearance: AvatarAppearance;
   level: number;
+  soundDNA?: SoundDNA;
   avatarId?: string;
 }
 
-export function ShareGif({ name, appearance, level, avatarId }: ShareGifProps) {
+export function ShareGif({ name, appearance, level, soundDNA, avatarId }: ShareGifProps) {
   const [generating, setGenerating] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState<AvatarState>("happy");
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -39,11 +41,16 @@ export function ShareGif({ name, appearance, level, avatarId }: ShareGifProps) {
       const blob = await generateAvatarGif(appearance, level, selectedActivity);
       const url = URL.createObjectURL(blob);
       setPreviewUrl(url);
+      if (soundDNA) playAvatarSound(selectedActivity, soundDNA);
     } catch (err) {
       console.warn("GIF generation failed:", err);
     } finally {
       setGenerating(false);
     }
+  }
+
+  function handlePlaySound() {
+    if (soundDNA) playAvatarSound(selectedActivity, soundDNA);
   }
 
   async function handleShare() {
@@ -54,6 +61,10 @@ export function ShareGif({ name, appearance, level, avatarId }: ShareGifProps) {
   async function handleDownload() {
     const { downloadAvatarGif } = await import("@/lib/gif-generator");
     await downloadAvatarGif(name, appearance, level, selectedActivity);
+    if (soundDNA) {
+      const { downloadAvatarSound } = await import("@/lib/pixel-sounds");
+      await downloadAvatarSound(name, selectedActivity, soundDNA);
+    }
   }
 
   async function handleUpload() {
@@ -61,6 +72,10 @@ export function ShareGif({ name, appearance, level, avatarId }: ShareGifProps) {
     setGenerating(true);
     const { uploadAvatarGif } = await import("@/lib/gif-generator");
     const url = await uploadAvatarGif(avatarId, appearance, level, selectedActivity);
+    if (soundDNA) {
+      const { uploadAvatarSound } = await import("@/lib/pixel-sounds");
+      await uploadAvatarSound(avatarId, selectedActivity, soundDNA);
+    }
     if (url) setPreviewUrl(url);
     setGenerating(false);
   }
@@ -114,6 +129,17 @@ export function ShareGif({ name, appearance, level, avatarId }: ShareGifProps) {
           </Button>
           {previewUrl && (
             <>
+              {soundDNA && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={handlePlaySound}
+                  className="gap-1"
+                  title="Prehrať zvuk"
+                >
+                  <Volume2 className="h-3.5 w-3.5" />
+                </Button>
+              )}
               <Button size="sm" onClick={handleShare} className="gap-1">
                 <Share2 className="h-3.5 w-3.5" /> Zdieľať
               </Button>
