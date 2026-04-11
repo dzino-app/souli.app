@@ -257,6 +257,11 @@
     "speciesBunny": "Lapin",
     "speciesBear": "Ours",
     "speciesFox": "Renard",
+    "gifGenerate": "Générer",
+    "gifRegenerate": "À nouveau",
+    "gifShare": "Partager",
+    "gifUpload": "Charger",
+    "gifPlaySound": "Lire le son",
     "empty": "Pas encore de Soulis."
   },
   "avatars": {

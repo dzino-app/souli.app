@@ -1,23 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Share2, Download, Loader2, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import type { AvatarAppearance, AvatarState, SoundDNA } from "@/lib/avatar";
 import { playAvatarSound } from "@/lib/pixel-sounds";
 
-const ACTIVITIES: { value: AvatarState; label: string }[] = [
-  { value: "idle", label: "Idle" },
-  { value: "happy", label: "Happy" },
-  { value: "dancing", label: "Dancing" },
-  { value: "sad", label: "Sad" },
-  { value: "waving", label: "Waving" },
-  { value: "walking", label: "Walking" },
-  { value: "talking", label: "Talking" },
-  { value: "thinking", label: "Thinking" },
-  { value: "eating", label: "Eating" },
-  { value: "sleeping", label: "Sleeping" },
+const ACTIVITIES: { value: AvatarState; key: string }[] = [
+  { value: "idle",     key: "animIdle" },
+  { value: "happy",    key: "animHappy" },
+  { value: "dancing",  key: "animDancing" },
+  { value: "sad",      key: "animSad" },
+  { value: "waving",   key: "animWaving" },
+  { value: "walking",  key: "animWalking" },
+  { value: "talking",  key: "animTalking" },
+  { value: "thinking", key: "animThinking" },
+  { value: "eating",   key: "animEating" },
+  { value: "sleeping", key: "animSleeping" },
 ];
 
 interface ShareGifProps {
@@ -29,6 +30,8 @@ interface ShareGifProps {
 }
 
 export function ShareGif({ name, appearance, level, soundDNA, avatarId }: ShareGifProps) {
+  const t = useTranslations("library");
+  const tp = useTranslations("publish");
   const [generating, setGenerating] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState<AvatarState>("happy");
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -97,7 +100,7 @@ export function ShareGif({ name, appearance, level, soundDNA, avatarId }: ShareG
                   : "bg-secondary text-muted-foreground hover:text-foreground"
               }`}
             >
-              {a.label}
+              {tp(a.key)}
             </button>
           ))}
         </div>
@@ -125,7 +128,7 @@ export function ShareGif({ name, appearance, level, soundDNA, avatarId }: ShareG
             className="flex-1 gap-1"
           >
             {generating ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : null}
-            {previewUrl ? "Znova" : "Vygenerovať"}
+            {previewUrl ? t("gifRegenerate") : t("gifGenerate")}
           </Button>
           {previewUrl && (
             <>
@@ -135,13 +138,13 @@ export function ShareGif({ name, appearance, level, soundDNA, avatarId }: ShareG
                   variant="outline"
                   onClick={handlePlaySound}
                   className="gap-1"
-                  title="Prehrať zvuk"
+                  title={t("gifPlaySound")}
                 >
                   <Volume2 className="h-3.5 w-3.5" />
                 </Button>
               )}
               <Button size="sm" onClick={handleShare} className="gap-1">
-                <Share2 className="h-3.5 w-3.5" /> Zdieľať
+                <Share2 className="h-3.5 w-3.5" /> {t("gifShare")}
               </Button>
               <Button size="sm" variant="outline" onClick={handleDownload} className="gap-1">
                 <Download className="h-3.5 w-3.5" />
@@ -150,7 +153,7 @@ export function ShareGif({ name, appearance, level, soundDNA, avatarId }: ShareG
           )}
           {previewUrl && avatarId && (
             <Button size="sm" variant="ghost" onClick={handleUpload} disabled={generating} className="text-xs">
-              Nahrať
+              {t("gifUpload")}
             </Button>
           )}
         </div>

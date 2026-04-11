@@ -257,6 +257,11 @@
     "speciesBunny": "Zajíc",
     "speciesBear": "Medvěd",
     "speciesFox": "Liška",
+    "gifGenerate": "Vygenerovat",
+    "gifRegenerate": "Znovu",
+    "gifShare": "Sdílet",
+    "gifUpload": "Nahrát",
+    "gifPlaySound": "Přehrát zvuk",
     "empty": "Zatím žádní Soulis."
   },
   "avatars": {

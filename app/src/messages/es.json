@@ -257,6 +257,11 @@
     "speciesBunny": "Conejo",
     "speciesBear": "Oso",
     "speciesFox": "Zorro",
+    "gifGenerate": "Generar",
+    "gifRegenerate": "De nuevo",
+    "gifShare": "Compartir",
+    "gifUpload": "Subir",
+    "gifPlaySound": "Reproducir sonido",
     "empty": "Aún no hay Soulis."
   },
   "avatars": {

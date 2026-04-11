@@ -257,6 +257,11 @@
     "speciesBunny": "खरगोश",
     "speciesBear": "भालू",
     "speciesFox": "लोमड़ी",
+    "gifGenerate": "बनाओ",
+    "gifRegenerate": "फिर से",
+    "gifShare": "शेयर करें",
+    "gifUpload": "अपलोड",
+    "gifPlaySound": "आवाज़ चलाएं",
     "empty": "अभी कोई Soulis नहीं।"
   },
   "avatars": {

@@ -377,6 +377,11 @@
     "speciesBunny": "Zajac",
     "speciesBear": "Medveď",
     "speciesFox": "Líška",
+    "gifGenerate": "Vygenerovať",
+    "gifRegenerate": "Znova",
+    "gifShare": "Zdieľať",
+    "gifUpload": "Nahrať",
+    "gifPlaySound": "Prehrať zvuk",
     "empty": "Zatiaľ tu nie sú žiadni Soulis."
   },
   "avatars": {

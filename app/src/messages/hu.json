@@ -257,6 +257,11 @@
     "speciesBunny": "Nyúl",
     "speciesBear": "Medve",
     "speciesFox": "Róka",
+    "gifGenerate": "Készítés",
+    "gifRegenerate": "Újra",
+    "gifShare": "Megosztás",
+    "gifUpload": "Feltöltés",
+    "gifPlaySound": "Hang lejátszása",
     "empty": "Még nincsenek Soulis-ok."
   },
   "avatars": {

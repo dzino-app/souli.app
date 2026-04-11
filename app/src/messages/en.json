@@ -259,6 +259,11 @@
     "speciesBunny": "Bunny",
     "speciesBear": "Bear",
     "speciesFox": "Fox",
+    "gifGenerate": "Generate",
+    "gifRegenerate": "Again",
+    "gifShare": "Share",
+    "gifUpload": "Upload",
+    "gifPlaySound": "Play sound",
     "empty": "No Soulis yet."
   },
   "avatars": {

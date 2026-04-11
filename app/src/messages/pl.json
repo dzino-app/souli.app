@@ -257,6 +257,11 @@
     "speciesBunny": "Królik",
     "speciesBear": "Niedźwiedź",
     "speciesFox": "Lis",
+    "gifGenerate": "Generuj",
+    "gifRegenerate": "Ponownie",
+    "gifShare": "Udostępnij",
+    "gifUpload": "Wgraj",
+    "gifPlaySound": "Odtwórz dźwięk",
     "empty": "Nie ma jeszcze żadnych Soulis."
   },
   "avatars": {
