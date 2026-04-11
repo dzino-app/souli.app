@@ -247,6 +247,16 @@
     "reportSubmit": "Küldés",
     "notFound": "Souli nem található",
     "backToLibrary": "Vissza a Pixocira",
+    "back": "Vissza",
+    "levelShort": "Szint",
+    "contentUnavailable": "A tartalom nem elérhető",
+    "cancel": "Mégse",
+    "speciesHuman": "Ember",
+    "speciesCat": "Macska",
+    "speciesDog": "Kutya",
+    "speciesBunny": "Nyúl",
+    "speciesBear": "Medve",
+    "speciesFox": "Róka",
     "empty": "Még nincsenek Soulis-ok."
   },
   "avatars": {
@@ -318,7 +328,8 @@
     "animThinking": "Gondolkodik",
     "animWaving": "Integet",
     "animEating": "Eszik",
-    "animSleeping": "Alszik"
+    "animSleeping": "Alszik",
+    "animDancing": "Táncol"
   },
   "common": {
     "error": "Valami hiba történt",

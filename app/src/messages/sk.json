@@ -367,6 +367,16 @@
     "reportSubmit": "Odoslať",
     "notFound": "Souli nebol nájdený",
     "backToLibrary": "Späť do Pixoci",
+    "back": "Späť",
+    "levelShort": "Úr.",
+    "contentUnavailable": "Obsah nie je dostupný",
+    "cancel": "Zrušiť",
+    "speciesHuman": "Človek",
+    "speciesCat": "Mačka",
+    "speciesDog": "Pes",
+    "speciesBunny": "Zajac",
+    "speciesBear": "Medveď",
+    "speciesFox": "Líška",
     "empty": "Zatiaľ tu nie sú žiadni Soulis."
   },
   "avatars": {
@@ -438,7 +448,8 @@
     "animThinking": "Premýšľa",
     "animWaving": "Máva",
     "animEating": "Je",
-    "animSleeping": "Spí"
+    "animSleeping": "Spí",
+    "animDancing": "Tancuje"
   },
   "legal": {
     "privacyTitle": "Ochrana sukromia",

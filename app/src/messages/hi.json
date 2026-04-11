@@ -247,6 +247,16 @@
     "reportSubmit": "सबमिट",
     "notFound": "Souli नहीं मिला",
     "backToLibrary": "Pixoci पर वापस",
+    "back": "वापस",
+    "levelShort": "स्तर",
+    "contentUnavailable": "सामग्री उपलब्ध नहीं",
+    "cancel": "रद्द करें",
+    "speciesHuman": "इंसान",
+    "speciesCat": "बिल्ली",
+    "speciesDog": "कुत्ता",
+    "speciesBunny": "खरगोश",
+    "speciesBear": "भालू",
+    "speciesFox": "लोमड़ी",
     "empty": "अभी कोई Soulis नहीं।"
   },
   "avatars": {
@@ -318,7 +328,8 @@
     "animThinking": "सोच रहा है",
     "animWaving": "हाथ हिला रहा है",
     "animEating": "खा रहा है",
-    "animSleeping": "सो रहा है"
+    "animSleeping": "सो रहा है",
+    "animDancing": "नाच रहा है"
   },
   "common": {
     "error": "कुछ गलत हो गया",

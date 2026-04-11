@@ -247,6 +247,16 @@
     "reportSubmit": "Envoyer",
     "notFound": "Souli introuvable",
     "backToLibrary": "Retour à Pixoci",
+    "back": "Retour",
+    "levelShort": "Niv.",
+    "contentUnavailable": "Contenu indisponible",
+    "cancel": "Annuler",
+    "speciesHuman": "Humain",
+    "speciesCat": "Chat",
+    "speciesDog": "Chien",
+    "speciesBunny": "Lapin",
+    "speciesBear": "Ours",
+    "speciesFox": "Renard",
     "empty": "Pas encore de Soulis."
   },
   "avatars": {
@@ -318,7 +328,8 @@
     "animThinking": "Réfléchit",
     "animWaving": "Fait coucou",
     "animEating": "Mange",
-    "animSleeping": "Dort"
+    "animSleeping": "Dort",
+    "animDancing": "Danse"
   },
   "common": {
     "error": "Quelque chose a mal tourné",
