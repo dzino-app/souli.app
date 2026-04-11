@@ -5,17 +5,42 @@ import { routing } from "@/i18n/routing";
 
 const intlMiddleware = createIntlMiddleware(routing);
 
+// Content-Security-Policy directives (Report-Only for now)
+const CSP_DIRECTIVES = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' blob: data: *.supabase.co",
+  "font-src 'self'",
+  "connect-src 'self' *.supabase.co *.googleapis.com *.google.com",
+  "media-src 'self' blob:",
+  "frame-src 'none'",
+  "object-src 'none'",
+  "base-uri 'self'",
+].join("; ");
+
+/** Attach CSP Report-Only header to a response */
+function applyCSPHeaders(response: NextResponse): NextResponse {
+  response.headers.set(
+    "Content-Security-Policy-Report-Only",
+    CSP_DIRECTIVES
+  );
+  return response;
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // API routes: no intl, but still refresh session cookie
   if (pathname.startsWith("/api")) {
-    return refreshSession(request, NextResponse.next({ request }));
+    return applyCSPHeaders(
+      await refreshSession(request, NextResponse.next({ request }))
+    );
   }
 
   // Auth callback: skip intl (not a locale-prefixed route)
   if (pathname.startsWith("/auth")) {
-    return NextResponse.next({ request });
+    return applyCSPHeaders(NextResponse.next({ request }));
   }
 
   // Run intl middleware first (handles locale detection + redirects)
@@ -23,7 +48,7 @@ export async function middleware(request: NextRequest) {
 
   // If the intl middleware issued a redirect, refresh session cookies and pass through
   if (intlResponse.status >= 300 && intlResponse.status < 400) {
-    return refreshSession(request, intlResponse);
+    return applyCSPHeaders(await refreshSession(request, intlResponse));
   }
 
   // Dev mode: skip auth when Supabase is not configured
@@ -31,7 +56,7 @@ export async function middleware(request: NextRequest) {
     !process.env.NEXT_PUBLIC_SUPABASE_URL ||
     !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
   ) {
-    return intlResponse;
+    return applyCSPHeaders(intlResponse);
   }
 
   // Create Supabase client that reads/writes cookies on the intl response
@@ -89,7 +114,7 @@ export async function middleware(request: NextRequest) {
     intlResponse.cookies.getAll().forEach((cookie) => {
       redirectResponse.cookies.set(cookie.name, cookie.value);
     });
-    return redirectResponse;
+    return applyCSPHeaders(redirectResponse);
   }
 
   // Redirect authenticated users away from auth/landing pages to home
@@ -101,10 +126,10 @@ export async function middleware(request: NextRequest) {
     intlResponse.cookies.getAll().forEach((cookie) => {
       redirectResponse.cookies.set(cookie.name, cookie.value);
     });
-    return redirectResponse;
+    return applyCSPHeaders(redirectResponse);
   }
 
-  return intlResponse;
+  return applyCSPHeaders(intlResponse);
 }
 
 /**
