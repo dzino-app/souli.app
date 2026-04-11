@@ -5,6 +5,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { SoundToggle } from "@/components/sound-toggle";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { LocaleSwitcher } from "@/components/locale-switcher";
@@ -40,6 +41,7 @@ export default async function LocaleLayout({
               <Library className="h-5 w-5" />
             </Link>
             <LocaleSwitcher />
+            <SoundToggle />
             <ThemeToggle />
           </div>
         </div>
