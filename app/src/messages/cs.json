@@ -49,7 +49,8 @@
     "resetSuccess": "Heslo změněno! Přesměrování...",
     "confirmEmailTitle": "Zkontroluj si email",
     "confirmEmailDesc": "Poslali jsme ti potvrzovací link na {email}. Klikni na něj a můžeš začít.",
-    "confirmEmailHint": "Zkontroluj i složku spam."
+    "confirmEmailHint": "Zkontroluj i složku spam.",
+    "ageConfirm": "Potvrzuji, že mi je 16 nebo více let."
   },
   "onboarding": {
     "welcome": "Vítej v Dzinu!",
@@ -92,7 +93,7 @@
     "yourQuestion": "Tvůj dotaz",
     "thinking": "Přemýšlím...",
     "followUpPlaceholder": "Polož navazující otázku...",
-    "disclaimer": "Dzino může dělat chyby.",
+    "disclaimer": "Odpovědi generuje AI — mohou obsahovat chyby a nenahrazují odborný názor.",
     "privacy": "Soukromí",
     "terms": "Podmínky"
   },

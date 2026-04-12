@@ -25,6 +25,7 @@ export default function SignupPage() {
   const locale = useLocale();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [mnemonic, setMnemonic] = useState<string | null>(null);
@@ -172,10 +173,22 @@ export default function SignupPage() {
                 {t("passwordDeviceHint")}
               </p>
             </div>
+            <label className="flex items-start gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={ageConfirmed}
+                onChange={(e) => setAgeConfirmed(e.target.checked)}
+                className="mt-0.5 rounded border-border"
+                required
+              />
+              <span className="text-xs text-muted-foreground leading-snug">
+                {t("ageConfirm")}
+              </span>
+            </label>
             {error && (
               <p className="text-sm text-destructive">{error}</p>
             )}
-            <Button type="submit" size="lg" disabled={loading}>
+            <Button type="submit" size="lg" disabled={loading || !ageConfirmed}>
               {loading ? "..." : t("signup")}
             </Button>
           </form>

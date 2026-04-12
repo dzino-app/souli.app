@@ -176,15 +176,46 @@ export default function AvatarDetailPage() {
           className="relative"
           style={{ animation: "float 3s ease-in-out infinite" }}
         >
-          <StoredAvatar
-            previewUrl={avatar.preview_url}
-            animationUrls={avatar.animation_urls}
-            state={activeAnimation}
-            size="lg"
-            fallbackAppearance={appearance}
-            fallbackLevel={avatar.level}
-          />
+          {avatar.portrait_url ? (
+            <div className="relative">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={avatar.portrait_url}
+                alt={avatar.name}
+                className="w-40 h-40 rounded-2xl object-cover border shadow-md"
+              />
+              <span className="absolute bottom-1 right-1 text-[9px] font-medium bg-black/60 text-white px-1.5 py-0.5 rounded">
+                AI Generated
+              </span>
+            </div>
+          ) : (
+            <StoredAvatar
+              previewUrl={avatar.preview_url}
+              animationUrls={avatar.animation_urls}
+              state={activeAnimation}
+              size="lg"
+              fallbackAppearance={appearance}
+              fallbackLevel={avatar.level}
+            />
+          )}
         </div>
+
+        {/* AI video clip */}
+        {avatar.video_url && (
+          <div className="relative">
+            <video
+              src={avatar.video_url}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-40 h-40 rounded-2xl object-cover border shadow-md"
+            />
+            <span className="absolute bottom-1 right-1 text-[9px] font-medium bg-black/60 text-white px-1.5 py-0.5 rounded">
+              AI Generated
+            </span>
+          </div>
+        )}
 
         <h1 className="text-2xl font-bold">{avatar.name}</h1>
 

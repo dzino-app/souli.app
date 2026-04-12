@@ -12,6 +12,7 @@ import {
   Trash2,
   LogOut,
   ChevronRight,
+  LifeBuoy,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -208,6 +209,13 @@ export default function SettingsPage() {
               loading: "Pripravujem...",
             }}
           />
+          <a
+            href="mailto:support@dzino.app"
+            className="flex items-center gap-2 rounded-md border px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+          >
+            <LifeBuoy className="h-4 w-4" />
+            Kontaktovať podporu (človeka)
+          </a>
           <form
             action="/api/auth/signout"
             method="POST"

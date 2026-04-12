@@ -49,7 +49,8 @@
     "resetSuccess": "Jelszó megváltoztatva! Átirányítás...",
     "confirmEmailTitle": "Nézd meg az e-mailed",
     "confirmEmailDesc": "Küldtünk egy megerősítő linket a {email} címre. Kattints rá a kezdéshez.",
-    "confirmEmailHint": "Nézd meg a spam mappát is."
+    "confirmEmailHint": "Nézd meg a spam mappát is.",
+    "ageConfirm": "Megerősítem, hogy 16 éves vagy annál idősebb vagyok."
   },
   "onboarding": {
     "welcome": "Üdv a Dzinóban!",
@@ -92,7 +93,7 @@
     "yourQuestion": "A kérdésed",
     "thinking": "Gondolkodom...",
     "followUpPlaceholder": "Tegyél fel egy további kérdést...",
-    "disclaimer": "Dzino hibázhat.",
+    "disclaimer": "A válaszokat AI generálja — hibákat tartalmazhatnak, és nem helyettesítik a szakmai tanácsot.",
     "privacy": "Adatvédelem",
     "terms": "Feltételek"
   },

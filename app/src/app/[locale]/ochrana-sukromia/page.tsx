@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Shield } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -64,6 +65,16 @@ export default function PrivacyPage() {
           <section>
             <h3 className="font-semibold mb-1">{t("privacyPasswordInputTitle")}</h3>
             <p className="text-muted-foreground">{t("privacyPasswordInput")}</p>
+          </section>
+          <section className="bg-blue-500/5 border border-blue-500/20 rounded-lg p-4">
+            <h3 className="font-semibold mb-1">{t("privacyAiActTitle")}</h3>
+            <p className="text-muted-foreground">{t("privacyAiAct")}</p>
+            <Link
+              href="/ako-funguje"
+              className="inline-block text-sm text-primary underline mt-2 hover:text-primary/80"
+            >
+              {t("privacyTransparencyLink")}
+            </Link>
           </section>
           <section>
             <h3 className="font-semibold mb-1">{t("privacyContactTitle")}</h3>

@@ -49,7 +49,8 @@
     "resetSuccess": "Hasło zmienione! Przekierowuję...",
     "confirmEmailTitle": "Sprawdź swoją skrzynkę",
     "confirmEmailDesc": "Wysłaliśmy link potwierdzający na {email}. Kliknij go, żeby zacząć.",
-    "confirmEmailHint": "Sprawdź też folder spam."
+    "confirmEmailHint": "Sprawdź też folder spam.",
+    "ageConfirm": "Potwierdzam, że mam 16 lat lub więcej."
   },
   "onboarding": {
     "welcome": "Witaj w Dzino!",
@@ -92,7 +93,7 @@
     "yourQuestion": "Twoje pytanie",
     "thinking": "Myślę...",
     "followUpPlaceholder": "Zadaj pytanie uzupełniające...",
-    "disclaimer": "Dzino może popełniać błędy.",
+    "disclaimer": "Odpowiedzi generuje AI — mogą zawierać błędy i nie zastępują profesjonalnej porady.",
     "privacy": "Prywatność",
     "terms": "Warunki"
   },

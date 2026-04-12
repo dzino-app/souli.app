@@ -13,6 +13,7 @@ import {
   Lock,
   KeyRound,
   Code,
+  ShieldCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -42,6 +43,7 @@ const trustPoints = [
   { key: "trust1", icon: Lock },
   { key: "trust2", icon: KeyRound },
   { key: "trust3", icon: Code },
+  { key: "trust4", icon: ShieldCheck },
 ] as const;
 
 const pricing = [
@@ -155,7 +157,7 @@ export default function LandingPage() {
         <h2 className="text-2xl font-bold text-center mb-3">
           {t("trustTitle")}
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
           {trustPoints.map(({ key, icon: Icon }) => (
             <Card key={key} className="border-primary/10 bg-primary/[0.02]">
               <CardContent className="pt-6 text-center">

@@ -49,7 +49,8 @@
     "resetSuccess": "Passwort geändert! Weiterleitung...",
     "confirmEmailTitle": "Überprüfe deine E-Mail",
     "confirmEmailDesc": "Wir haben dir einen Bestätigungslink an {email} geschickt. Klicke darauf, um loszulegen.",
-    "confirmEmailHint": "Überprüfe auch deinen Spam-Ordner."
+    "confirmEmailHint": "Überprüfe auch deinen Spam-Ordner.",
+    "ageConfirm": "Ich bestätige, dass ich 16 Jahre oder älter bin."
   },
   "onboarding": {
     "welcome": "Willkommen bei Dzino!",
@@ -92,7 +93,7 @@
     "yourQuestion": "Deine Frage",
     "thinking": "Ich denke nach...",
     "followUpPlaceholder": "Stell eine Folgefrage...",
-    "disclaimer": "Dzino kann Fehler machen.",
+    "disclaimer": "Antworten werden von KI generiert — sie können Fehler enthalten und ersetzen keine fachliche Beratung.",
     "privacy": "Datenschutz",
     "terms": "Nutzungsbedingungen"
   },

@@ -49,7 +49,8 @@
     "resetSuccess": "¡Contraseña cambiada! Redirigiendo...",
     "confirmEmailTitle": "Revisa tu email",
     "confirmEmailDesc": "Te enviamos un enlace de confirmación a {email}. Haz clic para empezar.",
-    "confirmEmailHint": "Revisa también la carpeta de spam."
+    "confirmEmailHint": "Revisa también la carpeta de spam.",
+    "ageConfirm": "Confirmo que tengo 16 años o más."
   },
   "onboarding": {
     "welcome": "¡Bienvenido a Dzino!",
@@ -92,7 +93,7 @@
     "yourQuestion": "Tu pregunta",
     "thinking": "Pensando...",
     "followUpPlaceholder": "Haz una pregunta de seguimiento...",
-    "disclaimer": "Dzino puede cometer errores.",
+    "disclaimer": "Las respuestas son generadas por IA — pueden contener errores y no sustituyen el consejo profesional.",
     "privacy": "Privacidad",
     "terms": "Términos"
   },
