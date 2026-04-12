@@ -1,4 +1,4 @@
-import { Home, MessageCircle, BookOpen, Calendar, Library, type LucideIcon } from "lucide-react";
+import { Home, MessageCircle, BookOpen, Calendar, Library, Sparkles, type LucideIcon } from "lucide-react";
 
 export interface NavItem {
   href: string;
@@ -11,7 +11,8 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { href: "/chat",     icon: MessageCircle, label: "Chat" },
   { href: "/dusa",     icon: BookOpen,      label: "Souli" },
   { href: "/udalosti", icon: Calendar,      label: "Udalosti" },
-  { href: "/kniznica", icon: Library,       label: "Pixoci" },
+  { href: "/zrucnosti", icon: Sparkles,      label: "Zručnosti" },
+  { href: "/kniznica",  icon: Library,       label: "Pixoci" },
 ] as const;
 
 export function getLocalePrefix(pathname: string): string {

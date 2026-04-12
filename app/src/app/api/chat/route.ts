@@ -121,9 +121,33 @@ export async function POST(request: NextRequest) {
       languageInstruction = "\n" + getLanguageInstruction(language);
     }
 
+    // Load installed skill prompts for this user
+    let skillPrompts = "";
+    try {
+      const supabase = await import("@/lib/supabase/server").then((m) => m.createClient());
+      const { data: { user } } = await (await supabase).auth.getUser();
+      if (user) {
+        const { data: skills } = await (await supabase)
+          .from("user_skills")
+          .select("skills(system_prompt)")
+          .eq("user_id", user.id)
+          .eq("enabled", true);
+        if (skills?.length) {
+          const prompts = skills
+            .map((s) => (s.skills as unknown as { system_prompt: string })?.system_prompt)
+            .filter(Boolean);
+          if (prompts.length) {
+            skillPrompts = "\n\n== NAINŠTALOVANÉ ZRUČNOSTI ==\n" + prompts.join("\n\n---\n\n");
+          }
+        }
+      }
+    } catch {
+      // Skills loading failed — proceed without them
+    }
+
     const systemWithSoul = safeSoulContext
-      ? `${SYSTEM_PROMPT}${languageInstruction}\n\n== TVOJ SOULI ==\n${safeSoulContext}`
-      : `${SYSTEM_PROMPT}${languageInstruction}`;
+      ? `${SYSTEM_PROMPT}${languageInstruction}\n\n== TVOJ SOULI ==\n${safeSoulContext}${skillPrompts}`
+      : `${SYSTEM_PROMPT}${languageInstruction}${skillPrompts}`;
 
     const contents: { role: "user" | "model"; parts: { text: string }[] }[] = [];
     for (const msg of safeHistory) {
