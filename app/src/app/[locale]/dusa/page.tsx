@@ -30,6 +30,7 @@ import {
   isDefaultFile,
   createCustomSoulFile,
   deleteCustomSoulFile,
+  updateSoulFile,
   type SoulFile,
   type SoulCategory,
 } from "@/lib/soul";
@@ -46,6 +47,8 @@ import {
   getIndexContent,
 } from "@/lib/soul-compiler";
 import { extractInsights, extractOpenThreads } from "@/lib/soul-retrieval";
+import { TemplatePicker } from "@/components/soul/template-picker";
+import type { SoulTemplate } from "@/lib/soul-templates";
 
 const CATEGORY_ICONS: Record<string, typeof BookOpen> = {
   jadro: User,
@@ -463,6 +466,21 @@ export default function SoulPage() {
 
       {/* Changelog section */}
       <ChangelogSection changelogGroups={changelogGroups} />
+
+      {/* Template picker — add new soul pages */}
+      <TemplatePicker
+        existingSlugs={Object.values(groups).flat().map((f) => f.slug)}
+        onAdd={async (template: SoulTemplate) => {
+          const file = createCustomSoulFile(
+            template.slug,
+            template.displayName,
+            template.category as SoulCategory,
+          );
+          file.content = template.starterContent;
+          await updateSoulFile(template.slug, template.starterContent, "dzino");
+          refreshGroups();
+        }}
+      />
 
       {/* File tree by category */}
       {categories.map((category) => {

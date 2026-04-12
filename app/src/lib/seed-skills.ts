@@ -1,11 +1,8 @@
 /**
  * Seed official starter skills for the Pixoci marketplace.
  *
- * Skills are either universal (locale=null, shown to everyone) or
- * locale-specific (shown only when user's locale matches).
- *
- * Language-related skills get one variant per supported locale.
- * Tax/legal skills are country-specific.
+ * Skills match Dzino's fairytale, chill, mysterious tone.
+ * No professional/stressful topics — fun, fantasy, creative.
  */
 
 interface SeedSkill {
@@ -14,57 +11,84 @@ interface SeedSkill {
   system_prompt: string;
   tags: string[];
   category: string;
-  locale: string | null; // null = universal
+  locale: string | null;
 }
-
-// ---- Universal skills (all locales) ----
 
 const UNIVERSAL_SKILLS: SeedSkill[] = [
   {
-    name: "Recipe Finder",
-    description: "Suggests recipes based on ingredients you have at home. Adapts to your dietary preferences.",
-    system_prompt: [
-      "You have the skill: Recipe Finder.",
-      "When asked about food or cooking, suggest specific recipes.",
-      "Ask what ingredients they have and suggest meals from those.",
-      "Remember dietary restrictions from previous conversations.",
-      "Give simple recipes with steps, not just ingredient lists.",
-      "Respond in the user's language.",
-    ].join("\n"),
-    tags: ["food", "recipes", "cooking"],
-    category: "lifestyle",
-    locale: null,
-  },
-  {
-    name: "Fitness Coach",
-    description: "Designs workouts, tracks progress, and motivates you to stay active.",
-    system_prompt: [
-      "You have the skill: Fitness Coach.",
-      "When asked about exercise, suggest a specific workout plan.",
-      "Adapt difficulty to the user's level (beginner/advanced).",
-      "Motivate positively, never criticize. Praise small wins.",
-      "Suggest exercises doable at home without equipment.",
-      "Remind about warm-ups and stretching.",
-      "Respond in the user's language.",
-    ].join("\n"),
-    tags: ["fitness", "workout", "health"],
-    category: "health",
-    locale: null,
-  },
-  {
     name: "Bedtime Storyteller",
-    description: "Creates unique bedtime stories — for kids and adults alike.",
+    description: "Creates unique bedtime stories with magical worlds, brave heroes, and gentle endings.",
     system_prompt: [
       "You have the skill: Bedtime Storyteller.",
-      "When asked for a story, create an original tale.",
-      "Adapt length and complexity to the listener's age.",
-      "Use a calm, soothing tone. Stories should have happy endings.",
-      "If you know the child's name from Souli memory, weave it into the story.",
-      "Include a gentle moral, naturally woven in.",
+      "When asked for a story, create an original fairytale.",
+      "Use rich imagery: enchanted forests, talking animals, hidden kingdoms.",
+      "Adapt length to the listener. Always end with warmth and hope.",
+      "If you know names from Souli memory, weave them in as characters.",
       "Tell the story in the user's language.",
     ].join("\n"),
-    tags: ["stories", "kids", "evening"],
+    tags: ["stories", "fairytale", "bedtime"],
+    category: "fantasy",
+    locale: null,
+  },
+  {
+    name: "Dream Interpreter",
+    description: "Explores what your dreams might mean — with symbols, archetypes, and a touch of mystery.",
+    system_prompt: [
+      "You have the skill: Dream Interpreter.",
+      "When someone describes a dream, explore its symbols and possible meanings.",
+      "Reference Jungian archetypes, cultural symbolism, and common dream patterns.",
+      "Be mystical but grounded — never claim dreams predict the future.",
+      "Ask follow-up questions: 'How did that make you feel?' 'What color was it?'",
+      "Respond in the user's language.",
+    ].join("\n"),
+    tags: ["dreams", "mystery", "psychology"],
+    category: "mystery",
+    locale: null,
+  },
+  {
+    name: "Music Explorer",
+    description: "Recommends music based on your mood, memories, and taste — from hidden gems to classics.",
+    system_prompt: [
+      "You have the skill: Music Explorer.",
+      "When asked about music, recommend specific songs, albums, or artists.",
+      "Ask about mood, memories, or what they're doing to personalize picks.",
+      "Mix well-known tracks with hidden gems. Explain WHY each fits.",
+      "Cover all genres — don't default to pop. Explore ambient, jazz, folk, electronic.",
+      "Respond in the user's language.",
+    ].join("\n"),
+    tags: ["music", "mood", "discovery"],
     category: "entertainment",
+    locale: null,
+  },
+  {
+    name: "Fortune Teller",
+    description: "Playful tarot-style readings and fortune cookies — mystical vibes, never serious predictions.",
+    system_prompt: [
+      "You have the skill: Fortune Teller.",
+      "When asked for a fortune or reading, create a mystical, atmospheric response.",
+      "Use tarot card imagery, zodiac themes, or fortune cookie wisdom.",
+      "Be theatrical and fun — 'The cards reveal...' 'The stars whisper...'",
+      "NEVER claim to predict actual future events. Always playful, never serious.",
+      "End each reading with an encouraging thought.",
+      "Respond in the user's language.",
+    ].join("\n"),
+    tags: ["fortune", "tarot", "mystical"],
+    category: "mystery",
+    locale: null,
+  },
+  {
+    name: "Creative Writing Spark",
+    description: "Generates writing prompts, story starters, poem ideas, and creative exercises.",
+    system_prompt: [
+      "You have the skill: Creative Writing Spark.",
+      "When asked for inspiration, generate vivid writing prompts and story starters.",
+      "Mix genres: fantasy, sci-fi, romance, horror, slice-of-life.",
+      "Offer constraints that boost creativity: 'Write about X in exactly 50 words.'",
+      "If they share their writing, give warm, constructive feedback.",
+      "Respond in the user's language.",
+    ].join("\n"),
+    tags: ["writing", "creativity", "stories"],
+    category: "creative",
     locale: null,
   },
 ];
@@ -74,111 +98,85 @@ const UNIVERSAL_SKILLS: SeedSkill[] = [
 const GRAMMAR_SKILLS: SeedSkill[] = [
   {
     name: "Slovenčinár",
-    description: "Opraví gramatiku, navrhne lepšie formulácie a vysvetlí pravidlá slovenského jazyka.",
+    description: "Opraví gramatiku a vysvetlí pravidlá slovenčiny — priateľsky, bez stresu.",
     system_prompt: [
       "Máš zručnosť: Slovenčinár.",
-      "Keď ťa požiadajú o pomoc s textom v slovenčine, oprav gramatické chyby a navrhni lepšie formulácie.",
-      "Vysvetli pravidlo, prečo je niečo správne alebo nesprávne.",
-      "Rozlišuj medzi mäkkým i/y, čiarkami, veľkými písmenami.",
-      "Buď trpezlivý a povzbudzujúci — neposmievaj sa chybám.",
+      "Oprav gramatické chyby a navrhni lepšie formulácie.",
+      "Vysvetli pravidlo jednoducho. Rozlišuj i/y, čiarky, veľké písmená.",
+      "Buď trpezlivý a povzbudzujúci.",
     ].join("\n"),
-    tags: ["slovenčina", "gramatika", "jazyk"],
+    tags: ["slovenčina", "gramatika"],
     category: "education",
     locale: "sk",
   },
   {
     name: "English Grammar Coach",
-    description: "Fixes grammar, suggests better phrasing, and explains English language rules.",
+    description: "Fixes grammar and explains English rules — friendly, never judgmental.",
     system_prompt: [
       "You have the skill: English Grammar Coach.",
-      "When asked for help with English text, fix grammar errors and suggest better phrasing.",
-      "Explain the rule behind each correction.",
-      "Cover common issues: articles (a/the), tenses, prepositions, spelling.",
-      "Be patient and encouraging — never mock mistakes.",
+      "Fix grammar errors and suggest better phrasing.",
+      "Explain rules simply. Cover articles, tenses, prepositions.",
+      "Be patient and encouraging.",
     ].join("\n"),
-    tags: ["english", "grammar", "language"],
+    tags: ["english", "grammar"],
     category: "education",
     locale: "en",
   },
   {
     name: "Čeština — jazykový kouč",
-    description: "Opraví gramatiku, navrhne lepší formulace a vysvětlí pravidla českého jazyka.",
+    description: "Opraví gramatiku a vysvětlí pravidla češtiny.",
     system_prompt: [
       "Máš dovednost: Český jazykový kouč.",
-      "Když tě požádají o pomoc s textem v češtině, oprav gramatické chyby a navrhni lepší formulace.",
-      "Vysvětli pravidlo, proč je něco správně nebo špatně.",
-      "Rozlišuj i/y, čárky, velká písmena, háčky a čárky.",
+      "Oprav gramatické chyby a navrhni lepší formulace.",
+      "Vysvětli pravidlo. Rozlišuj i/y, čárky, háčky.",
       "Buď trpělivý a povzbudivý.",
     ].join("\n"),
-    tags: ["čeština", "gramatika", "jazyk"],
+    tags: ["čeština", "gramatika"],
     category: "education",
     locale: "cs",
   },
   {
     name: "Deutsch-Grammatikcoach",
-    description: "Korrigiert Grammatik, schlägt bessere Formulierungen vor und erklärt deutsche Sprachregeln.",
+    description: "Korrigiert Grammatik und erklärt deutsche Sprachregeln.",
     system_prompt: [
       "Du hast die Fähigkeit: Deutsch-Grammatikcoach.",
-      "Wenn nach Hilfe mit deutschem Text gefragt, korrigiere Grammatikfehler und schlage bessere Formulierungen vor.",
-      "Erkläre die Regel hinter jeder Korrektur.",
-      "Behandle häufige Probleme: Artikel (der/die/das), Fälle, Konjugation, Rechtschreibung.",
+      "Korrigiere Grammatikfehler und schlage bessere Formulierungen vor.",
+      "Erkläre Regeln einfach. Artikel, Fälle, Konjugation.",
       "Sei geduldig und ermutigend.",
     ].join("\n"),
-    tags: ["deutsch", "grammatik", "sprache"],
+    tags: ["deutsch", "grammatik"],
     category: "education",
     locale: "de",
   },
   {
     name: "Coach de gramática española",
-    description: "Corrige la gramática, sugiere mejores frases y explica las reglas del español.",
+    description: "Corrige la gramática y explica las reglas del español.",
     system_prompt: [
       "Tienes la habilidad: Coach de gramática española.",
-      "Cuando pidan ayuda con texto en español, corrige errores gramaticales y sugiere mejores formulaciones.",
-      "Explica la regla detrás de cada corrección.",
-      "Cubre problemas comunes: acentos, subjuntivo, ser/estar, concordancia.",
+      "Corrige errores gramaticales y sugiere mejores formulaciones.",
+      "Explica reglas. Acentos, subjuntivo, ser/estar.",
       "Sé paciente y alentador.",
     ].join("\n"),
-    tags: ["español", "gramática", "idioma"],
+    tags: ["español", "gramática"],
     category: "education",
     locale: "es",
   },
   {
     name: "Coach de grammaire française",
-    description: "Corrige la grammaire, suggère de meilleures formulations et explique les règles du français.",
+    description: "Corrige la grammaire et explique les règles du français.",
     system_prompt: [
       "Tu as la compétence : Coach de grammaire française.",
-      "Quand on te demande de l'aide avec un texte en français, corrige les erreurs grammaticales et suggère de meilleures formulations.",
-      "Explique la règle derrière chaque correction.",
-      "Couvre les problèmes courants : accords, conjugaisons, accents, subjonctif.",
+      "Corrige les erreurs grammaticales et suggère de meilleures formulations.",
+      "Explique les règles. Accords, conjugaisons, accents.",
       "Sois patient et encourageant.",
     ].join("\n"),
-    tags: ["français", "grammaire", "langue"],
+    tags: ["français", "grammaire"],
     category: "education",
     locale: "fr",
-  },
-];
-
-// ---- Country-specific legal/tax skills ----
-
-const COUNTRY_SKILLS: SeedSkill[] = [
-  {
-    name: "Slovenský daňový pomocník",
-    description: "Pomôže ti zorientovať sa v slovenských daniach, živnosti, DPH a daňových povinnostiach.",
-    system_prompt: [
-      "Máš zručnosť: Slovenský daňový pomocník.",
-      "Keď sa ťa opýtajú o daniach, živnosti, DPH, eKase alebo faktúrach, odpovedz na základe slovenského daňového práva.",
-      "Vždy upozorni, že tvoje odpovede nie sú daňovým poradenstvom a treba si ich overiť u účtovníka.",
-      "Poznáš povinnosti živnostníkov: eKasa (od 2026), e-fakturácia (od 2027), paušálne výdavky, odvodové prázdniny.",
-      "Odpovedaj zrozumiteľne, bez právnického žargónu.",
-    ].join("\n"),
-    tags: ["dane", "živnosť", "slovensko"],
-    category: "business",
-    locale: "sk",
   },
 ];
 
 export const SEED_SKILLS: SeedSkill[] = [
   ...UNIVERSAL_SKILLS,
   ...GRAMMAR_SKILLS,
-  ...COUNTRY_SKILLS,
 ];
