@@ -4,7 +4,7 @@
  * based on personality trait answers.
  */
 
-import type { Species } from "./avatar";
+import type { Species, EarStyle } from "./avatar";
 
 export interface SouliType {
   species: Species;
@@ -71,53 +71,82 @@ export const SOULI_TYPES: Record<Species, SouliType> = {
     bodyColor: "#06B6D4",
     skinColor: "#FDDCB5",
   },
+  owl: {
+    species: "owl",
+    nameKey: "typeOwl",
+    emoji: "\uD83E\uDD89",
+    descriptionKey: "typeOwlDesc",
+    traits: ["traitWise", "traitObservant", "traitPatient"],
+    bodyColor: "#7C3AED",
+    skinColor: "#E0D4FF",
+  },
+  dragon: {
+    species: "dragon",
+    nameKey: "typeDragon",
+    emoji: "\uD83D\uDC32",
+    descriptionKey: "typeDragonDesc",
+    traits: ["traitBrave", "traitProtective", "traitFierce"],
+    bodyColor: "#DC2626",
+    skinColor: "#FFE4C9",
+  },
+  mushroom: {
+    species: "mushroom",
+    nameKey: "typeMushroom",
+    emoji: "\uD83C\uDF44",
+    descriptionKey: "typeMushroomDesc",
+    traits: ["traitGrounded", "traitMystical", "traitAdaptable"],
+    bodyColor: "#059669",
+    skinColor: "#D4FFE0",
+  },
 };
 
 /**
  * Each answer gives points to certain species.
  * Format: answers[questionIndex][answerIndex] = species weight map
  */
+// New species (owl, dragon, mushroom) have 0 weight — they're selectable via
+// avatar creation but don't appear as quiz results (quiz stays 6-species).
 export type AnswerWeights = Record<Species, number>;
 
 export const QUIZ_WEIGHTS: AnswerWeights[][] = [
   // Q1: How do you recharge?
   [
-    { cat: 3, fox: 2, bear: 1, bunny: 1, dog: 0, human: 0 },   // a: alone with a book
-    { dog: 3, human: 2, bunny: 0, cat: 0, bear: 0, fox: 1 },    // b: with friends
-    { bear: 3, bunny: 2, fox: 1, cat: 0, dog: 0, human: 0 },    // c: in nature
-    { human: 3, dog: 1, fox: 1, cat: 0, bunny: 0, bear: 0 },    // d: doing something new
+    { cat: 3, fox: 2, bear: 1, bunny: 1, dog: 0, human: 0, owl: 0, dragon: 0, mushroom: 0 },   // a: alone with a book
+    { dog: 3, human: 2, bunny: 0, cat: 0, bear: 0, fox: 1, owl: 0, dragon: 0, mushroom: 0 },    // b: with friends
+    { bear: 3, bunny: 2, fox: 1, cat: 0, dog: 0, human: 0, owl: 0, dragon: 0, mushroom: 0 },    // c: in nature
+    { human: 3, dog: 1, fox: 1, cat: 0, bunny: 0, bear: 0, owl: 0, dragon: 0, mushroom: 0 },    // d: doing something new
   ],
   // Q2: Pick a superpower
   [
-    { bunny: 3, cat: 1, fox: 2, bear: 0, dog: 0, human: 0 },    // a: create anything from imagination
-    { cat: 3, bear: 2, bunny: 0, dog: 0, fox: 0, human: 1 },    // b: read minds
-    { dog: 3, human: 1, bear: 0, cat: 0, bunny: 0, fox: 1 },    // c: teleport to anyone
-    { human: 3, fox: 1, dog: 0, cat: 0, bunny: 0, bear: 2 },    // d: see the future
+    { bunny: 3, cat: 1, fox: 2, bear: 0, dog: 0, human: 0, owl: 0, dragon: 0, mushroom: 0 },    // a: create anything from imagination
+    { cat: 3, bear: 2, bunny: 0, dog: 0, fox: 0, human: 1, owl: 0, dragon: 0, mushroom: 0 },    // b: read minds
+    { dog: 3, human: 1, bear: 0, cat: 0, bunny: 0, fox: 1, owl: 0, dragon: 0, mushroom: 0 },    // c: teleport to anyone
+    { human: 3, fox: 1, dog: 0, cat: 0, bunny: 0, bear: 2, owl: 0, dragon: 0, mushroom: 0 },    // d: see the future
   ],
   // Q3: Ideal weekend?
   [
-    { bear: 3, fox: 1, cat: 1, bunny: 0, dog: 0, human: 0 },    // a: hiking in mountains
-    { cat: 3, bunny: 2, bear: 0, dog: 0, fox: 1, human: 0 },    // b: cozy day at home
-    { dog: 3, human: 1, bunny: 1, cat: 0, bear: 0, fox: 0 },    // c: party with friends
-    { human: 3, fox: 2, dog: 0, cat: 0, bunny: 0, bear: 0 },    // d: exploring a new city
+    { bear: 3, fox: 1, cat: 1, bunny: 0, dog: 0, human: 0, owl: 0, dragon: 0, mushroom: 0 },    // a: hiking in mountains
+    { cat: 3, bunny: 2, bear: 0, dog: 0, fox: 1, human: 0, owl: 0, dragon: 0, mushroom: 0 },    // b: cozy day at home
+    { dog: 3, human: 1, bunny: 1, cat: 0, bear: 0, fox: 0, owl: 0, dragon: 0, mushroom: 0 },    // c: party with friends
+    { human: 3, fox: 2, dog: 0, cat: 0, bunny: 0, bear: 0, owl: 0, dragon: 0, mushroom: 0 },    // d: exploring a new city
   ],
   // Q4: How do you handle problems?
   [
-    { cat: 3, bear: 2, bunny: 0, dog: 0, fox: 0, human: 0 },    // a: think it through
-    { bunny: 3, fox: 2, dog: 1, cat: 0, bear: 0, human: 0 },    // b: follow your gut
-    { human: 3, dog: 1, bear: 0, cat: 0, bunny: 0, fox: 1 },    // c: take action immediately
-    { dog: 3, bear: 1, bunny: 1, cat: 0, fox: 0, human: 0 },    // d: ask someone for advice
+    { cat: 3, bear: 2, bunny: 0, dog: 0, fox: 0, human: 0, owl: 0, dragon: 0, mushroom: 0 },    // a: think it through
+    { bunny: 3, fox: 2, dog: 1, cat: 0, bear: 0, human: 0, owl: 0, dragon: 0, mushroom: 0 },    // b: follow your gut
+    { human: 3, dog: 1, bear: 0, cat: 0, bunny: 0, fox: 1, owl: 0, dragon: 0, mushroom: 0 },    // c: take action immediately
+    { dog: 3, bear: 1, bunny: 1, cat: 0, fox: 0, human: 0, owl: 0, dragon: 0, mushroom: 0 },    // d: ask someone for advice
   ],
   // Q5: Pick a vibe
   [
-    { bear: 3, cat: 2, bunny: 0, dog: 0, fox: 0, human: 0 },    // a: calm and zen
-    { dog: 3, human: 2, cat: 0, bunny: 0, bear: 0, fox: 0 },    // b: energetic and buzzing
-    { fox: 3, bunny: 1, cat: 1, dog: 0, bear: 0, human: 0 },    // c: mysterious and deep
-    { bunny: 3, dog: 1, human: 1, cat: 0, bear: 0, fox: 0 },    // d: playful and silly
+    { bear: 3, cat: 2, bunny: 0, dog: 0, fox: 0, human: 0, owl: 0, dragon: 0, mushroom: 0 },    // a: calm and zen
+    { dog: 3, human: 2, cat: 0, bunny: 0, bear: 0, fox: 0, owl: 0, dragon: 0, mushroom: 0 },    // b: energetic and buzzing
+    { fox: 3, bunny: 1, cat: 1, dog: 0, bear: 0, human: 0, owl: 0, dragon: 0, mushroom: 0 },    // c: mysterious and deep
+    { bunny: 3, dog: 1, human: 1, cat: 0, bear: 0, fox: 0, owl: 0, dragon: 0, mushroom: 0 },    // d: playful and silly
   ],
 ];
 
-const SPECIES_ORDER: Species[] = ["cat", "dog", "bunny", "bear", "fox", "human"];
+const SPECIES_ORDER: Species[] = ["cat", "dog", "bunny", "bear", "fox", "human", "owl", "dragon", "mushroom"];
 
 /**
  * Given a set of quiz answers (array of 5 indices, each 0-3),
@@ -125,7 +154,7 @@ const SPECIES_ORDER: Species[] = ["cat", "dog", "bunny", "bear", "fox", "human"]
  */
 export function computeSpecies(answers: number[]): Species {
   const scores: Record<Species, number> = {
-    cat: 0, dog: 0, bunny: 0, bear: 0, fox: 0, human: 0,
+    cat: 0, dog: 0, bunny: 0, bear: 0, fox: 0, human: 0, owl: 0, dragon: 0, mushroom: 0,
   };
 
   answers.forEach((answerIdx, questionIdx) => {
@@ -163,13 +192,16 @@ export function buildQuizAppearance(answers: number[], species: Species) {
   const hairStyles = ["none", "none", "spiky", "tuft", "bangs"] as const;
   const bodyShapes = ["round", "square", "tall"] as const;
 
-  const earMap: Record<Species, "none" | "round" | "pointy" | "floppy" | "bear"> = {
+  const earMap: Record<Species, EarStyle> = {
     human: "none",
     cat: "pointy",
     dog: "floppy",
     bunny: "pointy",
     bear: "bear",
     fox: "pointy",
+    owl: "wings",
+    dragon: "horned",
+    mushroom: "cap",
   };
 
   return {

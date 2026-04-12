@@ -20,6 +20,9 @@ const SPECIES_EMOJI: Record<string, string> = {
   bunny: "\ud83d\udc30",
   bear: "\ud83d\udc3b",
   fox: "\ud83e\udd8a",
+  owl: "\ud83e\udd89",
+  dragon: "\ud83d\udc32",
+  mushroom: "\ud83c\udf44",
 };
 
 const SPECIES_KEY: Record<string, string> = {
@@ -29,6 +32,9 @@ const SPECIES_KEY: Record<string, string> = {
   bunny: "speciesBunny",
   bear: "speciesBear",
   fox: "speciesFox",
+  owl: "speciesOwl",
+  dragon: "speciesDragon",
+  mushroom: "speciesMushroom",
 };
 
 const ANIMATION_STATES: Array<{ state: AvatarState; emoji: string; key: string }> = [

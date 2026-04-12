@@ -10,14 +10,17 @@ import { Link } from "@/i18n/routing";
 import type { AvatarRow } from "@/lib/supabase/avatars-db";
 import type { Species } from "@/lib/avatar";
 
-const SPECIES_LIST: { value: Species | ""; label: string }[] = [
-  { value: "", label: "Všetky" },
-  { value: "human", label: "Človek" },
-  { value: "cat", label: "Mačka" },
-  { value: "dog", label: "Pes" },
-  { value: "bunny", label: "Zajac" },
-  { value: "bear", label: "Medveď" },
-  { value: "fox", label: "Líška" },
+const SPECIES_LIST: { value: Species | ""; label: string; emoji: string }[] = [
+  { value: "",         label: "Všetky",  emoji: "" },
+  { value: "human",    label: "Človek",  emoji: "\ud83e\uddd1" },
+  { value: "cat",      label: "Mačka",   emoji: "\ud83d\udc31" },
+  { value: "dog",      label: "Pes",     emoji: "\ud83d\udc36" },
+  { value: "bunny",    label: "Zajac",   emoji: "\ud83d\udc30" },
+  { value: "bear",     label: "Medveď",  emoji: "\ud83d\udc3b" },
+  { value: "fox",      label: "Líška",   emoji: "\ud83e\udd8a" },
+  { value: "owl",      label: "Sova",    emoji: "\ud83e\udd89" },
+  { value: "dragon",   label: "Drak",    emoji: "\ud83d\udc32" },
+  { value: "mushroom", label: "Huba",    emoji: "\ud83c\udf44" },
 ];
 
 const SOUL_TYPE_FILTERS: { value: string; label: string }[] = [

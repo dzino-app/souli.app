@@ -33,6 +33,9 @@ function earStyleForSpecies(species: Species): AvatarAppearance["earStyle"] {
     bunny: "pointy",
     bear: "bear",
     fox: "pointy",
+    owl: "wings",
+    dragon: "horned",
+    mushroom: "cap",
   };
   return map[species];
 }

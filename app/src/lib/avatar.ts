@@ -10,12 +10,12 @@ export type AvatarState =
   | "waving"
   | "dancing";
 
-export type Species = "human" | "cat" | "dog" | "bunny" | "bear" | "fox";
+export type Species = "human" | "cat" | "dog" | "bunny" | "bear" | "fox" | "owl" | "dragon" | "mushroom";
 export type BodyShape = "round" | "square" | "tall";
 export type EyeStyle = "dots" | "wide" | "sleepy" | "anime";
 export type MouthStyle = "smile" | "line" | "open";
-export type EarStyle = "none" | "round" | "pointy" | "floppy" | "bear";
-export type Accessory = "none" | "crown" | "cap" | "bow" | "horns" | "halo" | "glasses";
+export type EarStyle = "none" | "round" | "pointy" | "floppy" | "bear" | "wings" | "horned" | "cap";
+export type Accessory = "none" | "crown" | "cap" | "bow" | "horns" | "halo" | "glasses" | "scarf" | "headband" | "monocle";
 export type HairStyle = "none" | "spiky" | "tuft" | "bangs";
 
 export interface AvatarAppearance {
@@ -50,24 +50,29 @@ export interface AvatarData {
 
 // Species define ear + default body shape combos
 const SPECIES_CONFIG: Record<Species, { ears: EarStyle; shapes: BodyShape[] }> = {
-  human:  { ears: "none",   shapes: ["round", "tall"] },
-  cat:    { ears: "pointy", shapes: ["round", "tall"] },
-  dog:    { ears: "floppy", shapes: ["round", "square"] },
-  bunny:  { ears: "pointy", shapes: ["round", "tall"] },
-  bear:   { ears: "bear",   shapes: ["round", "square"] },
-  fox:    { ears: "pointy", shapes: ["tall"] },
+  human:    { ears: "none",   shapes: ["round", "tall"] },
+  cat:      { ears: "pointy", shapes: ["round", "tall"] },
+  dog:      { ears: "floppy", shapes: ["round", "square"] },
+  bunny:    { ears: "pointy", shapes: ["round", "tall"] },
+  bear:     { ears: "bear",   shapes: ["round", "square"] },
+  fox:      { ears: "pointy", shapes: ["tall"] },
+  owl:      { ears: "wings",  shapes: ["round"] },
+  dragon:   { ears: "horned", shapes: ["tall", "square"] },
+  mushroom: { ears: "cap",    shapes: ["round"] },
 };
 
-const SPECIES_LIST: Species[] = ["human", "cat", "dog", "bunny", "bear", "fox"];
+const SPECIES_LIST: Species[] = ["human", "cat", "dog", "bunny", "bear", "fox", "owl", "dragon", "mushroom"];
 const EYE_STYLES: EyeStyle[] = ["dots", "wide", "sleepy", "anime"];
 const MOUTH_STYLES: MouthStyle[] = ["smile", "line", "open"];
-const ACCESSORIES: Accessory[] = ["none", "none", "crown", "cap", "bow", "horns", "halo", "glasses"];
+const ACCESSORIES: Accessory[] = ["none", "none", "crown", "cap", "bow", "horns", "halo", "glasses", "scarf", "headband", "monocle"];
 const HAIR_STYLES: HairStyle[] = ["none", "none", "spiky", "tuft", "bangs"];
 
 const BODY_COLORS = [
   "#4F46E5", "#E11D48", "#16A34A", "#F59E0B",
   "#8B5CF6", "#06B6D4", "#F97316", "#EC4899",
   "#6366F1", "#14B8A6", "#A855F7", "#EF4444",
+  "#0D9488", "#7C3AED", "#DC2626", "#2563EB",  // teal, violet, red, blue
+  "#CA8A04", "#059669", "#DB2777", "#4338CA",  // amber, emerald, pink, indigo
 ];
 
 const SKIN_COLORS = [

@@ -20,6 +20,9 @@ const SPECIES_LABELS: Record<string, string> = {
   bunny: "Zajac",
   bear: "Medveď",
   fox: "Líška",
+  owl: "Sova",
+  dragon: "Drak",
+  mushroom: "Huba",
 };
 
 const ACTIVITY_STATES: AvatarState[] = [
