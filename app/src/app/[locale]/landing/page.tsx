@@ -10,6 +10,9 @@ import {
   Target,
   Check,
   ChevronDown,
+  Lock,
+  KeyRound,
+  Code,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -33,6 +36,12 @@ const features = [
   { key: "feature2", icon: BookOpen },
   { key: "feature3", icon: Calendar },
   { key: "feature4", icon: Target },
+] as const;
+
+const trustPoints = [
+  { key: "trust1", icon: Lock },
+  { key: "trust2", icon: KeyRound },
+  { key: "trust3", icon: Code },
 ] as const;
 
 const pricing = [
@@ -135,6 +144,28 @@ export default function LandingPage() {
                     </p>
                   </div>
                 </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Trust & Security */}
+      <section>
+        <h2 className="text-2xl font-bold text-center mb-3">
+          {t("trustTitle")}
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+          {trustPoints.map(({ key, icon: Icon }) => (
+            <Card key={key} className="border-primary/10 bg-primary/[0.02]">
+              <CardContent className="pt-6 text-center">
+                <div className="rounded-full bg-primary/10 p-3 w-fit mx-auto mb-4">
+                  <Icon className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-semibold mb-2">{t(key)}</h3>
+                <p className="text-sm text-muted-foreground">
+                  {t(`${key}Desc`)}
+                </p>
               </CardContent>
             </Card>
           ))}
