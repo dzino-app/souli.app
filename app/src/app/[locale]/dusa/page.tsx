@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import Link from "next/link";
 import {
   BookOpen,
@@ -26,6 +26,7 @@ import { Button } from "@/components/ui/button";
 import {
   getSoulFilesByCategory,
   getSoulFile,
+  getSoulContext,
   CATEGORY_LABELS,
   isDefaultFile,
   createCustomSoulFile,
@@ -48,6 +49,7 @@ import {
 } from "@/lib/soul-compiler";
 import { extractInsights, extractOpenThreads } from "@/lib/soul-retrieval";
 import { TemplatePicker } from "@/components/soul/template-picker";
+import { SmartQuery } from "@/components/soul/smart-query";
 import type { SoulTemplate } from "@/lib/soul-templates";
 
 const CATEGORY_ICONS: Record<string, typeof BookOpen> = {
@@ -387,6 +389,8 @@ export default function SoulPage() {
     refreshGroups();
   }
 
+  const soulContent = useMemo(() => getSoulContext(), [groups]);
+
   const categories = Object.keys(groups);
 
   return (
@@ -460,6 +464,9 @@ export default function SoulPage() {
           </CardContent>
         </Card>
       )}
+
+      {/* Smart query */}
+      <SmartQuery soulContent={soulContent} />
 
       {/* Compilation section */}
       <CompilationSection onCompiled={refreshGroups} />
