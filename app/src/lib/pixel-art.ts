@@ -321,22 +321,20 @@ function generate8x8(
   set(g, 2, 6, Cd);
   set(g, 0, 2, Cl);
 
-  // ---- Eyes (row 1, cols 2 and 5) ----
+  // ---- Eyes (row 1, cols 2 and 5 — keep gap at cols 3-4) ----
   const ev = frame.eyeVariant;
   if (ev === "closed") {
-    set(g, 1, 2, EYE_COLOR); set(g, 1, 3, EYE_COLOR);
-    set(g, 1, 4, EYE_COLOR); set(g, 1, 5, EYE_COLOR);
+    set(g, 1, 2, EYE_COLOR);
+    set(g, 1, 5, EYE_COLOR);
   } else if (ev === "half") {
-    set(g, 1, 3, EYE_COLOR);
-    set(g, 1, 4, EYE_COLOR);
+    set(g, 1, 2, darken(EYE_COLOR, -40));
+    set(g, 1, 5, darken(EYE_COLOR, -40));
   } else if (ev === "squeezed") {
-    // Happy squint - arc shape
-    set(g, 1, 2, darken(C, 50)); set(g, 1, 3, darken(C, 50));
-    set(g, 1, 4, darken(C, 50)); set(g, 1, 5, darken(C, 50));
+    set(g, 1, 2, darken(C, 50));
+    set(g, 1, 5, darken(C, 50));
   } else if (ev === "wide") {
-    // Large eyes with highlight
-    set(g, 1, 2, EYE_HIGHLIGHT); set(g, 1, 3, EYE_COLOR);
-    set(g, 1, 4, EYE_HIGHLIGHT); set(g, 1, 5, EYE_COLOR);
+    set(g, 0, 2, EYE_HIGHLIGHT); set(g, 1, 2, EYE_COLOR);
+    set(g, 0, 5, EYE_HIGHLIGHT); set(g, 1, 5, EYE_COLOR);
   } else if (ev === "up-left") {
     set(g, 0, 2, EYE_COLOR); set(g, 1, 2, EYE_HIGHLIGHT);
     set(g, 0, 5, EYE_COLOR); set(g, 1, 5, EYE_HIGHLIGHT);
@@ -513,34 +511,35 @@ function generate12x12(
     }
   }
 
-  // ---- Eyes (row 3) ----
+  // ---- Eyes (row 3, cols 4 and 7 — gap at cols 5-6) ----
   const ev = frame.eyeVariant;
   if (ev === "closed") {
-    set(g, 3, 4, EYE_COLOR); set(g, 3, 5, EYE_COLOR);
-    set(g, 3, 6, EYE_COLOR); set(g, 3, 7, EYE_COLOR);
+    // Horizontal line per eye, NOT a continuous bar
+    set(g, 3, 3, EYE_COLOR); set(g, 3, 4, EYE_COLOR);
+    set(g, 3, 7, EYE_COLOR); set(g, 3, 8, EYE_COLOR);
   } else if (ev === "half") {
-    set(g, 3, 4, EYE_COLOR);
-    set(g, 3, 7, EYE_COLOR);
+    set(g, 3, 4, darken(EYE_COLOR, -40));
+    set(g, 3, 7, darken(EYE_COLOR, -40));
   } else if (ev === "squeezed") {
-    set(g, 3, 4, Cd); set(g, 3, 5, Cd);
-    set(g, 3, 6, Cd); set(g, 3, 7, Cd);
+    // Happy arc per eye, not a merged bar
+    set(g, 3, 3, Cd); set(g, 3, 4, Cd);
+    set(g, 3, 7, Cd); set(g, 3, 8, Cd);
   } else if (ev === "wide") {
-    // 2x2 eyes with highlight
-    set(g, 2, 4, EYE_HIGHLIGHT); set(g, 2, 5, EYE_COLOR);
-    set(g, 3, 4, EYE_COLOR);     set(g, 3, 5, EYE_COLOR);
-    set(g, 2, 6, EYE_HIGHLIGHT); set(g, 2, 7, EYE_COLOR);
-    set(g, 3, 6, EYE_COLOR);     set(g, 3, 7, EYE_COLOR);
+    // 2x2 eyes with gap between them (cols 3-4 and 7-8)
+    set(g, 2, 3, EYE_HIGHLIGHT); set(g, 2, 4, EYE_COLOR);
+    set(g, 3, 3, EYE_COLOR);     set(g, 3, 4, EYE_COLOR);
+    set(g, 2, 7, EYE_HIGHLIGHT); set(g, 2, 8, EYE_COLOR);
+    set(g, 3, 7, EYE_COLOR);     set(g, 3, 8, EYE_COLOR);
   } else if (ev === "up-left") {
     set(g, 2, 4, EYE_COLOR); set(g, 3, 4, EYE_HIGHLIGHT);
     set(g, 2, 7, EYE_COLOR); set(g, 3, 7, EYE_HIGHLIGHT);
   } else if (ev === "up-right") {
-    set(g, 2, 5, EYE_COLOR); set(g, 3, 5, EYE_HIGHLIGHT);
-    set(g, 2, 6, EYE_COLOR); set(g, 3, 6, EYE_HIGHLIGHT);
+    set(g, 2, 4, EYE_COLOR); set(g, 3, 4, EYE_HIGHLIGHT);
+    set(g, 2, 7, EYE_COLOR); set(g, 3, 7, EYE_HIGHLIGHT);
   } else {
-    // Normal open -- 1x1 dots
+    // Normal open — 1x1 dots with highlights
     set(g, 3, 4, EYE_COLOR);
     set(g, 3, 7, EYE_COLOR);
-    // Tiny highlights
     if (level >= 12) {
       set(g, 2, 4, EYE_HIGHLIGHT);
       set(g, 2, 7, EYE_HIGHLIGHT);
