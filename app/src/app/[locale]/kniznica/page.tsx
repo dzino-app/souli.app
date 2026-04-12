@@ -45,13 +45,23 @@ export default function LibraryPage() {
   const [soulType, setSoulType] = useState("");
   const [sort, setSort] = useState<"popular" | "recent">("popular");
   const [search, setSearch] = useState("");
+  const [avatarType, setAvatarType] = useState("");
   const [page, setPage] = useState(0);
+
+  // Read ?type= from URL on mount
+  useEffect(() => {
+    const urlType = new URLSearchParams(window.location.search).get("type");
+    if (urlType && ["pixel", "imagen", "veo"].includes(urlType)) {
+      setAvatarType(urlType);
+    }
+  }, []);
 
   const fetchAvatars = useCallback(async () => {
     setLoading(true);
     const params = new URLSearchParams();
     if (species) params.set("species", species);
     if (soulType) params.set("soulType", soulType);
+    if (avatarType) params.set("type", avatarType);
     params.set("sort", sort);
     if (search) params.set("search", search);
     params.set("page", String(page));
@@ -66,7 +76,7 @@ export default function LibraryPage() {
     } finally {
       setLoading(false);
     }
-  }, [species, soulType, sort, search, page]);
+  }, [species, soulType, avatarType, sort, search, page]);
 
   useEffect(() => {
     fetchAvatars();
@@ -136,6 +146,29 @@ export default function LibraryPage() {
             }`}
           >
             {s.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Type filter */}
+      <div className="flex items-center gap-1.5">
+        {[
+          { value: "", label: "Všetky typy" },
+          { value: "pixel", label: "Pixel" },
+          { value: "imagen", label: "Imagen" },
+          { value: "veo", label: "Video" },
+        ].map((t) => (
+          <button
+            key={t.value}
+            type="button"
+            onClick={() => { setAvatarType(t.value); setPage(0); }}
+            className={`px-2.5 py-1 rounded-full text-[11px] font-medium whitespace-nowrap transition-colors ${
+              avatarType === t.value
+                ? "bg-primary/20 text-primary"
+                : "bg-secondary/70 text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            {t.label}
           </button>
         ))}
       </div>

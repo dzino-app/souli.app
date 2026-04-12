@@ -33,11 +33,18 @@ export interface AvatarRow {
   preview_url: string | null;
   /** Pre-rendered animation frame URLs per activity (Supabase Storage) */
   animation_urls: Record<string, string[]> | null;
+  /** How the avatar's visuals were generated */
+  avatar_type: "pixel" | "imagen" | "veo";
+  /** AI-generated portrait image URL (Imagen) */
+  portrait_url: string | null;
+  /** AI-generated video clip URL (Veo) */
+  video_url: string | null;
 }
 
 export interface PublicAvatarFilters {
   species?: string;
   soulType?: string; // filter by avatars that have a specific public soul file slug
+  avatarType?: string; // pixel | imagen | veo
   sort?: "popular" | "recent";
   search?: string;
   page?: number;
@@ -172,6 +179,10 @@ export async function getPublicAvatars(
 
   if (filters.species) {
     query = query.eq("appearance->>species", filters.species);
+  }
+
+  if (filters.avatarType) {
+    query = query.eq("avatar_type", filters.avatarType);
   }
 
   if (filters.search) {

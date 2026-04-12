@@ -73,6 +73,18 @@ export function AvatarCard({ avatar, locale }: AvatarCardProps) {
             <span className="text-xs text-muted-foreground">{speciesLabel}</span>
             <span className="text-xs text-muted-foreground">·</span>
             <span className="text-xs text-muted-foreground">Úr. {avatar.level}</span>
+            {avatar.avatar_type && avatar.avatar_type !== "pixel" && (
+              <>
+                <span className="text-xs text-muted-foreground">·</span>
+                <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${
+                  avatar.avatar_type === "imagen"
+                    ? "bg-violet-500/10 text-violet-600"
+                    : "bg-rose-500/10 text-rose-600"
+                }`}>
+                  {avatar.avatar_type === "imagen" ? "AI" : "Video"}
+                </span>
+              </>
+            )}
           </div>
           {avatar.public_description && (
             <p className="text-[11px] text-muted-foreground text-center line-clamp-2 leading-snug">

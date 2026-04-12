@@ -20,6 +20,9 @@ export async function GET(request: NextRequest) {
   const soulType = searchParams.get("soulType");
   if (soulType) filters.soulType = soulType;
 
+  const avatarType = searchParams.get("type");
+  if (avatarType) filters.avatarType = avatarType;
+
   const page = searchParams.get("page");
   if (page) filters.page = parseInt(page, 10) || 0;
 
