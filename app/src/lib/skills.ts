@@ -21,6 +21,7 @@ export interface Skill {
   tags: string[];
   category: string;
   version: string;
+  locale: string | null; // null = universal, "sk"/"en"/etc = locale-specific
   created_at: string;
 }
 
@@ -66,6 +67,7 @@ export async function getEnabledSkillPrompts(): Promise<string[]> {
 export async function getPublicSkills(options?: {
   category?: string;
   search?: string;
+  locale?: string;
 }): Promise<Skill[]> {
   const supabase = createClient();
   let query = supabase
@@ -81,6 +83,10 @@ export async function getPublicSkills(options?: {
     query = query.or(
       `name.ilike.%${options.search}%,description.ilike.%${options.search}%`,
     );
+  }
+  // Filter by locale: show universal skills (locale IS NULL) + matching locale
+  if (options?.locale) {
+    query = query.or(`locale.is.null,locale.eq.${options.locale}`);
   }
 
   const { data } = await query;

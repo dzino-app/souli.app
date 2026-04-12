@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import { Plus, Power, Trash2, Search, Sparkles, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,6 +17,8 @@ import {
 } from "@/lib/skills";
 
 export default function SkillsPage() {
+  const params = useParams();
+  const locale = (params?.locale as string) ?? "sk";
   const [installed, setInstalled] = useState<InstalledSkill[]>([]);
   const [marketplace, setMarketplace] = useState<Skill[]>([]);
   const [search, setSearch] = useState("");
@@ -36,7 +39,7 @@ export default function SkillsPage() {
     setLoading(true);
     const [inst, pub] = await Promise.all([
       getInstalledSkills(),
-      getPublicSkills(),
+      getPublicSkills({ locale }),
     ]);
     setInstalled(inst);
     setMarketplace(pub);

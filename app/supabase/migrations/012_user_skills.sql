@@ -19,11 +19,12 @@ CREATE POLICY "Users can install skills" ON user_skills FOR INSERT WITH CHECK (a
 CREATE POLICY "Users can update own skills" ON user_skills FOR UPDATE USING (auth.uid() = user_id);
 CREATE POLICY "Users can uninstall skills" ON user_skills FOR DELETE USING (auth.uid() = user_id);
 
--- Add tags and category to skills for marketplace filtering
+-- Add tags, category, locale to skills for marketplace filtering
 ALTER TABLE skills
   ADD COLUMN IF NOT EXISTS tags TEXT[] DEFAULT '{}',
   ADD COLUMN IF NOT EXISTS category TEXT DEFAULT 'general',
-  ADD COLUMN IF NOT EXISTS version TEXT DEFAULT '1.0.0';
+  ADD COLUMN IF NOT EXISTS version TEXT DEFAULT '1.0.0',
+  ADD COLUMN IF NOT EXISTS locale TEXT; -- null = universal, 'sk'/'en'/etc = locale-specific
 
 -- Allow anyone to browse public skills
 CREATE POLICY "Anyone can read public skills" ON skills FOR SELECT USING (is_public = true OR auth.uid() = creator_id);

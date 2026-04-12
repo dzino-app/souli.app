@@ -28,6 +28,7 @@ export async function POST() {
       system_prompt: skill.system_prompt,
       tags: skill.tags,
       category: skill.category,
+      locale: skill.locale,
       is_public: true,
     });
 
