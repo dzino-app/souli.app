@@ -210,7 +210,7 @@ export default function SettingsPage() {
             }}
           />
           <a
-            href="mailto:support@dzino.app"
+            href="mailto:marosjanco@proton.me"
             className="flex items-center gap-2 rounded-md border px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
           >
             <LifeBuoy className="h-4 w-4" />

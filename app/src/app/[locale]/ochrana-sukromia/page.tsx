@@ -81,10 +81,10 @@ export default function PrivacyPage() {
             <p className="text-muted-foreground">
               {t("privacyContact")}{" "}
               <a
-                href="mailto:privacy@dzino.app"
+                href="mailto:marosjanco@proton.me"
                 className="underline hover:text-foreground"
               >
-                privacy@dzino.app
+                marosjanco@proton.me
               </a>
             </p>
           </section>
