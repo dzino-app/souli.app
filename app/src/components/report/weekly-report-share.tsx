@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PixelAvatar } from "@/components/avatar/pixel-avatar";
@@ -49,6 +50,7 @@ function StatBox({ emoji, value, label }: StatBoxProps) {
 }
 
 export function WeeklyReportShare() {
+  const t = useTranslations("report");
   const [report, setReport] = useState<WeeklyReportData | null>(null);
   const [sharing, setSharing] = useState(false);
   const [shared, setShared] = useState(false);
@@ -115,7 +117,7 @@ export function WeeklyReportShare() {
         {/* Header */}
         <div className="flex items-center gap-2 mb-4">
           <Sparkles className="h-4 w-4 text-primary" />
-          <h3 className="text-sm font-semibold">Weekly Souli Report</h3>
+          <h3 className="text-sm font-semibold">{t("title")}</h3>
           <span className="text-xs text-muted-foreground ml-auto">
             {formatDateShort(report.dateRange.start)} -{" "}
             {formatDateShort(report.dateRange.end)}
@@ -135,7 +137,7 @@ export function WeeklyReportShare() {
           <div>
             <p className="font-bold text-sm">{report.avatarName}</p>
             <p className="text-xs text-muted-foreground">
-              Level {report.level}
+              {t("level")} {report.level}
             </p>
           </div>
         </div>
@@ -145,12 +147,12 @@ export function WeeklyReportShare() {
           <StatBox
             emoji={"\u{1F4AC}"}
             value={String(report.totalMessages)}
-            label="Messages"
+            label={t("messages")}
           />
           <StatBox
             emoji={"\u{1F4D6}"}
             value={String(report.soulChanges)}
-            label="Learned"
+            label={t("learned")}
           />
           <StatBox
             emoji={moodEmoji(report.moodAverage)}
@@ -159,29 +161,29 @@ export function WeeklyReportShare() {
                 ? `${report.moodAverage.toFixed(1)} ${trendArrow(report.moodTrend)}`
                 : "--"
             }
-            label="Mood"
+            label={t("mood")}
           />
           <StatBox
             emoji={"\u{1F525}"}
             value={String(report.streakDays)}
-            label="Streak"
+            label={t("streak")}
           />
           <StatBox
             emoji={"\u{2B50}"}
             value={String(report.level)}
-            label="Level"
+            label={t("level")}
           />
           <StatBox
             emoji={"\u{26A1}"}
             value={`+${report.xpGained}`}
-            label="XP"
+            label={t("xp")}
           />
         </div>
 
         {/* Top topics */}
         {report.topTopics.length > 0 && (
           <p className="text-xs text-muted-foreground mb-4">
-            Top updates:{" "}
+            {t("topUpdates")}:{" "}
             <span className="text-foreground font-medium">
               {report.topTopics.join(", ")}
             </span>
@@ -197,7 +199,7 @@ export function WeeklyReportShare() {
             disabled={sharing}
           >
             <Share2 className="h-3.5 w-3.5" />
-            {shared ? "Shared!" : sharing ? "..." : "Share Report"}
+            {shared ? t("shared") : sharing ? "..." : t("share")}
           </Button>
           <Button
             size="sm"
