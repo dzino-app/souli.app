@@ -108,13 +108,16 @@ export default function Home() {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-40 h-40 rounded-full bg-primary/10 dark:bg-primary/20 blur-3xl" />
         </div>
-        <div className="relative" style={{ animation: "float 3s ease-in-out infinite" }}>
+        <Link href="/chat" className="relative cursor-pointer group" style={{ animation: "float 3s ease-in-out infinite" }}>
           <PixelAvatar state={state} appearance={appearance} size="lg" />
-        </div>
+          <div className="absolute inset-0 rounded-2xl bg-primary/0 group-hover:bg-primary/10 transition-colors" />
+        </Link>
         <div className="relative ml-6">
           <SpeechBubble />
         </div>
-        <h1 className="text-lg font-bold relative">{name}</h1>
+        <Link href="/chat" className="text-lg font-bold relative hover:text-primary transition-colors">
+          {name}
+        </Link>
         <p className="text-xs text-muted-foreground relative">
           {getMoodEmoji(mood)} {getMoodLabel(mood)}
         </p>
