@@ -645,6 +645,16 @@
     "whatsappStep2": "Otvor aplikáciu Sticker Maker for WhatsApp (alebo podobnú)",
     "whatsappStep3": "Importuj obrázky a vytvor si balík",
     "openStickerMaker": "Otvoriť Sticker Maker",
-    "link": "Balík nálepiek"
+    "link": "Balík nálepiek",
+    "shareOne": "Klikni na nálepku a zdieľaj ju v ktorejkoľvek appke",
+    "shareAll": "Zdieľať všetky",
+    "tipShareOne": "Tip: kliknutím na jednotlivú nálepku ju môžeš poslať priamo cez WhatsApp (ako obrázok).",
+    "telegramTitle": "Pridať do Telegramu",
+    "telegramStep1": "Zisti svoje Telegram ID — napíš si s botom",
+    "telegramStep2": "Skopíruj tvoje ID (vyzerá ako 123456789)",
+    "telegramStep3": "Vlož ho nižšie a klikni Vytvoriť",
+    "telegramCreate": "Vytvoriť balík",
+    "telegramInvalidId": "Neplatné Telegram ID",
+    "telegramFailed": "Vytvorenie zlyhalo"
   }
 }

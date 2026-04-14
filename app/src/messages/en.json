@@ -527,6 +527,16 @@
     "whatsappStep2": "Open Sticker Maker for WhatsApp (or similar app)",
     "whatsappStep3": "Import the images and create your pack",
     "openStickerMaker": "Open Sticker Maker",
-    "link": "Sticker Pack"
+    "link": "Sticker Pack",
+    "shareOne": "Click a sticker to share it in any messenger",
+    "shareAll": "Share all",
+    "tipShareOne": "Tip: click an individual sticker to send it directly via WhatsApp (as an image).",
+    "telegramTitle": "Add to Telegram",
+    "telegramStep1": "Find your Telegram ID — message",
+    "telegramStep2": "Copy your ID (looks like 123456789)",
+    "telegramStep3": "Paste it below and click Create",
+    "telegramCreate": "Create pack",
+    "telegramInvalidId": "Invalid Telegram ID",
+    "telegramFailed": "Creation failed"
   }
 }
