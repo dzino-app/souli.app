@@ -35,3 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 credentials.json
+# Prevent phantom app/ dir from confusing Next.js App Router detection
+/app/
