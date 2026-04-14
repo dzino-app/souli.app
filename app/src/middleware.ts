@@ -28,8 +28,21 @@ function applyCSPHeaders(response: NextResponse): NextResponse {
   return response;
 }
 
+const CANONICAL_HOST = "souli.app";
+const REDIRECT_HOSTS = ["dzino.sk", "dzino.cz", "dzino.app", "www.souli.app"];
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const host = request.headers.get("host")?.split(":")[0] ?? "";
+
+  // Redirect legacy domains → souli.app (preserve path + locale)
+  if (REDIRECT_HOSTS.includes(host)) {
+    const url = request.nextUrl.clone();
+    url.host = CANONICAL_HOST;
+    url.port = "";
+    url.protocol = "https";
+    return NextResponse.redirect(url, 301);
+  }
 
   // API routes: no intl, but still refresh session cookie
   if (pathname.startsWith("/api")) {

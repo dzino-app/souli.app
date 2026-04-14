@@ -92,7 +92,7 @@ export function StickerPack({ name, appearance, level }: StickerPackProps) {
         await navigator.share({
           files,
           title: `${name} stickers`,
-          text: `Nálepky Souliho z dzino.app`,
+          text: `Nálepky Souliho z souli.app`,
         });
       } catch {
         // user cancelled

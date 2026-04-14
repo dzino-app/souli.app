@@ -31,7 +31,7 @@ export default async function LocaleLayout({
         <div className="flex h-14 items-center justify-between gap-4 px-4 mx-auto max-w-5xl">
           <div className="flex items-center gap-4 min-w-0">
             <Link href={`/${locale}`} className="text-xl font-bold text-primary hover:opacity-80 transition-opacity shrink-0">
-              Dzino
+              Souli
             </Link>
             <HeaderNav />
           </div>

@@ -107,12 +107,12 @@ export async function generateSticker(
     ctx.fillText(label, centerX, labelY);
   }
 
-  // Watermark: dzino.app in bottom-right corner
+  // Watermark: souli.app in bottom-right corner
   ctx.font = `500 14px "Segoe UI", system-ui, sans-serif`;
   ctx.textAlign = "right";
   ctx.textBaseline = "bottom";
   ctx.fillStyle = "rgba(0, 0, 0, 0.35)";
-  ctx.fillText("dzino.app", STICKER_SIZE - 8, STICKER_SIZE - 4);
+  ctx.fillText("souli.app", STICKER_SIZE - 8, STICKER_SIZE - 4);
 
   return new Promise<Blob>((resolve) => {
     canvas.toBlob(

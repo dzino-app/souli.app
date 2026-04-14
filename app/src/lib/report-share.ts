@@ -2,7 +2,7 @@
  * Weekly Souli Report — share image generator.
  *
  * Renders a 1080x1920 (Instagram Stories) PNG card using canvas.
- * Features the pixel avatar, stats grid, and dzino.app branding.
+ * Features the pixel avatar, stats grid, and souli.app branding.
  */
 
 import type { WeeklyReportData } from "./weekly-report";
@@ -302,7 +302,7 @@ export function generateReportImage(data: WeeklyReportData): Blob {
   ctx.font = "bold 32px -apple-system, BlinkMacSystemFont, sans-serif";
   ctx.fillStyle = ACCENT;
   ctx.textAlign = "center";
-  ctx.fillText("dzino.app", W / 2, H - 120);
+  ctx.fillText("souli.app", W / 2, H - 120);
 
   ctx.font = "26px -apple-system, BlinkMacSystemFont, sans-serif";
   ctx.fillStyle = TEXT_MUTED;

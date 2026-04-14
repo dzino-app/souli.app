@@ -100,7 +100,7 @@ export default function LoginPage() {
     <div className="flex min-h-[60vh] items-center justify-center">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <div className="text-2xl font-bold text-primary mb-2">Dzino</div>
+          <div className="text-2xl font-bold text-primary mb-2">Souli</div>
           <CardTitle className="text-xl">{t("loginTitle")}</CardTitle>
           <CardDescription>{t("loginDescription")}</CardDescription>
         </CardHeader>

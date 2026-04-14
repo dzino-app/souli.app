@@ -75,7 +75,7 @@ export function WeeklyReportShare() {
       if (navigator.share && navigator.canShare?.({ files: [file] })) {
         await navigator.share({
           title: `${report.avatarName}'s Weekly Report`,
-          text: "Check out my Souli's weekly report! Raise your own at dzino.app",
+          text: "Check out my Souli's weekly report! Raise your own at souli.app",
           files: [file],
         });
         setShared(true);

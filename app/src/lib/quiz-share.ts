@@ -118,7 +118,7 @@ export async function generateShareImage(
   // Footer URL
   ctx.fillStyle = "#ffffff60";
   ctx.font = "bold 36px system-ui, -apple-system, sans-serif";
-  ctx.fillText("dzino.app/quiz", size / 2, size - 60);
+  ctx.fillText("souli.app/quiz", size / 2, size - 60);
 
   // Dzino logo
   ctx.fillStyle = souliType.bodyColor;

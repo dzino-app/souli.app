@@ -22,7 +22,7 @@ export function ShareCompletion({ challengeText }: ShareCompletionProps) {
   const [copied, setCopied] = useState(false);
 
   const streak = getGamification().streak;
-  const url = typeof window !== "undefined" ? window.location.origin : "https://dzino.app";
+  const url = typeof window !== "undefined" ? window.location.origin : "https://souli.app";
   const shareText = `🔥 Splnil som výzvu na Dzino: ${challengeText}! Už ${streak} dní v rade. Skús aj ty → ${url}`;
 
   async function handleCopy() {
