@@ -656,5 +656,19 @@
     "telegramCreate": "Vytvoriť balík",
     "telegramInvalidId": "Neplatné Telegram ID",
     "telegramFailed": "Vytvorenie zlyhalo"
+  },
+  "meeting": {
+    "title": "Stretnutie Soulis",
+    "subtitle": "Zoznám svojho Souliho s niekým z Pixoci",
+    "yourSouli": "Tvoj Souli",
+    "pickGuest": "Vyber hosťa z Pixoci",
+    "noGuests": "Zatiaľ tu nie sú žiadni Soulis na stretnutie.",
+    "generating": "Stretnutie prebieha",
+    "generatingHint": "Tvoji Soulis sa práve zoznamujú...",
+    "guest": "Hosť z Pixoci",
+    "share": "Kopírovať rozhovor",
+    "copied": "Skopírované!",
+    "tryAnother": "Skúsiť ďalšie stretnutie",
+    "introduce": "Zoznámiť s mojím Souli"
   }
 }
