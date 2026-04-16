@@ -77,6 +77,11 @@ const FEATURE_TOGGLES: FeatureToggle[] = [
     label: "Zvuky",
     description: "8-bitov\u00e9 zvuky avat\u00e1ra a \u010dasova\u010da",
   },
+  {
+    key: "webGrounding",
+    label: "Webov\u00e9 zdroje",
+    description: "Souli m\u00f4\u017ee h\u013eada\u0165 na webe a uv\u00e1dza\u0165 zdroje v odpovediach",
+  },
 ];
 
 export default function SettingsPage() {
