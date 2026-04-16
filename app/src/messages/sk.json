@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Džino",
+    "name": "Souli",
     "tagline": "Vychovaj si vlastného Souliho"
   },
   "nav": {
@@ -53,7 +53,7 @@
     "askDesc": "Polož akúkoľvek otázku k dokumentu"
   },
   "onboarding": {
-    "welcome": "Vitaj v Dzino!",
+    "welcome": "Vitaj v Souli!",
     "welcomeDesc": "Povedz mi o sebe, aby som ti mohol lepšie pomáhať.",
     "step": "Krok {current} z {total}",
     "q1": "Ako sa voláš?",
@@ -94,7 +94,7 @@
     "loginTitle": "Prihlás sa",
     "loginDescription": "Zadaj svoj e-mail a heslo",
     "signupTitle": "Vytvor si účet",
-    "signupDescription": "Začni používať Dzino za pár sekúnd",
+    "signupDescription": "Začni používať Souli za pár sekúnd",
     "email": "E-mail",
     "emailPlaceholder": "tvoj@email.sk",
     "password": "Heslo",
@@ -300,7 +300,7 @@
     "features": {
       "title": "Funkcie",
       "dailyGreeting": "Denné privítanie",
-      "dailyGreetingDesc": "Dzino ťa pozdraví keď otvoríš apku",
+      "dailyGreetingDesc": "Souli ťa pozdraví keď otvoríš apku",
       "moodTracking": "Sledovanie nálady",
       "moodTrackingDesc": "Každý deň sa ťa opýta, ako sa cítiš",
       "weeklyReview": "Týždenný prehľad",

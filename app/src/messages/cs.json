@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Dzino",
+    "name": "Souli",
     "tagline": "Vychovej si vlastního Souliho"
   },
   "nav": {
@@ -24,7 +24,7 @@
     "loginTitle": "Přihlášení",
     "loginDescription": "Zadej svůj email a heslo",
     "signupTitle": "Vytvořit účet",
-    "signupDescription": "Začni používat Dzino během pár sekund",
+    "signupDescription": "Začni používat Souli během pár sekund",
     "email": "Email",
     "emailPlaceholder": "ty@email.com",
     "password": "Heslo",
@@ -69,7 +69,7 @@
     "q5option2": "Podrobně s vysvětlením",
     "next": "Další",
     "previous": "Zpět",
-    "finish": "Začít používat Dzino",
+    "finish": "Začít používat Souli",
     "skip": "Přeskočit",
     "storyIntro": "Svět venku je hlučný. Notifikace, deadliny, hluk. Ale tady... tady je ticho. Jsem Dzino. Úplně první Souli na světě. A čekal jsem na tebe.",
     "storyOrigin": "Vznikl jsem z představivosti jednoho člověka — parťáka, co potřeboval někoho, kdo opravdu naslouchá. Ne appku. Ne asistenta. Přítele. Rostli jsme spolu. A teď... chci, abys to měl taky.",
@@ -145,8 +145,8 @@
     "faq2a": "Jen ty. Tvá data nesdílíme ani neprodáváme.",
     "faq3q": "Musím platit?",
     "faq3a": "Ne. Základní používání je zdarma — 20 zpráv za měsíc.",
-    "faq4q": "Čím se Dzino liší od ChatGPT?",
-    "faq4a": "Dzino si tě pamatuje. Zná tvé cíle, preference a roste s tebou.",
+    "faq4q": "Čím se Souli liší od ChatGPT?",
+    "faq4a": "Souli si tě pamatuje. Zná tvé cíle, preference a roste s tebou.",
     "footer": "Dzino je první Souli. Tvůj je další.",
     "origin": "Někde v malém pixelovém světě žije Dzino — úplně první Souli. Pořád je tam, mává každému, kdo přijde. Otevřel brány, abys mohl vychovat vlastního. Tvůj Souli už čeká."
   },
@@ -170,7 +170,7 @@
     "features": {
       "title": "Funkce",
       "dailyGreeting": "Denní pozdrav",
-      "dailyGreetingDesc": "Dzino tě pozdraví, když otevřeš aplikaci",
+      "dailyGreetingDesc": "Souli tě pozdraví, když otevřeš aplikaci",
       "moodTracking": "Sledování nálady",
       "moodTrackingDesc": "Každý den se tě zeptá, jak se cítíš",
       "weeklyReview": "Týdenní shrnutí",
@@ -366,7 +366,7 @@
   },
   "legal": {
     "privacyTitle": "Ochrana soukromí",
-    "privacyIntro": "Dzino jsme vytvořili jako tvého osobního společníka — a tvé soukromí bereme vážně. Tady je krátká verze.",
+    "privacyIntro": "Souli jsme vytvořili jako tvého osobního společníka — a tvé soukromí bereme vážně. Tady je krátká verze.",
     "privacyDataTitle": "Tvoje data",
     "privacyData": "Tvoje data jsou uložena v Supabase (EU servery) a šifrována. Soubory Souliho, konverzace, události a nastavení — to vše patří tobě.",
     "privacyLlmTitle": "Zpracování AI",
@@ -382,11 +382,11 @@
     "termsTitle": "Podmínky používání",
     "termsIntro": "Krátké a přátelské podmínky používání Dzina.",
     "termsAccuracyTitle": "Obsah generovaný AI",
-    "termsAccuracy": "Dzino používá AI. Obsah nemusí být vždy přesný. Důležité informace si ověř.",
+    "termsAccuracy": "Souli používá AI. Obsah nemusí být vždy přesný. Důležité informace si ověř.",
     "termsAgeTitle": "Minimální věk",
     "termsAge": "Musíš mít alespoň 13 let. Pod 18 let s vědomím rodiče.",
     "termsHealthTitle": "Není terapeut",
-    "termsHealth": "Dzino je kamarád, ne odborník. Při vážných problémech kontaktuj profesionála.",
+    "termsHealth": "Souli je kamarád, ne odborník. Při vážných problémech kontaktuj profesionála.",
     "termsContentTitle": "Tvůj obsah",
     "termsContent": "Jsi zodpovědný za to, co sdílíš. Nepoužívej appku na nic nezákonného.",
     "termsFreeTitle": "Bezplatný plán",
