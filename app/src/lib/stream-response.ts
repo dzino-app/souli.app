@@ -2,19 +2,26 @@ import { getIndexBasedContext } from "@/lib/soul-retrieval";
 import { getUserLanguage, setUserLanguage, detectLanguage } from "@/lib/languages";
 import { isAlreadyTranslated, translateSoulFiles } from "@/lib/soul-translator";
 import { getTodayMood } from "@/lib/mood-tracking";
-import { getLlmSettings } from "@/lib/user-settings";
+import { getLlmSettings, getUserSettings } from "@/lib/user-settings";
 
 const TIMEOUT_MS = 60_000;
+
+export interface GroundingSource {
+  title: string;
+  url: string;
+}
 
 export interface ChatMessage {
   role: "user" | "assistant";
   content: string;
+  sources?: GroundingSource[];
 }
 
 export async function streamChatResponse(
   message: string,
   history: ChatMessage[] = [],
-  onChunk?: (text: string) => void
+  onChunk?: (text: string) => void,
+  onSources?: (sources: GroundingSource[]) => void,
 ): Promise<string> {
   // Safety: filter out any ciphertext from history before sending to LLM.
   // If decryption failed somewhere, we never want to send enc:base64... to Gemini.
@@ -67,7 +74,7 @@ export async function streamChatResponse(
     const response = await fetch("/api/chat", {
       method: "POST",
       headers,
-      body: JSON.stringify({ message, soulContext: soulContext + moodContext, history: safeHistory, language: getUserLanguage() }),
+      body: JSON.stringify({ message, soulContext: soulContext + moodContext, history: safeHistory, language: getUserLanguage(), enableGrounding: getUserSettings().webGrounding }),
       signal: controller.signal,
     });
 
@@ -103,6 +110,9 @@ export async function streamChatResponse(
             const parsed = JSON.parse(data);
             if (parsed.error) {
               throw new Error(parsed.error);
+            }
+            if (parsed.sources && onSources) {
+              onSources(parsed.sources);
             }
             if (parsed.text) {
               fullText += parsed.text;

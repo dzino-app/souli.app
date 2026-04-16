@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { message, soulContext, history, language } = await request.json();
+    const { message, soulContext, history, language, enableGrounding } = await request.json();
 
     if (!message || typeof message !== "string") {
       return NextResponse.json({ error: "Žiadna správa" }, { status: 400 });
@@ -179,6 +179,7 @@ export async function POST(request: NextRequest) {
     const generateOptions = {
       systemInstruction: systemWithSoul,
       contents,
+      enableGrounding: enableGrounding !== false, // default on
     };
 
     const stream = customConfig
@@ -189,10 +190,22 @@ export async function POST(request: NextRequest) {
     const readable = new ReadableStream({
       async start(controller) {
         try {
-          for await (const text of stream) {
-            controller.enqueue(
-              encoder.encode(`data: ${JSON.stringify({ text })}\n\n`)
-            );
+          for await (const chunk of stream) {
+            if (typeof chunk === "string") {
+              // Custom provider returns plain strings
+              controller.enqueue(
+                encoder.encode(`data: ${JSON.stringify({ text: chunk })}\n\n`)
+              );
+            } else if (chunk.text) {
+              controller.enqueue(
+                encoder.encode(`data: ${JSON.stringify({ text: chunk.text })}\n\n`)
+              );
+            }
+            if (typeof chunk === "object" && "sources" in chunk && chunk.sources) {
+              controller.enqueue(
+                encoder.encode(`data: ${JSON.stringify({ sources: chunk.sources })}\n\n`)
+              );
+            }
           }
           controller.enqueue(encoder.encode("data: [DONE]\n\n"));
           controller.close();

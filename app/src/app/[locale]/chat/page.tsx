@@ -12,7 +12,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MarkdownResponse } from "@/components/chat/markdown-response";
 import { PixelAvatar } from "@/components/avatar/pixel-avatar";
 import { PixelBackground } from "@/components/avatar/pixel-background";
-import { streamChatResponse, type ChatMessage } from "@/lib/stream-response";
+import { streamChatResponse, type ChatMessage, type GroundingSource } from "@/lib/stream-response";
+import { GroundingSources } from "@/components/chat/grounding-sources";
 import { parseResponse, stripBlocksForDisplay, type EventProposal, type TimerRequest } from "@/lib/parse-soul-updates";
 import { TimerStopwatch } from "@/components/tools/timer-stopwatch";
 import { appendToSoulFile, updateSoulFile } from "@/lib/soul";
@@ -52,6 +53,7 @@ export default function ChatPage() {
   });
   const [achievementToast, setAchievementToast] = useState<Achievement | null>(null);
   const [soulToast, setSoulToast] = useState(false);
+  const [lastSources, setLastSources] = useState<GroundingSource[]>([]);
   const [credits, setCredits] = useState<CreditState>({ remaining: 20, total: 20, resetDate: "", tier: "free" });
   const [showCreditWarning, setShowCreditWarning] = useState(false);
   const [renaming, setRenaming] = useState(false);
@@ -150,10 +152,16 @@ export default function ChatPage() {
     addMessage(convIdRef.current, "user", userMsg);
 
     try {
-      const fullResponse = await streamChatResponse(userMsg, messages.slice(-10), (chunk) => {
-        setAvatarState("talking");
-        setStreamText(chunk);
-      });
+      setLastSources([]);
+      const fullResponse = await streamChatResponse(
+        userMsg,
+        messages.slice(-10),
+        (chunk) => {
+          setAvatarState("talking");
+          setStreamText(chunk);
+        },
+        (sources) => setLastSources(sources),
+      );
 
       const parsed = parseResponse(fullResponse);
       // Auto-save soul updates silently
@@ -385,6 +393,10 @@ export default function ChatPage() {
               {msg.role === "assistant" ? (
                 <>
                   <MarkdownResponse content={msg.content} />
+                  {/* Show sources on the last assistant message */}
+                  {i === messages.length - 1 && lastSources.length > 0 && (
+                    <GroundingSources sources={lastSources} />
+                  )}
                   <div className="flex justify-end mt-1">
                     <VoiceOutput text={msg.content} />
                   </div>

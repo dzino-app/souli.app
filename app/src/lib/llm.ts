@@ -87,12 +87,27 @@ export async function generateContent(options: GenerateOptions): Promise<string>
   return response.text || "";
 }
 
-export async function* generateContentStream(options: GenerateOptions) {
+export interface GroundingSource {
+  title: string;
+  url: string;
+}
+
+export interface StreamChunk {
+  text?: string;
+  sources?: GroundingSource[];
+}
+
+export async function* generateContentStream(
+  options: GenerateOptions & { enableGrounding?: boolean },
+): AsyncGenerator<StreamChunk> {
   const client = getClient();
   const config: Record<string, unknown> = {};
   if (options.systemInstruction) config.systemInstruction = options.systemInstruction;
-  // Enable Google Search grounding — Gemini can search the web and cite sources
-  config.tools = [{ googleSearch: {} }];
+
+  // Google Search grounding — optional, enabled by default
+  if (options.enableGrounding !== false) {
+    config.tools = [{ googleSearch: {} }];
+  }
 
   const response = await client.models.generateContentStream({
     model: options.model || "gemini-2.5-flash",
@@ -100,9 +115,40 @@ export async function* generateContentStream(options: GenerateOptions) {
     config,
   });
 
+  const collectedSources: GroundingSource[] = [];
+
   for await (const chunk of response) {
-    const text = chunk.text;
-    if (text) yield text;
+    if (chunk.text) {
+      yield { text: chunk.text };
+    }
+
+    // Extract grounding metadata from candidates
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    const candidates = (chunk as any).candidates;
+    if (candidates) {
+      for (const candidate of candidates) {
+        const meta = candidate.groundingMetadata;
+        if (meta?.groundingChunks) {
+          for (const gc of meta.groundingChunks) {
+            if (gc.web?.uri && gc.web?.title) {
+              const exists = collectedSources.some((s) => s.url === gc.web.uri);
+              if (!exists) {
+                collectedSources.push({
+                  title: gc.web.title,
+                  url: gc.web.uri,
+                });
+              }
+            }
+          }
+        }
+      }
+    }
+    /* eslint-enable @typescript-eslint/no-explicit-any */
+  }
+
+  // Yield sources at the end if any were collected
+  if (collectedSources.length > 0) {
+    yield { sources: collectedSources };
   }
 }
 
