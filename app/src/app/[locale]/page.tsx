@@ -36,6 +36,8 @@ import { buildMigrationPayload } from "@/lib/migrate-to-multi-avatar";
 import { setActiveAvatarId } from "@/lib/avatars";
 import { DailyLesson } from "@/components/learn/daily-lesson";
 import { WeeklyReportShare } from "@/components/report/weekly-report-share";
+import { AdventureCard } from "@/components/adventure/adventure-card";
+import { checkForAdventure, type Adventure } from "@/lib/adventures";
 
 export default function Home() {
   const t = useTranslations("stickers");
@@ -45,6 +47,7 @@ export default function Home() {
   const [groups, setGroups] = useState<Record<string, Conversation[]>>({});
   const [allConversations, setAllConversations] = useState<Conversation[]>([]);
   const levelUp = useLevelUp();
+  const [adventure, setAdventure] = useState<Adventure | null>(null);
 
   // Build searchable items from conversations (title + all message content)
   const searchableItems: SearchableItem[] = useMemo(
@@ -61,6 +64,7 @@ export default function Home() {
     migrateMemoriesToSoul();
     setGroups(getConversationsGroupedByDate());
     setAllConversations(getConversations());
+    setAdventure(checkForAdventure());
 
     // One-time migration to multi-avatar system
     if (needsMigration()) {
@@ -96,6 +100,14 @@ export default function Home() {
     <div className="flex flex-col gap-6">
       {/* Daily greeting — shows once per day */}
       <DailyGreeting />
+
+      {/* Adventure card — shows when Souli explored while user was away */}
+      {adventure && (
+        <AdventureCard
+          adventure={adventure}
+          onDismiss={() => setAdventure(null)}
+        />
+      )}
 
       {/* Avatar switcher */}
       <div className="flex justify-center">
