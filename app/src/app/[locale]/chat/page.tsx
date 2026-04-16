@@ -25,6 +25,9 @@ import { addXp, getGamification, saveGamification } from "@/lib/gamification";
 import { checkAchievements, grantAchievement, type Achievement } from "@/lib/achievements";
 import { updateChallengeProgress, completeChallengeById } from "@/lib/challenges";
 import { incrementCompileCounter, shouldCompile, triggerCompilation } from "@/lib/soul-compiler";
+import { getCredits, consumeCredit, resetMonthlyCredits, type CreditState } from "@/lib/credits";
+import { CreditDisplay } from "@/components/credits/credit-display";
+import { CreditWarning } from "@/components/credits/credit-warning";
 
 const POSITIVE_WORDS = ["super", "výborne", "splnené", "gratuluj", "skvelé", "paráda", "bravo", "hotovo", "dokonalé", "podarilo"];
 
@@ -49,6 +52,8 @@ export default function ChatPage() {
   });
   const [achievementToast, setAchievementToast] = useState<Achievement | null>(null);
   const [soulToast, setSoulToast] = useState(false);
+  const [credits, setCredits] = useState<CreditState>({ remaining: 20, total: 20, resetDate: "", tier: "free" });
+  const [showCreditWarning, setShowCreditWarning] = useState(false);
   const [renaming, setRenaming] = useState(false);
   const [renameValue, setRenameValue] = useState("");
   const convIdRef = useRef<string | null>(null);
@@ -93,6 +98,10 @@ export default function ChatPage() {
   }
 
   useEffect(() => {
+    // Reset monthly credits if needed, then load current state
+    const creditState = resetMonthlyCredits();
+    setCredits(creditState);
+
     const data = getAvatarData();
     setAvatarData({ name: data.name, appearance: data.appearance, soundDNA: data.soundDNA });
 
@@ -120,6 +129,13 @@ export default function ChatPage() {
   // Send a message programmatically (used for both form submit and auto-send)
   const sendMessage = useCallback(async (userMsg: string) => {
     if (!userMsg.trim() || streaming) return;
+
+    // Check credits before sending
+    if (!consumeCredit()) {
+      setShowCreditWarning(true);
+      return;
+    }
+    setCredits(getCredits());
 
     setInput("");
     setMessages((prev) => [...prev, { role: "user", content: userMsg }]);
@@ -258,6 +274,11 @@ export default function ChatPage() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-8rem)] sm:h-[calc(100vh-6rem)]">
+      {/* Credit display + Avatar header */}
+      <div className="flex justify-end px-1 pb-1">
+        <CreditDisplay credits={credits} onUpgradeClick={() => setShowCreditWarning(true)} />
+      </div>
+
       {/* Avatar -- prominent, centered, animated */}
       <div className="flex flex-col items-center gap-1 pb-3 border-b mb-3">
         <button
@@ -447,7 +468,7 @@ export default function ChatPage() {
           type="submit"
           size="icon"
           className="rounded-full h-10 w-10"
-          disabled={streaming || !input.trim()}
+          disabled={streaming || !input.trim() || credits.remaining <= 0}
         >
           <Send className="h-4 w-4" />
         </Button>
@@ -467,6 +488,11 @@ export default function ChatPage() {
             <span className="text-sm font-medium">Zapam&#228;tan&#233; &#10024;</span>
           </div>
         </div>
+      )}
+
+      {/* Credit warning modal */}
+      {showCreditWarning && (
+        <CreditWarning onDismiss={() => setShowCreditWarning(false)} />
       )}
 
       {/* Achievement toast */}

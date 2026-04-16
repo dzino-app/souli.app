@@ -13,6 +13,7 @@ import type { GamificationData } from "../gamification";
 import type { DzinoEvent } from "../events";
 import type { AvatarData } from "../avatar";
 import type { MoodEntry } from "../mood-tracking";
+import type { CreditState } from "../credits";
 
 // ---------- Helpers ----------
 
@@ -440,6 +441,50 @@ export async function loadMoodFromSupabase(): Promise<MoodEntry[] | null> {
     .filter(Boolean) as MoodEntry[];
 }
 
+// ---------- Credits ----------
+
+export async function syncCreditsToSupabase(
+  state: CreditState
+): Promise<void> {
+  const userId = await getUserId();
+  if (!userId) return;
+
+  const supabase = createClient();
+
+  await supabase.from("user_credits").upsert(
+    {
+      user_id: userId,
+      tier: state.tier,
+      remaining: state.remaining,
+      total: state.total,
+      reset_date: state.resetDate,
+    },
+    { onConflict: "user_id" }
+  );
+}
+
+export async function loadCreditsFromSupabase(): Promise<CreditState | null> {
+  const userId = await getUserId();
+  if (!userId) return null;
+
+  const supabase = createClient();
+
+  const { data } = await supabase
+    .from("user_credits")
+    .select("tier, remaining, total, reset_date")
+    .eq("user_id", userId)
+    .single();
+
+  if (!data) return null;
+
+  return {
+    tier: data.tier as CreditState["tier"],
+    remaining: data.remaining ?? 20,
+    total: data.total ?? 20,
+    resetDate: data.reset_date ?? new Date().toISOString(),
+  };
+}
+
 // ---------- Full sync orchestrators ----------
 
 /**
@@ -484,6 +529,12 @@ export async function loadFromSupabase(): Promise<void> {
     const mood = await loadMoodFromSupabase();
     if (mood && mood.length > 0) {
       localStorage.setItem("dzino_mood_history", JSON.stringify(mood));
+    }
+
+    // Load credits
+    const credits = await loadCreditsFromSupabase();
+    if (credits) {
+      localStorage.setItem("dzino_credits", JSON.stringify(credits));
     }
 
     // Soul files are already handled by soul.ts loadSoulFiles()
@@ -533,6 +584,13 @@ export async function syncToSupabase(): Promise<void> {
     if (moodRaw) {
       const entries: MoodEntry[] = JSON.parse(moodRaw);
       await syncMoodToSupabase(entries);
+    }
+
+    // Sync credits
+    const creditsRaw = localStorage.getItem("dzino_credits");
+    if (creditsRaw) {
+      const creditsData: CreditState = JSON.parse(creditsRaw);
+      await syncCreditsToSupabase(creditsData);
     }
   } catch (err) {
     console.warn("[sync] syncToSupabase failed:", err);
