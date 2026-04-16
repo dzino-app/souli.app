@@ -404,7 +404,7 @@ export default function SoulPage() {
           <div>
             <h1 className="text-xl font-bold">Môj Souli</h1>
             <p className="text-sm text-muted-foreground">
-              Všetko, čo o Vás Dzino vie. Môžete čokoľvek upraviť.
+              Všetko, čo o Vás Souli vie. Môžete čokoľvek upraviť.
             </p>
           </div>
         </div>
