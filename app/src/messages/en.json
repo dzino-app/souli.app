@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Dzino",
+    "name": "Souli",
     "tagline": "Raise your own Souli"
   },
   "nav": {
@@ -24,7 +24,7 @@
     "loginTitle": "Sign in",
     "loginDescription": "Enter your email and password",
     "signupTitle": "Create an account",
-    "signupDescription": "Start using Dzino in seconds",
+    "signupDescription": "Start using Souli in seconds",
     "email": "Email",
     "emailPlaceholder": "you@email.com",
     "password": "Password",
@@ -54,7 +54,7 @@
     "confirmEmailHint": "Check your spam folder too."
   },
   "onboarding": {
-    "welcome": "Welcome to Dzino!",
+    "welcome": "Welcome to Souli!",
     "welcomeDesc": "Tell me about yourself so I can help you better.",
     "step": "Step {current} of {total}",
     "q1": "What's your name?",
@@ -182,7 +182,7 @@
     "features": {
       "title": "Features",
       "dailyGreeting": "Daily greeting",
-      "dailyGreetingDesc": "Dzino greets you when you open the app",
+      "dailyGreetingDesc": "Souli greets you when you open the app",
       "moodTracking": "Mood tracking",
       "moodTrackingDesc": "Asks you how you feel every day",
       "weeklyReview": "Weekly review",

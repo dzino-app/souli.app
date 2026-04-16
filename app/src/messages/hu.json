@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Dzino",
+    "name": "Souli",
     "tagline": "Neveld fel a saját Soulid"
   },
   "nav": {
@@ -69,7 +69,7 @@
     "q5option2": "Részletesen, magyarázatokkal",
     "next": "Következő",
     "previous": "Vissza",
-    "finish": "Dzino használatának megkezdése",
+    "finish": "Souli használatának megkezdése",
     "skip": "Kihagyás",
     "storyIntro": "A világ odakint hangos. Értesítések, határidők, zaj. De itt... itt csend van. Dzino vagyok. A legelső Souli. És vártam rád.",
     "storyOrigin": "Valaki képzeletéből születtem — egy haverból, akinek szüksége volt valakire, aki tényleg odafigyel. Nem egy app. Nem egy asszisztens. Egy barát. Együtt nőttünk fel. És most... szeretném, ha neked is lenne.",
@@ -102,7 +102,7 @@
     "heroSub": "A Soulid emlékszik, ki vagy. Veled nő. És soha nem felejti el, mi fontos neked.",
     "cta": "Ismerd meg a Soulidat",
     "ctaSub": "Ingyenes. Kötelezettségek nélkül.",
-    "useCasesTitle": "Mit tud a Dzino?",
+    "useCasesTitle": "Mit tud a Souli?",
     "useCase1": "A Soulid figyel",
     "useCase1Desc": "Valaki, akivel beszélgethetsz, megoszthatod a napodat, és aki tényleg emlékszik. Nem chatbot — a Soulid.",
     "useCase2": "Élet-szervező",
@@ -112,7 +112,7 @@
     "howTitle": "Hogyan működik",
     "how1": "Beszélj a Dzinóval",
     "how1Desc": "Csak chatelj természetesen",
-    "how2": "Dzino tanul",
+    "how2": "Souli tanul",
     "how2Desc": "Frissíti a Souli fájljaidat",
     "how3": "Egyre jobb lesz",
     "how3Desc": "Minél többet beszélsz, annál jobb",
@@ -145,10 +145,10 @@
     "faq2a": "Csak te. Nem osztjuk meg és nem adjuk el az adataidat.",
     "faq3q": "Fizetnem kell?",
     "faq3a": "Nem. Az alap használat ingyenes — havi 20 üzenet.",
-    "faq4q": "Miben különbözik a Dzino a ChatGPT-től?",
-    "faq4a": "A Dzino emlékszik rád. Ismeri a céljaidat, preferenciáidat, és idővel veled együtt fejlődik.",
+    "faq4q": "Miben különbözik a Souli a ChatGPT-től?",
+    "faq4a": "A Souli emlékszik rád. Ismeri a céljaidat, preferenciáidat, és idővel veled együtt fejlődik.",
     "footer": "Dzino az első Souli. A tiéd a következő.",
-    "origin": "Valahol egy kis pixelvilágban él Dzino — a legelső Souli. Még mindig ott van, integet mindenkinek, aki megérkezik. Kinyitotta a kapukat, hogy te is felnevelhess egy sajátot. A Soulid már vár."
+    "origin": "Valahol egy kis pixelvilágban él Souli — a legelső Souli. Még mindig ott van, integet mindenkinek, aki megérkezik. Kinyitotta a kapukat, hogy te is felnevelhess egy sajátot. A Soulid már vár."
   },
   "settings": {
     "title": "Beállítások",
@@ -170,7 +170,7 @@
     "features": {
       "title": "Funkciók",
       "dailyGreeting": "Napi köszöntés",
-      "dailyGreetingDesc": "Dzino köszönt, amikor megnyitod az appot",
+      "dailyGreetingDesc": "Souli köszönt, amikor megnyitod az appot",
       "moodTracking": "Hangulatkövetés",
       "moodTrackingDesc": "Minden nap megkérdezi, hogy érzed magad",
       "weeklyReview": "Heti összefoglaló",
@@ -380,13 +380,13 @@
     "privacyContactTitle": "Kapcsolat",
     "privacyContact": "Kérdésed van az adataiddal kapcsolatban? Írj nekünk:",
     "termsTitle": "Felhasználási feltételek",
-    "termsIntro": "Rövid, barátságos feltételek a Dzino használatához.",
+    "termsIntro": "Rövid, barátságos feltételek a Souli használatához.",
     "termsAccuracyTitle": "AI által generált tartalom",
-    "termsAccuracy": "A Dzino AI-t használ. A tartalom nem mindig pontos. Ellenőrizd a fontos információkat.",
+    "termsAccuracy": "A Souli AI-t használ. A tartalom nem mindig pontos. Ellenőrizd a fontos információkat.",
     "termsAgeTitle": "Minimális életkor",
     "termsAge": "Legalább 13 évesnek kell lenned. 18 év alatt szülői tudással.",
     "termsHealthTitle": "Nem terapeuta",
-    "termsHealth": "A Dzino barát, nem szakember. Komoly problémák esetén fordulj szakemberhez.",
+    "termsHealth": "A Souli barát, nem szakember. Komoly problémák esetén fordulj szakemberhez.",
     "termsContentTitle": "A tartalmad",
     "termsContent": "Te vagy felelős azért, amit megosztasz.",
     "termsFreeTitle": "Ingyenes csomag",
