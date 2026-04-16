@@ -538,5 +538,19 @@
     "telegramCreate": "Create pack",
     "telegramInvalidId": "Invalid Telegram ID",
     "telegramFailed": "Creation failed"
+  },
+  "meeting": {
+    "title": "Souli Meeting",
+    "subtitle": "Introduce your Souli to someone from Pixoci",
+    "yourSouli": "Your Souli",
+    "pickGuest": "Pick a guest from Pixoci",
+    "noGuests": "No Soulis available for a meeting yet.",
+    "generating": "Meeting in progress",
+    "generatingHint": "Your Soulis are getting to know each other...",
+    "guest": "Guest from Pixoci",
+    "share": "Copy conversation",
+    "copied": "Copied!",
+    "tryAnother": "Try another meeting",
+    "introduce": "Introduce to my Souli"
   }
 }
