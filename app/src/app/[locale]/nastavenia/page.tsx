@@ -25,6 +25,7 @@ import { clearCryptoSession } from "@/lib/crypto-session";
 import { ExportData } from "@/components/settings/export-data";
 import { LlmSettings } from "@/components/settings/llm-settings";
 import { EncryptionToggle } from "@/components/settings/encryption-toggle";
+import { NotificationSettings } from "@/components/settings/notification-settings";
 
 const NAV_ITEMS = [
   { href: "/", icon: Home, label: "Domov" },
@@ -165,6 +166,14 @@ export default function SettingsPage() {
             ))}
           </CardContent>
         </Card>
+      </div>
+
+      {/* Notifications */}
+      <div>
+        <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-3">
+          Upozornenia
+        </h2>
+        <NotificationSettings />
       </div>
 
       {/* Custom LLM */}

@@ -9,6 +9,7 @@ import { BottomNav } from "@/components/layout/bottom-nav";
 import { HeaderNav } from "@/components/layout/header-nav";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { LocaleSwitcher } from "@/components/locale-switcher";
+import { NotificationScheduler } from "@/components/notifications/notification-scheduler";
 
 export default async function LocaleLayout({
   children,
@@ -46,6 +47,7 @@ export default async function LocaleLayout({
         <ErrorBoundary>{children}</ErrorBoundary>
       </main>
       <BottomNav />
+      <NotificationScheduler />
     </NextIntlClientProvider>
   );
 }
