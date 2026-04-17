@@ -13,16 +13,21 @@ import {
   AlertCircle,
   Loader2,
 } from "lucide-react";
+import { Mic, MicOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PixelAvatar } from "@/components/avatar/pixel-avatar";
 import { useAvatarState } from "@/components/avatar/use-avatar-state";
+import { useARSensors } from "@/components/ar/use-ar-sensors";
+import { pickReactiveState } from "@/lib/ar-sensors";
 
 type CaptureMode = "idle" | "recording" | "preview-photo" | "preview-video";
 
 export default function ARPage() {
   const router = useRouter();
   const { mounted, state, appearance, name } = useAvatarState();
+  const [reactiveEnabled, setReactiveEnabled] = useState(true);
+  const [audioEnabled, setAudioEnabled] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -249,6 +254,18 @@ export default function ARPage() {
     (e.target as HTMLElement).releasePointerCapture(e.pointerId);
   }
 
+  // Sensors — brightness / tilt / shake / loudness (V3 reactive Souli)
+  const sensors = useARSensors({
+    videoRef,
+    enabled: reactiveEnabled && permission === "granted" && !previewUrl,
+    enableAudio: audioEnabled,
+  });
+  const reactiveState = reactiveEnabled ? pickReactiveState(sensors) : state;
+  // Clamp tilt → small CSS rotation / sway on the avatar
+  const tiltRotate = Math.max(-15, Math.min(15, sensors.tilt.gamma / 3));
+  const tiltX = Math.max(-20, Math.min(20, sensors.tilt.gamma / 2));
+  const tiltY = Math.max(-20, Math.min(20, -sensors.tilt.beta / 4));
+
   if (!mounted) return null;
 
   return (
@@ -264,15 +281,37 @@ export default function ARPage() {
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <h1 className="text-white font-semibold">AR režim</h1>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={flipCamera}
-          className="text-white hover:bg-white/10"
-          disabled={permission !== "granted"}
-        >
-          <RotateCcw className="h-5 w-5" />
-        </Button>
+        <div className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setAudioEnabled((p) => !p)}
+            className="text-white hover:bg-white/10"
+            disabled={permission !== "granted" || !reactiveEnabled}
+            title={audioEnabled ? "Vypnúť mikrofón" : "Zapnúť mikrofón (reaguje na zvuk)"}
+          >
+            {audioEnabled ? <Mic className="h-5 w-5" /> : <MicOff className="h-5 w-5" />}
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setReactiveEnabled((p) => !p)}
+            className={`hover:bg-white/10 ${reactiveEnabled ? "text-amber-400" : "text-white"}`}
+            disabled={permission !== "granted"}
+            title={reactiveEnabled ? "Vypnúť reaktívny režim" : "Zapnúť reaktívny režim"}
+          >
+            <span className="text-lg">✨</span>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={flipCamera}
+            className="text-white hover:bg-white/10"
+            disabled={permission !== "granted"}
+          >
+            <RotateCcw className="h-5 w-5" />
+          </Button>
+        </div>
       </div>
 
       {/* Viewfinder */}
@@ -337,15 +376,16 @@ export default function ARPage() {
             ref={avatarLayerRef}
             className="absolute touch-none cursor-grab active:cursor-grabbing"
             style={{
-              left: `calc(50% + ${pos.x}px)`,
-              top: `calc(50% + ${pos.y}px)`,
-              transform: "translate(-50%, -50%)",
+              left: `calc(50% + ${pos.x + (reactiveEnabled ? tiltX : 0)}px)`,
+              top: `calc(50% + ${pos.y + (reactiveEnabled ? tiltY : 0)}px)`,
+              transform: `translate(-50%, -50%) rotate(${reactiveEnabled ? tiltRotate : 0}deg)`,
+              transition: "transform 120ms ease-out, left 120ms ease-out, top 120ms ease-out",
             }}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
           >
-            <PixelAvatar state={state} appearance={appearance} size="md" />
+            <PixelAvatar state={reactiveState} appearance={appearance} size="md" />
           </div>
         )}
 
@@ -359,8 +399,10 @@ export default function ARPage() {
 
         {/* Hint */}
         {permission === "granted" && !previewUrl && mode === "idle" && (
-          <div className="absolute top-20 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs px-3 py-1.5 rounded-full backdrop-blur">
-            Potiahni Souliho na správne miesto
+          <div className="absolute top-20 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs px-3 py-1.5 rounded-full backdrop-blur max-w-[90%] text-center">
+            {reactiveEnabled
+              ? "Souli reaguje na svetlo, pohyb a otras. Potiahni ho kam chceš."
+              : "Potiahni Souliho na správne miesto"}
           </div>
         )}
       </div>
