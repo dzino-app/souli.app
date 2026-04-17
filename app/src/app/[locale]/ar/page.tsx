@@ -102,7 +102,7 @@ export default function ARPage() {
 
     // Draw avatar layer by rasterizing SVG from DOM isn't trivial — instead use a simpler approach:
     // Render the avatar to a separate offscreen canvas via a DOM snapshot using html2canvas-style technique.
-    // For simplicity: draw a small "dzino was here" watermark + use foreignObject via SVG.
+    // For simplicity: draw a small souli.app watermark + use foreignObject via SVG.
     // Since the PixelAvatar is composed of divs, we'll composite a SVG foreignObject approach below.
 
     // Add souli.app watermark
