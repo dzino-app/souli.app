@@ -13,13 +13,16 @@ import {
   AlertCircle,
   Loader2,
 } from "lucide-react";
-import { Mic, MicOff } from "lucide-react";
+import { Mic, MicOff, Box } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PixelAvatar } from "@/components/avatar/pixel-avatar";
 import { useAvatarState } from "@/components/avatar/use-avatar-state";
 import { useARSensors } from "@/components/ar/use-ar-sensors";
 import { pickReactiveState } from "@/lib/ar-sensors";
+import { isWebXRARSupported } from "@/lib/webxr-ar";
+import { getGamification } from "@/lib/gamification";
+import type { ARSessionHandle } from "@/lib/webxr-ar";
 
 type CaptureMode = "idle" | "recording" | "preview-photo" | "preview-video";
 
@@ -28,6 +31,10 @@ export default function ARPage() {
   const { mounted, state, appearance, name } = useAvatarState();
   const [reactiveEnabled, setReactiveEnabled] = useState(true);
   const [audioEnabled, setAudioEnabled] = useState(false);
+  const [webxrSupported, setWebxrSupported] = useState(false);
+  const [webxrActive, setWebxrActive] = useState(false);
+  const webxrContainerRef = useRef<HTMLDivElement>(null);
+  const webxrSessionRef = useRef<ARSessionHandle | null>(null);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -237,6 +244,49 @@ export default function ARPage() {
     setMode("idle");
   }
 
+  // WebXR AR (V4) — check support on mount
+  useEffect(() => {
+    isWebXRARSupported().then(setWebxrSupported);
+  }, []);
+
+  async function startWebXR() {
+    const container = webxrContainerRef.current;
+    if (!container) return;
+    try {
+      // Stop the regular camera stream — WebXR takes over
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((t) => t.stop());
+        streamRef.current = null;
+      }
+      const { startARSession } = await import("@/lib/webxr-ar");
+      const { avatarToTexture } = await import("@/lib/pixel-to-texture");
+      const level = getGamification().level;
+      const textureUrl = avatarToTexture(appearance, level);
+      const handle = await startARSession({
+        container,
+        textureUrl,
+        onError: (err) => {
+          console.warn("[webxr]", err);
+          setWebxrActive(false);
+        },
+      });
+      if (handle) {
+        webxrSessionRef.current = handle;
+        setWebxrActive(true);
+      }
+    } catch (err) {
+      console.warn("[webxr]", err);
+    }
+  }
+
+  async function stopWebXR() {
+    await webxrSessionRef.current?.stop();
+    webxrSessionRef.current = null;
+    setWebxrActive(false);
+    // Restart regular camera
+    startCamera(facing);
+  }
+
   // Drag handlers for avatar positioning
   function onPointerDown(e: React.PointerEvent) {
     draggingRef.current = true;
@@ -302,17 +352,31 @@ export default function ARPage() {
           >
             <span className="text-lg">✨</span>
           </Button>
+          {webxrSupported && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => (webxrActive ? stopWebXR() : startWebXR())}
+              className={`hover:bg-white/10 ${webxrActive ? "text-amber-400" : "text-white"}`}
+              title={webxrActive ? "Ukončiť 3D režim" : "3D režim (WebXR)"}
+            >
+              <Box className="h-5 w-5" />
+            </Button>
+          )}
           <Button
             variant="ghost"
             size="icon"
             onClick={flipCamera}
             className="text-white hover:bg-white/10"
-            disabled={permission !== "granted"}
+            disabled={permission !== "granted" || webxrActive}
           >
             <RotateCcw className="h-5 w-5" />
           </Button>
         </div>
       </div>
+
+      {/* WebXR container (rendered outside the regular viewfinder) */}
+      <div ref={webxrContainerRef} className="absolute inset-0 z-30 pointer-events-none" />
 
       {/* Viewfinder */}
       <div className="relative flex-1 overflow-hidden">
@@ -408,8 +472,27 @@ export default function ARPage() {
       </div>
 
       {/* Controls */}
-      <div className="relative z-10 p-4 pb-8 bg-gradient-to-t from-black/80 to-transparent">
-        {previewUrl ? (
+      <div className="relative z-40 p-4 pb-8 bg-gradient-to-t from-black/80 to-transparent">
+        {webxrActive ? (
+          <div className="flex gap-3 justify-center">
+            <Button
+              variant="outline"
+              onClick={() => webxrSessionRef.current?.reset()}
+              className="gap-1.5"
+            >
+              <RotateCcw className="h-4 w-4" />
+              Vyčistiť
+            </Button>
+            <Button
+              size="lg"
+              onClick={() => webxrSessionRef.current?.placeAtHitTest()}
+              className="gap-1.5"
+            >
+              <Box className="h-5 w-5" />
+              Umiestniť Souliho
+            </Button>
+          </div>
+        ) : previewUrl ? (
           <div className="flex gap-3 justify-center">
             <Button variant="outline" onClick={reset} className="gap-1.5">
               <RotateCcw className="h-4 w-4" />
