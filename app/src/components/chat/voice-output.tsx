@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import { getUserLanguage } from "@/lib/languages";
+import type { SoundDNA } from "@/lib/avatar";
 
 // Language code to BCP-47 for speech synthesis voice matching
 const SPEECH_LOCALE_MAP: Record<string, string> = {
@@ -28,13 +29,51 @@ const SPEECH_LOCALE_MAP: Record<string, string> = {
 
 interface VoiceOutputProps {
   text: string;
+  /** Souli's unique sound fingerprint — drives pitch/rate */
+  soundDNA?: SoundDNA;
+  /** Auto-play on mount (for latest message) */
+  autoplay?: boolean;
+}
+
+/**
+ * Map Souli's SoundDNA to Web Speech API parameters.
+ * - basePitch (350-750 Hz) → utterance.pitch (0.6-1.4)
+ * - tempo (0.8-1.3) → utterance.rate (0.85-1.25)
+ * - timbre (square/sawtooth/triangle) → voice gender preference
+ */
+function dnaToSpeechParams(dna: SoundDNA) {
+  // Normalize pitch: 350→0.6, 550→1.0, 750→1.4
+  const pitch = Math.max(0.6, Math.min(1.4, 0.6 + ((dna.basePitch - 350) / 400) * 0.8));
+  // Tempo already close to rate scale; clamp
+  const rate = Math.max(0.85, Math.min(1.25, dna.tempo));
+  // Sawtooth = rougher → prefer male voices, triangle = softer → female, square = neutral
+  const voicePreference: "male" | "female" | "any" =
+    dna.timbre === "sawtooth" ? "male" : dna.timbre === "triangle" ? "female" : "any";
+  return { pitch, rate, voicePreference };
+}
+
+function pickVoiceForSouli(
+  voices: SpeechSynthesisVoice[],
+  lang: string,
+  preference: "male" | "female" | "any",
+): SpeechSynthesisVoice | null {
+  const matches = voices.filter((v) => v.lang.startsWith(lang));
+  if (matches.length === 0) return null;
+  if (preference === "any") return matches[0];
+  // Heuristic: voice names often contain hints
+  const genderHints = {
+    male: /male|man|miroslav|daniel|jakub|milan|paul|alex|david/i,
+    female: /female|woman|katarina|iveta|lucie|zuzana|samantha|karen|eva|maria/i,
+  };
+  const preferred = matches.find((v) => genderHints[preference].test(v.name));
+  return preferred || matches[0];
 }
 
 function isSpeechSynthesisSupported(): boolean {
   return typeof window !== "undefined" && "speechSynthesis" in window;
 }
 
-export function VoiceOutput({ text }: VoiceOutputProps) {
+export function VoiceOutput({ text, soundDNA, autoplay = false }: VoiceOutputProps) {
   const [supported, setSupported] = useState(false);
   const [playing, setPlaying] = useState(false);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
@@ -71,15 +110,22 @@ export function VoiceOutput({ text }: VoiceOutputProps) {
     const lang = getUserLanguage() || "sk";
     const locale = SPEECH_LOCALE_MAP[lang] || `${lang}-${lang.toUpperCase()}`;
     utterance.lang = locale;
-    utterance.rate = 1.0;
-    utterance.pitch = 1.0;
 
-    // Try to find a matching voice
-    const voices = window.speechSynthesis.getVoices();
-    const matchingVoice = voices.find((v) => v.lang.startsWith(lang)) ||
-      voices.find((v) => v.lang.startsWith(locale));
-    if (matchingVoice) {
-      utterance.voice = matchingVoice;
+    // Apply Souli-specific voice characteristics from SoundDNA
+    if (soundDNA) {
+      const params = dnaToSpeechParams(soundDNA);
+      utterance.pitch = params.pitch;
+      utterance.rate = params.rate;
+      const voices = window.speechSynthesis.getVoices();
+      const picked = pickVoiceForSouli(voices, lang, params.voicePreference);
+      if (picked) utterance.voice = picked;
+    } else {
+      utterance.rate = 1.0;
+      utterance.pitch = 1.0;
+      const voices = window.speechSynthesis.getVoices();
+      const matchingVoice = voices.find((v) => v.lang.startsWith(lang)) ||
+        voices.find((v) => v.lang.startsWith(locale));
+      if (matchingVoice) utterance.voice = matchingVoice;
     }
 
     utterance.onend = () => {
@@ -103,6 +149,15 @@ export function VoiceOutput({ text }: VoiceOutputProps) {
     setPlaying(false);
     utteranceRef.current = null;
   }, []);
+
+  // Auto-play when requested (on new message arrival)
+  useEffect(() => {
+    if (!autoplay || !supported || !text) return;
+    // Short delay so voices list is populated
+    const timer = setTimeout(() => speak(), 150);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text, autoplay, supported]);
 
   if (!supported) return null;
 

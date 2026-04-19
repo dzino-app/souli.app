@@ -7,6 +7,7 @@ export interface UserSettings {
   challengeNotifications: boolean;
   soundEnabled: boolean;
   webGrounding: boolean;
+  voiceAutoplay: boolean;
 }
 
 export type LlmProvider = "gemini" | "openai" | "anthropic";
@@ -29,6 +30,7 @@ const DEFAULT_SETTINGS: UserSettings = {
   challengeNotifications: true,
   soundEnabled: true,
   webGrounding: true,
+  voiceAutoplay: false,
 };
 
 export function getUserSettings(): UserSettings {
