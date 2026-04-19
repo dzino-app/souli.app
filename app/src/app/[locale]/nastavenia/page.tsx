@@ -82,6 +82,11 @@ const FEATURE_TOGGLES: FeatureToggle[] = [
     label: "Webov\u00e9 zdroje",
     description: "Souli m\u00f4\u017ee h\u013eada\u0165 na webe a uv\u00e1dza\u0165 zdroje v odpovediach",
   },
+  {
+    key: "voiceAutoplay",
+    label: "Automaticky prehr\u00e1va\u0165 hlas",
+    description: "Souli automaticky nahlas pre\u010d\u00edta ka\u017ed\u00fa nov\u00fa odpove\u010f",
+  },
 ];
 
 export default function SettingsPage() {

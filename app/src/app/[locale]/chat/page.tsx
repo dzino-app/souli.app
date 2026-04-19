@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Send, Loader2, Check, X, Pencil } from "lucide-react";
 import { VoiceInput } from "@/components/chat/voice-input";
 import { VoiceOutput } from "@/components/chat/voice-output";
+import { getUserSettings } from "@/lib/user-settings";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -398,7 +399,14 @@ export default function ChatPage() {
                     <GroundingSources sources={lastSources} />
                   )}
                   <div className="flex justify-end mt-1">
-                    <VoiceOutput text={msg.content} />
+                    <VoiceOutput
+                      text={msg.content}
+                      soundDNA={avatarData.soundDNA}
+                      autoplay={
+                        i === messages.length - 1 &&
+                        getUserSettings().voiceAutoplay
+                      }
+                    />
                   </div>
                 </>
               ) : (
