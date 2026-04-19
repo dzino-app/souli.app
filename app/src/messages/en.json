@@ -386,6 +386,8 @@
     "privacyAnalytics": "We use minimal analytics to understand how the app is used. No tracking cookies, no ad networks, no fingerprinting.",
     "privacyRecoveryTitle": "Password & recovery",
     "privacyRecovery": "Your encryption key is derived from your password. If you forget your password and have no recovery phrase, your encrypted data cannot be recovered — by anyone, including us. That's the point.",
+    "privacyPixociTitle": "Pixoci sharing",
+    "privacyPixoci": "Publicly shared Soulis are end-to-end encrypted too. Files are wrapped under the shared Pixoci library key and the server only sees ciphertext. The private half is bundled in the client (so every Souli client can read public content), but the server, DB dumps and stolen backups contain no plaintext.",
     "privacyPasswordInputTitle": "Password input",
     "privacyPasswordInput": "Your password travels through your device's keyboard and browser — we have no control over keyloggers, browser extensions, or OS-level clipboard managers. Only enter your password on trusted devices, and avoid shared computers.",
     "privacyAiActTitle": "EU AI Act",

@@ -119,6 +119,29 @@ export function PublishDialog({
         }
       }
 
+      // E2E encryption: wrap each soul file under the public library keypair
+      // using the sender's ECDH private key for the shared secret.
+      let encryptedContents = filteredContents;
+      let senderPubKey: string | undefined;
+      try {
+        const [{ ensureUserKeys, getOwnPrivateKey, getOwnPublicKeyB64 }, { encryptForPublicLibrary }] = await Promise.all([
+          import("@/lib/user-keys"),
+          import("@/lib/crypto-sharing"),
+        ]);
+        await ensureUserKeys();
+        const privateKey = await getOwnPrivateKey();
+        senderPubKey = (await getOwnPublicKeyB64()) ?? undefined;
+        if (privateKey && senderPubKey) {
+          const encrypted: Record<string, string> = {};
+          for (const [slug, content] of Object.entries(filteredContents)) {
+            encrypted[slug] = await encryptForPublicLibrary(content, privateKey);
+          }
+          encryptedContents = encrypted;
+        }
+      } catch (err) {
+        console.warn("[publish] E2E encryption failed, falling back to plaintext:", err);
+      }
+
       await fetch(`/api/avatars/${avatar.id}/publish`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -127,7 +150,8 @@ export function PublishDialog({
           description: bio || undefined,
           tags: parsedTags,
           publicSoulSlugs: selectedSlugs,
-          publicSoulContents: filteredContents,
+          publicSoulContents: encryptedContents,
+          senderPublicKey: senderPubKey,
         }),
       });
 

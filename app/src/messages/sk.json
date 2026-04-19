@@ -504,6 +504,8 @@
     "privacyAnalytics": "Používame minimálnu analytiku. Žiadne sledovacie cookies, žiadne reklamné siete, žiadny fingerprinting.",
     "privacyRecoveryTitle": "Heslo a obnova",
     "privacyRecovery": "Tvoj šifrovací kľúč je odvodený z tvojho hesla. Ak zabudneš heslo a nemáš obnovovaciu frázu, tvoje šifrované dáta sa nedajú obnoviť — nikým, vrátane nás. To je zmysel.",
+    "privacyPixociTitle": "Zdieľanie v Pixoci",
+    "privacyPixoci": "Aj verejne zdieľané Souli sú šifrované end-to-end. Súbory sa obalia pod spoločný kľúč Pixoci knižnice a server vidí len šifrovaný text. Privátny kľúč je bundlovaný v klientovi (takže každý Souli klient vie čítať verejné obsahy), ale server, DB dump ani unesené zálohy plaintext neobsahujú.",
     "privacyPasswordInputTitle": "Zadávanie hesla",
     "privacyPasswordInput": "Heslo prechádza cez klávesnicu a prehliadač tvojho zariadenia — nemáme kontrolu nad keyloggermi, rozšíreniami prehliadača ani správcami schránky na úrovni OS. Používaj heslo len na dôveryhodných zariadeniach a vyhni sa zdieľaným počítačom.",
     "privacyAiActTitle": "EU AI Act",

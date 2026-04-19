@@ -39,6 +39,8 @@ export interface AvatarRow {
   portrait_url: string | null;
   /** AI-generated video clip URL (Veo) */
   video_url: string | null;
+  /** Publisher's ECDH public key (base64) for E2E-encrypted Pixoci content */
+  sender_public_key: string | null;
 }
 
 export interface PublicAvatarFilters {
@@ -434,18 +436,24 @@ export async function publishAvatar(
     tags?: string[];
     publicSoulSlugs?: string[];
     publicSoulContents?: Record<string, string>;
+    senderPublicKey?: string;
   }
 ): Promise<void> {
   const supabase = createClient();
 
+  const update: Record<string, unknown> = {
+    is_public: opts.isPublic,
+    public_description: opts.description ?? null,
+    tags: opts.tags ?? [],
+    updated_at: new Date().toISOString(),
+  };
+  if (opts.senderPublicKey !== undefined) {
+    update.sender_public_key = opts.senderPublicKey;
+  }
+
   await supabase
     .from("avatars")
-    .update({
-      is_public: opts.isPublic,
-      public_description: opts.description ?? null,
-      tags: opts.tags ?? [],
-      updated_at: new Date().toISOString(),
-    })
+    .update(update)
     .eq("id", avatarId);
 
   // Update soul files public visibility

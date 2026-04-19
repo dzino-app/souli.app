@@ -33,12 +33,14 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
     tags,
     publicSoulSlugs,
     publicSoulContents,
+    senderPublicKey,
   } = body as {
     isPublic: boolean;
     description?: string;
     tags?: string[];
     publicSoulSlugs?: string[];
     publicSoulContents?: Record<string, string>;
+    senderPublicKey?: string;
   };
 
   if (typeof isPublic !== "boolean") {
@@ -54,6 +56,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
     tags,
     publicSoulSlugs,
     publicSoulContents,
+    senderPublicKey,
   });
 
   return NextResponse.json({ ok: true });

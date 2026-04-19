@@ -82,14 +82,47 @@ export default function AvatarDetailPage() {
   useEffect(() => {
     if (!id) return;
 
-    fetch(`/api/library/${id}`)
-      .then((r) => r.json())
-      .then((data) => {
-        setAvatar(data.avatar ?? null);
-        setSoulFiles(data.soulFiles ?? []);
-      })
-      .catch(() => setAvatar(null))
-      .finally(() => setLoading(false));
+    (async () => {
+      try {
+        const res = await fetch(`/api/library/${id}`);
+        const data = await res.json();
+        const avatarRow: AvatarRow | null = data.avatar ?? null;
+        const rawFiles: SoulFileInfo[] = data.soulFiles ?? [];
+        setAvatar(avatarRow);
+
+        // Decrypt E2E-encrypted soul files if sender key is present
+        if (avatarRow?.sender_public_key && rawFiles.length > 0) {
+          try {
+            const { importPublicKey } = await import("@/lib/crypto-sharing");
+            const { decryptFromPublicLibrary } = await import("@/lib/crypto-sharing");
+            const senderPub = await importPublicKey(avatarRow.sender_public_key);
+            const decrypted = await Promise.all(
+              rawFiles.map(async (sf) => {
+                if (!sf.content) return sf;
+                // Detect encrypted format: "base64:base64:base64"
+                const parts = sf.content.split(":");
+                if (parts.length !== 3) return sf; // plaintext fallback
+                try {
+                  const plain = await decryptFromPublicLibrary(sf.content, senderPub);
+                  return { ...sf, content: plain };
+                } catch {
+                  return sf;
+                }
+              }),
+            );
+            setSoulFiles(decrypted);
+          } catch {
+            setSoulFiles(rawFiles);
+          }
+        } else {
+          setSoulFiles(rawFiles);
+        }
+      } catch {
+        setAvatar(null);
+      } finally {
+        setLoading(false);
+      }
+    })();
   }, [id]);
 
   async function handleLoad() {
