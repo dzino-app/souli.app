@@ -63,6 +63,10 @@ export default function PrivacyPage() {
             <p className="text-muted-foreground">{t("privacyRecovery")}</p>
           </section>
           <section>
+            <h3 className="font-semibold mb-1">{t("privacyPixociTitle")}</h3>
+            <p className="text-muted-foreground">{t("privacyPixoci")}</p>
+          </section>
+          <section>
             <h3 className="font-semibold mb-1">{t("privacyPasswordInputTitle")}</h3>
             <p className="text-muted-foreground">{t("privacyPasswordInput")}</p>
           </section>
