@@ -1,4 +1,4 @@
-import { Home, MessageCircle, BookOpen, Calendar, CalendarDays, Heart, Library, Sparkles, type LucideIcon } from "lucide-react";
+import { Home, MessageCircle, BookOpen, Calendar, CalendarDays, Heart, Library, Sparkles, Target, type LucideIcon } from "lucide-react";
 
 export interface NavItem {
   href: string;
@@ -13,6 +13,7 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { href: "/udalosti", icon: Calendar,      label: "Udalosti" },
   { href: "/dennik",    icon: CalendarDays,  label: "Denník" },
   { href: "/wellness",  icon: Heart,         label: "Zdravie" },
+  { href: "/programy",  icon: Target,        label: "Cesty" },
   { href: "/zrucnosti", icon: Sparkles,      label: "Zručnosti" },
   { href: "/kniznica",  icon: Library,       label: "Pixoci" },
 ] as const;
