@@ -77,6 +77,7 @@ export function VoiceOutput({ text, soundDNA, autoplay = false }: VoiceOutputPro
   const [supported, setSupported] = useState(false);
   const [playing, setPlaying] = useState(false);
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     setSupported(isSpeechSynthesisSupported());
@@ -91,18 +92,8 @@ export function VoiceOutput({ text, soundDNA, autoplay = false }: VoiceOutputPro
     };
   }, []);
 
-  const speak = useCallback(() => {
+  const speakViaWebSpeech = useCallback((cleanText: string) => {
     if (!isSpeechSynthesisSupported()) return;
-
-    // Strip markdown formatting for cleaner speech
-    const cleanText = text
-      .replace(/[#*_~`>]/g, "")
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-      .replace(/\n+/g, ". ")
-      .trim();
-
-    if (!cleanText) return;
-
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utteranceRef.current = utterance;
 
@@ -140,9 +131,60 @@ export function VoiceOutput({ text, soundDNA, autoplay = false }: VoiceOutputPro
 
     window.speechSynthesis.speak(utterance);
     setPlaying(true);
-  }, [text]);
+  }, [soundDNA]);
+
+  const speak = useCallback(async () => {
+    // Strip markdown for cleaner speech
+    const cleanText = text
+      .replace(/[#*_~`>]/g, "")
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+      .replace(/\n+/g, ". ")
+      .trim();
+    if (!cleanText) return;
+
+    const lang = getUserLanguage() || "sk";
+
+    // Try server-side Google TTS first (neural quality)
+    try {
+      const res = await fetch("/api/voice/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: cleanText, locale: lang, soundDNA }),
+      });
+      if (res.ok) {
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const audio = new Audio(url);
+        audioRef.current = audio;
+        audio.onended = () => {
+          setPlaying(false);
+          URL.revokeObjectURL(url);
+          audioRef.current = null;
+        };
+        audio.onerror = () => {
+          setPlaying(false);
+          URL.revokeObjectURL(url);
+          audioRef.current = null;
+          // Fallback to Web Speech on playback error
+          speakViaWebSpeech(cleanText);
+        };
+        setPlaying(true);
+        await audio.play();
+        return;
+      }
+    } catch {
+      // Network / API failure — fall through to Web Speech
+    }
+
+    // Fallback: Web Speech API
+    speakViaWebSpeech(cleanText);
+  }, [text, soundDNA, speakViaWebSpeech]);
 
   const stop = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
     if (isSpeechSynthesisSupported()) {
       window.speechSynthesis.cancel();
     }
