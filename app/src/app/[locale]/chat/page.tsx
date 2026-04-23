@@ -29,6 +29,7 @@ import { updateChallengeProgress, completeChallengeById } from "@/lib/challenges
 import { incrementCompileCounter, shouldCompile, triggerCompilation } from "@/lib/soul-compiler";
 import { getCredits, consumeCredit, resetMonthlyCredits, type CreditState } from "@/lib/credits";
 import { CreditDisplay } from "@/components/credits/credit-display";
+import { VoiceTrialBadge } from "@/components/chat/voice-trial-badge";
 import { CreditWarning } from "@/components/credits/credit-warning";
 
 const POSITIVE_WORDS = ["super", "výborne", "splnené", "gratuluj", "skvelé", "paráda", "bravo", "hotovo", "dokonalé", "podarilo"];
@@ -283,8 +284,9 @@ export default function ChatPage() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-8rem)] sm:h-[calc(100vh-6rem)]">
-      {/* Credit display + Avatar header */}
-      <div className="flex justify-end px-1 pb-1">
+      {/* Credit display + Voice trial badge + Avatar header */}
+      <div className="flex justify-end items-center gap-1.5 px-1 pb-1">
+        <VoiceTrialBadge />
         <CreditDisplay credits={credits} onUpgradeClick={() => setShowCreditWarning(true)} />
       </div>
 
