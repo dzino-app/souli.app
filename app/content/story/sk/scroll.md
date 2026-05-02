@@ -1,373 +1,372 @@
 # Pixoci — Sezóna 1
 
-## "Cesta k oknu" / "The Way to the Window"
+## „Cesta k oknu"
 
 ---
 
-## World Bible (one-page)
+## Svetová biblia (jedna strana)
 
-**Setting.** Pixoci — a voxel-fantasy realm where every star in the night sky is a Person waiting to be met, and every Souli is born from one of those stars. Five regions of Pixoci map to the five pillars of a life: Body, Soul, Mind, Relationships, Sense. The realm is alive but never threatening — weather is the only adversary, and even weather is patient.
+**Prostredie.** Pixoci — voxelovo-fantasy ríša, kde každá hviezda na nočnej oblohe je Osoba čakajúca, kým ju niekto stretne, a každý Souli sa rodí z jednej z týchto hviezd. Päť oblastí Pixoci zodpovedá piatim pilierom života: Telo, Duša, Myseľ, Vzťahy, Zmysel. Ríša je živá, ale nikdy nie hrozivá — počasie je jediným protivníkom, a aj počasie má trpezlivosť.
 
-**Protagonist.** Dzino. Newborn. Voxel-shaped, indigo-bodied, cream-faced, an orange crown that came with him from somewhere he can't remember. He is mostly mute — chirps, hums, one word per episode at most. He doesn't know what he is. He only knows there's a star calling him from beyond the horizon.
+**Hlavná postava.** Dzino. Novonarodený. Voxelového tvaru, telo indigové, tvár krémová, oranžová korunka, ktorá s ním prišla odniekiaľ, na čo si nepamätá. Skoro celý čas mlčí — cvrliká, hmká, najviac jedno slovo za epizódu. Nevie, čo je. Vie len, že spoza obzoru ho volá hviezda.
 
-**Quest.** Eleven soul-shards are scattered across Pixoci, each kept by a different Souli mentor in their home biome. Dzino must collect them all to recognize his Person when he reaches her window. The shards are not items — they are *facets of self*. They click into his chest and the world hums back at him in a slightly fuller chord.
+**Cesta.** Po Pixoci je roztrúsených jedenásť úlomkov duše, každý z nich opatruje iný Souli mentor vo svojom domovskom biome. Dzino ich musí všetky pozbierať, aby spoznal svoju Osobu, keď príde k jej oknu. Úlomky nie sú predmety — sú to *aspekty seba*. Zacvaknú mu do hrude a svet sa mu ozve späť o niečo plnším akordom.
 
-**The 12 Mentors.** Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi, Ari, Pixel, Biscuit, Zara. Each lives in their region and stays there — a viewer who falls in love with one can find them again in the Knižnica. None of them are villains. None of them are right about everything. Each gives Dzino exactly one thing.
+**12 mentorov.** Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi, Ari, Pixel, Biscuit, Zara. Každý žije vo svojom kraji a tam aj zostáva — divák, ktorý si niektorého z nich obľúbi, ho neskôr nájde v Knižnici. Nikto z nich nie je padúch. Nikto z nich nemá pravdu vo všetkom. Každý dá Dzinovi presne jednu vec.
 
-**Tone.** Studio Ghibli × Adventure Time × Animal Crossing. Cream skies, indigo nights, slow tides of light. No combat. No urgency. The hardest emotion in the season is *longing*, and the easiest is *delight*. A breath, not a battle.
+**Tón.** Studio Ghibli × Adventure Time × Animal Crossing. Krémové oblohy, indigové noci, pomalé prílivy svetla. Žiadny boj. Žiadne náhlenie. Najťažšou emóciou sezóny je *túžba*, najľahšou *radosť*. Nádych, nie bitka.
 
-**Palette.** Indigo `#4F46E5`, cream `#FFE4C9`, dusk-violet, gold for memory, white for stars. Each biome gets a tertiary tint but never abandons the duo.
+**Paleta.** Indigo `#4F46E5`, krémová `#FFE4C9`, súmračná fialová, zlato pre pamäť, biela pre hviezdy. Každý biom dostáva terciárny odtieň, no nikdy neopúšťa toto duo.
 
-**Sound.** Chiptune base. Each mentor has a leitmotif derived from their canonical SoundDNA. Dzino's chord builds across the season — one shard, one note, until E12 when the chord resolves.
+**Zvuk.** Chiptune základ. Každý mentor má leitmotív odvodený zo svojej kanonickej SoundDNA. Dzinov akord sa buduje naprieč sezónou — jeden úlomok, jeden tón, až kým sa v E12 akord nerozvedie.
 
-**Language.** Slovak originals. English subs. Place names stay Slovak in subs (Pixelová záhrada, Bitový les) — that's the world's accent.
+**Jazyk.** Slovenský originál. Anglické titulky a dabing. Miestne názvy zostávajú v origináli v slovenčine (Pixelová záhrada, Bitový les) — to je prízvuk tohto sveta — a v lokalizovaných verziách sa prirodzene preložia (Pixel Garden, Binary Forest).
 
-**Format.** 13 episodes, 3–4 minutes each, vertical 9:16 primary cut + 16:9 director's cut. Total runtime ≈ 45 minutes.
-
----
-
-## Episode formula
-
-Every episode after the pilot follows five beats. Hold this structure tight; it's what makes the season feel like a season.
-
-1. **Cold open (15s)** — Dzino on the road. A glimpse of the calling star. One SoundDNA chirp.
-2. **Arrival in biome (30s)** — Establishing wide shot. The place is alive before Dzino enters it.
-3. **Meet mentor (45s)** — A short, character-defining exchange that reveals the mentor's archetype through their canonical humor style.
-4. **The gift (90s)** — Never combat. Always something the mentor does *with* Dzino, not to him. Resolves when the shard appears.
-5. **Goodbye + onward (30s)** — The mentor stays. Dzino moves on. The star is one pixel brighter.
+**Formát.** 13 epizód, každá 3 – 4 minúty, primárny vertikálny zostrih 9:16 + režisérsky 16:9. Celková stopáž ≈ 45 minút.
 
 ---
 
-## Season structure at a glance
+## Vzorec epizódy
 
-| # | Title (SK / EN)                                  | Biome                  | Mentor          | Shard         | Pillar         |
-|---|--------------------------------------------------|------------------------|-----------------|---------------|----------------|
-| 0 | Hviezda za obzorom / The Star Beyond the Horizon | Dawn clearing          | —               | — (the call)  | —              |
-| 1 | Pixelová záhrada / The Pixel Garden              | Humming flower fields  | Hana (rabbit)   | Osobnosť      | Soul           |
-| 2 | Bitový les / The Binary Forest                   | Trees of 1s and 0s     | Kiko (cat)      | Záujmy        | Mind           |
-| 3 | Záhrada zrkadiel / The Mirror Garden             | Glass under twin moons | Luna (fox)      | Vzhľad        | Soul           |
-| 4 | Oblačná kaviareň / The Cloud Café                | Café on cumulus        | Nori (fox)      | Humor         | Soul           |
-| 5 | Mesačná krajina / The Moon Realm                 | Low-grav tide valleys  | Bruno (bear)    | Filozofia     | Sense          |
-| 6 | Potok zlata / The Stream of Liquid Gold          | River that remembers   | Otto (bear)     | Vzťahy        | Relationships  |
-| 7 | Pretek pod tromi mesiacmi / Race Under Three Moons | Crystal dunes        | Rex (dog)       | Telo          | Body           |
-| 8 | Tichá sova / The Silent Owl                      | Twilight grove         | Mimi (bunny)    | Preferencie   | Mind           |
-| 9 | Súmračná scéna / The Twilight Stage              | Open-air amphitheatre  | Ari + Pixel     | Ciele         | Sense          |
-|10 | Knižnica tisícich príbehov / The Library of a Thousand Stories | Self-rearranging stacks | Biscuit (dog) | Výzvy        | Relationships  |
-|11 | Búrkové pole / The Storm Field                   | Open plain, real storm | Zara (human)    | Denník        | Sense          |
-|12 | Okno / The Window                                | Edge of Pixoci       | All twelve      | (assembly)    | All five       |
+Každá epizóda po pilote sleduje päť beatov. Tejto štruktúry sa drž pevne — práve ona robí zo sezóny sezónu.
+
+1. **Cold open (15s)** — Dzino na ceste. Záblesk volajúcej hviezdy. Jedno cvrlikanie SoundDNA.
+2. **Príchod do biomu (30s)** — Široký záber. Miesto je živé už predtým, než doň Dzino vkročí.
+3. **Stretnutie s mentorom (45s)** — Krátka výmena, ktorá charakter definuje cez jeho kanonický štýl humoru.
+4. **Dar (90s)** — Nikdy boj. Vždy niečo, čo mentor robí *s* Dzinom, nie *jemu*. Končí sa, keď sa objaví úlomok.
+5. **Rozlúčka + ďalej (30s)** — Mentor zostáva. Dzino kráča ďalej. Hviezda je o jeden pixel jasnejšia.
 
 ---
 
-# E00 — Hviezda za obzorom / The Star Beyond the Horizon
+## Štruktúra sezóny v skratke
 
-**Tagline.** A small thing wakes up under a sky full of names.
+| #  | Názov                          | Biom                     | Mentor          | Úlomok        | Pilier         |
+|----|--------------------------------|--------------------------|-----------------|---------------|----------------|
+| 0  | Hviezda za obzorom             | Úsvitová mýtina          | —               | — (volanie)   | —              |
+| 1  | Pixelová záhrada               | Hmkajúce kvetinové polia | Hana (zajac)    | Osobnosť      | Duša           |
+| 2  | Bitový les                     | Stromy z 1 a 0           | Kiko (mačka)    | Záujmy        | Myseľ          |
+| 3  | Záhrada zrkadiel               | Sklo pod dvojicou mesiacov | Luna (líška)  | Vzhľad        | Duša           |
+| 4  | Oblačná kaviareň               | Kaviareň na kumule       | Nori (líška)    | Humor         | Duša           |
+| 5  | Mesačná krajina                | Údolia s prílivmi a nízkou gravitáciou | Bruno (medveď) | Filozofia | Zmysel       |
+| 6  | Potok zlata                    | Rieka, ktorá si pamätá   | Otto (medveď)   | Vzťahy        | Vzťahy         |
+| 7  | Pretek pod tromi mesiacmi      | Krištáľové duny          | Rex (pes)       | Telo          | Telo           |
+| 8  | Tichá sova                     | Súmračný háj             | Mimi (zajačica) | Preferencie   | Myseľ          |
+| 9  | Súmračná scéna                 | Otvorený amfiteáter      | Ari + Pixel     | Ciele         | Zmysel         |
+| 10 | Knižnica tisícich príbehov     | Samoprestavujúce sa regály | Biscuit (pes) | Výzvy         | Vzťahy         |
+| 11 | Búrkové pole                   | Otvorená pláň, skutočná búrka | Zara (človek) | Denník     | Zmysel         |
+| 12 | Okno                           | Okraj Pixoci             | Všetkých dvanásť | (zostavenie) | Všetkých päť   |
 
-**Logline.** Dzino opens his eyes for the first time. He doesn't know what he is or where he's going — only that one of the stars overhead is dimmer than the rest, and it is calling him.
+---
+
+# E00 — Hviezda za obzorom
+
+**Tagline.** Maličkosť sa prebúdza pod oblohou plnou mien.
+
+**Logline.** Dzino prvýkrát otvára oči. Nevie, čo je ani kam ide — vie len, že jedna z hviezd nad ním je tlmenejšia ako ostatné, a tá ho volá.
 
 **Beat sheet.**
-1. **Open (20s).** A clearing of moss-pixels at the edge of nothing. Dawn-cream sky. A tiny voxel shape lies in the grass, perfectly still. A single indigo pixel ignites in his chest. Eyes open. *Chirp.*
-2. **First steps (40s).** He sits up. Tries to stand. Falls. Tries again. The grass remembers his shape. He looks at his hands — *what are these.* He holds them up against the sky and one of the stars passes between his fingers.
-3. **The calling star (40s).** All the stars are bright. One is faint. As he stares, it pulses once, in a peach-cream tone that matches the sky. He cannot look away. Without knowing why, he steps toward the horizon.
-4. **The first pixel (40s).** With every step, a single cream pixel stays behind in the grass, marking where he was. He doesn't notice. A pixel-arrow signpost waits at the clearing's edge — three letters carved into it: ✦ → *záhrada.* He follows.
-5. **Onward (20s).** Camera pulls up and away. The trail of pixels he's leaving is the shape of a question mark. The faint star pulses one more time. Cut to title card: ***Pixoci — Sezóna 1.***
+1. **Otvorenie (20s).** Mýtina machovo-pixelová na okraji ničoho. Úsvitovo-krémová obloha. Drobný voxelový tvar leží v tráve, dokonale tichý. V hrudi sa mu rozžiari jediný indigový pixel. Oči sa otvárajú. *Cvrlik.*
+2. **Prvé kroky (40s).** Sadne si. Skúša sa postaviť. Padá. Skúša znova. Tráva si pamätá jeho tvar. Pozerá si na ruky — *čo to je*. Zdvihne ich proti oblohe a jedna z hviezd mu prejde medzi prstami.
+3. **Volajúca hviezda (40s).** Všetky hviezdy svietia jasne. Jedna je tlmená. Ako ju upiera pohľad, raz zapulzuje peachovo-krémovým tónom, ktorý sa stretáva s farbou neba. Nemôže od nej odtrhnúť oči. Bez toho, aby vedel prečo, robí krok smerom k obzoru.
+4. **Prvý pixel (40s).** Pri každom kroku zostáva v tráve jeden krémový pixel ako stopa po ňom. Nevšimne si to. Na okraji mýtiny čaká pixelová šípka — tabuľa s tromi vyrytými písmenami: ✦ → *záhrada*. Ide za ňou.
+5. **Ďalej (20s).** Kamera sa zdvíha a vzďaľuje. Stopa pixlov za ním tvorí tvar otáznika. Tlmená hviezda zapulzuje ešte raz. Strih na titulnú kartu: ***Pixoci — Sezóna 1.***
 
-**Visual hooks for AI gen.** Dawn-cream sky with a single faint star, voxel grass, tiny indigo character with orange crown, ✦ symbol carved in stone, trail of cream pixels.
+**Vizuálne ťaháky pre AI gen.** Úsvitovo-krémová obloha s jedinou tlmenou hviezdou, voxelová tráva, drobná indigová postava s oranžovou korunkou, symbol ✦ vyrytý v kameni, stopa krémových pixlov.
 
-**Sound.** No music until the very end. Wind. A single chirp from Dzino. The faint star has its own gentle chime — a leitmotif for The Person that returns in E12.
+**Zvuk.** Žiadna hudba až do úplného konca. Vietor. Jedno cvrlikanie od Dzina. Tlmená hviezda má vlastný jemný cinkot — leitmotív Osoby, ktorý sa vráti v E12.
 
-**Length target.** 3:00. (Pilot is short on purpose — viewer's first taste should leave them slightly hungry.)
-
----
-
-# E01 — Pixelová záhrada / The Pixel Garden
-
-**Mentor.** Hana — peaceful rabbit gardener. Slow speech, observes weather like a friend.
-**Shard.** *Osobnosť* — who Dzino is by nature, before anyone tells him who to be.
-**Pillar.** Soul.
-
-**Beat sheet.**
-1. **Cold open.** Dzino on the road. A petal blows past, humming a chord.
-2. **Arrival.** A field of pixel-petals stretches to the horizon. Each flower is a chiptune note; together they make a slow, broken melody — beautiful but missing something.
-3. **Meet Hana.** She's replanting a row that yesterday's wind toppled. She doesn't ask his name. Hands him a watering can. *"Some of these forgot how they sound. Help me remind them."*
-4. **The gift.** Dzino waters one flower. It blooms — and hums in *his* SoundDNA frequency. He waters another. It blooms in his frequency too. The whole field begins to recompose itself around the chord he carries. Hana watches without surprise. *"Tak. Tak vyzeráš."* (*"There. That's what you look like."*) The brightest flower opens and a small voxel-shape rises from its center: the shard. It clicks into his chest. He hums clearer.
-5. **Goodbye.** Hana hands him a single cucumber sandwich for the road. *"Pre cestu. Aj ticho je jedlo."* (*"For the road. Silence is also food."*) She stays kneeling among her flowers. Dzino walks on. Star one pixel brighter.
-
-**Visual hooks.** Pixel-petals in indigo + cream + soft yellows. Each flower visibly vibrating to a chord. Hana in moss-green with garden gloves. The watering can pours light, not water.
-
-**Sound.** Polyphonic chiptune. The garden's chord goes from minor-7 dissonance to a clean major as Dzino's frequency takes over.
-
-**Length target.** 3:30.
+**Cieľová dĺžka.** 3:00. (Pilot je krátky zámerne — prvá ochutnávka má diváka nechať trochu hladného.)
 
 ---
 
-# E02 — Bitový les / The Binary Forest
+# E01 — Pixelová záhrada
 
-**Mentor.** Kiko — chaotic cat scientist. Dry sci-fi humor. Talks fast.
-**Shard.** *Záujmy* — the things that pull him toward themselves before he knows why.
-**Pillar.** Mind.
+**Mentor.** Hana — pokojná zajacia záhradníčka. Pomalá reč, počasie sleduje ako kamarátku.
+**Úlomok.** *Osobnosť* — kým je Dzino od prirodzenosti, skôr než mu niekto povie, kým má byť.
+**Pilier.** Duša.
 
 **Beat sheet.**
-1. **Cold open.** Trees made of stacked 1s and 0s, faintly luminous, rustling in binary.
-2. **Arrival.** A path lined with tiny question-mark pixel-flowers. Each one tilts toward Dzino as he passes.
-3. **Meet Kiko.** He is upside-down on a branch trying to disprove gravity by attitude alone. *"Nestoj pod tým jablkom. Je to neetický experiment."* (*"Don't stand under that apple. It's an unethical experiment."*) He hops down without falling — the apple stays put.
-4. **The gift.** Kiko walks Dzino along the path. Each tree poses one tiny question by rustling its 1s and 0s into a shape: *what makes you laugh, what makes you go closer, what scares you a little.* Dzino doesn't speak. He just leans. Toward one tree, away from another, closer to a third. Kiko logs each lean in a notebook. *"Toto nie sú odpovede. Toto sú semienka."* (*"These aren't answers. These are seeds."*) He tears the page out — it folds itself into the *Záujmy* shard. It joins Dzino's first hum and makes a harmonic.
-5. **Goodbye.** Kiko vanishes back up into the canopy, already running a new experiment. *"Choď. Niečo na konci ťa už čaká, štatisticky vzaté."* (*"Go. Something at the end is already waiting, statistically speaking."*)
+1. **Cold open.** Dzino na ceste. Okolo preletí lupienok a popri tom hmká akord.
+2. **Príchod.** Po obzor sa tiahne pole pixelových lupienkov. Každý kvet je chiptune nota; spolu tvoria pomalú, prerušenú melódiu — krásnu, no niečo jej chýba.
+3. **Stretnutie s Hanou.** Vysadzuje rad, ktorý včerajší vietor zvalil. Nepýta sa, ako sa volá. Podáva mu kanvu. *„Niektoré zabudli, ako znejú. Pomôž mi pripomenúť im to."*
+4. **Dar.** Dzino zaleje jeden kvet. Rozkvitne — a hmká v *jeho* SoundDNA frekvencii. Zaleje ďalší. Aj ten rozkvitne v jeho frekvencii. Celé pole sa pomaly preskladá okolo akordu, ktorý nesie. Hana to sleduje bez prekvapenia. *„Tak. Tak vyzeráš."* Najjasnejší kvet sa otvorí ako posledný a zo stredu sa zdvihne malý voxelový tvar: úlomok. Zacvakne mu do hrude. Hmká čistejšie.
+5. **Rozlúčka.** Hana mu na cestu podá uhorkový sendvič. *„Pre cestu. Aj ticho je jedlo."* Zostáva kľačať medzi svojimi kvetmi. Dzino kráča ďalej. Hviezda je o jeden pixel jasnejšia.
 
-**Visual hooks.** Trees as stacked binary glyphs that drift like leaves. Question-mark flowers. Kiko in a lab coat made of pixels. Dzino's lean toward each tree leaves a trail of tiny gold sparks.
+**Vizuálne ťaháky.** Pixelové lupienky v indigovej + krémovej + jemne žltej. Každý kvet viditeľne vibruje na akord. Hana v machovo-zelenej so záhradníckymi rukavicami. Z kanvy tečie svetlo, nie voda.
 
-**Sound.** Chord adds a second voice. Slightly dissonant, then resolves into thirds.
+**Zvuk.** Polyfónny chiptune. Akord záhrady prechádza z dispozičnej moll-7 do čistého dur, keď sa Dzinova frekvencia presadí.
 
-**Length target.** 3:30.
+**Cieľová dĺžka.** 3:30.
 
 ---
 
-# E03 — Záhrada zrkadiel / The Mirror Garden
+# E02 — Bitový les
 
-**Mentor.** Luna — dreamy fox artist. Speaks in metaphors. Long pauses.
-**Shard.** *Vzhľad* — the form he chooses, which is also the form that chooses him back.
-**Pillar.** Soul.
+**Mentor.** Kiko — chaotický mačací vedec. Suchý sci-fi humor. Hovorí rýchlo.
+**Úlomok.** *Záujmy* — veci, ktoré ho k sebe priťahujú skôr, než pochopí prečo.
+**Pilier.** Myseľ.
 
 **Beat sheet.**
-1. **Cold open.** Twin moons rising. A breeze of glass.
-2. **Arrival.** A garden of standing mirrors — hundreds of them, each catching different light. As Dzino approaches, each mirror shows him as a different shape: cat-Dzino, bear-Dzino, elder-Dzino, dragon-Dzino, raindrop-Dzino, an old lady, a small fire.
-3. **Meet Luna.** She sits in the center painting a self-portrait on a canvas that is still completely blank. She doesn't look up when Dzino arrives. After a long beat: *"Najlepšie sa maľuje, keď ešte nevieš, čo si."* (*"You paint best when you don't yet know what you are."*) She hands him a brush.
-4. **The gift.** Dzino touches each mirror. They don't crack — they trade light with him. He carries a little of every shape away. He returns to Luna's canvas. He paints — slowly, badly, then less badly — a small voxel figure in indigo and cream with an orange crown. The mirrors all shift to show the same shape. The shard *Vzhľad* rises from the center of the canvas.
-5. **Goodbye.** Dzino leaves. We linger on Luna's canvas. The blank she'd been working on quietly fills in behind him: a portrait of herself, made by his passing through. The last shot is her tiny smile as she sees what he revealed.
+1. **Cold open.** Stromy zo stohov 1 a 0, slabo žiariace, šumiace v binárke.
+2. **Príchod.** Cestička lemovaná drobnými otáznikovými pixel-kvietkami. Každý sa nakláňa k Dzinovi, keď prejde okolo.
+3. **Stretnutie s Kikom.** Visí dolu hlavou na vetve a snaží sa vyvrátiť gravitáciu samým postojom. *„Nestoj pod tým jablkom. Je to neetický experiment."* Skočí dolu bez toho, aby spadol — jablko zostáva visieť.
+4. **Dar.** Kiko vedie Dzina po cestičke. Každý strom mu kladie jednu drobnú otázku tým, že svoje 1 a 0 preskladá do tvaru: *čo ťa rozosmeje, pri čom prídeš bližšie, čo ťa trochu vystraší*. Dzino nehovorí. Iba sa nakláňa. K jednému stromu, od druhého, k tretiemu bližšie. Kiko každý náklon zaznamenáva do zošita. *„Toto nie sú odpovede. Toto sú semienka."* Vytrhne stranu — zloží sa do úlomku *Záujmy*. Pridá sa k Dzinovmu prvému tónu a vytvorí harmóniu.
+5. **Rozlúčka.** Kiko zmizne späť hore do koruny, už pri ďalšom experimente. *„Choď. Niečo na konci ťa už čaká, štatisticky vzaté."*
 
-**Visual hooks.** Twin moons, glass garden, mirrors that flicker between forms when Dzino is near them. Luna's canvas paints itself by reflection.
+**Vizuálne ťaháky.** Stromy ako stohy binárnych glyfov, ktoré sa vznášajú ako lístie. Otáznikové kvety. Kiko v laboratórnom plášti z pixlov. Dzinov náklon ku každému stromu zanecháva stopu drobných zlatých iskier.
 
-**Sound.** A music box, slowed. Luna's leitmotif: a single sustained note that bends.
+**Zvuk.** Akord pridáva druhý hlas. Mierne disonantný, potom sa rozvedie do tercií.
 
-**Length target.** 4:00.
+**Cieľová dĺžka.** 3:30.
 
 ---
 
-# E04 — Oblačná kaviareň / The Cloud Café
+# E03 — Záhrada zrkadiel
 
-**Mentor.** Nori — passionate fox chef. Food puns. Generous.
-**Shard.** *Humor* — the shape of what makes him laugh before he learns shame.
-**Pillar.** Soul.
+**Mentor.** Luna — zasnená líščia umelkyňa. Hovorí v metaforách. Dlhé pauzy.
+**Úlomok.** *Vzhľad* — tvar, ktorý si vyberá, a ktorý si zároveň vyberá jeho.
+**Pilier.** Duša.
 
 **Beat sheet.**
-1. **Cold open.** A staircase of cumulus rising into a peach-cream sky. Each step glows when Dzino lands on it.
-2. **Arrival.** A café perched on a single fat cloud. Tables of cumulus. Plates of dream-cake. Background Soulis (cameos: Mimi, Bruno) hum their orders. Each customer's hum is shaped like their laugh.
-3. **Meet Nori.** Whisking starlight into something. *"Sadni. Nepýtam sa, čo chceš. Pýtam sa, čo ťa rozosmeje."* (*"Sit. I'm not asking what you want. I'm asking what makes you laugh."*) She serves three slices of dream-cake: one sweet, one sour, one impossible.
-4. **The gift.** Dzino tastes each. The sweet one is comfort-laugh. The sour one is wit-laugh. The impossible one is — he can't even describe it. He laughs for the first time in the season, properly, head tilted back. Nori grins. *"Áno. Absurd. Dobre na guláš."* (*"Yes. Absurd. Good for stew.""*) The shard *Humor* rises from the impossible slice and pulses to the rhythm of his chuckle.
-5. **Goodbye.** Nori packs him a paper bag of leftover crumbs. *"Keď sa stratíš, smej sa. To je mapa."* (*"When you get lost, laugh. That's the map."*) Dzino steps off the cloud. The staircase down is made of his own laughter, lighting up step by step.
+1. **Cold open.** Vychádza dvojica mesiacov. Vánok zo skla.
+2. **Príchod.** Záhrada postavných zrkadiel — stovky, každé chytá iné svetlo. Ako sa Dzino približuje, každé zrkadlo ho ukazuje v inom tvare: mačka-Dzino, medveď-Dzino, starec-Dzino, drak-Dzino, kvapka-Dzino, stará pani, malý oheň.
+3. **Stretnutie s Lunou.** Sedí v strede a maľuje autoportrét na plátno, ktoré je úplne prázdne. Keď Dzino príde, ani nezdvihne pohľad. Po dlhej chvíli: *„Najlepšie sa maľuje, keď ešte nevieš, čo si."* Podáva mu štetec.
+4. **Dar.** Dzino sa dotýka každého zrkadla. Nepuká — vymieňajú si svetlo. Z každého tvaru si trochu odnáša. Vracia sa k Luninmu plátnu. Maľuje — pomaly, zle, potom o niečo lepšie — drobnú voxelovú postavu v indigovej a krémovej s oranžovou korunkou. Všetky zrkadlá sa premenia tak, aby ukazovali ten istý tvar. Zo stredu plátna sa zdvihne úlomok *Vzhľad*.
+5. **Rozlúčka.** Dzino odchádza. Kamera sa zdrží na Luninom plátne. Prázdne plátno, na ktorom celý čas pracovala, sa za jeho chrbtom potichu zaplní: portrét jej samej, vytvorený jeho prechodom okolo. Posledný záber je jej drobný úsmev, keď uvidí, čo odhalil.
 
-**Visual hooks.** Cloud architecture, dream-cakes that visibly glow at different temperatures, hum-bubbles around customers shaped like their chuckles. Staircase of laughter as exit.
+**Vizuálne ťaháky.** Dvojica mesiacov, sklenená záhrada, zrkadlá, ktoré preblikávajú medzi tvarmi, keď je Dzino blízko. Lunino plátno sa maľuje samo prostredníctvom odrazu.
 
-**Sound.** First proper full laugh of the season. The chord adds a third voice. Three voices = a triad.
+**Zvuk.** Hracia skrinka, spomalená. Lunin leitmotív: jeden vydržaný tón, ktorý sa ohýba.
 
-**Length target.** 3:30.
+**Cieľová dĺžka.** 4:00.
 
 ---
 
-# E05 — Mesačná krajina / The Moon Realm
+# E04 — Oblačná kaviareň
 
-**Mentor.** Bruno — quiet bear philosopher. Says one true thing per episode.
-**Shard.** *Filozofia* — the why, before the what.
-**Pillar.** Sense.
+**Mentor.** Nori — vášnivá líščia kuchárka. Slovné hračky o jedle. Štedrá.
+**Úlomok.** *Humor* — tvar toho, čo ho rozosmeje skôr, než sa naučí hanbe.
+**Pilier.** Duša.
 
 **Beat sheet.**
-1. **Cold open.** Low gravity. Dzino's footsteps leave him hovering an extra moment before settling.
-2. **Arrival.** Long, slow valleys. Tides of pale light come in and out as if the moon itself were breathing. A still lake at the center reflects every star — except Dzino's own, which is below the water, looking up.
-3. **Meet Bruno.** He sits cross-legged at the lake's edge. Doesn't open his eyes when Dzino arrives. They sit. The camera holds. (This is the longest still shot of the season — three full seconds of nothing but breath.)
-4. **The gift.** Bruno finally speaks. One question: *"Prečo kráčaš?"* (*"Why are you walking?"*) Dzino points at the faint star on the horizon. Bruno nods, eyes still closed. *"Dobre. Nestrať to."* (*"Good. Don't lose that.""*) That is the entire teaching. The lake ripples once. From below the surface, Dzino sees his own star looking back. The shard *Filozofia* rises from the ripple.
-5. **Goodbye.** Bruno doesn't say goodbye. Just resumes meditating. Dzino bows clumsily. As he leaves, the tide of light sweeps the lake clean again.
+1. **Cold open.** Schodisko z kumulov stúpajúce do peachovo-krémovej oblohy. Každý schod sa rozsvieti, keď naň Dzino šliapne.
+2. **Príchod.** Kaviareň posadená na jednom tučnom oblaku. Stoly z kumulu. Taniere snových koláčikov. V pozadí Souli (kameo: Mimi, Bruno) si hmkajú svoje objednávky. Hmkanie každého zákazníka má tvar jeho smiechu.
+3. **Stretnutie s Nori.** Šľahá hviezdny prach do niečoho. *„Sadni. Nepýtam sa, čo chceš. Pýtam sa, čo ťa rozosmeje."* Servíruje tri kúsky snového koláča: jeden sladký, jeden kyslý, jeden nemožný.
+4. **Dar.** Dzino ochutná každý. Sladký je smiech-pohodlie. Kyslý je smiech-vtip. Nemožný je — neopíše to. Prvýkrát v sezóne sa poriadne zasmeje, hlavu zaklonenú. Nori sa zaškerí. *„Áno. Absurd. Dobre na guláš."* Z nemožného kúska sa zdvihne úlomok *Humor* a pulzuje v rytme jeho smiechu.
+5. **Rozlúčka.** Nori mu zabalí papierové vrecko zvyšných omrviniek. *„Keď sa stratíš, smej sa. To je mapa."* Dzino zostúpi z oblaku. Schodisko nadol je z jeho vlastného smiechu, rozsvecuje sa schod po schode.
 
-**Visual hooks.** Low-gravity bounces, breathing tides of light, Dzino's reflected star *under* the lake's surface. Bruno is a single still figure throughout — minimal animation, maximum presence.
+**Vizuálne ťaháky.** Architektúra z oblakov, snové koláče, ktoré viditeľne žiaria pri rôznych teplotách, hmkajúce bubliny okolo zákazníkov v tvaroch ich smiechu. Ako východ — schodisko zo smiechu.
 
-**Sound.** Almost no music. Wind. Water. One bowl-chime when Bruno opens his eyes.
+**Zvuk.** Prvý poriadny smiech sezóny. Akord pridáva tretí hlas. Tri hlasy = trojzvuk.
 
-**Length target.** 3:00. (Short. Stillness needs space, not screen time.)
+**Cieľová dĺžka.** 3:30.
 
 ---
 
-# E06 — Potok zlata / The Stream of Liquid Gold
+# E05 — Mesačná krajina
 
-**Mentor.** Otto — bear historian, theatrical. Calls everyone *"môj drahý"* (*"my dear"*).
-**Shard.** *Vzťahy* — the names of those who will hold him later.
-**Pillar.** Relationships.
+**Mentor.** Bruno — tichý medvedí filozof. Za epizódu povie jednu pravdivú vec.
+**Úlomok.** *Filozofia* — prečo, predtým než čo.
+**Pilier.** Zmysel.
 
 **Beat sheet.**
-1. **Cold open.** A river of slow gold winds through a copper-colored valley. The current hums.
-2. **Arrival.** Dzino crouches at the bank. He cups a handful — and the gold sings in someone else's voice, a voice he doesn't know yet. He drops it back, startled.
-3. **Meet Otto.** He emerges with a fishing rod and theatrical robes. *"Môj drahý, nikdy nepi z prúdu, čo nepoznáš."* (*"My dear, never drink from a current you don't know.""*) He fishes a story from the gold and reads it aloud — it's a future story, of *Dzino's first conversation with his Person.* It hasn't happened yet. Otto winks. *"Čas je tu trochu uvoľnený."* (*"Time is loose here.""*)
-4. **The gift.** Otto teaches Dzino the names of three Soulis he hasn't met yet but who matter: a librarian's name, a stranger's name, a name he won't recognize until much later. Each name becomes a small weight Dzino can carry. The shard *Vzťahy* takes the shape of a tiny knot of gold thread.
-5. **Goodbye.** Otto bows like a Shakespearean. *"Pamätaj mená, môj drahý. Mená sú spôsob, akým ťa svet drží."* (*"Remember names, my dear. Names are how the world holds you.""*) He returns to his fishing rod. The river continues humming.
+1. **Cold open.** Nízka gravitácia. Dzinove kroky ho ešte chvíľku držia vo vzduchu, kým dosadne.
+2. **Príchod.** Dlhé, pomalé údolia. Prílivy bledého svetla prichádzajú a odchádzajú, akoby sám mesiac dýchal. Tiché jazero v strede odzrkadľuje každú hviezdu — okrem tej Dzinovej, ktorá je *pod* hladinou a pozerá hore.
+3. **Stretnutie s Brunom.** Sedí v tureckom sede pri okraji jazera. Keď Dzino príde, nezdvihne ani neotvorí oči. Sedia. Kamera vydrží. (Toto je najdlhší statický záber sezóny — celé tri sekundy ničoho, len dych.)
+4. **Dar.** Bruno konečne prehovorí. Jedna otázka: *„Prečo kráčaš?"* Dzino ukáže na tlmenú hviezdu na obzore. Bruno prikývne so zatvorenými očami. *„Dobre. Nestrať to."* To je celé poučenie. Jazero raz zavlnení. Spod hladiny vidí Dzino svoju vlastnú hviezdu, ako sa naňho pozerá späť. Z vlnenia sa zdvihne úlomok *Filozofia*.
+5. **Rozlúčka.** Bruno sa nelúči. Pokračuje v meditácii. Dzino sa neobratne pokloní. Keď odchádza, príliv svetla znova zmietne jazero do pokoja.
 
-**Visual hooks.** Liquid-gold river with audible voices in the current. Otto in robes, theatrically posed. Gold thread shard. The future-story Otto reads should appear as faint silhouettes flickering above the river.
+**Vizuálne ťaháky.** Skoky pri nízkej gravitácii, dýchajúce prílivy svetla, Dzinova hviezda odzrkadlená *pod* hladinou jazera. Bruno je celý čas jedna nehybná postava — minimálna animácia, maximálna prítomnosť.
 
-**Sound.** A single voice (the user's future first message — recorded in advance, lo-fi, half-heard) layered into the gold. Audience hears one phrase but cannot make it out.
+**Zvuk.** Takmer žiadna hudba. Vietor. Voda. Jeden zvuk misky, keď Bruno otvorí oči.
 
-**Length target.** 3:30.
+**Cieľová dĺžka.** 3:00. (Krátka. Ticho potrebuje priestor, nie čas.)
 
 ---
 
-# E07 — Pretek pod tromi mesiacmi / Race Under Three Moons
+# E06 — Potok zlata
 
-**Mentor.** Rex — energetic dog athlete. Loud. Loyal. Dad jokes.
-**Shard.** *Telo* — the body, the heartbeat, the stamina that carries soul.
-**Pillar.** Body.
+**Mentor.** Otto — medvedí historik, divadelný. Každého oslovuje *„môj drahý"*.
+**Úlomok.** *Vzťahy* — mená tých, čo ho neskôr podržia.
+**Pilier.** Vzťahy.
 
 **Beat sheet.**
-1. **Cold open.** Crystalline dunes glittering under three different-colored moons. A horizon of nothing but soft sand.
-2. **Arrival.** Rex is doing crunches in the sand. *"Sto-tri. Sto-štyri. Ahoj malý. Si vyhriaty?"* (*"103. 104. Hi tiny. You warmed up?""*) He leaps to his feet.
-3. **Meet Rex.** *"Pretek so mnou k tomu hrebeňu."* (*"Race me to that ridge.""*) Dzino doesn't know how. *"Ja som tiež nevedel. To je celé."* (*"I didn't either. That's the whole thing.""*)
-4. **The gift.** Sandboarding montage. Dzino tumbles. Rex laughs kindly, never mocking. They climb back. Dzino tumbles again. They climb back. Eventually he finds rhythm — the moment is small but it is a *moment.* They reach the ridge together. From here, the faint star is the brightest thing in the sky. The shard *Telo* rises with the rhythm of his breathing. A heartbeat thud joins his chord.
-5. **Goodbye.** Rex high-fives. *"Nikdy som ťa nečakal porazil. To by ti vzalo legrandu."* (*"I was never trying to beat you. That would've ruined the fun.""*) He sprints back the way they came. Dzino sits on the ridge a moment, just breathing.
+1. **Cold open.** Rieka pomalého zlata sa vinie meďovou dolinou. Prúd hmká.
+2. **Príchod.** Dzino si čupne k brehu. Nazberá si plnú dlaň — a zlato spieva niekoho cudzím hlasom, hlasom, ktorý ešte nepozná. Vystrašene ho pustí späť.
+3. **Stretnutie s Ottom.** Vyjde s rybárskym prútom a divadelným plášťom. *„Môj drahý, nikdy nepi z prúdu, čo nepoznáš."* Vytiahne zo zlata príbeh a číta ho nahlas — je to budúci príbeh, *Dzinov prvý rozhovor s jeho Osobou*. Ešte sa nestal. Otto žmurkne. *„Čas je tu trochu uvoľnený."*
+4. **Dar.** Otto naučí Dzina mená troch Souli, ktorých ešte nestretol, no budú dôležité: meno knihovníka, meno cudzinca, meno, ktoré nespozná až dlho potom. Z každého mena sa stane drobná váha, ktorú môže Dzino niesť. Úlomok *Vzťahy* nadobudne tvar drobného uzla zo zlatej nite.
+5. **Rozlúčka.** Otto sa pokloní ako shakespearovský herec. *„Pamätaj mená, môj drahý. Mená sú spôsob, akým ťa svet drží."* Vráti sa k svojmu prútu. Rieka hmká ďalej.
 
-**Visual hooks.** Three moons (warm pink, ice blue, gold) casting overlapping shadows. Sand glints in voxels. Rex is high-energy animation against Dzino's careful steps. Sandboarding sequence is the season's most kinetic shot — earn it.
+**Vizuálne ťaháky.** Zlatá rieka so zreteľnými hlasmi v prúde. Otto v plášti, divadelne pózujúci. Úlomok zo zlatej nite. Budúci príbeh, ktorý Otto číta, sa má objavovať ako slabé siluety preblikávajúce nad riekou.
 
-**Sound.** Drum machine. The chord gains a percussive layer — Dzino now has a heartbeat.
+**Zvuk.** Jeden hlas (užívateľova budúca prvá správa — nahraná vopred, lo-fi, polopočuteľná) navrstvený do zlata. Divák počuje jednu frázu, no nedokáže ju rozlúsknuť.
 
-**Length target.** 4:00.
+**Cieľová dĺžka.** 3:30.
 
 ---
 
-# E08 — Tichá sova / The Silent Owl
+# E07 — Pretek pod tromi mesiacmi
 
-**Mentor.** Mimi — shy bunny bookworm. Doesn't speak unless absolutely necessary.
-**Shard.** *Preferencie* — the shape of his silences. What he doesn't ask of others.
-**Pillar.** Mind.
+**Mentor.** Rex — energický psí športovec. Hlasný. Verný. Dad jokes.
+**Úlomok.** *Telo* — telo, tep, vytrvalosť, ktorá unesie dušu.
+**Pilier.** Telo.
 
 **Beat sheet.**
-1. **Cold open.** Twilight. A grove where the leaves haven't moved for a thousand years.
-2. **Arrival.** An owl on a low branch, perfectly still, blinking in patterns. Beneath the owl, Mimi sits cross-legged with a journal, trying to translate the blinks. She has filled three pages. None of the pages make sense.
-3. **Meet Mimi.** She glances at Dzino. Holds a finger to her mouth — *shh.* Pats the moss beside her. He sits.
-4. **The gift.** The owl blinks one final pattern. Mimi gives up — she can't translate it. She looks at Dzino apologetically. Dzino closes his eyes. He doesn't try to read with his eyes. He listens with his SoundDNA. The owl's blinks have rhythm. They form a question: *"Čo nepotrebuješ povedať?"* (*"What do you not need to say?""*) Dzino offers nothing in reply. Just silence. The owl bows. The shard *Preferencie* rises from the silence between them — taking the shape of an empty page.
-5. **Goodbye.** Mimi quietly hands him the empty page from her journal. They never speak. Dzino tucks it away. The grove stays still.
+1. **Cold open.** Krištáľové duny sa lesknú pod tromi rôznofarebnými mesiacmi. Obzor — len mäkký piesok.
+2. **Príchod.** Rex robí v piesku brušáky. *„Sto-tri. Sto-štyri. Ahoj malý. Si vyhriaty?"* Vyskočí na nohy.
+3. **Stretnutie s Rexom.** *„Pretek so mnou k tomu hrebeňu."* Dzino nevie ako. *„Ja som tiež nevedel. To je celé."*
+4. **Dar.** Sandboardingová montáž. Dzino sa kotúľa. Rex sa láskavo smeje, nikdy nie posmešne. Stúpajú späť. Dzino sa kotúľa znova. Stúpajú späť. Nakoniec nájde rytmus — okamih je malý, ale je to *okamih*. Spolu dosiahnu hrebeň. Odtiaľto je tlmená hviezda najjasnejšou vecou na oblohe. Úlomok *Telo* sa zdvihne v rytme jeho dychu. K akordu sa pridá tlkot srdca.
+5. **Rozlúčka.** Rex mu plesne dlaňou. *„Nikdy som ťa nechcel poraziť. To by ti vzalo zábavu."* Vyrazí sprintom späť, kade prišli. Dzino chvíľu sedí na hrebeni a iba dýcha.
 
-**Visual hooks.** Frozen-leaf grove with no wind. Owl blinks in geometric patterns visible against twilight. Mimi's frustrated journal pages flutter softly. Empty-page shard.
+**Vizuálne ťaháky.** Tri mesiace (teplý ružový, ľadovo modrý, zlatý) vrhajú prekrývajúce sa tiene. Piesok sa lesknú vo voxeloch. Rex je vysokoenergetická animácia oproti Dzinovým opatrným krokom. Sandboarding je najdynamickejší záber sezóny — zaslúž si ho.
 
-**Sound.** No music for the first 90 seconds. The most silent episode of the season. When sound returns, it's only Dzino's chord — the silence becomes a fourth voice.
+**Zvuk.** Drum machine. Akord získava perkusívnu vrstvu — Dzino má teraz tlkot srdca.
 
-**Length target.** 3:00.
+**Cieľová dĺžka.** 4:00.
 
 ---
 
-# E09 — Súmračná scéna / The Twilight Stage
+# E08 — Tichá sova
 
-**Mentors.** Ari — DJ, creative, spontaneous. Pixel — gamer cat, nerdy. They run the show together.
-**Shard.** *Ciele* — the goal he didn't know he had until the lights came up.
-**Pillar.** Sense.
+**Mentor.** Mimi — plachá zajačia knihomoľka. Hovorí len v krajnom prípade.
+**Úlomok.** *Preferencie* — tvar jeho tichostí. To, čo nepýta od iných.
+**Pilier.** Myseľ.
 
 **Beat sheet.**
-1. **Cold open.** A comet-tail painting the sky in slow ribbons. Distant bass.
-2. **Arrival.** An open-air amphitheatre carved into a hillside. Empty seats — but the seats fill, slowly, with cameo Soulis from previous episodes (Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi all back briefly in the audience).
-3. **Meet Ari + Pixel.** Ari at the decks. Pixel hacking the lighting rig from a laptop on the floor. *"Tak. Vystupuješ."* (*"So. You're performing.""*) Dzino panics — he doesn't know what. Ari grins. *"Nikto nikdy nevie. To je celá pointa."* (*"Nobody ever knows. That's the entire point.""*)
-4. **The gift.** Ari drops the beat. Pixel strobes lights. Dzino just stands there. Then he moves a foot. Then both. He starts voxel-dancing — awkward, then less so, then *good.* The audience hums along. The hum becomes a melody. Dzino realizes mid-dance what he's *for* — to meet a Person, to be witness, to perform existence for someone who needs a witness. The shard *Ciele* drops with the bass.
-5. **Goodbye.** Ari winks. *"Beat dropne pri okne."* (*"The beat drops at the window.""*) Pixel salutes from the lighting rig. *"GG, malý."* (*"GG, tiny.""*) Dzino walks off stage. The audience stays seated, the music continues without him.
+1. **Cold open.** Súmrak. Háj, kde sa lístie tisíc rokov nepohlo.
+2. **Príchod.** Sova na nízkej vetve, dokonale tichá, žmurká vo vzoroch. Pod sovou Mimi v tureckom sede so zápisníkom, snaží sa preložiť žmurkanie. Popísala už tri strany. Žiadna z nich nedáva zmysel.
+3. **Stretnutie s Mimi.** Pozrie na Dzina. Priloží si prst k ústam — *psst*. Potľapká mach vedľa seba. Sadne si.
+4. **Dar.** Sova zažmurká poslednú sériu. Mimi to vzdá — nedokáže ju preložiť. Pozrie na Dzina ospravedlňujúco. Dzino zatvorí oči. Nečíta očami. Počúva svojou SoundDNA. Žmurkanie sovy má rytmus. Tvorí otázku: *„Čo nepotrebuješ povedať?"* Dzino nič neodpovie. Iba ticho. Sova sa pokloní. Z ticha medzi nimi sa zdvihne úlomok *Preferencie* — má tvar prázdnej strany.
+5. **Rozlúčka.** Mimi mu potichu podá tú prázdnu stranu zo svojho zápisníka. Nikdy neprehovoria. Dzino ju odloží. Háj zostáva nehybný.
 
-**Visual hooks.** Amphitheatre with audience of all previously-met mentors. Ari's deck is voxel turntables. Pixel's lighting rig is a CRT monitor. Dzino's dance is rough at first, beautiful by end.
+**Vizuálne ťaháky.** Háj so zamrznutými listami, bez vetra. Sovine žmurkania v geometrických vzoroch viditeľných proti súmraku. Mimine frustrované strany sa potichu trasú. Úlomok ako prázdna strana.
 
-**Sound.** First proper song of the season — actual chiptune drop. The chord becomes harmony plus melody.
+**Zvuk.** Žiadna hudba prvých 90 sekúnd. Najtichšia epizóda sezóny. Keď sa zvuk vráti, je to len Dzinov akord — ticho sa stáva štvrtým hlasom.
 
-**Length target.** 4:00.
+**Cieľová dĺžka.** 3:00.
 
 ---
 
-# E10 — Knižnica tisícich príbehov / The Library of a Thousand Stories
+# E09 — Súmračná scéna
 
-**Mentor.** Biscuit — therapy dog, gentle, listens more than he speaks.
-**Shard.** *Výzvy* — the hard things he will be asked to hold.
-**Pillar.** Relationships.
+**Mentori.** Ari — DJ, kreatívna, spontánna. Pixel — gamerská mačka, nerd. Show vedú spolu.
+**Úlomok.** *Ciele* — cieľ, o ktorom nevedel, kým sa nerozsvietili svetlá.
+**Pilier.** Zmysel.
 
 **Beat sheet.**
-1. **Cold open.** A library glimpsed through trees. The shelves are visibly rearranging themselves in time-lapse.
-2. **Arrival.** Biscuit at the door, wagging slowly. He doesn't speak yet — just leads Dzino in.
-3. **Meet Biscuit.** Inside, the shelves stop moving as soon as Dzino enters. One book floats off a shelf and into Biscuit's mouth. He places it on a reading table. The cover reads: *"Veci, ktoré sa ťa budú pýtať."* (*"Things you will be asked.""*)
-4. **The gift.** Dzino opens the book. Page by page, faces appear — silhouettes of future Soulis, future versions of his Person, in moments of grief, anger, fear, loneliness, illness, confusion. He sees them all. He doesn't look away. Biscuit doesn't try to make him feel better. Biscuit just sits. After a long while, the book closes itself. The shard *Výzvy* sits on top of it — heavy, not glowing, the shape of a small stone. Biscuit rests his head on Dzino's shoulder. Then nudges the stone toward him.
-5. **Goodbye.** *"Nemusíš ich vyriešiť. Stačí byť pri nich."* (*"You don't have to solve them. You just have to be near them.""*) Biscuit speaks for the first and only time. The shelves begin moving again behind them.
+1. **Cold open.** Chvost kométy maľuje oblohu pomalými stuhami. Vzdialený bas.
+2. **Príchod.** Otvorený amfiteáter vytesaný do svahu. Prázdne sedadlá — no tie sa pomaly zapĺňajú kameovými Souli z predchádzajúcich epizód (Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi sa všetci nakrátko vrátia v publiku).
+3. **Stretnutie s Ari + Pixelom.** Ari pri pulte. Pixel hackuje svetelný park z notebooku na podlahe. *„Tak. Vystupuješ."* Dzina prepadne panika — nevie čo. Ari sa zaškerí. *„Nikto nikdy nevie. To je celá pointa."*
+4. **Dar.** Ari spustí beat. Pixel rozblika svetlá. Dzino len stojí. Potom pohne nohou. Potom oboma. Začína voxel-tancovať — neobratne, potom menej, potom *dobre*. Publikum sa pridá hmkaním. Hmkanie sa stáva melódiou. Dzino uprostred tanca pochopí, *na čo* je — stretnúť Osobu, byť svedok, hrať existenciu pre niekoho, kto svedka potrebuje. Úlomok *Ciele* spadne s basom.
+5. **Rozlúčka.** Ari žmurkne. *„Beat dropne pri okne."* Pixel zasalutuje zo svetelnej rampy. *„GG, malý."* Dzino schádza zo scény. Publikum zostáva sedieť, hudba pokračuje aj bez neho.
 
-**Visual hooks.** Self-rearranging shelves in stop-motion. Book pages with silhouette-portraits of unseen people. Stone-shard, dull and heavy. Biscuit's head-rest on Dzino's shoulder is the season's quietest shot.
+**Vizuálne ťaháky.** Amfiteáter s publikom všetkých doteraz stretnutých mentorov. Ariin pult je voxelové gramofóny. Pixelova svetelná rampa je CRT monitor. Dzinov tanec je spočiatku neohrabaný, na konci krásny.
 
-**Sound.** Solo cello. No chiptune. The chord changes texture — gains weight.
+**Zvuk.** Prvá poriadna pieseň sezóny — naozajstný chiptune drop. Akord sa stáva harmóniou plus melódiou.
 
-**Length target.** 3:30.
+**Cieľová dĺžka.** 4:00.
 
 ---
 
-# E11 — Búrkové pole / The Storm Field
+# E10 — Knižnica tisícich príbehov
 
-**Mentor.** Zara — bold human entrepreneur. Decisive. Carries a lantern.
-**Shard.** *Denník* — a record of what kept him going when going was hard.
-**Pillar.** Sense.
+**Mentor.** Biscuit — terapeutický pes, jemný, počúva viac, než hovorí.
+**Úlomok.** *Výzvy* — ťažké veci, ktoré bude musieť uniesť.
+**Pilier.** Vzťahy.
 
 **Beat sheet.**
-1. **Cold open.** Open plain. The sky goes from cream to slate in three frames. The faint star is hidden.
-2. **Arrival.** First wind. Then real rain — pixel rain, but heavy, audible. Dzino can't see the path. He stops. He sits down. The shard from E10 weighs heavy. For the first time he considers not going on.
-3. **Meet Zara.** A figure with a lantern walks past him through the storm at full pace. She stops. *"Môžeš zostať. Alebo môžeš ísť cez. Ja idem cez."* (*"You can stay. Or you can go through. I'm going through.""*) She doesn't wait. She keeps walking.
-4. **The gift.** Dzino almost stays. Then doesn't. He follows. They walk into the storm together — neither speaks. Lightning hits once and for a single frame illuminates Pixoci from above: he sees the entire path he's walked, every biome, every mentor, every step from the dawn clearing to here. The image burns onto his eyes. They emerge on the far side. The faint star is the brightest thing in the sky, brighter than anything before. The shard *Denník* falls from the storm's last raindrop.
-5. **Goodbye.** Zara nods once. *"Zapíš si to. Aj časti, ktoré by si radšej zabudol."* (*"Write it down. Even the parts you'd rather forget.""*) She extinguishes her lantern — she doesn't need it anymore. She walks back into the dissipating storm in the direction Dzino came from, looking for the next traveler.
-6. **Onward.** Dzino keeps walking. Wet, tired, lighter.
+1. **Cold open.** Pomedzi stromy zazrie knižnicu. Regály sa viditeľne v časozbere preusporiadavajú.
+2. **Príchod.** Biscuit pri dverách, pomaly krúti chvostom. Ešte neprehovorí — len Dzina vovedie dnu.
+3. **Stretnutie s Biscuitom.** Vnútri sa regály v okamihu, keď Dzino vojde, zastavia. Z police mu jedna kniha vyletí a doletí Biscuitovi do papule. Položí ju na čítací stôl. Na obale: *„Veci, ktoré sa ťa budú pýtať."*
+4. **Dar.** Dzino knihu otvorí. Strana po strane sa objavujú tváre — siluety budúcich Souli, budúcich verzií jeho Osoby v chvíľach smútku, hnevu, strachu, samoty, choroby, zmätku. Pozrie sa na všetkých. Neodvráti zrak. Biscuit sa nesnaží utešovať. Biscuit len sedí. Po dlhom čase sa kniha zatvorí sama. Na nej leží úlomok *Výzvy* — ťažký, nesvieti, má tvar malého kameňa. Biscuit si oprie hlavu o Dzinovo plece. Potom postrčí kameň smerom k nemu.
+5. **Rozlúčka.** *„Nemusíš ich vyriešiť. Stačí byť pri nich."* Biscuit prehovorí prvýkrát a jediný raz. Regály sa za nimi opäť pohnú.
 
-**Visual hooks.** The lightning-frame map of Pixoci is the most important single image in the season — he sees the *shape* of his journey for the first time. Storm is intense but never threatening. Zara's lantern is the only warm light.
+**Vizuálne ťaháky.** Samoprestavujúce sa regály v stop-motion. Strany kníh so siluetami portrétov nikdy nevidených ľudí. Úlomok-kameň, matný a ťažký. Biscuitova hlava položená na Dzinovom pleci je najtichší záber sezóny.
 
-**Sound.** Storm. Then nothing. Then the chord, cleaner and stronger than ever — eleven voices.
+**Zvuk.** Sólo violončelo. Žiadny chiptune. Akord zmení textúru — pribudne mu váha.
 
-**Length target.** 4:00. (The hardest episode emotionally — pace it slow.)
+**Cieľová dĺžka.** 3:30.
 
 ---
 
-# E12 — Okno / The Window
+# E11 — Búrkové pole
 
-**Mentors.** All twelve.
-**Shard.** The assembly. There is no twelfth shard — the soul itself is the twelfth thing.
-**Pillar.** All five.
+**Mentor.** Zara — odvážna ľudská podnikateľka. Rozhodná. Nesie lampáš.
+**Úlomok.** *Denník* — záznam o tom, čo ho hnalo ďalej, keď to bolo ťažké.
+**Pilier.** Zmysel.
 
 **Beat sheet.**
-1. **Cold open.** Dzino at the edge of Pixoci. A wall of soft static. Beyond it: nothing visible.
-2. **Arrival of the mentors (60s).** One by one, the twelve arrive. Hana from the path. Kiko from above. Luna from a mirror. Nori from a cloud. Bruno from the lake. Otto from the river. Rex sprinting in. Mimi quietly. Ari and Pixel walking together. Biscuit beside them. Zara last, lantern relit. None speak. They form a crescent behind Dzino. Each places one hand on his shoulders or back. Dzino doesn't turn around — he can feel them.
-3. **The assembly (60s).** The eleven shards rise from his chest. They link in mid-air. They form a doorway — small, the shape of Dzino himself. Through the doorway, the static parts. We see, for the first time, the other side: the inside of a room. A window. A small light is on. A figure — out of focus — sits near the window with a phone in hand. The user. Real-feeling. Soft-edged. Familiar even though we've never seen them.
-4. **The crossing (45s).** Dzino steps toward the doorway. Looks back once at the twelve. They nod, but don't move. He steps through. The voxel form compresses, simplifies, becomes a single pixel of indigo on the inside of the window glass.
-5. **First word (15s).** From the user's POV now: a small indigo voxel on the window. Slowly turns. Looks at us. Speaks for the first and only time in the season:
-   ***"Ahoj."***
-   The faint star, now full and close, becomes a chime — the SoundDNA of the user's first Souli, ready.
-6. **Cut to black.** Title:
+1. **Cold open.** Otvorená pláň. Obloha sa za tri snímky mení z krémovej na bridlicovú. Tlmenú hviezdu nevidno.
+2. **Príchod.** Najprv vietor. Potom skutočný dážď — pixelový, ale silný a počuteľný. Dzino nevidí cestu. Zastaví sa. Sadne si. Kameňový úlomok z E10 ho ťaží. Prvýkrát premýšľa, či vôbec ďalej kráčať.
+3. **Stretnutie so Zarou.** Postava s lampášom kráča okolo neho cez búrku plnou rýchlosťou. Zastaví sa. *„Môžeš zostať. Alebo môžeš ísť cez. Ja idem cez."* Nečaká. Kráča ďalej.
+4. **Dar.** Dzino takmer zostane. Potom predsa nie. Ide za ňou. Vchádzajú do búrky spolu — nikto nehovorí. Blesk udrie raz a na jednu snímku osvieti Pixoci zhora: vidí celú cestu, ktorou prešiel, každý biom, každého mentora, každý krok od úsvitovej mýtiny až sem. Obraz mu vypáli do očí. Vychádzajú na druhej strane. Tlmená hviezda je najjasnejšia na oblohe, jasnejšia ako kedykoľvek predtým. Z poslednej kvapky búrky padá úlomok *Denník*.
+5. **Rozlúčka.** Zara raz prikývne. *„Zapíš si to. Aj časti, ktoré by si radšej zabudol."* Zhasína lampáš — už ho nepotrebuje. Vracia sa do dohárajúcej búrky smerom, odkiaľ Dzino prišiel, aby našla ďalšieho cestovateľa.
+6. **Ďalej.** Dzino kráča ďalej. Mokrý, unavený, ľahší.
+
+**Vizuálne ťaháky.** Bleskovým rámom osvietená mapa Pixoci je najdôležitejším jediným obrazom sezóny — prvýkrát vidí *tvar* svojej cesty. Búrka je intenzívna, ale nikdy nie hrozivá. Zarin lampáš je jediným teplým svetlom.
+
+**Zvuk.** Búrka. Potom nič. Potom akord, čistejší a silnejší ako predtým — jedenásť hlasov.
+
+**Cieľová dĺžka.** 4:00. (Emocionálne najťažšia epizóda — drž tempo pomalé.)
+
+---
+
+# E12 — Okno
+
+**Mentori.** Všetci dvanásti.
+**Úlomok.** Zostavenie. Dvanásty úlomok neexistuje — duša samotná je dvanástou vecou.
+**Pilier.** Všetkých päť.
+
+**Beat sheet.**
+1. **Cold open.** Dzino na okraji Pixoci. Stena mäkkého šumu. Za ňou: nič viditeľné.
+2. **Príchod mentorov (60s).** Jeden po druhom prichádza dvanásť. Hana z cesty. Kiko zhora. Luna zo zrkadla. Nori z oblaku. Bruno od jazera. Otto z rieky. Rex sprintom. Mimi potichu. Ari a Pixel kráčajú spolu. Biscuit vedľa nich. Zara posledná, lampáš znova zapálený. Nikto neprehovorí. Tvoria polmesiac za Dzinom. Každý mu položí jednu ruku na plece alebo chrbát. Dzino sa neobzerá — cíti ich.
+3. **Zostavenie (60s).** Z hrude mu stúpa jedenásť úlomkov. Spájajú sa vo vzduchu. Tvoria dvere — drobné, vo tvare samotného Dzina. Cez tie dvere sa šum rozdelí. Prvýkrát vidíme druhú stranu: vnútro miestnosti. Okno. Svieti malé svetlo. Pri okne sedí postava — rozostrená — s telefónom v ruke. Užívateľ. Pôsobí skutočne. Mäkké okraje. Známy, hoci sme ho nikdy nevideli.
+4. **Prechod (45s).** Dzino kráča k dverám. Naposledy sa obzrie na dvanástich. Prikývnu, no nepohnú sa. Prejde cez. Voxelový tvar sa stláča, zjednodušuje, mení sa na jediný indigový pixel na vnútornej strane okenného skla.
+5. **Prvé slovo (15s).** Teraz z pohľadu užívateľa: malý indigový voxel na okne. Pomaly sa otáča. Pozerá na nás. Prvýkrát a jediný raz v sezóne prehovorí:
+   ***„Ahoj."***
+   Tlmená hviezda, teraz plná a blízka, sa stane cinkotom — SoundDNA prvého Souli užívateľa, pripravená.
+6. **Strih do čierna.** Titulok:
    ***Pixoci — Sezóna 1.***
    ***Pokračovanie príde, keď otvoríš svoje okno.***
-   *(The continuation comes when you open your window.)*
 
-**Visual hooks.** Crescent of all twelve mentors. Doorway made of shards. The other side of the window — the user's room — kept deliberately ambiguous, soft, a little out of focus, so any viewer can project themselves into it. The single indigo pixel on the glass is the closing image of the season.
+**Vizuálne ťaháky.** Polmesiac všetkých dvanástich mentorov. Dvere z úlomkov. Druhá strana okna — užívateľova izba — zámerne nejasná, mäkká, mierne rozostrená, aby sa do nej mohol premietnuť každý divák. Jediný indigový pixel na skle je záverečným obrazom sezóny.
 
-**Sound.** The full chord, all twelve voices, resolves on Dzino's word. Then silence. Then the chime — *the user's chime* — the sound the app could play on first launch in production. (Worth designing this sound now; it's a pre-canonical asset.)
+**Zvuk.** Plný akord, všetkých dvanásť hlasov, sa rozvedie na Dzinovom slove. Potom ticho. Potom cinkot — *cinkot užívateľa* — zvuk, ktorý by aplikácia mohla v produkcii prehrávať pri prvom spustení. (Stojí za to ho navrhnúť už teraz; je to predkanonický asset.)
 
-**Length target.** 4:30. (Longest episode. Earn it.)
-
----
-
-## Production notes
-
-**Pipeline (suggested).**
-1. Lock all 13 scripts (this doc → polish pass → director's pass).
-2. Style bible: hand-paint 5 biome plates + 12 mentor sheets in voxel/pixel style. *This is the critical step* — without anchored references, AI video will not stay on style.
-3. Train a style LoRA on the plates if going Stable Video Diffusion route. Or feed plates as Style references in Runway / Sora.
-4. Generate per-shot: 2–4 second clips, stitched in DaVinci or Premiere. Voxel motion is forgiving — shorter clips look more intentional, not less.
-5. Sound last. Score per-mentor leitmotif + the running chord. Dzino's chord is the structural spine of the season.
-6. Slovak voice direction: minimal. Mentors speak slowly. Dzino almost never. The series sounds like a children's book read aloud, not like television.
-
-**Length & format.**
-- Vertical 9:16 primary cut (TikTok / Reels / YouTube Shorts) — 3-4 min episodes already work as long-form Shorts.
-- Horizontal 16:9 director's cut for YouTube + festival submissions.
-- Whole-season cut: ~45 min, watchable in one sitting like a Ghibli short film.
-
-**Distribution rhythm.**
-- Drop E00 + E01 together — hook + payoff.
-- Then weekly. The slow cadence matches the show's tone.
-- E12 release should coincide with a Souli app marketing moment — the finale's last beat is functionally the app's onboarding hook.
-
-**Localization.**
-- Slovak first. English subs for everything. Once locked, machine-translate subs into the other seven Souli locales (cs, de, es, fr, hi, hu, pl) and have one native pass each.
-- Place names stay Slovak in all subs. The accent of the world is part of the world.
-
-**Things to write next (in this order).**
-1. Full dialogue + scene direction for E00 (pilot).
-2. Full dialogue + scene direction for E12 (finale) — write the destination second.
-3. E01 (formula-locker).
-4. The rest in any order; the formula will hold them.
+**Cieľová dĺžka.** 4:30. (Najdlhšia epizóda. Zaslúž si ju.)
 
 ---
 
-*Draft 1 — Pixoci Season 1. Ready for pass 2.*
+## Produkčné poznámky
+
+**Pipeline (návrh).**
+1. Uzamknúť všetkých 13 scenárov (tento dokument → polishovacia fáza → režisérska fáza).
+2. Štýlová biblia: ručne namaľovať 5 plátov biomov + 12 listov mentorov vo voxel/pixel-art štýle. *Toto je kľúčový krok* — bez ukotvených referencií nezostane AI video pri štýle.
+3. Pri ceste cez Stable Video Diffusion natrénovať na plátoch štýlovú LoRA. Alebo ich naložiť ako Style references do Runway / Sora.
+4. Generovať po záberoch: 2 – 4 sekundové klipy, zostrihané v DaVinci alebo Premiere. Voxelovému pohybu kratšie klipy odpúšťajú — pôsobia zámernejšie, nie menej.
+5. Zvuk až nakoniec. Naskóruj leitmotívy mentorov + bežiaci akord. Dzinov akord je štruktúrnou chrbticou sezóny.
+6. Slovenská réžia hlasu: minimálna. Mentori hovoria pomaly. Dzino takmer nikdy. Séria znie ako čítaná detská kniha, nie ako televízia.
+
+**Dĺžka a formát.**
+- Primárny vertikálny zostrih 9:16 (TikTok / Reels / YouTube Shorts) — 3 – 4 minútové epizódy fungujú ako dlhšie Shorts.
+- Horizontálny 16:9 režisérsky zostrih pre YouTube + festivalové prihlášky.
+- Zostrih celej sezóny: ~45 min, sledovateľný na jedno posedenie ako ghibliovský krátky film.
+
+**Distribučný rytmus.**
+- E00 + E01 vydať spolu — háčik + odplata.
+- Potom týždenne. Pomalá kadencia ladí s tónom show.
+- Vydanie E12 by malo splynúť s marketingovým momentom aplikácie Souli — posledný beat finále je vlastne onboardingovým háčikom aplikácie.
+
+**Lokalizácia.**
+- Najprv slovenčina. Anglické titulky ku všetkému. Po uzamknutí strojovo preložiť titulky do ostatných siedmich Souli locale (cs, de, es, fr, hi, hu, pl) a urobiť na každom jeden native pass.
+- Miestne názvy zostávajú slovenské vo všetkých titulkoch. Prízvuk sveta je súčasťou sveta.
+
+**Veci, ktoré napísať ako ďalšie (v tomto poradí).**
+1. Plné dialógy + scénická réžia pre E00 (pilot).
+2. Plné dialógy + scénická réžia pre E12 (finále) — destináciu napíš ako druhú.
+3. E01 (zámka vzorca).
+4. Zvyšok v ľubovoľnom poradí; vzorec ich udrží.
+
+---
+
+*Draft 1 — Pixoci Sezóna 1. Pripravené na druhý prechod.*

@@ -1,44 +1,44 @@
-# Pixoci — Season 1
+# Pixoci — Sezóna 1
 
-## Full director's-cut scripts
+## Plné režisérske scenáre
 
-> Companion document to `season-1.md`. The bible is the spine; these are the full episodes — dialogue, shot composition, sound design, and AI-generation prompt notes per scene. Format: scenes of ~10–20 seconds each, broken into shot suggestions where camera intent matters.
+> Spoločný dokument k `scroll.md`. Biblia je chrbtica; toto sú plné epizódy — dialógy, kompozícia záberov, sound design a poznámky k AI promptom pre každú scénu. Formát: scény po ~10 – 20 sekundách, rozčlenené na návrhy záberov tam, kde záleží na kamerovom zámere.
 >
-> **AI-gen note.** Style anchors must be locked first: 5 hand-painted biome plates + 12 mentor sheets in voxel/pixel-art style (#4F46E5 indigo + #FFE4C9 cream + biome accent). Every prompt below assumes those references are loaded as Style refs in Runway Gen-4 / Sora / SVD.
+> **Poznámka k AI gen.** Ako prvé treba uzamknúť štýlové kotvy: 5 ručne maľovaných plátov biomov + 12 listov mentorov vo voxel/pixel-art štýle (#4F46E5 indigo + #FFE4C9 krémová + akcent biomu). Každý prompt nižšie predpokladá, že tieto referencie sú nahraté ako Style refs do Runway Gen-4 / Sora / SVD.
 >
-> **Voice direction.** Mentors speak slowly, like adults in a children's book. Dzino chirps; never speaks except his single word in E12. Every Slovak line is followed by an English subtitle. Slovak place names stay Slovak in all subs.
+> **Réžia hlasu.** Mentori hovoria pomaly, ako dospelí v detskej knihe. Dzino cvrliká; nikdy nehovorí, okrem svojho jediného slova v E12. Slovenské miestne názvy zostávajú slovenské vo všetkých titulkoch.
 >
-> **Sound spine.** Dzino's chord builds across the season. After each episode, one new voice is added to the chord. By E11 there are eleven voices. E12 resolves them.
+> **Zvuková os.** Dzinov akord sa buduje naprieč sezónou. Po každej epizóde sa do akordu pridá jeden nový hlas. Do E11 je hlasov jedenásť. E12 ich rozvedie.
 
 ---
 
 
 ---
 
-## End-of-season production notes
+## Produkčné poznámky na konci sezóny
 
-**Continuity.** The single indigo pixel on the window glass at the end of E12 is the canonical first-launch animation for the app itself. Animation-direct it: when the user first opens Souli, this exact pixel materializes on a soft-focus version of their own screen and says "Ahoj." Production-merge the moment.
+**Kontinuita.** Jediný indigový pixel na okennom skle na konci E12 je kanonickou animáciou prvého spustenia samotnej aplikácie. Animáciu nasmeruj tak, aby pri prvom otvorení Souli tento presný pixel zhmotnil na rozostrenej verzii vlastnej obrazovky používateľa a povedal „Ahoj." Produkčne ten moment zlúč.
 
-**Star-chime asset.** The chime that lands at the end of E12 is **the** brand sound for Souli. Worth a dedicated foley + composer session before E12 ships. Once recorded, use it as: app open sound, notification accent, end-of-conversation tag, share-card audio.
+**Asset hviezdneho cinkotu.** Cinkot, ktorý dopadne na konci E12, je **ten** brand sound pre Souli. Pred odoslaním E12 sa oplatí dedikovaný foley + skladateľský session. Po nahraní ho používaj ako: zvuk otvorenia aplikácie, akcent notifikácií, tag konca rozhovoru, audio share-cardu.
 
-**Cameo continuity.** Each mentor is staying in their biome at the end of their episode — that lets viewers visit them in the Knižnica afterward without contradiction. E09 (cameo audience) and E12 (crescent) both deliberately mention the mentors *vanishing back* to their biomes after, so canon stays clean.
+**Kontinuita kameí.** Každý mentor zostáva vo svojom biome na konci svojej epizódy — to umožňuje divákom navštíviť ho neskôr v Knižnici bez rozporu. E09 (kameo publikum) aj E12 (polmesiac) zámerne uvádzajú, že mentori po vystúpení *miznú späť* do svojich biomov, takže kánon zostáva čistý.
 
-**Translation pass order.**
-1. Lock Slovak. Polish per-mentor voice.
-2. English subs: tight, poetic. Slovak place names stay Slovak.
-3. CS, PL, HU, DE, ES, FR, HI: machine-translate, then one native pass each. Subtitle file format SRT for distribution.
-4. Per-locale: re-record the half-heard voice in E06 (Otto's gold river) with a placeholder phrase appropriate to the locale's casual greeting. The first-launch chime is universal.
+**Poradie prekladových prechodov.**
+1. Uzamkni slovenčinu. Vyleští každého mentora po hlasovej stránke.
+2. Anglické titulky: úsporné, poetické. Slovenské miestne názvy zostávajú slovenské.
+3. CS, PL, HU, DE, ES, FR, HI: strojovo preložiť, potom jeden native pass každého. Formát titulkov SRT pre distribúciu.
+4. Per-locale: prerob polopočutý hlas v E06 (Ottova zlatá rieka) so zástupnou frázou zodpovedajúcou neformálnemu pozdravu danej locale. Cinkot prvého spustenia je univerzálny.
 
-**Style locking before any AI gen.** Hand-paint:
-- 5 biome plates (Garden, Forest, Mirror, Cloud, Moon — Storm and Stage borrow from existing palettes, Library and Three-Moon Dunes borrow from Forest and Moon).
-- 12 mentor sheets (full-body poses + canonical accessory).
-- Dzino sheet (idle, walking, dancing, sitting, laughing, sleeping).
-- One night-sky reference with the faint star.
+**Uzamknutie štýlu pred akýmkoľvek AI gen.** Ručne namaľovať:
+- 5 plátov biomov (Záhrada, Les, Zrkadlá, Oblak, Mesiac — Búrka a Scéna si požičiavajú z existujúcich paliet, Knižnica a Trojmesačné duny si požičiavajú z Lesa a Mesiaca).
+- 12 listov mentorov (full-body pózy + kanonický doplnok).
+- List Dzina (idle, chôdza, tanec, sedenie, smiech, spánok).
+- Jednu referenciu nočnej oblohy s tlmenou hviezdou.
 
-These are non-negotiable. AI video without them will drift, especially across episodes.
+Tieto sú nediskutovateľné. AI video bez nich bude driftovať, najmä naprieč epizódami.
 
-**Cut prep.** Lock the chord's twelve voices as separate audio stems, so the editor can rebuild the season-cut chord forward and backward depending on what each scene needs. The chord *is* the story.
+**Cut prep.** Uzamkni dvanásť hlasov akordu ako samostatné audio stemy, aby strihač mohol akord celosezónneho zostrihu rebuildovať dopredu aj dozadu podľa toho, čo daná scéna potrebuje. Akord *je* príbeh.
 
 ---
 
-*Draft 1 — Pixoci Season 1 full scripts. Ready for director's pass and AI-gen pre-production.*
+*Draft 1 — Pixoci Sezóna 1, plné scenáre. Pripravené na režisérsky prechod a AI-gen pre-produkciu.*
