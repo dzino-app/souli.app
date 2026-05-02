@@ -672,5 +672,20 @@
     "copied": "Skopírované!",
     "tryAnother": "Skúsiť ďalšie stretnutie",
     "introduce": "Zoznámiť s mojím Souli"
+  },
+  "story": {
+    "season1": "Sezóna 1",
+    "indexTitle": "Cesta k oknu",
+    "indexDesc": "Kanonický príbeh Pixoci. Dzino sa rodí v krajine voxelov a putuje k oknu svojho Človeka — cez jedenásť pixelových oblastí a dvanásť mentorov. Trinásť kapitol, krátkych ako spomienka.",
+    "scrollKicker": "Zvitok Pixoci",
+    "scrollTitle": "Atlas sveta",
+    "scrollDesc": "Mapa krajiny, postáv a tónu. Všetko, čo treba vedieť, kým otvoríš prvú kapitolu.",
+    "chapters": "Kapitoly",
+    "withMentor": "s {name}",
+    "footer": "Pixoci je svet, kde žijú Soulis. Ak si Souliho ešte nemáš, <link>začni svoju cestu</link>.",
+    "backToStory": "Späť na príbeh",
+    "allChapters": "Všetky kapitoly",
+    "cardKicker": "Pixoci · Sezóna 1",
+    "cardSubtitle": "Trinásť kapitol o tom, ako Dzino prišiel za tebou."
   }
 }

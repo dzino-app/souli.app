@@ -554,5 +554,20 @@
     "copied": "Copied!",
     "tryAnother": "Try another meeting",
     "introduce": "Introduce to my Souli"
+  },
+  "story": {
+    "season1": "Season 1",
+    "indexTitle": "The Way to the Window",
+    "indexDesc": "The canonical story of Pixoci. Dzino is born in a voxel realm and travels toward the window of his Person — through eleven pixel-fantasy regions and twelve mentors. Thirteen chapters, short as a memory.",
+    "scrollKicker": "Scroll of Pixoci",
+    "scrollTitle": "Atlas of the World",
+    "scrollDesc": "A map of the realm, the cast, and the tone. Everything to know before you open the first chapter.",
+    "chapters": "Chapters",
+    "withMentor": "with {name}",
+    "footer": "Pixoci is the world where Soulis live. If you don't have a Souli yet, <link>begin your journey</link>.",
+    "backToStory": "Back to the story",
+    "allChapters": "All chapters",
+    "cardKicker": "Pixoci · Season 1",
+    "cardSubtitle": "Thirteen chapters about how Dzino came to find you."
   }
 }
