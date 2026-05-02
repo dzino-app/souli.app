@@ -1,5 +1,6 @@
 #!/usr/bin/env bun
-// Reads app/content/story/{locale}/*.md and emits app/src/lib/story-content.generated.ts
+// Reads app/content/story/{locale}/*.md (scroll, notes, episodes/*, storyboards/*)
+// and emits app/src/lib/story-content.generated.ts.
 // Run with: bun run scripts/build-story.ts
 import fs from "node:fs";
 import path from "node:path";
@@ -12,6 +13,7 @@ interface LocalePack {
   scroll: string;
   notes: string;
   episodes: Record<string, string>;
+  storyboards: Record<string, string>;
 }
 
 const locales: Record<string, LocalePack> = {};
@@ -23,6 +25,7 @@ for (const locale of fs.readdirSync(SRC_DIR).sort()) {
   const scrollPath = path.join(localeDir, "scroll.md");
   const notesPath = path.join(localeDir, "notes.md");
   const epDir = path.join(localeDir, "episodes");
+  const sbDir = path.join(localeDir, "storyboards");
 
   if (!fs.existsSync(scrollPath)) {
     console.log(`  skipping ${locale} — no scroll.md`);
@@ -41,15 +44,24 @@ for (const locale of fs.readdirSync(SRC_DIR).sort()) {
     }
   }
 
-  locales[locale] = { scroll, notes, episodes };
+  const storyboards: Record<string, string> = {};
+  if (fs.existsSync(sbDir)) {
+    for (const f of fs.readdirSync(sbDir).sort()) {
+      if (!f.endsWith(".md")) continue;
+      const id = f.replace(/\.md$/, "");
+      storyboards[id] = fs.readFileSync(path.join(sbDir, f), "utf8");
+    }
+  }
+
+  locales[locale] = { scroll, notes, episodes, storyboards };
   console.log(
-    `  ${locale}: scroll ${scroll.length}c, notes ${notes.length}c, ${Object.keys(episodes).length} episodes`,
+    `  ${locale}: scroll ${scroll.length}c, notes ${notes.length}c, ${Object.keys(episodes).length} ep, ${Object.keys(storyboards).length} sb`,
   );
 }
 
 let out = "// AUTO-GENERATED from app/content/story/{locale}/*.md — do not edit by hand.\n";
 out += "// Regenerate with: bun run scripts/build-story.ts\n\n";
-out += "export interface LocalePack {\n  scroll: string;\n  notes: string;\n  episodes: Record<string, string>;\n}\n\n";
+out += "export interface LocalePack {\n  scroll: string;\n  notes: string;\n  episodes: Record<string, string>;\n  storyboards: Record<string, string>;\n}\n\n";
 out += "export const STORY_BY_LOCALE: Record<string, LocalePack> = ";
 out += JSON.stringify(locales, null, 2);
 out += ";\n\n";

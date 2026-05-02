@@ -407,6 +407,12 @@
     "backToStory": "Zurück zur Geschichte",
     "allChapters": "Alle Kapitel",
     "cardKicker": "Pixoci · Staffel 1",
-    "cardSubtitle": "Dreizehn Kapitel darüber, wie Dzino zu dir gefunden hat."
+    "cardSubtitle": "Dreizehn Kapitel darüber, wie Dzino zu dir gefunden hat.",
+    "storyboardKicker": "Storyboard",
+    "storyboardTitle": "Storyboard dieses Kapitels ansehen",
+    "backToEpisode": "Zurück zum Kapitel",
+    "chimeTitle": "Der Pixoci-Klang",
+    "chimeDesc": "Die Drei-Ton-Phrase, die beim ersten Öffnen von Souli erklingt.",
+    "chimePlay": "Klang abspielen"
   }
 }

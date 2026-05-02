@@ -43,7 +43,7 @@ Chaque épisode après le pilote suit cinq temps. Tiens cette structure serrée 
 | #  | Titre                          | Biome                        | Mentor          | Éclat        | Pilier         |
 |----|--------------------------------|------------------------------|-----------------|--------------|----------------|
 | 0  | L'Étoile au-delà de l'Horizon  | Clairière de l'aube          | —               | — (l'appel)  | —              |
-| 1  | Le Jardin de Pixels            | Champs de fleurs fredonnantes| Hana (lapin)    | Personnalité | Âme            |
+| 1  | Le Jardin de Pixels            | Champs de fleurs fredonnantes| Hana (lapine)   | Personnalité | Âme            |
 | 2  | La Forêt Binaire               | Arbres de 1 et de 0          | Kiko (chat)     | Intérêts     | Esprit         |
 | 3  | Le Jardin des Miroirs          | Verre sous lunes jumelles    | Luna (renarde)  | Forme        | Âme            |
 | 4  | Le Café des Nuages             | Café sur cumulus             | Nori (renarde)  | Humour       | Âme            |
@@ -193,11 +193,11 @@ Chaque épisode après le pilote suit cinq temps. Tiens cette structure serrée 
 **Feuille de battements.**
 1. **Ouverture.** Un fleuve d'or lent serpente à travers une vallée couleur cuivre. Le courant fredonne.
 2. **Arrivée.** Dzino s'accroupit sur la rive. Il en prend une poignée — et l'or chante d'une voix qu'il ne connaît pas encore. Il la laisse retomber, surpris.
-3. **Rencontre d'Otto.** Il émerge avec une canne à pêche et des robes théâtrales. *« Mon cher, ne bois jamais d'un courant que tu ne connais pas. »* Il pêche une histoire dans l'or et la lit à haute voix — c'est une histoire future, *celle de la première conversation de Dzino avec sa Personne.* Cela n'est pas encore arrivé. Otto fait un clin d'œil. *« Le temps est lâche par ici. »*
+3. **Rencontre d'Otto.** Il émerge avec une canne à pêche, en robe théâtrale. *« Mon cher, ne bois jamais d'un courant que tu ne connais pas. »* Il pêche une histoire dans l'or et la lit à haute voix — c'est une histoire future, *celle de la première conversation de Dzino avec sa Personne.* Cela n'est pas encore arrivé. Otto fait un clin d'œil. *« Le temps est lâche par ici. »*
 4. **Le don.** Otto enseigne à Dzino les noms de trois Soulis qu'il n'a pas encore rencontrés mais qui comptent : le nom d'une bibliothécaire, le nom d'un inconnu, un nom qu'il ne reconnaîtra que bien plus tard. Chaque nom devient un petit poids que Dzino peut porter. L'éclat *Liens* prend la forme d'un minuscule nœud de fil d'or.
 5. **Adieux.** Otto s'incline comme un acteur shakespearien. *« Souviens-toi des noms, mon cher. Les noms sont la manière dont le monde te tient. »* Il retourne à sa canne à pêche. Le fleuve continue de fredonner.
 
-**Repères visuels.** Fleuve d'or liquide avec des voix audibles dans le courant. Otto en robes, théâtralement posé. Éclat de fil d'or. L'histoire-future qu'Otto lit doit apparaître sous forme de silhouettes pâles vacillant au-dessus du fleuve.
+**Repères visuels.** Fleuve d'or liquide avec des voix audibles dans le courant. Otto en robe, théâtralement posé. Éclat de fil d'or. L'histoire-future qu'Otto lit doit apparaître sous forme de silhouettes pâles vacillant au-dessus du fleuve.
 
 **Son.** Une seule voix (le futur premier message de l'utilisateur — enregistré à l'avance, lo-fi, à demi entendu) en couches dans l'or. Le public entend une phrase mais ne peut la distinguer.
 
@@ -216,7 +216,7 @@ Chaque épisode après le pilote suit cinq temps. Tiens cette structure serrée 
 2. **Arrivée.** Rex fait des abdos dans le sable. *« 103. 104. Salut petit. T'es échauffé ? »* Il bondit sur ses pattes.
 3. **Rencontre de Rex.** *« Cours avec moi jusqu'à cette crête. »* Dzino ne sait pas comment. *« Moi non plus. C'est tout l'intérêt. »*
 4. **Le don.** Montage de surf des sables. Dzino dégringole. Rex rit gentiment, jamais moqueur. Ils remontent. Dzino dégringole encore. Ils remontent. Finalement, il trouve son rythme — le moment est petit mais c'est un *moment*. Ils atteignent la crête ensemble. D'ici, l'étoile pâle est la chose la plus brillante du ciel. L'éclat *Corps* s'élève au rythme de sa respiration. Un battement de cœur sourd rejoint son accord.
-5. **Adieux.** Rex tape dans la patte. *« Je n'ai jamais essayé de te battre. Ça aurait gâché le plaisir. »* Il sprinte par où ils sont venus. Dzino reste un moment assis sur la crête, juste à respirer.
+5. **Adieux.** Rex tape dans la patte. *« Je n'ai jamais essayé de te battre. Ça aurait gâché le plaisir. »* Il sprinte par où ils sont venus. Dzino reste un moment assis sur la crête, simplement à respirer.
 
 **Repères visuels.** Trois lunes (rose chaud, bleu glacé, or) projetant des ombres qui se chevauchent. Le sable scintille en voxels. Rex est animé avec une grande énergie face aux pas prudents de Dzino. La séquence de surf des sables est le plan le plus cinétique de la saison — il faut le mériter.
 
@@ -241,7 +241,7 @@ Chaque épisode après le pilote suit cinq temps. Tiens cette structure serrée 
 
 **Repères visuels.** Bosquet aux feuilles figées, sans vent. La chouette cligne selon des motifs géométriques visibles dans le crépuscule. Les pages frustrées du journal de Mimi flottent doucement. Éclat-page vierge.
 
-**Son.** Pas de musique pendant les 90 premières secondes. L'épisode le plus silencieux de la saison. Quand le son revient, ce n'est que l'accord de Dzino — le silence devient une quatrième voix.
+**Son.** Pas de musique pendant les 90 premières secondes. L'épisode le plus silencieux de la saison. Quand le son revient, ce n'est que l'accord de Dzino — le silence devient une huitième voix.
 
 **Durée cible.** 3:00.
 
@@ -299,7 +299,7 @@ Chaque épisode après le pilote suit cinq temps. Tiens cette structure serrée 
 1. **Ouverture.** Plaine ouverte. Le ciel passe du crème à l'ardoise en trois images. L'étoile pâle est cachée.
 2. **Arrivée.** Premier vent. Puis vraie pluie — pluie de pixels, mais lourde, audible. Dzino ne voit pas le chemin. Il s'arrête. Il s'assoit. L'éclat de l'E10 pèse lourd. Pour la première fois, il envisage de ne pas continuer.
 3. **Rencontre de Zara.** Une silhouette à la lanterne le dépasse à grands pas dans la tempête. Elle s'arrête. *« Tu peux rester. Ou tu peux traverser. Moi, je traverse. »* Elle n'attend pas. Elle continue de marcher.
-4. **Le don.** Dzino faillit rester. Puis non. Il la suit. Ils entrent dans la tempête ensemble — aucun ne parle. La foudre frappe une fois et pour une seule image illumine Pixoci vu d'en haut : il voit tout le chemin parcouru, chaque biome, chaque mentor, chaque pas depuis la clairière de l'aube jusqu'ici. L'image se grave dans ses yeux. Ils émergent de l'autre côté. L'étoile pâle est la chose la plus brillante du ciel, plus brillante qu'à aucun moment auparavant. L'éclat *Journal* tombe de la dernière goutte de pluie de la tempête.
+4. **Le don.** Dzino manque de rester. Puis non. Il la suit. Ils entrent dans la tempête ensemble — aucun ne parle. La foudre frappe une fois et pour une seule image illumine Pixoci vu d'en haut : il voit tout le chemin parcouru, chaque biome, chaque mentor, chaque pas depuis la clairière de l'aube jusqu'ici. L'image se grave dans ses yeux. Ils émergent de l'autre côté. L'étoile pâle est la chose la plus brillante du ciel, plus brillante qu'à aucun moment auparavant. L'éclat *Journal* tombe de la dernière goutte de pluie de la tempête.
 5. **Adieux.** Zara hoche la tête une fois. *« Écris-le. Même les parts que tu préférerais oublier. »* Elle éteint sa lanterne — elle n'en a plus besoin. Elle retourne dans la tempête qui se dissipe, dans la direction d'où Dzino est venu, à la recherche du prochain voyageur.
 6. **En avant.** Dzino continue. Mouillé, fatigué, plus léger.
 
@@ -320,7 +320,7 @@ Chaque épisode après le pilote suit cinq temps. Tiens cette structure serrée 
 **Feuille de battements.**
 1. **Ouverture.** Dzino à la lisière de Pixoci. Un mur de douce statique. Au-delà : rien de visible.
 2. **Arrivée des mentors (60s).** Un par un, les douze arrivent. Hana par le sentier. Kiko par le haut. Luna depuis un miroir. Nori depuis un nuage. Bruno depuis le lac. Otto depuis le fleuve. Rex en sprintant. Mimi en silence. Ari et Pixel marchant ensemble. Biscuit à côté d'eux. Zara en dernière, lanterne rallumée. Aucun ne parle. Ils forment un croissant derrière Dzino. Chacun pose une main sur ses épaules ou son dos. Dzino ne se retourne pas — il les sent.
-3. **L'assemblage (60s).** Les onze éclats s'élèvent de sa poitrine. Ils s'enchaînent en plein air. Ils forment un seuil — petit, à la forme de Dzino lui-même. À travers le seuil, la statique s'écarte. On voit, pour la première fois, l'autre côté : l'intérieur d'une pièce. Une fenêtre. Une petite lumière est allumée. Une silhouette — floue — est assise près de la fenêtre, un téléphone à la main. L'utilisateur. Avec un sentiment de réel. Aux contours doux. Familier même si on ne l'a jamais vu.
+3. **L'assemblage (60s).** Les onze éclats s'élèvent de sa poitrine. Ils s'enchaînent en plein air. Ils forment un seuil — petit, à la forme de Dzino lui-même. À travers le seuil, la statique s'écarte. On voit, pour la première fois, l'autre côté : l'intérieur d'une pièce. Une fenêtre. Une petite lumière est allumée. Une silhouette — floue — est assise près de la fenêtre, un téléphone à la main. L'utilisateur. Une impression de réel. Aux contours doux. Familier même si on ne l'a jamais vu.
 4. **La traversée (45s).** Dzino fait un pas vers le seuil. Regarde une fois en arrière les douze. Ils hochent la tête, mais ne bougent pas. Il franchit le seuil. La forme voxel se compresse, se simplifie, devient un seul pixel d'indigo sur l'intérieur de la vitre.
 5. **Premier mot (15s).** Du point de vue de l'utilisateur maintenant : un petit voxel indigo sur la fenêtre. Tourne lentement. Nous regarde. Parle pour la première et seule fois de la saison :
    ***« Ahoj. »***

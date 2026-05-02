@@ -407,6 +407,12 @@
     "backToStory": "Powrót do historii",
     "allChapters": "Wszystkie rozdziały",
     "cardKicker": "Pixoci · Sezon 1",
-    "cardSubtitle": "Trzynaście rozdziałów o tym, jak Dzino do ciebie dotarł."
+    "cardSubtitle": "Trzynaście rozdziałów o tym, jak Dzino do ciebie dotarł.",
+    "storyboardKicker": "Storyboard",
+    "storyboardTitle": "Zobacz storyboard tego rozdziału",
+    "backToEpisode": "Powrót do rozdziału",
+    "chimeTitle": "Dźwięk Pixoci",
+    "chimeDesc": "Trzynutowa fraza, która brzmi przy pierwszym otwarciu Souli.",
+    "chimePlay": "Odtwórz dźwięk"
   }
 }

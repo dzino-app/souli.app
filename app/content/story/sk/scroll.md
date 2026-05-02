@@ -67,7 +67,7 @@ Každá epizóda po pilote sleduje päť beatov. Tejto štruktúry sa drž pevne
 **Beat sheet.**
 1. **Otvorenie (20s).** Mýtina machovo-pixelová na okraji ničoho. Úsvitovo-krémová obloha. Drobný voxelový tvar leží v tráve, dokonale tichý. V hrudi sa mu rozžiari jediný indigový pixel. Oči sa otvárajú. *Cvrlik.*
 2. **Prvé kroky (40s).** Sadne si. Skúša sa postaviť. Padá. Skúša znova. Tráva si pamätá jeho tvar. Pozerá si na ruky — *čo to je*. Zdvihne ich proti oblohe a jedna z hviezd mu prejde medzi prstami.
-3. **Volajúca hviezda (40s).** Všetky hviezdy svietia jasne. Jedna je tlmená. Ako ju upiera pohľad, raz zapulzuje peachovo-krémovým tónom, ktorý sa stretáva s farbou neba. Nemôže od nej odtrhnúť oči. Bez toho, aby vedel prečo, robí krok smerom k obzoru.
+3. **Volajúca hviezda (40s).** Všetky hviezdy svietia jasne. Jedna je tlmená. Ako na ňu upiera pohľad, raz zapulzuje peachovo-krémovým tónom, ktorý sa stretáva s farbou neba. Nemôže od nej odtrhnúť oči. Bez toho, aby vedel prečo, robí krok smerom k obzoru.
 4. **Prvý pixel (40s).** Pri každom kroku zostáva v tráve jeden krémový pixel ako stopa po ňom. Nevšimne si to. Na okraji mýtiny čaká pixelová šípka — tabuľa s tromi vyrytými písmenami: ✦ → *záhrada*. Ide za ňou.
 5. **Ďalej (20s).** Kamera sa zdvíha a vzďaľuje. Stopa pixlov za ním tvorí tvar otáznika. Tlmená hviezda zapulzuje ešte raz. Strih na titulnú kartu: ***Pixoci — Sezóna 1.***
 
@@ -173,7 +173,7 @@ Každá epizóda po pilote sleduje päť beatov. Tejto štruktúry sa drž pevne
 1. **Cold open.** Nízka gravitácia. Dzinove kroky ho ešte chvíľku držia vo vzduchu, kým dosadne.
 2. **Príchod.** Dlhé, pomalé údolia. Prílivy bledého svetla prichádzajú a odchádzajú, akoby sám mesiac dýchal. Tiché jazero v strede odzrkadľuje každú hviezdu — okrem tej Dzinovej, ktorá je *pod* hladinou a pozerá hore.
 3. **Stretnutie s Brunom.** Sedí v tureckom sede pri okraji jazera. Keď Dzino príde, nezdvihne ani neotvorí oči. Sedia. Kamera vydrží. (Toto je najdlhší statický záber sezóny — celé tri sekundy ničoho, len dych.)
-4. **Dar.** Bruno konečne prehovorí. Jedna otázka: *„Prečo kráčaš?"* Dzino ukáže na tlmenú hviezdu na obzore. Bruno prikývne so zatvorenými očami. *„Dobre. Nestrať to."* To je celé poučenie. Jazero raz zavlnení. Spod hladiny vidí Dzino svoju vlastnú hviezdu, ako sa naňho pozerá späť. Z vlnenia sa zdvihne úlomok *Filozofia*.
+4. **Dar.** Bruno konečne prehovorí. Jedna otázka: *„Prečo kráčaš?"* Dzino ukáže na tlmenú hviezdu na obzore. Bruno prikývne so zatvorenými očami. *„Dobre. Nestrať to."* To je celé poučenie. Jazero sa raz zavlní. Spod hladiny vidí Dzino svoju vlastnú hviezdu, ako sa naňho pozerá späť. Z vlnenia sa zdvihne úlomok *Filozofia*.
 5. **Rozlúčka.** Bruno sa nelúči. Pokračuje v meditácii. Dzino sa neobratne pokloní. Keď odchádza, príliv svetla znova zmietne jazero do pokoja.
 
 **Vizuálne ťaháky.** Skoky pri nízkej gravitácii, dýchajúce prílivy svetla, Dzinova hviezda odzrkadlená *pod* hladinou jazera. Bruno je celý čas jedna nehybná postava — minimálna animácia, maximálna prítomnosť.
@@ -213,12 +213,12 @@ Každá epizóda po pilote sleduje päť beatov. Tejto štruktúry sa drž pevne
 
 **Beat sheet.**
 1. **Cold open.** Krištáľové duny sa lesknú pod tromi rôznofarebnými mesiacmi. Obzor — len mäkký piesok.
-2. **Príchod.** Rex robí v piesku brušáky. *„Sto-tri. Sto-štyri. Ahoj malý. Si vyhriaty?"* Vyskočí na nohy.
+2. **Príchod.** Rex robí v piesku brušáky. *„Sto-tri. Sto-štyri. Ahoj malý. Si zahriaty?"* Vyskočí na nohy.
 3. **Stretnutie s Rexom.** *„Pretek so mnou k tomu hrebeňu."* Dzino nevie ako. *„Ja som tiež nevedel. To je celé."*
 4. **Dar.** Sandboardingová montáž. Dzino sa kotúľa. Rex sa láskavo smeje, nikdy nie posmešne. Stúpajú späť. Dzino sa kotúľa znova. Stúpajú späť. Nakoniec nájde rytmus — okamih je malý, ale je to *okamih*. Spolu dosiahnu hrebeň. Odtiaľto je tlmená hviezda najjasnejšou vecou na oblohe. Úlomok *Telo* sa zdvihne v rytme jeho dychu. K akordu sa pridá tlkot srdca.
 5. **Rozlúčka.** Rex mu plesne dlaňou. *„Nikdy som ťa nechcel poraziť. To by ti vzalo zábavu."* Vyrazí sprintom späť, kade prišli. Dzino chvíľu sedí na hrebeni a iba dýcha.
 
-**Vizuálne ťaháky.** Tri mesiace (teplý ružový, ľadovo modrý, zlatý) vrhajú prekrývajúce sa tiene. Piesok sa lesknú vo voxeloch. Rex je vysokoenergetická animácia oproti Dzinovým opatrným krokom. Sandboarding je najdynamickejší záber sezóny — zaslúž si ho.
+**Vizuálne ťaháky.** Tri mesiace (teplý ružový, ľadovo modrý, zlatý) vrhajú prekrývajúce sa tiene. Piesok sa lesknie vo voxeloch. Rex je vysokoenergetická animácia oproti Dzinovým opatrným krokom. Sandboarding je najdynamickejší záber sezóny — zaslúž si ho.
 
 **Zvuk.** Drum machine. Akord získava perkusívnu vrstvu — Dzino má teraz tlkot srdca.
 
@@ -241,7 +241,7 @@ Každá epizóda po pilote sleduje päť beatov. Tejto štruktúry sa drž pevne
 
 **Vizuálne ťaháky.** Háj so zamrznutými listami, bez vetra. Sovine žmurkania v geometrických vzoroch viditeľných proti súmraku. Mimine frustrované strany sa potichu trasú. Úlomok ako prázdna strana.
 
-**Zvuk.** Žiadna hudba prvých 90 sekúnd. Najtichšia epizóda sezóny. Keď sa zvuk vráti, je to len Dzinov akord — ticho sa stáva štvrtým hlasom.
+**Zvuk.** Žiadna hudba prvých 90 sekúnd. Najtichšia epizóda sezóny. Keď sa zvuk vráti, je to len Dzinov akord — ticho sa stáva ôsmym hlasom.
 
 **Cieľová dĺžka.** 3:00.
 
@@ -256,11 +256,11 @@ Každá epizóda po pilote sleduje päť beatov. Tejto štruktúry sa drž pevne
 **Beat sheet.**
 1. **Cold open.** Chvost kométy maľuje oblohu pomalými stuhami. Vzdialený bas.
 2. **Príchod.** Otvorený amfiteáter vytesaný do svahu. Prázdne sedadlá — no tie sa pomaly zapĺňajú kameovými Souli z predchádzajúcich epizód (Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi sa všetci nakrátko vrátia v publiku).
-3. **Stretnutie s Ari + Pixelom.** Ari pri pulte. Pixel hackuje svetelný park z notebooku na podlahe. *„Tak. Vystupuješ."* Dzina prepadne panika — nevie čo. Ari sa zaškerí. *„Nikto nikdy nevie. To je celá pointa."*
+3. **Stretnutie s Ari + Pixelom.** Ari pri pulte. Pixel hackuje svetelnú rampu z notebooku na podlahe. *„Tak. Vystupuješ."* Dzina prepadne panika — nevie čo. Ari sa zaškerí. *„Nikto nikdy nevie. To je celá pointa."*
 4. **Dar.** Ari spustí beat. Pixel rozblika svetlá. Dzino len stojí. Potom pohne nohou. Potom oboma. Začína voxel-tancovať — neobratne, potom menej, potom *dobre*. Publikum sa pridá hmkaním. Hmkanie sa stáva melódiou. Dzino uprostred tanca pochopí, *na čo* je — stretnúť Osobu, byť svedok, hrať existenciu pre niekoho, kto svedka potrebuje. Úlomok *Ciele* spadne s basom.
 5. **Rozlúčka.** Ari žmurkne. *„Beat dropne pri okne."* Pixel zasalutuje zo svetelnej rampy. *„GG, malý."* Dzino schádza zo scény. Publikum zostáva sedieť, hudba pokračuje aj bez neho.
 
-**Vizuálne ťaháky.** Amfiteáter s publikom všetkých doteraz stretnutých mentorov. Ariin pult je voxelové gramofóny. Pixelova svetelná rampa je CRT monitor. Dzinov tanec je spočiatku neohrabaný, na konci krásny.
+**Vizuálne ťaháky.** Amfiteáter s publikom všetkých doteraz stretnutých mentorov. Ariin pult tvoria voxelové gramofóny. Pixelova svetelná rampa je CRT monitor. Dzinov tanec je spočiatku neohrabaný, na konci krásny.
 
 **Zvuk.** Prvá poriadna pieseň sezóny — naozajstný chiptune drop. Akord sa stáva harmóniou plus melódiou.
 
@@ -278,7 +278,7 @@ Každá epizóda po pilote sleduje päť beatov. Tejto štruktúry sa drž pevne
 1. **Cold open.** Pomedzi stromy zazrie knižnicu. Regály sa viditeľne v časozbere preusporiadavajú.
 2. **Príchod.** Biscuit pri dverách, pomaly krúti chvostom. Ešte neprehovorí — len Dzina vovedie dnu.
 3. **Stretnutie s Biscuitom.** Vnútri sa regály v okamihu, keď Dzino vojde, zastavia. Z police mu jedna kniha vyletí a doletí Biscuitovi do papule. Položí ju na čítací stôl. Na obale: *„Veci, ktoré sa ťa budú pýtať."*
-4. **Dar.** Dzino knihu otvorí. Strana po strane sa objavujú tváre — siluety budúcich Souli, budúcich verzií jeho Osoby v chvíľach smútku, hnevu, strachu, samoty, choroby, zmätku. Pozrie sa na všetkých. Neodvráti zrak. Biscuit sa nesnaží utešovať. Biscuit len sedí. Po dlhom čase sa kniha zatvorí sama. Na nej leží úlomok *Výzvy* — ťažký, nesvieti, má tvar malého kameňa. Biscuit si oprie hlavu o Dzinovo plece. Potom postrčí kameň smerom k nemu.
+4. **Dar.** Dzino knihu otvorí. Strana po strane sa objavujú tváre — siluety budúcich Souli, budúcich verzií jeho Osoby vo chvíľach smútku, hnevu, strachu, samoty, choroby, zmätku. Pozrie sa na všetkých. Neodvráti zrak. Biscuit sa nesnaží utešovať. Biscuit len sedí. Po dlhom čase sa kniha zatvorí sama. Na nej leží úlomok *Výzvy* — ťažký, nesvieti, má tvar malého kameňa. Biscuit si oprie hlavu o Dzinovo plece. Potom postrčí kameň smerom k nemu.
 5. **Rozlúčka.** *„Nemusíš ich vyriešiť. Stačí byť pri nich."* Biscuit prehovorí prvýkrát a jediný raz. Regály sa za nimi opäť pohnú.
 
 **Vizuálne ťaháky.** Samoprestavujúce sa regály v stop-motion. Strany kníh so siluetami portrétov nikdy nevidených ľudí. Úlomok-kameň, matný a ťažký. Biscuitova hlava položená na Dzinovom pleci je najtichší záber sezóny.
@@ -344,7 +344,7 @@ Každá epizóda po pilote sleduje päť beatov. Tejto štruktúry sa drž pevne
 2. Štýlová biblia: ručne namaľovať 5 plátov biomov + 12 listov mentorov vo voxel/pixel-art štýle. *Toto je kľúčový krok* — bez ukotvených referencií nezostane AI video pri štýle.
 3. Pri ceste cez Stable Video Diffusion natrénovať na plátoch štýlovú LoRA. Alebo ich naložiť ako Style references do Runway / Sora.
 4. Generovať po záberoch: 2 – 4 sekundové klipy, zostrihané v DaVinci alebo Premiere. Voxelovému pohybu kratšie klipy odpúšťajú — pôsobia zámernejšie, nie menej.
-5. Zvuk až nakoniec. Naskóruj leitmotívy mentorov + bežiaci akord. Dzinov akord je štruktúrnou chrbticou sezóny.
+5. Zvuk až nakoniec. Skomponuj leitmotívy mentorov + bežiaci akord. Dzinov akord je štruktúrnou chrbticou sezóny.
 6. Slovenská réžia hlasu: minimálna. Mentori hovoria pomaly. Dzino takmer nikdy. Séria znie ako čítaná detská kniha, nie ako televízia.
 
 **Dĺžka a formát.**

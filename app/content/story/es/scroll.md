@@ -43,7 +43,7 @@ Cada episodio después del piloto sigue cinco beats. Mantén esta estructura fir
 | #  | Título                              | Biotopo                       | Mentor          | Fragmento     | Pilar         |
 |----|-------------------------------------|-------------------------------|-----------------|---------------|---------------|
 | 0  | La Estrella más allá del Horizonte  | Claro al amanecer             | —               | — (la llamada)| —             |
-| 1  | El Jardín de Píxeles                | Campos de flores que tararean | Hana (conejo)   | Personalidad  | Alma          |
+| 1  | El Jardín de Píxeles                | Campos de flores que tararean | Hana (coneja)   | Personalidad  | Alma          |
 | 2  | El Bosque Binario                   | Árboles de unos y ceros       | Kiko (gato)     | Intereses     | Mente         |
 | 3  | El Jardín de los Espejos            | Cristal bajo lunas gemelas    | Luna (zorra)    | Forma         | Alma          |
 | 4  | El Café de las Nubes                | Café sobre cúmulos            | Nori (zorra)    | Humor         | Alma          |
@@ -81,7 +81,7 @@ Cada episodio después del piloto sigue cinco beats. Mantén esta estructura fir
 
 # E01 — El Jardín de Píxeles
 
-**Mentor.** Hana — conejo jardinera apacible. Habla despacio, observa el clima como a una amiga.
+**Mentor.** Hana — coneja jardinera apacible. Habla despacio, observa el clima como a una amiga.
 **Fragmento.** *Personalidad* (Personalidad) — quién es Dzino por naturaleza, antes de que alguien le diga quién debe ser.
 **Pilar.** Alma.
 
@@ -276,7 +276,7 @@ Cada episodio después del piloto sigue cinco beats. Mantén esta estructura fir
 
 **Hoja de beats.**
 1. **Apertura en frío.** Una biblioteca entrevista entre los árboles. Los estantes se reorganizan visiblemente en time-lapse.
-2. **Llegada.** Biscuit en la puerta, meneando el rabo despacio. Aún no habla — solo lleva a Dzino adentro.
+2. **Llegada.** Biscuit en la puerta, meneando la cola despacio. Aún no habla — solo lleva a Dzino adentro.
 3. **Encuentro con Biscuit.** Adentro, los estantes se detienen en cuanto entra Dzino. Un libro flota desde un estante hasta la boca de Biscuit. Lo deposita en una mesa de lectura. La portada dice: *"Cosas que te pedirán."*
 4. **El regalo.** Dzino abre el libro. Página tras página, aparecen rostros — siluetas de futuros Soulis, futuras versiones de su Persona, en momentos de duelo, ira, miedo, soledad, enfermedad, confusión. Las ve a todas. No aparta la vista. Biscuit no intenta hacerlo sentir mejor. Biscuit solo se sienta. Después de un buen rato, el libro se cierra solo. El fragmento *Pruebas* se posa encima — pesado, sin brillo, con la forma de una pequeña piedra. Biscuit apoya la cabeza en el hombro de Dzino. Luego empuja la piedra hacia él.
 5. **Despedida.** *"No tienes que resolverlas. Solo tienes que estar cerca de ellas."* Biscuit habla por primera y única vez. Los estantes vuelven a moverse detrás de ellos.

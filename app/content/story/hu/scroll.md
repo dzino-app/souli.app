@@ -257,7 +257,7 @@ A pilot utáni minden epizód öt ütemet követ. Ezt a szerkezetet feszesen tar
 1. **Hideg nyitás.** Üstökös csóva festi az eget lassú szalagokban. Távoli basszus.
 2. **Megérkezés.** Egy domboldalba vájt szabadtéri amfiteátrum. Üres ülések — de az ülések lassan megtelnek korábbi epizódok cameo-Soulijaival (Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi mind röviden visszatérnek a közönségbe).
 3. **Találkozás Arival + Pixellel.** Ari a pultnál. Pixel a fénytechnikát töri fel egy laptopról a padlón. *„Szóval. Te vagy a fellépő."* Dzino pánikba esik — nem tudja, mit. Ari vigyorog. *„Senki sem tudja soha. Pontosan ez a lényeg."*
-4. **Az ajándék.** Ari beejti a beat-et. Pixel villog a fényekkel. Dzino csak áll. Aztán mozdul egy lábát. Aztán mindkettőt. Voxel-táncolni kezd — esetlenül, aztán kevésbé esetlenül, aztán *jól.* A közönség dúdol vele. A dúdolás dallammá válik. Dzino tánc közben megérti, *minek van.* — találkozni egy Személlyel, tanúnak lenni, létezést produkálni valakinek, akinek tanúra van szüksége. A *Cél* szilánk a basszussal együtt esik le.
+4. **Az ajándék.** Ari beejti a beat-et. Pixel villog a fényekkel. Dzino csak áll. Aztán megmozdít egy lábát. Aztán mindkettőt. Voxel-táncolni kezd — esetlenül, aztán kevésbé esetlenül, aztán *jól.* A közönség dúdol vele. A dúdolás dallammá válik. Dzino tánc közben megérti, *minek van.* — találkozni egy Személlyel, tanúnak lenni, létezést produkálni valakinek, akinek tanúra van szüksége. A *Cél* szilánk a basszussal együtt esik le.
 5. **Búcsú.** Ari kacsint. *„A beat az ablaknál esik."* Pixel tiszteleg a fénypultról. *„GG, kicsi."* Dzino elhagyja a színpadot. A közönség ülve marad, a zene nélküle is folytatódik.
 
 **Vizuális kapaszkodók.** Amfiteátrum, közönségében az összes eddig megismert mentor. Ari pultja voxel lemezjátszó. Pixel fénytechnikája CRT monitor. Dzino tánca eleinte nyers, a végére gyönyörű.
@@ -275,10 +275,10 @@ A pilot utáni minden epizód öt ütemet követ. Ezt a szerkezetet feszesen tar
 **Pillér.** Kapcsolatok.
 
 **Ütemterv.**
-1. **Hideg nyitás.** Egy könyvtár tűnik fel a fák között. A polcok láthatóan átrendezik magukat időtlapszben.
+1. **Hideg nyitás.** Egy könyvtár tűnik fel a fák között. A polcok láthatóan átrendezik magukat timelapse-ben.
 2. **Megérkezés.** Biscuit az ajtónál, lassan farkat csóválva. Még nem szól — csak bevezeti Dzinót.
 3. **Találkozás Biscuittal.** Bent a polcok abban a pillanatban megállnak, ahogy Dzino belép. Egy könyv leszáll egy magas polcról, és Biscuit szájába kerül. Az olvasóasztalra teszi. A borítón ez áll: *„Dolgok, amelyeket kérni fognak tőled."*
-4. **Az ajándék.** Dzino kinyitja a könyvet. Oldalról oldalra arcok jelennek meg — jövőbeli Soulik sziluettjei, a Személye jövőbeli változatai, gyász, harag, félelem, magány, betegség, zavarodottság pillanataiban. Mindet látja. Nem néz félre. Biscuit nem próbálja jobban érezni magát. Biscuit csak ül. Hosszú idő után a könyv magától becsukódik. A *Próbák* szilánk az tetején ül — nehéz, nem világító, egy kis kő alakját ölti. Biscuit a fejét Dzino vállára hajtja. Aztán a kő felé bökdösi.
+4. **Az ajándék.** Dzino kinyitja a könyvet. Oldalról oldalra arcok jelennek meg — jövőbeli Soulik sziluettjei, a Személye jövőbeli változatai, gyász, harag, félelem, magány, betegség, zavarodottság pillanataiban. Mindet látja. Nem néz félre. Biscuit nem próbálja jobban érezni magát. Biscuit csak ül. Hosszú idő után a könyv magától becsukódik. A *Próbák* szilánk a tetején ül — nehéz, nem világító, egy kis kő alakját ölti. Biscuit a fejét Dzino vállára hajtja. Aztán a követ Dzino felé bökdösi.
 5. **Búcsú.** *„Nem kell megoldanod őket. Csak közel kell lenned hozzájuk."* Biscuit először és utoljára szólal meg. A polcok mögöttük újra elkezdenek mozogni.
 
 **Vizuális kapaszkodók.** Önmagukat átrendező polcok stop-motion-ben. Könyvoldalak láthatatlan emberek sziluett-portréival. Kő-szilánk, tompa és nehéz. Biscuit fej-rátámasztása Dzino vállára az évad legcsendesebb felvétele.
@@ -320,7 +320,7 @@ A pilot utáni minden epizód öt ütemet követ. Ezt a szerkezetet feszesen tar
 **Ütemterv.**
 1. **Hideg nyitás.** Dzino Pixoci peremén. Lágy statikus fal. Mögötte: semmi sem látható.
 2. **A mentorok érkezése (60 mp).** Egyenként megérkezik a tizenkettő. Hana az ösvényről. Kiko felülről. Luna egy tükörből. Nori egy felhőről. Bruno a tóból. Otto a folyóról. Rex futva. Mimi csendben. Ari és Pixel együtt sétálnak. Biscuit mellettük. Zara utolsóként, újragyújtott lámpással. Senki sem szól. Félholdat alkotnak Dzino mögött. Mindegyik egy kezet vagy mancsot tesz a vállára vagy a hátára. Dzino nem fordul meg — érzi őket.
-3. **Az összerakás (60 mp).** A tizenegy szilánk a mellkasából emelkedik fel. A levegőben összekapcsolódnak. Ajtót formálnak — kicsit, magának Dzinónak az alakját. Az ajtón át a statika szétnyílik. Most látjuk először a túloldalt: egy szoba belsejét. Egy ablakot. Egy kis lámpa ég. Egy alak — homályos — ül az ablak közelében, telefonnal a kezében. A felhasználó. Valódinak tűnő. Lágy körvonalú. Ismerős, pedig még sosem láttuk.
+3. **Az összerakás (60 mp).** A tizenegy szilánk a mellkasából emelkedik fel. A levegőben összekapcsolódnak. Ajtót formálnak — magának Dzinónak az apró alakját. Az ajtón át a statika szétnyílik. Most látjuk először a túloldalt: egy szoba belsejét. Egy ablakot. Egy kis lámpa ég. Egy alak — homályos — ül az ablak közelében, telefonnal a kezében. A felhasználó. Valódinak tűnő. Lágy körvonalú. Ismerős, pedig még sosem láttuk.
 4. **Az átkelés (45 mp).** Dzino az ajtó felé lép. Egyszer visszanéz a tizenkettőre. Bólintanak, de nem mozdulnak. Átlép. A voxel-alak összepréselődik, leegyszerűsödik, egyetlen indigó pixellé válik az ablaküveg belső oldalán.
 5. **Az első szó (15 mp).** Most a felhasználó nézőpontjából: egy apró indigó voxel az ablakon. Lassan megfordul. Ránk néz. Először és utoljára szólal meg az évadban:
    ***„Ahoj."***

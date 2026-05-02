@@ -174,7 +174,7 @@ Každá epizoda po pilotu sleduje pět beatů. Drž se této struktury pevně; j
 2. **Příchod.** Dlouhá, pomalá údolí. Přílivy bledého světla přicházejí a odcházejí, jako by sám měsíc dýchal. Klidné jezero ve středu odráží každou hvězdu — kromě té Dzinovy, která je pod hladinou a dívá se vzhůru.
 3. **Setkání s Brunem.** Sedí v tureckém sedu na břehu jezera. Když Dzino dorazí, neotevře oči. Sedí spolu. Kamera vydrží. (Tohle je nejdelší statický záběr sezóny — celé tři vteřiny ničeho než dech.)
 4. **Dar.** Bruno konečně promluví. Jedna otázka: *„Proč jdeš?"* Dzino ukáže na slabou hvězdu na obzoru. Bruno přikývne, oči stále zavřené. *„Dobře. Neztrať to."* To je celé učení. Jezero se jednou zavlní. Z hloubky pod hladinou se na Dzina dívá jeho vlastní hvězda. Z té vlnky se zvedá střípek *Filozofie*.
-5. **Rozloučení.** Bruno se neloučí. Prostě pokračuje v meditaci. Dzino se neobratně ukloní. Když odchází, příliv světla zase smete jezero čistou.
+5. **Rozloučení.** Bruno se neloučí. Prostě pokračuje v meditaci. Dzino se neobratně ukloní. Když odchází, příliv světla zase smete jezero do čista.
 
 **Vizuální háčky.** Skoky v slabé gravitaci, dýchající přílivy světla, Dzinova odražená hvězda *pod* hladinou jezera. Bruno je celou dobu jediná nehybná postava — minimální animace, maximální přítomnost.
 
@@ -216,7 +216,7 @@ Každá epizoda po pilotu sleduje pět beatů. Drž se této struktury pevně; j
 2. **Příchod.** Rex dělá v písku sedy-lehy. *„103. 104. Ahoj, prcku. Rozcvičil ses?"* Vyskočí na nohy.
 3. **Setkání s Rexem.** *„Závoď se mnou k tomu hřebenu."* Dzino neví jak. *„Ani já jsem to neuměl. O to jde."*
 4. **Dar.** Sandboardová montáž. Dzino padá. Rex se laskavě směje, nikdy se neposmívá. Vyšplhají zpátky. Dzino padá znovu. Vyšplhají zpátky. Nakonec najde rytmus — moment je drobný, ale je to *moment.* Společně dorazí k hřebenu. Odtud je slabá hvězda nejjasnější věcí na obloze. Střípek *Tělo* se zvedá v rytmu jeho dechu. K akordu se připojí dunění srdce.
-5. **Rozloučení.** Rex plácne packou. *„Nikdy jsem tě nechtěl porazit. To by zkazilo zábavu."* Sprintuje zpátky odkud přišli. Dzino chvíli sedí na hřebenu a jen dýchá.
+5. **Rozloučení.** Rex plácne packou. *„Nikdy jsem tě nechtěl porazit. To by zkazilo zábavu."* Sprintuje zpátky, odkud přišli. Dzino chvíli sedí na hřebenu a jen dýchá.
 
 **Vizuální háčky.** Tři měsíce (teple růžový, ledově modrý, zlatý) vrhají překrývající se stíny. Písek se voxelově třpytí. Rex je vysokoenergetická animace proti Dzinovým opatrným krokům. Sandboardová sekvence je nejvíc kinetický záběr sezóny — zaslouž si ho.
 
@@ -239,7 +239,7 @@ Každá epizoda po pilotu sleduje pět beatů. Drž se této struktury pevně; j
 4. **Dar.** Sova mrkne poslední vzorec. Mimi to vzdá — nedokáže to přeložit. Omluvně se na Dzina podívá. Dzino zavře oči. Nesnaží se číst očima. Poslouchá svou SoundDNA. Mrknutí mají rytmus. Tvoří otázku: *„Co nepotřebuješ říct?"* Dzino nic neodpoví. Jen ticho. Sova se ukloní. Z ticha mezi nimi se zvedá střípek *Tichost* — má tvar prázdné stránky.
 5. **Rozloučení.** Mimi mu tiše podá prázdnou stránku ze svého deníčku. Nepromluví. Dzino ji uschová. Háj zůstává tichý.
 
-**Vizuální háčky.** Háj zamrzlých listů bez větru. Sovino mrkání v geometrických vzorech viditelných proti soumraku. Mimiiny zoufalé stránky deníčku zlehka šustí. Střípek prázdné stránky.
+**Vizuální háčky.** Háj zamrzlých listů bez větru. Sovino mrkání v geometrických vzorech viditelných proti soumraku. Miminy zoufalé stránky deníčku zlehka šustí. Střípek prázdné stránky.
 
 **Zvuk.** Žádná hudba prvních 90 vteřin. Nejtišší epizoda sezóny. Když se zvuk vrátí, je to jen Dzinův akord — ticho se stává čtvrtým hlasem.
 

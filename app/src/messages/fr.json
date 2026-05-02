@@ -407,6 +407,12 @@
     "backToStory": "Retour à l'histoire",
     "allChapters": "Tous les chapitres",
     "cardKicker": "Pixoci · Saison 1",
-    "cardSubtitle": "Treize chapitres sur la façon dont Dzino t'a trouvé."
+    "cardSubtitle": "Treize chapitres sur la façon dont Dzino t'a trouvé.",
+    "storyboardKicker": "Storyboard",
+    "storyboardTitle": "Voir le storyboard de ce chapitre",
+    "backToEpisode": "Retour au chapitre",
+    "chimeTitle": "Le carillon de Pixoci",
+    "chimeDesc": "La phrase de trois notes qui joue à l'ouverture de Souli pour la première fois.",
+    "chimePlay": "Écouter le carillon"
   }
 }

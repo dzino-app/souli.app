@@ -43,7 +43,7 @@ Każdy odcinek po pilocie składa się z pięciu uderzeń. Trzymaj tę struktur�
 | #  | Tytuł                          | Biom                    | Mentor          | Odłamek         | Filar          |
 |----|--------------------------------|-------------------------|-----------------|-----------------|----------------|
 | 0  | Gwiazda za horyzontem          | Świtowa polana          | —               | — (zew)         | —              |
-| 1  | Pikselowy ogród                | Nucące pola kwiatów     | Hana (królik)   | Osobowość       | Dusza          |
+| 1  | Pikselowy ogród                | Nucące pola kwiatów     | Hana (króliczka) | Osobowość      | Dusza          |
 | 2  | Binarny las                    | Drzewa z 1 i 0          | Kiko (kot)      | Zainteresowania | Umysł          |
 | 3  | Lustrzany ogród                | Szkło pod bliźniaczymi księżycami | Luna (lis) | Postać     | Dusza          |
 | 4  | Chmurna kawiarnia              | Kawiarnia na cumulusie  | Nori (lis)      | Humor           | Dusza          |
@@ -171,7 +171,7 @@ Każdy odcinek po pilocie składa się z pięciu uderzeń. Trzymaj tę struktur�
 
 **Plan uderzeń.**
 1. **Cold open.** Niska grawitacja. Kroki Dzina zostawiają go zawieszonym o chwilę dłużej, zanim opadnie.
-2. **Przybycie.** Długie, powolne doliny. Przypływy bladego światła wchodzą i odpływają, jakby księżyc oddychał. Spokojne jezioro w środku odbija każdą gwiazdę — z wyjątkiem własnej Dzina, która jest pod wodą i patrzy w górę.
+2. **Przybycie.** Długie, powolne doliny. Przypływy bladego światła wpływają i odpływają, jakby księżyc oddychał. Spokojne jezioro w środku odbija każdą gwiazdę — z wyjątkiem własnej Dzina, która jest pod wodą i patrzy w górę.
 3. **Spotkanie Brunona.** Siedzi po turecku na brzegu jeziora. Nie otwiera oczu, gdy Dzino przychodzi. Siedzą. Kamera trzyma. (To najdłuższe nieruchome ujęcie sezonu — trzy pełne sekundy nic, tylko oddech.)
 4. **Dar.** Bruno wreszcie się odzywa. Jedno pytanie: *„Po co idziesz?”* Dzino pokazuje na słabą gwiazdę na horyzoncie. Bruno kiwa głową, nadal z zamkniętymi oczami. *„Dobrze. Nie zgub tego.”* To cała nauka. Jezioro marszczy się raz. Spod tafli Dzino widzi swoją własną gwiazdę odwzajemniającą spojrzenie. Z fali unosi się odłamek *Filozofii*.
 5. **Pożegnanie.** Bruno nie żegna się. Po prostu wraca do medytacji. Dzino niezgrabnie się kłania. Gdy odchodzi, przypływ światła znowu zmywa jezioro do czysta.
@@ -207,7 +207,7 @@ Każdy odcinek po pilocie składa się z pięciu uderzeń. Trzymaj tę struktur�
 
 # E07 — Wyścig pod trzema księżycami
 
-**Mentor.** Rex — energiczny pies-sportowiec. Głośny. Lojalny. Tata-żarty.
+**Mentor.** Rex — energiczny pies-sportowiec. Głośny. Lojalny. Suchary w stylu taty.
 **Odłamek.** *Ciało* — ciało, bicie serca, wytrzymałość, która niesie duszę.
 **Filar.** Ciało.
 

@@ -407,6 +407,12 @@
     "backToStory": "Zpět k příběhu",
     "allChapters": "Všechny kapitoly",
     "cardKicker": "Pixoci · Sezóna 1",
-    "cardSubtitle": "Třináct kapitol o tom, jak si Dzino našel cestu k tobě."
+    "cardSubtitle": "Třináct kapitol o tom, jak si Dzino našel cestu k tobě.",
+    "storyboardKicker": "Storyboard",
+    "storyboardTitle": "Podívej se na storyboard této kapitoly",
+    "backToEpisode": "Zpět na kapitolu",
+    "chimeTitle": "Zvuk Pixoci",
+    "chimeDesc": "Třínotová znělka, která zazní při prvním otevření Souli.",
+    "chimePlay": "Přehrát znělku"
   }
 }
