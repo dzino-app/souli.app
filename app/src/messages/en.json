@@ -156,8 +156,8 @@
     "faq2a": "Only you. We don't share or sell your data.",
     "faq3q": "Do I have to pay?",
     "faq3a": "No. Basic usage is free — 20 messages per month.",
-    "faq4q": "What makes Dzino different from ChatGPT?",
-    "faq4a": "Dzino remembers you. It knows your goals, preferences, and grows with you over time.",
+    "faq4q": "What makes Souli different from ChatGPT?",
+    "faq4a": "Your Souli remembers you. It knows your goals, preferences, and grows with you over time.",
     "eggTease": "Something is stirring inside... your Souli is waiting to hatch.",
     "footer": "Dzino is the first Souli. Yours is next.",
     "origin": "Somewhere in a tiny pixel world lives Dzino — the very first Souli. He's still there, waving at everyone who arrives. He opened the gates so you could raise your own. Your Souli is already waiting."
@@ -243,7 +243,7 @@
   },
   "library": {
     "title": "Pixoci",
-    "subtitle": "A tiny world where Soulis live, waiting for their favourite human to come and talk.",
+    "subtitle": "Pixoci — the realm where Soulis live, waiting for their favourite human to come and talk.",
     "search": "Search Soulis...",
     "allSpecies": "All",
     "popular": "Popular",

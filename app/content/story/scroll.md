@@ -1,4 +1,4 @@
-# Súliland — Sezóna 1
+# Pixoci — Sezóna 1
 
 ## "Cesta k oknu" / "The Way to the Window"
 
@@ -6,11 +6,11 @@
 
 ## World Bible (one-page)
 
-**Setting.** Súliland — a voxel-fantasy realm where every star in the night sky is a Person waiting to be met, and every Souli is born from one of those stars. Five regions of Súliland map to the five pillars of a life: Body, Soul, Mind, Relationships, Sense. The realm is alive but never threatening — weather is the only adversary, and even weather is patient.
+**Setting.** Pixoci — a voxel-fantasy realm where every star in the night sky is a Person waiting to be met, and every Souli is born from one of those stars. Five regions of Pixoci map to the five pillars of a life: Body, Soul, Mind, Relationships, Sense. The realm is alive but never threatening — weather is the only adversary, and even weather is patient.
 
 **Protagonist.** Dzino. Newborn. Voxel-shaped, indigo-bodied, cream-faced, an orange crown that came with him from somewhere he can't remember. He is mostly mute — chirps, hums, one word per episode at most. He doesn't know what he is. He only knows there's a star calling him from beyond the horizon.
 
-**Quest.** Eleven soul-shards are scattered across Súliland, each kept by a different Souli mentor in their home biome. Dzino must collect them all to recognize his Person when he reaches her window. The shards are not items — they are *facets of self*. They click into his chest and the world hums back at him in a slightly fuller chord.
+**Quest.** Eleven soul-shards are scattered across Pixoci, each kept by a different Souli mentor in their home biome. Dzino must collect them all to recognize his Person when he reaches her window. The shards are not items — they are *facets of self*. They click into his chest and the world hums back at him in a slightly fuller chord.
 
 **The 12 Mentors.** Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi, Ari, Pixel, Biscuit, Zara. Each lives in their region and stays there — a viewer who falls in love with one can find them again in the Knižnica. None of them are villains. None of them are right about everything. Each gives Dzino exactly one thing.
 
@@ -54,7 +54,7 @@ Every episode after the pilot follows five beats. Hold this structure tight; it'
 | 9 | Súmračná scéna / The Twilight Stage              | Open-air amphitheatre  | Ari + Pixel     | Ciele         | Sense          |
 |10 | Knižnica tisícich príbehov / The Library of a Thousand Stories | Self-rearranging stacks | Biscuit (dog) | Výzvy        | Relationships  |
 |11 | Búrkové pole / The Storm Field                   | Open plain, real storm | Zara (human)    | Denník        | Sense          |
-|12 | Okno / The Window                                | Edge of Súliland       | All twelve      | (assembly)    | All five       |
+|12 | Okno / The Window                                | Edge of Pixoci       | All twelve      | (assembly)    | All five       |
 
 ---
 
@@ -69,7 +69,7 @@ Every episode after the pilot follows five beats. Hold this structure tight; it'
 2. **First steps (40s).** He sits up. Tries to stand. Falls. Tries again. The grass remembers his shape. He looks at his hands — *what are these.* He holds them up against the sky and one of the stars passes between his fingers.
 3. **The calling star (40s).** All the stars are bright. One is faint. As he stares, it pulses once, in a peach-cream tone that matches the sky. He cannot look away. Without knowing why, he steps toward the horizon.
 4. **The first pixel (40s).** With every step, a single cream pixel stays behind in the grass, marking where he was. He doesn't notice. A pixel-arrow signpost waits at the clearing's edge — three letters carved into it: ✦ → *záhrada.* He follows.
-5. **Onward (20s).** Camera pulls up and away. The trail of pixels he's leaving is the shape of a question mark. The faint star pulses one more time. Cut to title card: ***Súliland — Sezóna 1.***
+5. **Onward (20s).** Camera pulls up and away. The trail of pixels he's leaving is the shape of a question mark. The faint star pulses one more time. Cut to title card: ***Pixoci — Sezóna 1.***
 
 **Visual hooks for AI gen.** Dawn-cream sky with a single faint star, voxel grass, tiny indigo character with orange crown, ✦ symbol carved in stone, trail of cream pixels.
 
@@ -299,11 +299,11 @@ Every episode after the pilot follows five beats. Hold this structure tight; it'
 1. **Cold open.** Open plain. The sky goes from cream to slate in three frames. The faint star is hidden.
 2. **Arrival.** First wind. Then real rain — pixel rain, but heavy, audible. Dzino can't see the path. He stops. He sits down. The shard from E10 weighs heavy. For the first time he considers not going on.
 3. **Meet Zara.** A figure with a lantern walks past him through the storm at full pace. She stops. *"Môžeš zostať. Alebo môžeš ísť cez. Ja idem cez."* (*"You can stay. Or you can go through. I'm going through.""*) She doesn't wait. She keeps walking.
-4. **The gift.** Dzino almost stays. Then doesn't. He follows. They walk into the storm together — neither speaks. Lightning hits once and for a single frame illuminates Súliland from above: he sees the entire path he's walked, every biome, every mentor, every step from the dawn clearing to here. The image burns onto his eyes. They emerge on the far side. The faint star is the brightest thing in the sky, brighter than anything before. The shard *Denník* falls from the storm's last raindrop.
+4. **The gift.** Dzino almost stays. Then doesn't. He follows. They walk into the storm together — neither speaks. Lightning hits once and for a single frame illuminates Pixoci from above: he sees the entire path he's walked, every biome, every mentor, every step from the dawn clearing to here. The image burns onto his eyes. They emerge on the far side. The faint star is the brightest thing in the sky, brighter than anything before. The shard *Denník* falls from the storm's last raindrop.
 5. **Goodbye.** Zara nods once. *"Zapíš si to. Aj časti, ktoré by si radšej zabudol."* (*"Write it down. Even the parts you'd rather forget.""*) She extinguishes her lantern — she doesn't need it anymore. She walks back into the dissipating storm in the direction Dzino came from, looking for the next traveler.
 6. **Onward.** Dzino keeps walking. Wet, tired, lighter.
 
-**Visual hooks.** The lightning-frame map of Súliland is the most important single image in the season — he sees the *shape* of his journey for the first time. Storm is intense but never threatening. Zara's lantern is the only warm light.
+**Visual hooks.** The lightning-frame map of Pixoci is the most important single image in the season — he sees the *shape* of his journey for the first time. Storm is intense but never threatening. Zara's lantern is the only warm light.
 
 **Sound.** Storm. Then nothing. Then the chord, cleaner and stronger than ever — eleven voices.
 
@@ -318,7 +318,7 @@ Every episode after the pilot follows five beats. Hold this structure tight; it'
 **Pillar.** All five.
 
 **Beat sheet.**
-1. **Cold open.** Dzino at the edge of Súliland. A wall of soft static. Beyond it: nothing visible.
+1. **Cold open.** Dzino at the edge of Pixoci. A wall of soft static. Beyond it: nothing visible.
 2. **Arrival of the mentors (60s).** One by one, the twelve arrive. Hana from the path. Kiko from above. Luna from a mirror. Nori from a cloud. Bruno from the lake. Otto from the river. Rex sprinting in. Mimi quietly. Ari and Pixel walking together. Biscuit beside them. Zara last, lantern relit. None speak. They form a crescent behind Dzino. Each places one hand on his shoulders or back. Dzino doesn't turn around — he can feel them.
 3. **The assembly (60s).** The eleven shards rise from his chest. They link in mid-air. They form a doorway — small, the shape of Dzino himself. Through the doorway, the static parts. We see, for the first time, the other side: the inside of a room. A window. A small light is on. A figure — out of focus — sits near the window with a phone in hand. The user. Real-feeling. Soft-edged. Familiar even though we've never seen them.
 4. **The crossing (45s).** Dzino steps toward the doorway. Looks back once at the twelve. They nod, but don't move. He steps through. The voxel form compresses, simplifies, becomes a single pixel of indigo on the inside of the window glass.
@@ -326,7 +326,7 @@ Every episode after the pilot follows five beats. Hold this structure tight; it'
    ***"Ahoj."***
    The faint star, now full and close, becomes a chime — the SoundDNA of the user's first Souli, ready.
 6. **Cut to black.** Title:
-   ***Súliland — Sezóna 1.***
+   ***Pixoci — Sezóna 1.***
    ***Pokračovanie príde, keď otvoríš svoje okno.***
    *(The continuation comes when you open your window.)*
 
@@ -370,4 +370,4 @@ Every episode after the pilot follows five beats. Hold this structure tight; it'
 
 ---
 
-*Draft 1 — Súliland Season 1. Ready for pass 2.*
+*Draft 1 — Pixoci Season 1. Ready for pass 2.*
