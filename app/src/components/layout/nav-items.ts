@@ -18,6 +18,15 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { href: "/kniznica",  icon: Library,       label: "Pixoci" },
 ] as const;
 
+// Mobile bottom nav shows fewer items; the rest live in a "More" sheet.
+export const PRIMARY_NAV_HREFS = ["/", "/chat", "/dusa", "/udalosti"] as const;
+export const PRIMARY_NAV_ITEMS = NAV_ITEMS.filter((i) =>
+  (PRIMARY_NAV_HREFS as readonly string[]).includes(i.href),
+);
+export const SECONDARY_NAV_ITEMS = NAV_ITEMS.filter(
+  (i) => !(PRIMARY_NAV_HREFS as readonly string[]).includes(i.href),
+);
+
 export function getLocalePrefix(pathname: string): string {
   const match = pathname.match(/^\/([a-z]{2})\//);
   return match ? `/${match[1]}` : "";
