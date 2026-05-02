@@ -106,17 +106,17 @@ export async function middleware(request: NextRequest) {
 
   // Check if this is a public page (no auth required)
   const isPublicPage =
-    /\/(prihlasenie|registracia|landing|login|signup|kniznica|library|reset-hesla|ochrana-sukromia|podmienky|privacy|terms|quiz)(\/|$)/.test(
+    /\/(prihlasenie|registracia|landing|login|signup|kniznica|library|reset-hesla|ochrana-sukromia|podmienky|privacy|terms|quiz|pribeh|story)(\/|$)/.test(
       resolvedPathname
     ) ||
-    /\/(prihlasenie|registracia|landing|login|signup|kniznica|library|reset-hesla|ochrana-sukromia|podmienky|privacy|terms|quiz)(\/|$)/.test(pathname);
+    /\/(prihlasenie|registracia|landing|login|signup|kniznica|library|reset-hesla|ochrana-sukromia|podmienky|privacy|terms|quiz|pribeh|story)(\/|$)/.test(pathname);
 
   // Public pages accessible to everyone (no redirect for auth users)
   const isOpenPage =
-    /\/(kniznica|library|ochrana-sukromia|podmienky|privacy|terms|quiz)(\/|$)/.test(
+    /\/(kniznica|library|ochrana-sukromia|podmienky|privacy|terms|quiz|pribeh|story)(\/|$)/.test(
       resolvedPathname
     ) ||
-    /\/(kniznica|library|ochrana-sukromia|podmienky|privacy|terms|quiz)(\/|$)/.test(pathname);
+    /\/(kniznica|library|ochrana-sukromia|podmienky|privacy|terms|quiz|pribeh|story)(\/|$)/.test(pathname);
 
   // Redirect unauthenticated users to landing (except public pages)
   if (!user && !isPublicPage) {
