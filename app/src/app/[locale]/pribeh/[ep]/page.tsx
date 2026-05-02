@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import { MarkdownArticle } from "@/components/story/markdown-article";
 import {
-  EPISODES,
   loadEpisode,
   getEpisode,
   getNextEpisode,
@@ -12,10 +11,6 @@ import {
 
 interface Props {
   params: Promise<{ locale: string; ep: string }>;
-}
-
-export function generateStaticParams() {
-  return EPISODES.map((e) => ({ ep: e.id }));
 }
 
 export async function generateMetadata({ params }: Props) {
