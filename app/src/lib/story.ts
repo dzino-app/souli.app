@@ -1,6 +1,4 @@
-import fs from "node:fs/promises";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { SCROLL, EPISODE_CONTENT } from "./story-content.generated";
 
 export interface EpisodeMeta {
   id: string; // "00" .. "12"
@@ -27,33 +25,12 @@ export const EPISODES: readonly EpisodeMeta[] = [
   { id: "12", number: 12, titleSk: "Okno",                       titleEn: "The Window",                  mentor: "Všetkých dvanásť",  biome: "Hrana Pixoci" },
 ] as const;
 
-// Resolve content dir relative to this module so it works regardless of cwd.
-// Try cwd first (dev), fall back to module-relative (Vercel runtime).
-async function resolveStoryDir(): Promise<string> {
-  const candidates = [
-    path.join(process.cwd(), "content", "story"),
-    path.join(process.cwd(), "app", "content", "story"),
-    path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "content", "story"),
-  ];
-  for (const c of candidates) {
-    try {
-      await fs.access(c);
-      return c;
-    } catch {
-      // try next
-    }
-  }
-  throw new Error(`content/story not found. Tried: ${candidates.join(", ")}`);
+export function loadScroll(): string {
+  return SCROLL;
 }
 
-export async function loadScroll(): Promise<string> {
-  const dir = await resolveStoryDir();
-  return fs.readFile(path.join(dir, "scroll.md"), "utf8");
-}
-
-export async function loadEpisode(id: string): Promise<string> {
-  const dir = await resolveStoryDir();
-  return fs.readFile(path.join(dir, "episodes", `${id}.md`), "utf8");
+export function loadEpisode(id: string): string | null {
+  return EPISODE_CONTENT[id] ?? null;
 }
 
 export function getEpisode(id: string): EpisodeMeta | undefined {

@@ -33,12 +33,8 @@ export default async function EpisodePage({ params }: Props) {
   const meta = getEpisode(ep);
   if (!meta) notFound();
 
-  let source: string;
-  try {
-    source = await loadEpisode(ep);
-  } catch {
-    notFound();
-  }
+  const source = loadEpisode(ep);
+  if (!source) notFound();
 
   const next = getNextEpisode(ep);
   const prev = getPrevEpisode(ep);

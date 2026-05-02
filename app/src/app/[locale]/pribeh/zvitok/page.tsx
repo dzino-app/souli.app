@@ -14,7 +14,7 @@ interface Props {
 
 export default async function ScrollPage({ params }: Props) {
   const { locale } = await params;
-  const source = await loadScroll();
+  const source = loadScroll();
 
   return (
     <div className="flex flex-col gap-6">
