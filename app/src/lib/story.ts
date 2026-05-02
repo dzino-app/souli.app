@@ -1,7 +1,7 @@
-import { SCROLL, EPISODE_CONTENT } from "./story-content.generated";
+import { STORY_BY_LOCALE } from "./story-content.generated";
 
 export interface EpisodeMeta {
-  id: string; // "00" .. "12"
+  id: string; // "e00" .. "e12"
   number: number;
   titleSk: string;
   titleEn: string;
@@ -25,12 +25,29 @@ export const EPISODES: readonly EpisodeMeta[] = [
   { id: "e12", number: 12, titleSk: "Okno",                       titleEn: "The Window",                  mentor: "Všetkých dvanásť",  biome: "Hrana Pixoci" },
 ] as const;
 
-export function loadScroll(): string {
-  return SCROLL;
+const FALLBACK_LOCALE = "en";
+
+function resolveLocale(locale: string): string {
+  if (STORY_BY_LOCALE[locale]) return locale;
+  if (STORY_BY_LOCALE[FALLBACK_LOCALE]) return FALLBACK_LOCALE;
+  const any = Object.keys(STORY_BY_LOCALE)[0];
+  if (!any) throw new Error("no story content compiled");
+  return any;
 }
 
-export function loadEpisode(id: string): string | null {
-  return EPISODE_CONTENT[id] ?? null;
+export function loadScroll(locale: string): string {
+  return STORY_BY_LOCALE[resolveLocale(locale)].scroll;
+}
+
+export function loadEpisode(locale: string, id: string): string | null {
+  const pack = STORY_BY_LOCALE[resolveLocale(locale)];
+  if (pack.episodes[id]) return pack.episodes[id];
+  const fallback = STORY_BY_LOCALE[FALLBACK_LOCALE];
+  return fallback?.episodes[id] ?? null;
+}
+
+export function hasLocale(locale: string): boolean {
+  return Boolean(STORY_BY_LOCALE[locale]);
 }
 
 export function getEpisode(id: string): EpisodeMeta | undefined {
@@ -45,4 +62,10 @@ export function getNextEpisode(id: string): EpisodeMeta | undefined {
 export function getPrevEpisode(id: string): EpisodeMeta | undefined {
   const idx = EPISODES.findIndex((e) => e.id === id);
   return idx > 0 ? EPISODES[idx - 1] : undefined;
+}
+
+/** Title displayed for an episode, picking locale-appropriate where available. */
+export function getEpisodeTitle(meta: EpisodeMeta, locale: string): string {
+  if (locale === "sk") return meta.titleSk;
+  return meta.titleEn;
 }

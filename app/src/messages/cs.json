@@ -393,5 +393,20 @@
     "termsFree": "Bezplatný plán: 20 zpráv měsíčně.",
     "termsSuspensionTitle": "Pozastavení účtu",
     "termsSuspension": "Můžeme pozastavit účty porušující bezpečnostní pravidla."
+  },
+  "story": {
+    "season1": "Sezóna 1",
+    "indexTitle": "Cesta k oknu",
+    "indexDesc": "Kanonický příběh Pixoci. Dzino se rodí ve světě voxelů a putuje k oknu svého Člověka — skrze jedenáct pixelových krajin a dvanáct mentorů. Třináct kapitol, krátkých jako vzpomínka.",
+    "scrollKicker": "Zvitek Pixoci",
+    "scrollTitle": "Atlas světa",
+    "scrollDesc": "Mapa krajiny, postav a tónu. Vše, co je třeba vědět, než otevřeš první kapitolu.",
+    "chapters": "Kapitoly",
+    "withMentor": "s {name}",
+    "footer": "Pixoci je svět, kde žijí Soulis. Pokud ještě svého Souliho nemáš, <link>začni svou cestu</link>.",
+    "backToStory": "Zpět k příběhu",
+    "allChapters": "Všechny kapitoly",
+    "cardKicker": "Pixoci · Sezóna 1",
+    "cardSubtitle": "Třináct kapitol o tom, jak si Dzino našel cestu k tobě."
   }
 }

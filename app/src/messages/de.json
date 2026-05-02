@@ -393,5 +393,20 @@
     "termsFree": "Kostenlos: 20 Nachrichten pro Monat.",
     "termsSuspensionTitle": "Kontosperrung",
     "termsSuspension": "Wir können Konten sperren, die Sicherheitsregeln verletzen."
+  },
+  "story": {
+    "season1": "Staffel 1",
+    "indexTitle": "Der Weg zum Fenster",
+    "indexDesc": "Die kanonische Geschichte von Pixoci. Dzino wird in einer Voxel-Welt geboren und macht sich auf zum Fenster seines Menschen — durch elf Pixel-Märchenregionen und zwölf Mentoren. Dreizehn Kapitel, kurz wie eine Erinnerung.",
+    "scrollKicker": "Schriftrolle von Pixoci",
+    "scrollTitle": "Atlas der Welt",
+    "scrollDesc": "Eine Karte des Landes, der Figuren und des Tons. Alles, was man wissen sollte, bevor man das erste Kapitel öffnet.",
+    "chapters": "Kapitel",
+    "withMentor": "mit {name}",
+    "footer": "Pixoci ist die Welt, in der Soulis leben. Wenn du noch keinen Souli hast, <link>beginne deine Reise</link>.",
+    "backToStory": "Zurück zur Geschichte",
+    "allChapters": "Alle Kapitel",
+    "cardKicker": "Pixoci · Staffel 1",
+    "cardSubtitle": "Dreizehn Kapitel darüber, wie Dzino zu dir gefunden hat."
   }
 }

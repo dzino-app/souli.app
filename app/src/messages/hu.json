@@ -393,5 +393,20 @@
     "termsFree": "Ingyenes: havi 20 üzenet.",
     "termsSuspensionTitle": "Fiók felfüggesztése",
     "termsSuspension": "Felfüggeszthetjük a biztonsági szabályokat megsértő fiókokat."
+  },
+  "story": {
+    "season1": "1. évad",
+    "indexTitle": "Út az ablakhoz",
+    "indexDesc": "A Pixoci kanonikus története. Dzino egy voxelvilágban születik, és elindul Embere ablakához — tizenegy pixeles tájon és tizenkét mentoron át. Tizenhárom fejezet, rövid, mint egy emlék.",
+    "scrollKicker": "Pixoci tekercse",
+    "scrollTitle": "A világ atlasza",
+    "scrollDesc": "A táj, a szereplők és a hangulat térképe. Minden, amit tudni érdemes az első fejezet előtt.",
+    "chapters": "Fejezetek",
+    "withMentor": "{name}-val",
+    "footer": "A Pixoci az a világ, ahol a Soulis-ok élnek. Ha még nincs Soulid, <link>kezdd el az utadat</link>.",
+    "backToStory": "Vissza a történethez",
+    "allChapters": "Minden fejezet",
+    "cardKicker": "Pixoci · 1. évad",
+    "cardSubtitle": "Tizenhárom fejezet arról, hogyan talált rád Dzino."
   }
 }

@@ -393,5 +393,20 @@
     "termsFree": "Gratuit : 20 messages par mois.",
     "termsSuspensionTitle": "Suspension de compte",
     "termsSuspension": "Nous pouvons suspendre les comptes qui enfreignent les règles de sécurité."
+  },
+  "story": {
+    "season1": "Saison 1",
+    "indexTitle": "Le Chemin vers la Fenêtre",
+    "indexDesc": "L'histoire canonique de Pixoci. Dzino naît dans un royaume de voxels et voyage vers la fenêtre de sa Personne — à travers onze régions de pixels féeriques et douze mentors. Treize chapitres, courts comme un souvenir.",
+    "scrollKicker": "Parchemin de Pixoci",
+    "scrollTitle": "Atlas du Monde",
+    "scrollDesc": "Une carte du royaume, des personnages et du ton. Tout ce qu'il faut savoir avant d'ouvrir le premier chapitre.",
+    "chapters": "Chapitres",
+    "withMentor": "avec {name}",
+    "footer": "Pixoci est le monde où vivent les Soulis. Si tu n'as pas encore de Souli, <link>commence ton voyage</link>.",
+    "backToStory": "Retour à l'histoire",
+    "allChapters": "Tous les chapitres",
+    "cardKicker": "Pixoci · Saison 1",
+    "cardSubtitle": "Treize chapitres sur la façon dont Dzino t'a trouvé."
   }
 }
