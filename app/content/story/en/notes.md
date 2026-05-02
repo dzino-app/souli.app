@@ -2,16 +2,13 @@
 
 ## Full director's-cut scripts
 
-> Companion document to `season-1.md`. The bible is the spine; these are the full episodes — dialogue, shot composition, sound design, and AI-generation prompt notes per scene. Format: scenes of ~10–20 seconds each, broken into shot suggestions where camera intent matters.
+> Companion document to `scroll.md`. The bible is the spine; these are the full episodes — dialogue, shot composition, sound design, and AI-generation prompt notes per scene. Format: scenes of ~10–20 seconds each, broken into shot suggestions where camera intent matters.
 >
 > **AI-gen note.** Style anchors must be locked first: 5 hand-painted biome plates + 12 mentor sheets in voxel/pixel-art style (#4F46E5 indigo + #FFE4C9 cream + biome accent). Every prompt below assumes those references are loaded as Style refs in Runway Gen-4 / Sora / SVD.
 >
 > **Voice direction.** Mentors speak slowly, like adults in a children's book. Dzino chirps; never speaks except his single word in E12. Every Slovak line is followed by an English subtitle. Slovak place names stay Slovak in all subs.
 >
 > **Sound spine.** Dzino's chord builds across the season. After each episode, one new voice is added to the chord. By E11 there are eleven voices. E12 resolves them.
-
----
-
 
 ---
 

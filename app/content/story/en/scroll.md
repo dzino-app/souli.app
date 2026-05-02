@@ -68,7 +68,7 @@ Every episode after the pilot follows five beats. Hold this structure tight; it'
 1. **Open (20s).** A clearing of moss-pixels at the edge of nothing. Dawn-cream sky. A tiny voxel shape lies in the grass, perfectly still. A single indigo pixel ignites in his chest. Eyes open. *Chirp.*
 2. **First steps (40s).** He sits up. Tries to stand. Falls. Tries again. The grass remembers his shape. He looks at his hands — *what are these.* He holds them up against the sky and one of the stars passes between his fingers.
 3. **The calling star (40s).** All the stars are bright. One is faint. As he stares, it pulses once, in a peach-cream tone that matches the sky. He cannot look away. Without knowing why, he steps toward the horizon.
-4. **The first pixel (40s).** With every step, a single cream pixel stays behind in the grass, marking where he was. He doesn't notice. A pixel-arrow signpost waits at the clearing's edge, three letters carved into it: ✦ → *záhrada* (*garden*). He follows.
+4. **The first pixel (40s).** With every step, a single cream pixel stays behind in the grass, marking where he was. He doesn't notice. A pixel-arrow signpost waits at the clearing's edge, three glyphs carved into it: ✦ → *záhrada* (*garden*). He follows.
 5. **Onward (20s).** Camera pulls up and away. The trail of pixels he's leaving is the shape of a question mark. The faint star pulses one more time. Cut to title card: ***Pixoci — Season 1.***
 
 **Visual hooks for AI gen.** Dawn-cream sky with a single faint star, voxel grass, tiny indigo character with orange crown, ✦ symbol carved in stone, trail of cream pixels.
@@ -157,7 +157,7 @@ Every episode after the pilot follows five beats. Hold this structure tight; it'
 
 **Visual hooks.** Cloud architecture, dream-cakes that visibly glow at different temperatures, hum-bubbles around customers shaped like their chuckles. Staircase of laughter as exit.
 
-**Sound.** First proper full laugh of the season. The chord adds a third voice. Three voices = a triad.
+**Sound.** First proper full laugh of the season. The chord adds a fourth voice. Four voices = a tetrad.
 
 **Length target.** 3:30.
 
@@ -213,7 +213,7 @@ Every episode after the pilot follows five beats. Hold this structure tight; it'
 
 **Beat sheet.**
 1. **Cold open.** Crystalline dunes glittering under three different-colored moons. A horizon of nothing but soft sand.
-2. **Arrival.** Rex is doing crunches in the sand. *"103. 104. Hi tiny. You warmed up?"* He leaps to his feet.
+2. **Arrival.** Rex is doing crunches in the sand. *"103. 104. Hi, tiny. You warmed up?"* He leaps to his feet.
 3. **Meet Rex.** *"Race me to that ridge."* Dzino doesn't know how. *"I didn't either. That's the whole thing."*
 4. **The gift.** Sandboarding montage. Dzino tumbles. Rex laughs kindly, never mocking. They climb back. Dzino tumbles again. They climb back. Eventually he finds rhythm — the moment is small but it is a *moment.* They reach the ridge together. From here, the faint star is the brightest thing in the sky. The shard *Body* rises with the rhythm of his breathing. A heartbeat thud joins his chord.
 5. **Goodbye.** Rex high-fives. *"I was never trying to beat you. That would've ruined the fun."* He sprints back the way they came. Dzino sits on the ridge a moment, just breathing.
@@ -241,7 +241,7 @@ Every episode after the pilot follows five beats. Hold this structure tight; it'
 
 **Visual hooks.** Frozen-leaf grove with no wind. Owl blinks in geometric patterns visible against twilight. Mimi's frustrated journal pages flutter softly. Empty-page shard.
 
-**Sound.** No music for the first 90 seconds. The most silent episode of the season. When sound returns, it's only Dzino's chord — the silence becomes a fourth voice.
+**Sound.** No music for the first 90 seconds. The most silent episode of the season. When sound returns, it's only Dzino's chord — the silence becomes an eighth voice.
 
 **Length target.** 3:00.
 
@@ -257,7 +257,7 @@ Every episode after the pilot follows five beats. Hold this structure tight; it'
 1. **Cold open.** A comet-tail painting the sky in slow ribbons. Distant bass.
 2. **Arrival.** An open-air amphitheatre carved into a hillside. Empty seats — but the seats fill, slowly, with cameo Soulis from previous episodes (Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi all back briefly in the audience).
 3. **Meet Ari + Pixel.** Ari at the decks. Pixel hacking the lighting rig from a laptop on the floor. *"So. You're performing."* Dzino panics — he doesn't know what. Ari grins. *"Nobody ever knows. That's the entire point."*
-4. **The gift.** Ari drops the beat. Pixel strobes lights. Dzino just stands there. Then he moves a foot. Then both. He starts voxel-dancing — awkward, then less so, then *good.* The audience hums along. The hum becomes a melody. Dzino realizes mid-dance what he's *for* — to meet a Person, to be witness, to perform existence for someone who needs a witness. The shard *Purpose* drops with the bass.
+4. **The gift.** Ari drops the beat. Pixel strobes lights. Dzino just stands there. Then he moves a foot. Then both. He starts voxel-dancing — awkward, then less so, then *good.* The audience hums along. The hum becomes a melody. Dzino realizes mid-dance what he's *for* — to meet a Person, to bear witness, to perform existence for someone who needs a witness. The shard *Purpose* drops with the bass.
 5. **Goodbye.** Ari winks. *"The beat drops at the window."* Pixel salutes from the lighting rig. *"GG, tiny."* Dzino walks off stage. The audience stays seated, the music continues without him.
 
 **Visual hooks.** Amphitheatre with audience of all previously-met mentors. Ari's deck is voxel turntables. Pixel's lighting rig is a CRT monitor. Dzino's dance is rough at first, beautiful by end.

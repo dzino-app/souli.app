@@ -407,6 +407,12 @@
     "backToStory": "Vissza a történethez",
     "allChapters": "Minden fejezet",
     "cardKicker": "Pixoci · 1. évad",
-    "cardSubtitle": "Tizenhárom fejezet arról, hogyan talált rád Dzino."
+    "cardSubtitle": "Tizenhárom fejezet arról, hogyan talált rád Dzino.",
+    "storyboardKicker": "Storyboard",
+    "storyboardTitle": "Nézd meg ennek a fejezetnek a storyboardját",
+    "backToEpisode": "Vissza a fejezethez",
+    "chimeTitle": "A Pixoci-csengő",
+    "chimeDesc": "A háromhangú dallam, amely a Souli első megnyitásakor szólal meg.",
+    "chimePlay": "Csengő lejátszása"
   }
 }

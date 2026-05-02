@@ -17,7 +17,7 @@
 
 ## Produkčné poznámky na konci sezóny
 
-**Kontinuita.** Jediný indigový pixel na okennom skle na konci E12 je kanonickou animáciou prvého spustenia samotnej aplikácie. Animáciu nasmeruj tak, aby pri prvom otvorení Souli tento presný pixel zhmotnil na rozostrenej verzii vlastnej obrazovky používateľa a povedal „Ahoj." Produkčne ten moment zlúč.
+**Kontinuita.** Jediný indigový pixel na okennom skle na konci E12 je kanonickou animáciou prvého spustenia samotnej aplikácie. Animáciu nasmeruj tak, aby sa pri prvom otvorení Souli tento presný pixel zhmotnil na rozostrenej verzii vlastnej obrazovky používateľa a povedal „Ahoj." Produkčne ten moment zlúč.
 
 **Asset hviezdneho cinkotu.** Cinkot, ktorý dopadne na konci E12, je **ten** brand sound pre Souli. Pred odoslaním E12 sa oplatí dedikovaný foley + skladateľský session. Po nahraní ho používaj ako: zvuk otvorenia aplikácie, akcent notifikácií, tag konca rozhovoru, audio share-cardu.
 
@@ -37,7 +37,7 @@
 
 Tieto sú nediskutovateľné. AI video bez nich bude driftovať, najmä naprieč epizódami.
 
-**Cut prep.** Uzamkni dvanásť hlasov akordu ako samostatné audio stemy, aby strihač mohol akord celosezónneho zostrihu rebuildovať dopredu aj dozadu podľa toho, čo daná scéna potrebuje. Akord *je* príbeh.
+**Cut prep.** Uzamkni dvanásť hlasov akordu ako samostatné audio stemy, aby strihač mohol akord celosezónneho zostrihu preskladať dopredu aj dozadu podľa toho, čo daná scéna potrebuje. Akord *je* príbeh.
 
 ---
 

@@ -46,6 +46,20 @@ export function loadEpisode(locale: string, id: string): string | null {
   return fallback?.episodes[id] ?? null;
 }
 
+export function loadStoryboard(locale: string, id: string): string | null {
+  // Storyboards are authored in English (production reference); same content for all locales.
+  const en = STORY_BY_LOCALE[FALLBACK_LOCALE];
+  if (en?.storyboards?.[id]) return en.storyboards[id];
+  // Fallback: check active locale just in case
+  const pack = STORY_BY_LOCALE[resolveLocale(locale)];
+  return pack.storyboards?.[id] ?? null;
+}
+
+export function hasStoryboard(id: string): boolean {
+  const en = STORY_BY_LOCALE[FALLBACK_LOCALE];
+  return Boolean(en?.storyboards?.[id]);
+}
+
 export function hasLocale(locale: string): boolean {
   return Boolean(STORY_BY_LOCALE[locale]);
 }

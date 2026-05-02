@@ -686,6 +686,12 @@
     "backToStory": "Späť na príbeh",
     "allChapters": "Všetky kapitoly",
     "cardKicker": "Pixoci · Sezóna 1",
-    "cardSubtitle": "Trinásť kapitol o tom, ako Dzino prišiel za tebou."
+    "cardSubtitle": "Trinásť kapitol o tom, ako Dzino prišiel za tebou.",
+    "storyboardKicker": "Storyboard",
+    "storyboardTitle": "Pozri storyboard tejto kapitoly",
+    "backToEpisode": "Späť na kapitolu",
+    "chimeTitle": "Zvuk Pixoci",
+    "chimeDesc": "Trojnotová znelka, ktorá zaznie pri otvorení Souli prvý raz.",
+    "chimePlay": "Pre­hrať znelku"
   }
 }

@@ -407,6 +407,12 @@
     "backToStory": "कहानी पर वापस",
     "allChapters": "सभी अध्याय",
     "cardKicker": "Pixoci · सीज़न 1",
-    "cardSubtitle": "तेरह अध्याय इस बारे में कि Dzino तुम तक कैसे पहुँचा।"
+    "cardSubtitle": "तेरह अध्याय इस बारे में कि Dzino तुम तक कैसे पहुँचा।",
+    "storyboardKicker": "Storyboard",
+    "storyboardTitle": "इस अध्याय का storyboard देखो",
+    "backToEpisode": "अध्याय पर वापस",
+    "chimeTitle": "Pixoci की धुन",
+    "chimeDesc": "तीन-नोट की धुन जो Souli पहली बार खोलने पर बजती है।",
+    "chimePlay": "धुन बजाओ"
   }
 }

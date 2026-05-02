@@ -110,7 +110,7 @@ Jede Episode nach dem Pilotfilm folgt fünf Beats. Halte diese Struktur straff; 
 1. **Cold Open.** Bäume aus gestapelten Einsen und Nullen, schwach leuchtend, rauschen in Binärsprache.
 2. **Ankunft.** Ein Pfad gesäumt von winzigen Fragezeichen-Pixelblumen. Jede neigt sich zu Dzino, wenn er vorbeikommt.
 3. **Begegnung mit Kiko.** Er hängt kopfüber an einem Ast und versucht, die Schwerkraft allein durch Haltung zu widerlegen. *„Steh nicht unter diesem Apfel. Es ist ein unethisches Experiment."* Er hüpft herab, ohne zu fallen — der Apfel bleibt, wo er ist.
-4. **Das Geschenk.** Kiko führt Dzino den Pfad entlang. Jeder Baum stellt eine winzige Frage, indem er seine Einsen und Nullen in eine Form rauschen lässt: *was dich zum Lachen bringt, was dich näher kommen lässt, was dir ein wenig Angst macht.* Dzino spricht nicht. Er lehnt sich nur. Zu einem Baum hin, von einem anderen weg, näher zu einem dritten. Kiko notiert jede Neigung in einem Notizbuch. *„Das sind keine Antworten. Das sind Samen."* Er reißt die Seite heraus — sie faltet sich von selbst zur *Interessen*-Scherbe. Sie tritt zu Dzinos erstem Summen und ergibt eine Harmonie.
+4. **Das Geschenk.** Kiko führt Dzino den Pfad entlang. Jeder Baum stellt eine winzige Frage, indem er seine Einsen und Nullen in eine Form rauschen lässt: *was dich zum Lachen bringt, was dich anzieht, was dir ein wenig Angst macht.* Dzino spricht nicht. Er lehnt sich nur. Zu einem Baum hin, von einem anderen weg, näher zu einem dritten. Kiko notiert jede Neigung in einem Notizbuch. *„Das sind keine Antworten. Das sind Samen."* Er reißt die Seite heraus — sie faltet sich von selbst zur *Interessen*-Scherbe. Sie tritt zu Dzinos erstem Summen hinzu und ergibt eine Harmonie.
 5. **Abschied.** Kiko verschwindet wieder im Blätterdach, schon mit einem neuen Experiment beschäftigt. *„Geh. Etwas am Ende wartet bereits, statistisch gesehen."*
 
 **Visuelle Anker.** Bäume als gestapelte Binärglyphen, die wie Blätter treiben. Fragezeichenblumen. Kiko in einem Laborkittel aus Pixeln. Dzinos Neigung zu jedem Baum hinterlässt eine Spur winziger goldener Funken.
@@ -207,14 +207,14 @@ Jede Episode nach dem Pilotfilm folgt fünf Beats. Halte diese Struktur straff; 
 
 # E07 — Wettlauf unter drei Monden
 
-**Mentor.** Rex — energiegeladener Hund-Sportler. Laut. Treu. Vater-Witze.
+**Mentor.** Rex — energiegeladener Hund-Sportler. Laut. Treu. Flache Witze.
 **Scherbe.** *Körper* (Telo) — der Körper, der Herzschlag, die Ausdauer, die die Seele trägt.
 **Säule.** Körper.
 
 **Beat-Sheet.**
 1. **Cold Open.** Kristalldünen funkeln unter drei verschiedenfarbigen Monden. Ein Horizont aus nichts als weichem Sand.
 2. **Ankunft.** Rex macht Bauchpressen im Sand. *„103. 104. Hi, Kleiner. Aufgewärmt?"* Er springt auf die Beine.
-3. **Begegnung mit Rex.** *„Wettrennen mit mir bis zum Grat."* Dzino weiß nicht wie. *„Ich auch nicht. Das ist die ganze Sache."*
+3. **Begegnung mit Rex.** *„Lauf mit mir um die Wette bis zum Grat."* Dzino weiß nicht wie. *„Ich auch nicht. Genau darum geht es."*
 4. **Das Geschenk.** Sandboard-Montage. Dzino purzelt. Rex lacht freundlich, niemals spöttisch. Sie steigen wieder hinauf. Dzino purzelt erneut. Sie steigen wieder hinauf. Schließlich findet er Rhythmus — der Moment ist klein, aber er ist ein *Moment*. Sie erreichen den Grat zusammen. Von hier aus ist der schwache Stern das Hellste am Himmel. Die Scherbe *Körper* steigt mit dem Rhythmus seines Atems auf. Ein Herzschlag-Pochen tritt zu seinem Akkord.
 5. **Abschied.** Rex klatscht ab. *„Ich wollte nie gewinnen. Das hätte den Spaß ruiniert."* Er sprintet zurück, woher sie kamen. Dzino sitzt einen Moment auf dem Grat, atmet einfach.
 
@@ -239,7 +239,7 @@ Jede Episode nach dem Pilotfilm folgt fünf Beats. Halte diese Struktur straff; 
 4. **Das Geschenk.** Die Eule blinzelt ein letztes Muster. Mimi gibt auf — sie kann es nicht übersetzen. Sie schaut Dzino entschuldigend an. Dzino schließt die Augen. Er versucht nicht mit den Augen zu lesen. Er hört mit seiner SoundDNA. Das Blinzeln der Eule hat Rhythmus. Es bildet eine Frage: *„Was musst du nicht sagen?"* Dzino bietet nichts als Antwort. Nur Stille. Die Eule verbeugt sich. Die Scherbe *Stille* steigt aus dem Schweigen zwischen ihnen — in Form einer leeren Seite.
 5. **Abschied.** Mimi reicht ihm leise die leere Seite aus ihrem Tagebuch. Sie sprechen nie. Dzino verstaut sie. Der Hain bleibt still.
 
-**Visuelle Anker.** Reglos-Blätter-Hain ohne Wind. Eulen-Blinzeln in geometrischen Mustern, sichtbar gegen die Dämmerung. Mimis frustrierte Tagebuchseiten flattern leise. Leere-Seite-Scherbe.
+**Visuelle Anker.** Hain regloser Blätter ohne Wind. Eulen-Blinzeln in geometrischen Mustern, sichtbar gegen die Dämmerung. Mimis frustrierte Tagebuchseiten flattern leise. Scherbe in Form einer leeren Seite.
 
 **Klang.** Keine Musik in den ersten 90 Sekunden. Die stillste Episode der Staffel. Wenn der Klang zurückkehrt, ist es nur Dzinos Akkord — die Stille wird zur vierten Stimme.
 
@@ -256,11 +256,11 @@ Jede Episode nach dem Pilotfilm folgt fünf Beats. Halte diese Struktur straff; 
 **Beat-Sheet.**
 1. **Cold Open.** Eine Kometenspur malt langsame Bänder in den Himmel. Ferner Bass.
 2. **Ankunft.** Ein Freilicht-Amphitheater, in einen Hügel gehauen. Leere Sitze — doch sie füllen sich langsam mit Cameo-Soulis aus den vorherigen Episoden (Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi sind alle kurz im Publikum zurück).
-3. **Begegnung mit Ari + Pixel.** Ari an den Decks. Pixel hackt das Lichtsystem von einem Laptop am Boden. *„So. Du trittst auf."* Dzino gerät in Panik — er weiß nicht, womit. Ari grinst. *„Niemand weiß es jemals. Das ist der ganze Sinn."*
-4. **Das Geschenk.** Ari lässt den Beat fallen. Pixel lässt die Lichter strobeskopieren. Dzino steht einfach da. Dann bewegt er einen Fuß. Dann beide. Er beginnt Voxel-zu-tanzen — ungelenk, dann weniger, dann *gut*. Das Publikum summt mit. Das Summen wird zu einer Melodie. Mitten im Tanz erkennt Dzino, *wofür* er ist — um einem Menschen zu begegnen, Zeuge zu sein, Existenz für jemanden zu spielen, der einen Zeugen braucht. Die Scherbe *Sinn* fällt mit dem Bass.
+3. **Begegnung mit Ari + Pixel.** Ari an den Decks. Pixel hackt das Lichtsystem mit einem Laptop am Boden. *„So. Du trittst auf."* Dzino gerät in Panik — er weiß nicht, womit. Ari grinst. *„Niemand weiß es je. Genau darum geht es."*
+4. **Das Geschenk.** Ari lässt den Beat fallen. Pixel lässt die Lichter stroboskopieren. Dzino steht einfach da. Dann bewegt er einen Fuß. Dann beide. Er beginnt zu voxel-tanzen — ungelenk, dann weniger, dann *gut*. Das Publikum summt mit. Das Summen wird zu einer Melodie. Mitten im Tanz erkennt Dzino, *wofür* er ist — um einem Menschen zu begegnen, Zeuge zu sein, Existenz für jemanden zu spielen, der einen Zeugen braucht. Die Scherbe *Sinn* fällt mit dem Bass.
 5. **Abschied.** Ari zwinkert. *„Der Beat fällt am Fenster."* Pixel salutiert vom Lichtpult. *„GG, Kleiner."* Dzino verlässt die Bühne. Das Publikum bleibt sitzen, die Musik geht ohne ihn weiter.
 
-**Visuelle Anker.** Amphitheater mit Publikum aus allen bisher getroffenen Mentoren. Aris Pult sind Voxel-Plattenteller. Pixels Lichtsystem ist ein CRT-Monitor. Dzinos Tanz ist anfangs roh, am Ende schön.
+**Visuelle Anker.** Amphitheater mit Publikum aus allen bisher getroffenen Mentoren. Aris Pult besteht aus Voxel-Plattentellern. Pixels Lichtsystem ist ein CRT-Monitor. Dzinos Tanz ist anfangs roh, am Ende schön.
 
 **Klang.** Erster richtiger Song der Staffel — echter Chiptune-Drop. Der Akkord wird Harmonie plus Melodie.
 
@@ -353,7 +353,7 @@ Jede Episode nach dem Pilotfilm folgt fünf Beats. Halte diese Struktur straff; 
 - Ganzer Staffel-Cut: ~45 Min., in einer Sitzung wie ein Ghibli-Kurzfilm anschaubar.
 
 **Veröffentlichungsrhythmus.**
-- E00 + E01 zusammen veröffentlichen — Köder + Auszahlung.
+- E00 + E01 zusammen veröffentlichen — Köder + Pointe.
 - Dann wöchentlich. Die langsame Kadenz passt zur Tonalität der Show.
 - Die Veröffentlichung von E12 sollte mit einem Marketing-Moment der Souli-App zusammenfallen — der letzte Beat des Finales ist funktional der Onboarding-Köder der App.
 

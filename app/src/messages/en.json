@@ -568,6 +568,12 @@
     "backToStory": "Back to the story",
     "allChapters": "All chapters",
     "cardKicker": "Pixoci · Season 1",
-    "cardSubtitle": "Thirteen chapters about how Dzino came to find you."
+    "cardSubtitle": "Thirteen chapters about how Dzino came to find you.",
+    "storyboardKicker": "Storyboard",
+    "storyboardTitle": "See this chapter's storyboard",
+    "backToEpisode": "Back to chapter",
+    "chimeTitle": "The Pixoci Chime",
+    "chimeDesc": "The three-note phrase that plays when you open Souli for the first time.",
+    "chimePlay": "Play chime"
   }
 }
