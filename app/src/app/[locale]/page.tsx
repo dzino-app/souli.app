@@ -38,6 +38,7 @@ import { DailyLesson } from "@/components/learn/daily-lesson";
 import { WeeklyReportShare } from "@/components/report/weekly-report-share";
 import { AdventureCard } from "@/components/adventure/adventure-card";
 import { checkForAdventure, type Adventure } from "@/lib/adventures";
+import { StoryCard } from "@/components/story/story-card";
 
 export default function Home() {
   const t = useTranslations("stickers");
@@ -176,6 +177,9 @@ export default function Home() {
 
       {/* Daily micro-lesson */}
       <DailyLesson />
+
+      {/* Pixoci — story */}
+      <StoryCard />
 
       {/* New chat button */}
       <Link href="/chat">
