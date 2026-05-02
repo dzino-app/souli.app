@@ -229,7 +229,7 @@ Every episode after the pilot follows five beats. Hold this structure tight; it'
 # E08 — The Silent Owl
 
 **Mentor.** Mimi — shy bunny bookworm. Doesn't speak unless absolutely necessary.
-**Shard.** *Quiet* (Preferencie) — the shape of his silences. What he doesn't ask of others.
+**Shard.** *Quiet* (Ticho) — the shape of his silences. What he doesn't ask of others.
 **Pillar.** Mind.
 
 **Beat sheet.**
