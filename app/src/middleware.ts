@@ -188,6 +188,6 @@ async function refreshSession(
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|sprites|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|sprites|sounds|icons|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|wav|mp3|ogg)$).*)",
   ],
 };
