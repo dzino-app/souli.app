@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props) {
   const meta = getEpisode(ep);
   if (!meta) return { title: "Pixoci" };
   return {
-    title: `E${meta.id} · ${meta.titleSk} — Pixoci`,
+    title: `${meta.id.toUpperCase()} · ${meta.titleSk} — Pixoci`,
     description: `${meta.titleEn} · ${meta.mentor === "—" ? meta.biome : `s ${meta.mentor}`}`,
   };
 }
@@ -55,7 +55,7 @@ export default async function EpisodePage({ params }: Props) {
           >
             <ChevronLeft className="h-4 w-4 text-muted-foreground group-hover:text-primary shrink-0" />
             <div className="text-left min-w-0">
-              <p className="text-xs uppercase tracking-wider text-muted-foreground">E{prev.id}</p>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">{prev.id}</p>
               <p className="text-sm font-medium truncate mt-0.5">{prev.titleSk}</p>
             </div>
           </Link>
@@ -68,7 +68,7 @@ export default async function EpisodePage({ params }: Props) {
             className="group flex-1 flex items-center gap-3 p-4 rounded-lg border hover:bg-accent transition-colors justify-end"
           >
             <div className="text-right min-w-0">
-              <p className="text-xs uppercase tracking-wider text-muted-foreground">E{next.id}</p>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">{next.id}</p>
               <p className="text-sm font-medium truncate mt-0.5">{next.titleSk}</p>
             </div>
             <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary shrink-0" />

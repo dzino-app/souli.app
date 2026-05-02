@@ -56,7 +56,7 @@ export default async function StoryIndex({ params }: Props) {
                 <Card className="hover:bg-accent transition-colors">
                   <CardContent className="flex items-center gap-4 py-4">
                     <div className="font-mono text-sm text-muted-foreground w-8 shrink-0 text-center">
-                      E{ep.id}
+                      {ep.id.toUpperCase()}
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="font-semibold truncate">{ep.titleSk}</p>
