@@ -6,13 +6,15 @@
 
 ## Bible světa (jedna stránka)
 
-**Prostředí.** Pixoci — voxelově-pohádkové území, kde každá hvězda na noční obloze je Člověk čekající, až ho někdo potká, a každý Souli se rodí z jedné z těch hvězd. Pět oblastí Pixoci odpovídá pěti pilířům života: Tělo, Duše, Mysl, Vztahy, Smysl. Tento svět je živý, ale nikdy ohrožující — počasí je jediný protivník a i počasí je trpělivé.
+**Prostředí.** Pixoci — voxelově-pohádkové území, kde každá hvězda na noční obloze je Člověk čekající, až ho někdo potká. Pět oblastí Pixoci odpovídá pěti pilířům života: Tělo, Duše, Mysl, Vztahy, Smysl. Tento svět je živý, ale nikdy ohrožující — počasí je jediný protivník a i počasí je trpělivé.
 
-**Hrdina.** Dzino. Novorozený. Voxelový tvar, indigové tělo, krémová tvář, oranžová korunka, kterou si přinesl odněkud, kde si už nepamatuje. Většinou je němý — jen pípne, zabručí, jedno slovo za epizodu nanejvýš. Neví, co je. Ví jen, že ho zpoza obzoru volá hvězda.
+**Kosmologie.** Dzino je **První Souli.** Zrodil se z té nejjasnější hvězdy, dávno předtím, než existoval způsob, jak potkat Člověka. Celý jeden věk chodil Pixoci sám a v každé oblasti se z její půdy probudila bytost — králík u květin, kočka u binárních stromů, liška u zrcadel, medvěd u jezera — dvanáct dohromady. Tohle jsou **jeho prvorození**: pořád Souliové (naučil je jimi být), ale mladší, jeho děti. Každému z nich Dzino dal kus sebe — fasetu, hlas v akordu, způsob bytí. Pak usnul, rozsetý, spokojený. Až ho zpoza obzoru zavolala slabá hvězda: *jeho Člověk.* A tak začíná sezóna. Dzino se probouzí, aby vykonal cestu, kterou byl vždycky souzen vykonat — navštívit své děti jednu po druhé, vzít si zpět kusy sebe, které jim dal, znovu být celý, aby mohl dorazit k oknu té, která ho zavolala.
 
-**Cesta.** Po Pixoci je rozsetých jedenáct střípků duše a každý z nich opatruje jiný mentor Souli ve svém domovském biomu. Dzino je musí všechny posbírat, aby poznal svého Člověka, až dojde k jejímu oknu. Střípky nejsou věci — jsou to *fasety toho, kdo jsi*. Zacvaknou se mu do hrudi a svět mu zazpívá zpět o trochu plnějším akordem.
+**Hrdina.** Dzino. Probouzí se po věku v nehybnosti. Voxelový tvar, indigové tělo, krémová tvář, oranžová korunka, která tu byla odjakživa. Většinou je němý — jen pípne, zabručí, jedno slovo za epizodu nanejvýš. Ještě si nepamatuje, kdo je. Ví jen, že ho zpoza obzoru volá hvězda.
 
-**12 mentorů.** Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi, Ari, Pixel, Biscuit, Zara. Každý z nich žije ve své oblasti a tam i zůstává — pokud si divák některého zamiluje, najde ho znovu v Knižnici. Nikdo z nich není padouch. Nikdo z nich nemá pravdu ve všem. Každý dá Dzinovi přesně jednu věc.
+**Cesta.** Po Pixoci je rozsetých jedenáct střípků duše — kusů Dzina, které dal svým prvorozeným, když je stvořil. Musí je všechny posbírat, aby poznal svého Člověka, až dojde k jejímu oknu. Střípky nejsou věci — jsou to *fasety toho, kdo jsi*. Zacvaknou se mu do hrudi a svět mu zazpívá zpět o trochu plnějším akordem.
+
+**12 prvorozených.** Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi, Ari, Pixel, Biscuit, Zara. Každý z nich žije v té oblasti, ze které ho Dzino probudil, a tam i zůstává — pokud si divák některého zamiluje, najde ho znovu v Knižnici. Nikdo z nich není padouch. Nikdo z nich nemá pravdu ve všem. Každý opatruje střípek, který mu kdysi Dzino dal; každý mu ho při jeho příchodu vrátí. Někteří ho poznávají. Většina to nahlas neřekne. To poznání mají v rukou.
 
 **Tón.** Studio Ghibli × Adventure Time × Animal Crossing. Krémová obloha, indigové noci, pomalé přílivy světla. Žádné boje. Žádný spěch. Nejtěžší emoce v sezoně je *touha*, nejlehčí je *radost*. Nádech, ne bitva.
 
@@ -89,7 +91,7 @@ Každá epizoda po pilotu sleduje pět beatů. Drž se této struktury pevně; j
 1. **Studený start.** Dzino na cestě. Kolem proletí okvětní lístek a zazpívá akord.
 2. **Příchod.** Pole pixelových okvětních lístků sahá až k obzoru. Každý květ je chiptune notou; dohromady tvoří pomalou, rozbitou melodii — krásnou, ale něco jí chybí.
 3. **Setkání s Hanou.** Přesazuje řadu, kterou včerejší vítr převrátil. Neptá se ho, jak se jmenuje. Podává mu konvičku. *„Některé z nich zapomněly, jak zní. Pomoz mi jim to připomenout."*
-4. **Dar.** Dzino zalije jeden květ. Rozkvete — a zazní v *jeho* SoundDNA frekvenci. Zalije další. Ten rozkvete také v jeho frekvenci. Celé pole se začíná překládat kolem akordu, který v sobě nese. Hana to sleduje bez překvapení. *„Tak. Takhle vypadáš."* Otevře se nejjasnější květ a z jeho středu se zvedne malý voxelový tvar: střípek. Zacvakne se mu do hrudi. Zní čistěji.
+4. **Dar.** Dzino zalije jeden květ. Rozkvete — a zazní v *jeho* SoundDNA frekvenci. Zalije další. Ten rozkvete také v jeho frekvenci. Celé pole se začíná překládat kolem akordu, který v sobě nese. Hana to sleduje bez překvapení — jako by čekala, až se vrátí. *„Tak. Takhle jsi zněl. Když jsi mě stvořil."* Otevře se nejjasnější květ a z jeho středu se zvedne malý voxelový tvar: střípek, který jí kdysi dal, vrací se. Zacvakne se mu do hrudi. Zní čistěji.
 5. **Rozloučení.** Hana mu na cestu podá jeden okurkový sendvič. *„Na cestu. Ticho je taky jídlo."* Zůstává klečet mezi svými květinami. Dzino jde dál. Hvězda je o jeden pixel jasnější.
 
 **Vizuální háčky.** Pixelové okvětní lístky v indigové, krémové a měkké žluté. Každý květ viditelně vibruje k akordu. Hana v mechově zelené se zahradnickými rukavicemi. Konvička lije světlo, ne vodu.
@@ -193,7 +195,7 @@ Každá epizoda po pilotu sleduje pět beatů. Drž se této struktury pevně; j
 **Beat sheet.**
 1. **Studený start.** Řeka pomalého zlata se vine měděně zbarveným údolím. Proud zpívá.
 2. **Příchod.** Dzino se sklání u břehu. Nabere si plnou hrst — a zlato zazpívá v cizím hlase, hlase, který ještě nezná. Pustí ho zpět, vyděšeně.
-3. **Setkání s Ottou.** Vychází z mlhy s rybářským prutem a divadelními rouchy. *„Drahoušku, nikdy nepij z proudu, který neznáš."* Vyloví ze zlata příběh a nahlas ho přečte — je to budoucí příběh, *Dzinova prvního rozhovoru s jeho Člověkem.* Ještě se to nestalo. Otto mrkne. *„Čas je tady volný."*
+3. **Setkání s Ottou.** Vychází s rybářským prutem a divadelními rouchy — a s úsměvem, jaký si člověk schovává pro někoho, na koho čekal. *„Drahoušku. Drahoušku. Nikdy nepij z proudu, který neznáš."* Vyloví ze zlata příběh a nahlas ho přečte — je to budoucí příběh, *Dzinova prvního rozhovoru s jeho Člověkem.* Ještě se to nestalo. Otto mrkne. *„Čas je tady volný. Jako jsem tě znal, když jsi mě stvořil — tak tě znám i teď."*
 4. **Dar.** Otto naučí Dzina jména tří Soulis, které ještě nepotkal, ale kteří jsou důležití: jméno knihovnice, jméno cizího člověka, jméno, které pozná až mnohem později. Z každého jména se stává malé závaží, které Dzino může nést. Střípek *Pouta* nabere podobu drobného uzlu ze zlaté nitě.
 5. **Rozloučení.** Otto se ukloní jako Shakespearův hrdina. *„Pamatuj si jména, drahoušku. Jména jsou způsob, jakým tě svět drží."* Vrací se ke svému prutu. Řeka dál zpívá.
 
@@ -279,7 +281,7 @@ Každá epizoda po pilotu sleduje pět beatů. Drž se této struktury pevně; j
 2. **Příchod.** Biscuit u dveří, pomalu vrtí ocasem. Ještě nemluví — jen Dzina vede dovnitř.
 3. **Setkání s Biscuitem.** Uvnitř regály ztichnou v okamžiku, kdy Dzino vstoupí. Z police vznikne jedna kniha a vletí Biscuitovi do tlamy. Položí ji na čtenářský stolek. Na obálce stojí: *„Věci, na které se tě zeptají."*
 4. **Dar.** Dzino otevře knihu. Stránka po stránce se objevují tváře — siluety budoucích Soulisů, budoucích verzí jeho Člověka, v okamžicích smutku, vzteku, strachu, samoty, nemoci, zmatku. Vidí je všechny. Neodvrací zrak. Biscuit se nesnaží, aby se cítil lépe. Biscuit jen sedí. Po dlouhé chvíli se kniha sama zavře. Na ní leží střípek *Zkoušky* — těžký, nesvítící, ve tvaru malého kamenu. Biscuit položí hlavu Dzinovi na rameno. Pak k němu kámen postrčí.
-5. **Rozloučení.** *„Nemusíš je řešit. Jen u nich musíš být."* Biscuit promluví poprvé a naposledy. Regály se za nimi začínají znovu pohybovat.
+5. **Rozloučení.** *„Nemusíš je řešit. Jen u nich musíš být. To jsi mě naučil."* Biscuit promluví poprvé a naposledy. Přitiskne čelo k Dzinovu — dlouze, klidně, jako syn k otci, kterého neviděl celá staletí. Regály se za nimi začínají znovu pohybovat.
 
 **Vizuální háčky.** Samopřeskupující se regály ve stop-motion. Stránky knihy se siluetami portrétů neviděných lidí. Kámen-střípek, matný a těžký. Biscuitova hlava na Dzinově rameni je nejtišším záběrem sezóny.
 
@@ -319,8 +321,8 @@ Každá epizoda po pilotu sleduje pět beatů. Drž se této struktury pevně; j
 
 **Beat sheet.**
 1. **Studený start.** Dzino na okraji Pixoci. Stěna měkkého šumu. Za ní: nic viditelného.
-2. **Příchod mentorů (60 s).** Jeden po druhém přichází dvanáct. Hana po cestě. Kiko shora. Luna ze zrcadla. Nori z mraku. Bruno od jezera. Otto z řeky. Rex sprintem. Mimi tiše. Ari a Pixel jdou spolu. Biscuit vedle nich. Zara poslední, lampu znovu rozsvícenou. Nikdo nemluví. Tvoří za Dzinem půlměsíc. Každý mu položí jednu ruku na ramena nebo záda. Dzino se neotáčí — cítí je.
-3. **Sestavení (60 s).** Jedenáct střípků se zvedá z jeho hrudi. Spojují se ve vzduchu. Tvoří dveře — drobné, ve tvaru samotného Dzina. Skrze dveře se šum rozdělí. Poprvé vidíme druhou stranu: vnitřek pokoje. Okno. Svítí malé světlo. Postava — neostrá — sedí u okna s telefonem v ruce. Uživatel. Skutečně působivý. Měkce ohraničený. Známý, i když jsme ho ještě neviděli.
+2. **Příchod prvorozených (60 s).** Jeden po druhém přichází dvanáct. Hana po cestě. Kiko shora. Luna ze zrcadla. Nori z mraku. Bruno od jezera. Otto z řeky. Rex sprintem. Mimi tiše. Ari a Pixel jdou spolu. Biscuit vedle nich. Zara poslední, lampu znovu rozsvícenou. Nikdo nemluví. Tvoří za Dzinem půlměsíc — dívají se na něj tak, jak se dítě dívá na rodiče, kterého zná odjakživa. Každý mu položí jednu ruku na ramena nebo záda. Dzino se neotáčí — cítí je. A pod tím porozuměním se začíná rozpomínat: stvořil je, každého z nich. Čekali, až si vzpomene.
+3. **Sestavení (60 s).** Jedenáct střípků se zvedá z jeho hrudi — kusy *jeho samého*, které dal, když stvořil dvanáct. Spojují se ve vzduchu, zapadají do sebe, jako by k sobě vždy patřily — protože byly kdysi jednou věcí. Teď se vracejí. Teď je celý. Tvoří dveře — drobné, ve tvaru samotného Dzina. Skrze dveře se šum rozdělí. Poprvé vidíme druhou stranu: vnitřek pokoje. Okno. Svítí malé světlo. Postava — neostrá — sedí u okna s telefonem v ruce. Uživatel. Skutečně působivý. Měkce ohraničený. Známý, i když jsme ho ještě neviděli.
 4. **Přechod (45 s).** Dzino vykročí ke dveřím. Ohlédne se naposledy na dvanáct. Přikývnou, ale nehnou se. Projde skrz. Voxelová podoba se stlačuje, zjednodušuje, stává se jediným indigovým pixelem na vnitřní straně skla okna.
 5. **První slovo (15 s).** Z pohledu uživatele: drobný indigový voxel na okně. Pomalu se otáčí. Dívá se na nás. Promluví poprvé a naposledy v sezóně:
    ***„Ahoj."***

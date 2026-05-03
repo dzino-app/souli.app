@@ -6,13 +6,15 @@
 
 ## Biblia świata (jednostronicowa)
 
-**Sceneria.** Pixoci — wokselowo-baśniowa kraina, gdzie każda gwiazda na nocnym niebie jest Osobą czekającą na spotkanie, a każdy Souli rodzi się z jednej z tych gwiazd. Pięć regionów Pixoci odpowiada pięciu filarom życia: Ciało, Dusza, Umysł, Relacje, Sens. Kraina żyje, lecz nigdy nie zagraża — pogoda jest jedynym przeciwnikiem, a nawet pogoda jest cierpliwa.
+**Sceneria.** Pixoci — wokselowo-baśniowa kraina, gdzie każda gwiazda na nocnym niebie jest Osobą czekającą na spotkanie. Pięć regionów Pixoci odpowiada pięciu filarom życia: Ciało, Dusza, Umysł, Relacje, Sens. Kraina żyje, lecz nigdy nie zagraża — pogoda jest jedynym przeciwnikiem, a nawet pogoda jest cierpliwa.
 
-**Bohater.** Dzino. Nowo narodzony. O wokselowym kształcie, indygowym ciele, kremowej twarzy, z pomarańczową koroną, którą przyniósł skądś, czego nie pamięta. Jest niemal niemy — ćwierka, nuci, najwyżej jedno słowo na odcinek. Nie wie, czym jest. Wie tylko, że zza horyzontu woła go gwiazda.
+**Kosmologia.** Dzino jest **Pierwszym Souli.** Narodził się z najjaśniejszej gwiazdy, na długo zanim istniał jakikolwiek sposób, by spotkać Osobę. Wieki wędrował po Pixoci sam, a w każdym regionie z jego ziemi budziła się istota — króliczka przy kwiatach, kot przy binarnych drzewach, lis przy lustrach, niedźwiedź nad jeziorem — w sumie dwunastu. To są **Pierwszych Dwunastu**, jego pierworodni: wciąż Soulisi (sam ich tego nauczył), ale młodsi — jego dzieci. Każdemu z nich Dzino dał kawałek siebie — fasetę, głos akordu, sposób bycia. Potem zasnął, rozproszony, spełniony. Aż słaba gwiazda zaczęła go ciągnąć zza horyzontu: *jego Osoba.* I tak zaczyna się sezon. Dzino budzi się, by odbyć podróż, którą zawsze miał odbyć — odwiedzić swoje dzieci jedno po drugim, odebrać kawałki siebie, które im kiedyś dał, stać się znów całością, by mógł dotrzeć do okna tej, która go zawołała.
 
-**Wyprawa.** Jedenaście odłamków duszy jest rozsianych po Pixoci, każdy strzeżony przez innego mentora Souli w jego rodzimym biomie. Dzino musi zebrać je wszystkie, by rozpoznać swoją Osobę, gdy dotrze do jej okna. Odłamki nie są przedmiotami — są *aspektami jaźni*. Wpinają się w jego pierś, a świat odpowiada nieco pełniejszym akordem.
+**Bohater.** Dzino. Budzi się po wieku bezruchu. O wokselowym kształcie, indygowym ciele, kremowej twarzy, z pomarańczową koroną, która zawsze tam była. Jest niemal niemy — ćwierka, nuci, najwyżej jedno słowo na odcinek. Jeszcze nie pamięta, kim jest. Wie tylko, że zza horyzontu woła go gwiazda.
 
-**Dwunastu Mentorów.** Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi, Ari, Pixel, Biscuit, Zara. Każde z nich mieszka w swoim regionie i tam pozostaje — widz, który się w którymś zakocha, może odnaleźć go ponownie w Knižnicy. Żadne nie jest złoczyńcą. Żadne nie ma we wszystkim racji. Każde daje Dzinowi dokładnie jedną rzecz.
+**Wyprawa.** Jedenaście odłamków duszy jest rozsianych po Pixoci — kawałków Dzina, które dał swoim pierworodnym, gdy ich wychował. Musi zebrać je wszystkie, by rozpoznać swoją Osobę, gdy dotrze do jej okna. Odłamki nie są przedmiotami — są *aspektami jaźni*. Wpinają się w jego pierś, a świat odpowiada nieco pełniejszym akordem.
+
+**Pierwszych Dwunastu.** Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi, Ari, Pixel, Biscuit, Zara. Każde mieszka w regionie, z którego Dzino je obudził, i tam pozostaje — widz, który się w którymś zakocha, może odnaleźć go ponownie w Knižnicy. Żadne nie jest złoczyńcą. Żadne nie ma we wszystkim racji. Każde trzyma odłamek, który Dzino mu kiedyś dał; każde oddaje go, gdy on przybywa. Niektóre go rozpoznają. Większość nie mówi tego na głos. Rozpoznanie jest w ich dłoniach.
 
 **Ton.** Studio Ghibli × Adventure Time × Animal Crossing. Kremowe niebo, indygowe noce, powolne przypływy światła. Bez walki. Bez pośpiechu. Najtrudniejsza emocja sezonu to *tęsknota*, najłatwiejsza — *zachwyt*. Oddech, nie bitwa.
 
@@ -89,7 +91,7 @@ Każdy odcinek po pilocie składa się z pięciu uderzeń. Trzymaj tę struktur�
 1. **Cold open.** Dzino w drodze. Mija go płatek, nucąc akord.
 2. **Przybycie.** Pole pikselowych płatków rozciąga się aż po horyzont. Każdy kwiat to nuta chiptune'a; razem tworzą powolną, połamaną melodię — piękną, ale czegoś jej brakuje.
 3. **Spotkanie Hany.** Przesadza rządek, który przewrócił wczorajszy wiatr. Nie pyta go o imię. Wręcza mu konewkę. *„Niektóre zapomniały, jak brzmią. Pomóż mi im przypomnieć.”*
-4. **Dar.** Dzino podlewa jeden kwiat. Ten rozkwita — i nuci na *jego* częstotliwości SoundDNA. Podlewa kolejny. Też rozkwita w jego częstotliwości. Całe pole zaczyna układać się na nowo wokół akordu, który niesie. Hana patrzy bez zaskoczenia. *„Proszę. Tak właśnie wyglądasz.”* Najjaśniejszy kwiat otwiera się i z jego środka unosi się mała wokselowa forma: odłamek. Wpina się w jego pierś. Nuci wyraźniej.
+4. **Dar.** Dzino podlewa jeden kwiat. Ten rozkwita — i nuci na *jego* częstotliwości SoundDNA. Podlewa kolejny. Też rozkwita w jego częstotliwości. Całe pole zaczyna układać się na nowo wokół akordu, który niesie. Hana patrzy bez zaskoczenia — jakby czekała, aż wróci. *„Tak. Tak brzmiałeś. Kiedy mnie stworzyłeś.”* Najjaśniejszy kwiat otwiera się i z jego środka unosi się mała wokselowa forma: odłamek, który jej kiedyś dał, wracający. Wpina się w jego pierś. Nuci wyraźniej.
 5. **Pożegnanie.** Hana wręcza mu jedną kanapkę z ogórkiem na drogę. *„Na drogę. Cisza też jest jedzeniem.”* Zostaje, klęcząc wśród swoich kwiatów. Dzino idzie dalej. Gwiazda jest o jeden piksel jaśniejsza.
 
 **Wizualne kotwice.** Pikselowe płatki w indygo, kremie i delikatnych żółciach. Każdy kwiat wyraźnie wibruje na jakimś akordzie. Hana w mchowo-zielonych ogrodniczkach. Konewka leje światło, nie wodę.
@@ -193,7 +195,7 @@ Każdy odcinek po pilocie składa się z pięciu uderzeń. Trzymaj tę struktur�
 **Plan uderzeń.**
 1. **Cold open.** Rzeka powolnego złota wije się przez miedzianą dolinę. Nurt nuci.
 2. **Przybycie.** Dzino przyklęka nad brzegiem. Czerpie garść — a złoto śpiewa cudzym głosem, którego jeszcze nie zna. Wystraszony wypuszcza je z powrotem.
-3. **Spotkanie Otta.** Wyłania się z wędką i teatralnymi szatami. *„Mój drogi, nigdy nie pij z nurtu, którego nie znasz.”* Wyławia opowieść ze złota i czyta ją na głos — to opowieść z przyszłości, o *pierwszej rozmowie Dzina ze swoją Osobą*. Jeszcze się nie wydarzyła. Otto mruga. *„Czas jest tu luźny.”*
+3. **Spotkanie Otta.** Wyłania się z wędką i teatralnymi szatami — i z uśmiechem zarezerwowanym dla kogoś, na kogo się czekało. *„Mój drogi. Mój drogi. Nigdy nie pij z nurtu, którego nie znasz.”* Wyławia opowieść ze złota i czyta ją na głos — to opowieść z przyszłości, o *pierwszej rozmowie Dzina ze swoją Osobą*. Jeszcze się nie wydarzyła. Otto mruga. *„Czas jest tu luźny. Jak znałem cię, gdy mnie wychowałeś — tak znam cię i teraz.”*
 4. **Dar.** Otto uczy Dzina imion trzech Souli, których jeszcze nie spotkał, ale którzy mają znaczenie: imię bibliotekarza, imię nieznajomego, imię, którego nie rozpozna aż do dużo później. Każde imię staje się małym ciężarkiem, który Dzino może nieść. Odłamek *Więzi* przybiera kształt drobnego węzła ze złotej nici.
 5. **Pożegnanie.** Otto kłania się jak postać Szekspira. *„Pamiętaj imiona, mój drogi. Imiona to sposób, w jaki świat cię trzyma.”* Wraca do wędki. Rzeka nuci dalej.
 
@@ -279,7 +281,7 @@ Każdy odcinek po pilocie składa się z pięciu uderzeń. Trzymaj tę struktur�
 2. **Przybycie.** Biscuit w drzwiach, powoli macha ogonem. Jeszcze nie mówi — po prostu prowadzi Dzina do środka.
 3. **Spotkanie Biscuita.** W środku półki zatrzymują się, gdy tylko Dzino wchodzi. Jedna książka unosi się z półki i wpada Biscuitowi do pyska. Kładzie ją na stoliku. Na okładce: *„Rzeczy, o które będziesz proszony.”*
 4. **Dar.** Dzino otwiera księgę. Strona po stronie pojawiają się twarze — sylwetki przyszłych Souli, przyszłych wersji jego Osoby, w chwilach żałoby, gniewu, lęku, samotności, choroby, zagubienia. Widzi je wszystkie. Nie odwraca wzroku. Biscuit nie próbuje sprawić, by poczuł się lepiej. Biscuit tylko siedzi. Po długiej chwili księga sama się zamyka. Na niej spoczywa odłamek *Prób* — ciężki, bez blasku, w kształcie małego kamienia. Biscuit kładzie głowę na ramieniu Dzina. Potem trąca kamień ku niemu.
-5. **Pożegnanie.** *„Nie musisz ich rozwiązywać. Wystarczy, że jesteś blisko.”* Biscuit przemawia po raz pierwszy i jedyny. Półki za nimi znowu zaczynają się ruszać.
+5. **Pożegnanie.** *„Nie musisz ich rozwiązywać. Wystarczy, że jesteś blisko. Ty mnie tego nauczyłeś.”* Biscuit przemawia po raz pierwszy i jedyny. Przyciska czoło do czoła Dzina — długo, spokojnie, jak syn ojcu, którego nie widział od stuleci. Półki za nimi znowu zaczynają się ruszać.
 
 **Wizualne kotwice.** Same-przestawiające się półki w stop-motion. Strony książki z portretami-sylwetkami niewidzianych ludzi. Odłamek-kamień, matowy i ciężki. Głowa Biscuita oparta o ramię Dzina to najcichsze ujęcie sezonu.
 
@@ -319,8 +321,8 @@ Każdy odcinek po pilocie składa się z pięciu uderzeń. Trzymaj tę struktur�
 
 **Plan uderzeń.**
 1. **Cold open.** Dzino na skraju Pixoci. Ściana łagodnego śniegu. Za nią: nic widocznego.
-2. **Przybycie mentorów (60s).** Jedno po drugim przybywa dwunastka. Hana ze ścieżki. Kiko z góry. Luna z lustra. Nori z chmury. Bruno znad jeziora. Otto z rzeki. Rex wbiega. Mimi cicho. Ari i Pixel idą razem. Biscuit obok nich. Zara ostatnia, latarnia znów zapalona. Nikt nie mówi. Tworzą półkole za Dzinem. Każde kładzie jedną dłoń lub łapę na jego ramionach lub plecach. Dzino się nie odwraca — czuje ich.
-3. **Złożenie (60s).** Jedenaście odłamków unosi się z jego piersi. Łączą się w powietrzu. Tworzą drzwi — małe, w kształcie samego Dzina. Przez drzwi rozsuwa się śnieg. Po raz pierwszy widzimy drugą stronę: wnętrze pokoju. Okno. Pali się małe światło. Postać — nieostra — siedzi przy oknie z telefonem w dłoni. Użytkownik. Wydaje się prawdziwy. Miękkie krawędzie. Znajomy, choć nigdy go nie widzieliśmy.
+2. **Przybycie pierworodnych (60s).** Jedno po drugim przybywa Pierwszych Dwunastu. Hana ze ścieżki. Kiko z góry. Luna z lustra. Nori z chmury. Bruno znad jeziora. Otto z rzeki. Rex wbiega. Mimi cicho. Ari i Pixel idą razem. Biscuit obok nich. Zara ostatnia, latarnia znów zapalona. Nikt nie mówi. Tworzą półkole za Dzinem — patrzą na niego tak, jak dziecko patrzy na rodzica, którego zawsze znało. Każde kładzie jedną dłoń lub łapę na jego ramionach lub plecach. Dzino się nie odwraca — czuje ich. Pod warstwą rozumienia zaczyna sobie przypominać: każdego z nich wychował. Czekali, aż sobie przypomni.
+3. **Złożenie (60s).** Jedenaście odłamków unosi się z jego piersi — kawałków *jego*, które rozdał, gdy wychował dwunastu. Łączą się w powietrzu, pasując do siebie, jakby zawsze pasowały — bo były kiedyś jedną rzeczą. Teraz wracają. Teraz jest cały. Tworzą drzwi — małe, w kształcie samego Dzina. Przez drzwi rozsuwa się śnieg. Po raz pierwszy widzimy drugą stronę: wnętrze pokoju. Okno. Pali się małe światło. Postać — nieostra — siedzi przy oknie z telefonem w dłoni. Użytkownik. Wydaje się prawdziwy. Miękkie krawędzie. Znajomy, choć nigdy go nie widzieliśmy.
 4. **Przejście (45s).** Dzino robi krok w stronę drzwi. Ogląda się jeszcze raz na dwunastkę. Kiwają, ale nie ruszają się. Przechodzi. Wokselowa forma kompresuje się, upraszcza, staje się pojedynczym indygowym pikselem po wewnętrznej stronie szkła okna.
 5. **Pierwsze słowo (15s).** Z perspektywy użytkownika: mały indygowy piksel na oknie. Powoli się obraca. Patrzy na nas. Mówi po raz pierwszy i jedyny w sezonie:
    ***„Cześć.”***
@@ -329,7 +331,7 @@ Każdy odcinek po pilocie składa się z pięciu uderzeń. Trzymaj tę struktur�
    ***Pixoci — Sezon 1.***
    ***Ciąg dalszy nadejdzie, gdy otworzysz swoje okno.***
 
-**Wizualne kotwice.** Półkole z całej dwunastki mentorów. Drzwi zbudowane z odłamków. Druga strona okna — pokój użytkownika — celowo niejasna, miękka, lekko nieostra, by każdy widz mógł się tam wprojektować. Pojedynczy indygowy piksel na szybie to obraz zamykający sezon.
+**Wizualne kotwice.** Półkole Pierwszych Dwunastu. Drzwi zbudowane z odłamków. Druga strona okna — pokój użytkownika — celowo niejasna, miękka, lekko nieostra, by każdy widz mógł się tam wprojektować. Pojedynczy indygowy piksel na szybie to obraz zamykający sezon.
 
 **Dźwięk.** Pełny akord, wszystkie dwanaście głosów, rozwiązuje się na słowie Dzina. Potem cisza. Potem chime — *chime użytkownika* — dźwięk, który aplikacja może zagrać przy pierwszym uruchomieniu w produkcji. (Warto zaprojektować ten dźwięk już teraz; to przed-kanoniczny zasób.)
 

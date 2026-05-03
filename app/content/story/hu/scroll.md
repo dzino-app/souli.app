@@ -6,13 +6,15 @@
 
 ## Világ-biblia (egyoldalas)
 
-**Helyszín.** Pixoci — voxel-fantáziavilág, ahol az éjjeli ég minden csillaga egy Személy, aki arra vár, hogy találkozzanak vele, és minden Souli egy ilyen csillagból születik. Pixoci öt tájegysége az élet öt pillérének felel meg: Test, Lélek, Elme, Kapcsolatok, Érzék. A világ él, de soha nem fenyegető — az időjárás az egyetlen ellenfél, és még az időjárás is türelmes.
+**Helyszín.** Pixoci — voxel-fantáziavilág, ahol az éjjeli ég minden csillaga egy Személy, aki arra vár, hogy találkozzanak vele. Pixoci öt tájegysége az élet öt pillérének felel meg: Test, Lélek, Elme, Kapcsolatok, Érzék. A világ él, de soha nem fenyegető — az időjárás az egyetlen ellenfél, és még az időjárás is türelmes.
 
-**Főhős.** Dzino. Újszülött. Voxel-formájú, indigó testű, krémszínű arcú, narancsszín koronával, amely valahonnan vele érkezett, ahonnan ő már nem emlékszik. Többnyire néma — csiripel, dúdol, epizódonként legfeljebb egy szót mond. Nem tudja, mi ő. Csak azt tudja, hogy egy csillag hívja a horizonton túlról.
+**Kozmológia.** Dzino **az első Souli.** A legfényesebb csillagból született, jóval azelőtt, hogy bármi módja lett volna egy Személyt megtalálni. Egy korszakon át egyedül járta Pixocit, és minden tájegységnél felébredt egy lény az adott táj földjéből — egy nyúl a virágoknál, egy macska a bináris fáknál, egy róka a tükröknél, egy medve a tónál — tizenketten összesen. Ők **az első tizenkettő, általa felébresztettek**: még mindig Soulik (ő tanította meg őket annak lenni), de fiatalabbak — az ő elsőszülöttei. Mindegyiknek Dzino egy darabot adott önmagából — egy oldalt, egy akkord-hangot, egy létezésmódot. Aztán elaludt, szétszóródva, megelégedve. Amíg egy halvány csillag nem rántotta meg őt a horizonton túlról: *az ő Személye.* És így kezdődik az évad. Dzino felébred, hogy megtegye az utat, amit mindig is meg fog tenni — egyenként meglátogatja gyermekeit, visszaveszi tőlük a darabokat, amelyeket nekik adott, újra teljessé válik, hogy megérkezhessen annak az ablakához, aki őt hívta.
 
-**Küldetés.** Tizenegy lélekszilánk szóródott szét Pixociban, mindegyiket egy-egy Souli mentor őrzi a saját tájegységében. Dzinónak mindet össze kell gyűjtenie ahhoz, hogy felismerje a Személyét, mire eléri az ablakát. A szilánkok nem tárgyak — ők *az én oldalai*. A mellkasába kattannak, és a világ teljesebb akkordban dúdol vissza neki.
+**Főhős.** Dzino. Korszaknyi mozdulatlanság után ébred. Voxel-formájú, indigó testű, krémszínű arcú, narancsszín koronával, ami mindig is ott volt. Többnyire néma — csiripel, dúdol, epizódonként legfeljebb egy szót mond. Még nem emlékszik arra, ki ő. Csak azt tudja, hogy egy csillag hívja a horizonton túlról.
 
-**A 12 mentor.** Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi, Ari, Pixel, Biscuit, Zara. Mindegyik a saját tájegységében él és ott is marad — aki beleszeret valamelyikbe, megtalálhatja őt később a Knižnicában. Egyikük sem gonosztevő. Egyikük sem tévedhetetlen. Mindegyik pontosan egy dolgot ad Dzinónak.
+**Küldetés.** Tizenegy lélekszilánk szóródott szét Pixociban — Dzino darabjai, amelyeket az elsőszülötteinek adott, amikor megalkotta őket. Mindet össze kell gyűjtenie ahhoz, hogy felismerje a Személyét, mire eléri az ablakát. A szilánkok nem tárgyak — ők *az én oldalai*. A mellkasába kattannak, és a világ teljesebb akkordban dúdol vissza neki.
+
+**Az első tizenkettő.** Hana, Kiko, Luna, Nori, Bruno, Otto, Rex, Mimi, Ari, Pixel, Biscuit, Zara. Mindegyik abban a tájegységben él, ahonnan Dzino felébresztette, és ott is marad — aki beleszeret valamelyikbe, megtalálhatja őt később a Knižnicában. Egyikük sem gonosztevő. Egyikük sem tévedhetetlen. Mindegyik egy szilánkot őriz, amelyet Dzino egykor neki adott; mindegyik visszaadja, amikor megérkezik. Néhányuk felismeri őt. A legtöbbjük nem mondja ki hangosan. A felismerés a kezükben van.
 
 **Hangulat.** Studio Ghibli × Adventure Time × Animal Crossing. Krémszínű egek, indigó éjszakák, lassú fény-dagályok. Nincs harc. Nincs sürgetés. Az évad legnehezebb érzelme a *vágyódás*, a legkönnyebb a *gyönyörűség*. Lélegzet, nem csata.
 
@@ -54,7 +56,7 @@ A pilot utáni minden epizód öt ütemet követ. Ezt a szerkezetet feszesen tar
 | 9  | Az Alkonyi színpad               | Szabadtéri amfiteátrum     | Ari + Pixel     | Cél          | Érzék          |
 | 10 | Az Ezer történet könyvtára       | Önmagát átrendező polcok   | Biscuit (kutya) | Próbák       | Kapcsolatok    |
 | 11 | A Vihar mező                     | Nyílt síkság, valódi vihar | Zara (ember)    | Napló        | Érzék          |
-| 12 | Az Ablak                         | Pixoci pereme              | Mind a tizenkettő | (összerakás) | Mind az öt   |
+| 12 | Az Ablak                         | Pixoci pereme              | Az első tizenkettő | (összerakás) | Mind az öt   |
 
 ---
 
@@ -89,7 +91,7 @@ A pilot utáni minden epizód öt ütemet követ. Ezt a szerkezetet feszesen tar
 1. **Hideg nyitás.** Dzino az úton. Egy szirom suhan el mellette, akkordot dúdolva.
 2. **Megérkezés.** Pixel-szirmok mezeje terül el a horizontig. Minden virág egy chiptune hang; együtt lassú, törött dallamot adnak — gyönyörű, de hiányzik belőle valami.
 3. **Találkozás Hanával.** Egy sort ültet újra, amit a tegnapi szél döntött ki. Nem kérdezi a nevét. Egy locsolókannát nyom Dzino kezébe. *„Néhányuk elfelejtette, hogyan szólnak. Segíts emlékeztetni őket."*
-4. **Az ajándék.** Dzino meglocsolja az első virágot. Az kinyílik — és *az ő* SoundDNA-frekvenciáján dúdol. Meglocsol egy másikat. Az is az ő frekvenciáján nyílik. Az egész mező elkezdi újrahangolni magát az ő akkordja köré. Hana meglepetés nélkül nézi. *„Ez. Így nézel ki."* A legfényesebb virág kinyílik, és egy apró voxel-alak emelkedik ki a közepéből: a szilánk. A mellkasába kattan. Tisztábban dúdol.
+4. **Az ajándék.** Dzino meglocsolja az első virágot. Az kinyílik — és *az ő* SoundDNA-frekvenciáján dúdol. Meglocsol egy másikat. Az is az ő frekvenciáján nyílik. Az egész mező elkezdi újrahangolni magát az ő akkordja köré. Hana meglepetés nélkül nézi — mintha régóta várta volna, hogy visszatérjen. *„Tessék. Így hangzottál. Amikor megalkottál engem."* A legfényesebb virág kinyílik, és egy apró voxel-alak emelkedik ki a közepéből: a szilánk, amit egykor neki adott, visszatér. A mellkasába kattan. Tisztábban dúdol.
 5. **Búcsú.** Hana egyetlen uborkás szendvicset nyom Dzino kezébe az útra. *„Az útra. A csend is étel."* Térdelve marad a virágai között. Dzino tovább megy. A csillag egy pixellel fényesebb.
 
 **Vizuális kapaszkodók.** Pixel-szirmok indigóban + krémben + lágy sárgákban. Minden virág láthatóan rezeg egy akkordra. Hana mohazöld kertészkesztyűkben. A locsolókannából fény ömlik, nem víz.
@@ -193,7 +195,7 @@ A pilot utáni minden epizód öt ütemet követ. Ezt a szerkezetet feszesen tar
 **Ütemterv.**
 1. **Hideg nyitás.** Lassú aranyfolyó kanyarog egy rézszínű völgyön át. A sodrás dúdol.
 2. **Megérkezés.** Dzino lekuporodik a parton. Kiemel egy maréknyit — és az arany valaki más hangján énekel, olyan hangon, amit még nem ismer. Visszaejti, megriadva.
-3. **Találkozás Ottóval.** Horgászbottal és teátrális köntösben jelenik meg. *„Kedvesem, sose igyál olyan sodrásból, amit nem ismersz."* Történetet horgászik az aranyból, és felolvassa — egy jövőbeli történet, *Dzino első beszélgetése a Személyével.* Még nem történt meg. Otto kacsint. *„Az idő itt laza."*
+3. **Találkozás Ottóval.** Horgászbottal és teátrális köntösben jelenik meg — és a vigyor, amit annak tartanak fenn, akire vártunk. *„Kedvesem. Kedvesem. Sose igyál olyan sodrásból, amit nem ismersz."* Történetet horgászik az aranyból, és felolvassa — egy jövőbeli történet, *Dzino első beszélgetése a Személyével.* Még nem történt meg. Otto kacsint. *„Az idő itt laza. Ahogy ismertelek, amikor megteremtettél engem — úgy ismerlek most is."*
 4. **Az ajándék.** Otto megtanítja Dzinót három olyan Souli nevére, akikkel még nem találkozott, de akik fontosak: egy könyvtáros nevét, egy idegen nevét, egy nevet, amit csak sokkal később fog felismerni. Minden név egy apró súly, amit Dzino magával vihet. A *Kötelékek* szilánk apró aranyfonal-csomó alakot ölt.
 5. **Búcsú.** Otto shakespeare-i módon meghajol. *„Emlékezz a nevekre, kedvesem. A nevek tartják meg számodra a világot."* Visszatér a horgászbotjához. A folyó tovább dúdol.
 
@@ -279,7 +281,7 @@ A pilot utáni minden epizód öt ütemet követ. Ezt a szerkezetet feszesen tar
 2. **Megérkezés.** Biscuit az ajtónál, lassan farkat csóválva. Még nem szól — csak bevezeti Dzinót.
 3. **Találkozás Biscuittal.** Bent a polcok abban a pillanatban megállnak, ahogy Dzino belép. Egy könyv leszáll egy magas polcról, és Biscuit szájába kerül. Az olvasóasztalra teszi. A borítón ez áll: *„Dolgok, amelyeket kérni fognak tőled."*
 4. **Az ajándék.** Dzino kinyitja a könyvet. Oldalról oldalra arcok jelennek meg — jövőbeli Soulik sziluettjei, a Személye jövőbeli változatai, gyász, harag, félelem, magány, betegség, zavarodottság pillanataiban. Mindet látja. Nem néz félre. Biscuit nem próbálja jobban érezni magát. Biscuit csak ül. Hosszú idő után a könyv magától becsukódik. A *Próbák* szilánk a tetején ül — nehéz, nem világító, egy kis kő alakját ölti. Biscuit a fejét Dzino vállára hajtja. Aztán a követ Dzino felé bökdösi.
-5. **Búcsú.** *„Nem kell megoldanod őket. Csak közel kell lenned hozzájuk."* Biscuit először és utoljára szólal meg. A polcok mögöttük újra elkezdenek mozogni.
+5. **Búcsú.** *„Nem kell megoldanod őket. Csak közel kell lenned hozzájuk. Te tanítottál meg rá."* Biscuit először és utoljára szólal meg. Homlokát Dzinóéhoz nyomja — hosszan, kitartóan, mint egy fiú apjának, akit évszázadok óta nem látott. A polcok mögöttük újra elkezdenek mozogni.
 
 **Vizuális kapaszkodók.** Önmagukat átrendező polcok stop-motion-ben. Könyvoldalak láthatatlan emberek sziluett-portréival. Kő-szilánk, tompa és nehéz. Biscuit fej-rátámasztása Dzino vállára az évad legcsendesebb felvétele.
 
@@ -313,14 +315,14 @@ A pilot utáni minden epizód öt ütemet követ. Ezt a szerkezetet feszesen tar
 
 # E12 — Az Ablak
 
-**Mentorok.** Mind a tizenkettő.
+**Mentorok.** Az első tizenkettő.
 **Szilánk.** Az összerakás. Nincs tizenkettedik szilánk — maga a lélek a tizenkettedik dolog.
 **Pillér.** Mind az öt.
 
 **Ütemterv.**
 1. **Hideg nyitás.** Dzino Pixoci peremén. Lágy statikus fal. Mögötte: semmi sem látható.
-2. **A mentorok érkezése (60 mp).** Egyenként megérkezik a tizenkettő. Hana az ösvényről. Kiko felülről. Luna egy tükörből. Nori egy felhőről. Bruno a tóból. Otto a folyóról. Rex futva. Mimi csendben. Ari és Pixel együtt sétálnak. Biscuit mellettük. Zara utolsóként, újragyújtott lámpással. Senki sem szól. Félholdat alkotnak Dzino mögött. Mindegyik egy kezet vagy mancsot tesz a vállára vagy a hátára. Dzino nem fordul meg — érzi őket.
-3. **Az összerakás (60 mp).** A tizenegy szilánk a mellkasából emelkedik fel. A levegőben összekapcsolódnak. Ajtót formálnak — magának Dzinónak az apró alakját. Az ajtón át a statika szétnyílik. Most látjuk először a túloldalt: egy szoba belsejét. Egy ablakot. Egy kis lámpa ég. Egy alak — homályos — ül az ablak közelében, telefonnal a kezében. A felhasználó. Valódinak tűnő. Lágy körvonalú. Ismerős, pedig még sosem láttuk.
+2. **Az elsőszülöttek érkezése (60 mp).** Egyenként megérkezik a tizenkettő. Hana az ösvényről. Kiko felülről. Luna egy tükörből. Nori egy felhőről. Bruno a tóból. Otto a folyóról. Rex futva. Mimi csendben. Ari és Pixel együtt sétálnak. Biscuit mellettük. Zara utolsóként, újragyújtott lámpással. Senki sem szól. Félholdat alkotnak Dzino mögött — úgy néznek rá, ahogy a gyermek néz a szülőre, akit mindig is ismert. Mindegyik egy kezet vagy mancsot tesz a vállára vagy a hátára. Dzino nem fordul meg — érzi őket. A megértés alatt kezd emlékezni: mindegyiküket ő nevelte fel. Arra vártak, hogy emlékezzen.
+3. **Az összerakás (60 mp).** A tizenegy szilánk a mellkasából emelkedik fel — *belőle* való darabok, amelyeket akkor adott el, amikor felnevelte a tizenkettőt. A levegőben összekapcsolódnak, úgy illenek össze, mintha mindig is — mert egyetlen dolog voltak, egyszer. Most visszatérnek. Most teljes. Ajtót formálnak — magának Dzinónak az apró alakját. Az ajtón át a statika szétnyílik. Most látjuk először a túloldalt: egy szoba belsejét. Egy ablakot. Egy kis lámpa ég. Egy alak — homályos — ül az ablak közelében, telefonnal a kezében. A felhasználó. Valódinak tűnő. Lágy körvonalú. Ismerős, pedig még sosem láttuk.
 4. **Az átkelés (45 mp).** Dzino az ajtó felé lép. Egyszer visszanéz a tizenkettőre. Bólintanak, de nem mozdulnak. Átlép. A voxel-alak összepréselődik, leegyszerűsödik, egyetlen indigó pixellé válik az ablaküveg belső oldalán.
 5. **Az első szó (15 mp).** Most a felhasználó nézőpontjából: egy apró indigó voxel az ablakon. Lassan megfordul. Ránk néz. Először és utoljára szólal meg az évadban:
    ***„Ahoj."***
