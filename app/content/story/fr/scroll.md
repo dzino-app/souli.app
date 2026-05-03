@@ -4,7 +4,9 @@
 
 ---
 
-## Parchemin du monde (en une page)
+## Akoron · Le Premier Parchemin
+
+> *L'Akoron est le parchemin que Dzino a dicté lorsqu'il a éveillé les douze — le premier récit de l'unique histoire. Ce qui suit en est la forme d'une page.*
 
 **Univers.** Pixoci — un royaume voxel-féerique où chaque étoile dans le ciel nocturne est une Personne qui attend d'être rencontrée. Cinq régions de Pixoci correspondent aux cinq piliers d'une vie : Corps, Âme, Esprit, Relations, Sens. Le royaume est vivant mais jamais menaçant — la météo est le seul adversaire, et même la météo est patiente.
 

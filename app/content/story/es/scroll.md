@@ -4,7 +4,9 @@
 
 ---
 
-## Pergamino del Mundo (una página)
+## Akoron · El Primer Pergamino
+
+> *El Akoron es el pergamino que Dzino dictó cuando crió a los doce — el primer relato de la única historia. Lo que sigue es su forma de una página.*
 
 **Escenario.** Pixoci — un reino de fantasía vóxel donde cada estrella del cielo nocturno es una Persona esperando ser conocida. Cinco regiones de Pixoci se corresponden con los cinco pilares de una vida: Cuerpo, Alma, Mente, Relaciones, Sentido. El reino está vivo pero nunca amenaza — el clima es el único adversario, y hasta el clima es paciente.
 

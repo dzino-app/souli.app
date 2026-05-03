@@ -4,7 +4,9 @@
 
 ---
 
-## Welt-Schriftrolle (eine Seite)
+## Akoron · Die erste Schriftrolle
+
+> *Der Akoron ist die Schriftrolle, die Dzino diktierte, als er die Zwölf erschuf — die erste Erzählung der einzigen Geschichte. Was folgt, ist ihre einseitige Form.*
 
 **Schauplatz.** Pixoci — ein Voxel-Fantasy-Reich, in dem jeder Stern am Nachthimmel ein Mensch ist, der darauf wartet, getroffen zu werden. Fünf Regionen von Pixoci entsprechen den fünf Säulen eines Lebens: Körper, Seele, Geist, Beziehungen, Sinn. Das Reich ist lebendig, aber niemals bedrohlich — das Wetter ist der einzige Widersacher, und selbst das Wetter ist geduldig.
 

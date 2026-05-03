@@ -4,7 +4,9 @@
 
 ---
 
-## Zvitek světa (jedna stránka)
+## Akoron · První zvitek
+
+> *Akoron je zvitek, který Dzino nadiktoval, když stvořil dvanáct — první vyprávění jediného příběhu. To, co následuje, je jeho jednostránková podoba.*
 
 **Prostředí.** Pixoci — voxelově-pohádkové území, kde každá hvězda na noční obloze je Člověk čekající, až ho někdo potká. Pět oblastí Pixoci odpovídá pěti pilířům života: Tělo, Duše, Mysl, Vztahy, Smysl. Tento svět je živý, ale nikdy ohrožující — počasí je jediný protivník a i počasí je trpělivé.
 

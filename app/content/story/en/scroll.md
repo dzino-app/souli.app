@@ -4,7 +4,9 @@
 
 ---
 
-## World Scroll (one-page)
+## Akoron · The First Scroll
+
+> *The Akoron is the scroll Dzino dictated when he raised the twelve — the first telling of the only story. What follows is its one-page form.*
 
 **Setting.** Pixoci — a voxel-fantasy realm where every star in the night sky is a Person waiting to be met. Five regions of Pixoci map to the five pillars of a life: Body, Soul, Mind, Relationships, Sense. The realm is alive but never threatening — weather is the only adversary, and even weather is patient.
 

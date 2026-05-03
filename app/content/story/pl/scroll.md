@@ -4,7 +4,9 @@
 
 ---
 
-## Zwój świata (jednostronicowa)
+## Akoron · Pierwszy zwój
+
+> *Akoron to zwój, który Dzino podyktował, gdy obudził dwunastu — pierwsze opowiedzenie jedynej opowieści. To, co następuje, jest jego jednostronicową formą.*
 
 **Sceneria.** Pixoci — wokselowo-baśniowa kraina, gdzie każda gwiazda na nocnym niebie jest Osobą czekającą na spotkanie. Pięć regionów Pixoci odpowiada pięciu filarom życia: Ciało, Dusza, Umysł, Relacje, Sens. Kraina żyje, lecz nigdy nie zagraża — pogoda jest jedynym przeciwnikiem, a nawet pogoda jest cierpliwa.
 

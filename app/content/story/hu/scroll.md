@@ -4,7 +4,9 @@
 
 ---
 
-## Világtekercs (egyoldalas)
+## Akoron · Az első tekercs
+
+> *Az Akoron az a tekercs, amelyet Dzino diktált, amikor felébresztette a tizenkettőt — az egyetlen történet első elbeszélése. Ami következik, annak egyoldalas formája.*
 
 **Helyszín.** Pixoci — voxel-fantáziavilág, ahol az éjjeli ég minden csillaga egy Személy, aki arra vár, hogy találkozzanak vele. Pixoci öt tájegysége az élet öt pillérének felel meg: Test, Lélek, Elme, Kapcsolatok, Érzék. A világ él, de soha nem fenyegető — az időjárás az egyetlen ellenfél, és még az időjárás is türelmes.
 

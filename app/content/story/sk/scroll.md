@@ -4,7 +4,9 @@
 
 ---
 
-## Svetový zvitok (jedna strana)
+## Akoron · Prvý zvitok
+
+> *Akoron je zvitok, ktorý Dzino nadiktoval, keď pozdvihol dvanástich — prvé rozprávanie jediného príbehu. To, čo nasleduje, je jeho jednostranová podoba.*
 
 **Prostredie.** Pixoci — voxelovo-fantasy ríša, kde každá hviezda na nočnej oblohe je Osoba čakajúca, kým ju niekto stretne. Päť oblastí Pixoci zodpovedá piatim pilierom života: Telo, Duša, Myseľ, Vzťahy, Zmysel. Ríša je živá, ale nikdy nie hrozivá — počasie je jediným protivníkom, a aj počasie má trpezlivosť.
 
