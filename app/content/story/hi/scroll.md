@@ -343,7 +343,7 @@
 
 **Pipeline (सुझाया गया)।**
 1. सभी 13 स्क्रिप्टों को lock करो (यह दस्तावेज़ → polish pass → director's pass)।
-2. Style bible: voxel/pixel शैली में 5 वन-plates + 12 गुरु-sheets हाथ से रंगो। *यह सबसे ज़रूरी कदम है* — anchored references के बिना AI video शैली पर नहीं टिकेगा।
+2. शैली स्क्रॉल: voxel/pixel शैली में 5 वन-plates + 12 गुरु-sheets हाथ से रंगो। *यह सबसे ज़रूरी कदम है* — anchored references के बिना AI video शैली पर नहीं टिकेगा।
 3. अगर Stable Video Diffusion रास्ता लेना हो तो plates पर एक style LoRA train करो। या plates को Style references के रूप में Runway / Sora में दो।
 4. Per-shot generate करो: 2–4 सेकंड के clips, DaVinci या Premiere में जोड़े गए। voxel motion क्षमाशील है — छोटे clips ज़्यादा सोचे-समझे लगते हैं, कम नहीं।
 5. ध्वनि अंत में। per-mentor leitmotif + चल रहा स्वर। Dzino का स्वर सीज़न की ढाँचागत रीढ़ है।

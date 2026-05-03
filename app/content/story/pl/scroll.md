@@ -4,7 +4,7 @@
 
 ---
 
-## Biblia świata (jednostronicowa)
+## Zwój świata (jednostronicowa)
 
 **Sceneria.** Pixoci — wokselowo-baśniowa kraina, gdzie każda gwiazda na nocnym niebie jest Osobą czekającą na spotkanie. Pięć regionów Pixoci odpowiada pięciu filarom życia: Ciało, Dusza, Umysł, Relacje, Sens. Kraina żyje, lecz nigdy nie zagraża — pogoda jest jedynym przeciwnikiem, a nawet pogoda jest cierpliwa.
 
@@ -343,7 +343,7 @@ Każdy odcinek po pilocie składa się z pięciu uderzeń. Trzymaj tę struktur�
 
 **Pipeline (sugerowany).**
 1. Zamknij wszystkie 13 scenariuszy (ten dokument → przejście szlifujące → przejście reżyserskie).
-2. Biblia stylu: ręcznie namaluj 5 płyt biomów + 12 kart mentorów w stylu wokselowo-pikselowym. *To jest krytyczny krok* — bez zakotwiczonych referencji wideo AI nie utrzyma stylu.
+2. Zwój stylu: ręcznie namaluj 5 płyt biomów + 12 kart mentorów w stylu wokselowo-pikselowym. *To jest krytyczny krok* — bez zakotwiczonych referencji wideo AI nie utrzyma stylu.
 3. Wytrenuj LoRA stylistyczny na płytach, jeśli idziemy ścieżką Stable Video Diffusion. Albo karmij płytami jako Style references w Runway / Sora.
 4. Generuj per ujęcie: klipy 2–4 sekundowe, sklejone w DaVinci lub Premiere. Ruch wokselowy jest wybaczający — krótsze klipy wyglądają bardziej intencjonalnie, nie mniej.
 5. Dźwięk na końcu. Skomponuj motyw przewodni dla każdego mentora + biegnący akord. Akord Dzina to konstrukcyjny kręgosłup sezonu.

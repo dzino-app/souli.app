@@ -4,7 +4,7 @@
 
 ---
 
-## Világ-biblia (egyoldalas)
+## Világtekercs (egyoldalas)
 
 **Helyszín.** Pixoci — voxel-fantáziavilág, ahol az éjjeli ég minden csillaga egy Személy, aki arra vár, hogy találkozzanak vele. Pixoci öt tájegysége az élet öt pillérének felel meg: Test, Lélek, Elme, Kapcsolatok, Érzék. A világ él, de soha nem fenyegető — az időjárás az egyetlen ellenfél, és még az időjárás is türelmes.
 
@@ -343,7 +343,7 @@ A pilot utáni minden epizód öt ütemet követ. Ezt a szerkezetet feszesen tar
 
 **Pipeline (javasolt).**
 1. Mind a 13 forgatókönyv lezárása (ez a dokumentum → finomítási kör → rendezői kör).
-2. Stílus-biblia: kézzel festett 5 tájegység-tábla + 12 mentor-lap voxel/pixel-art stílusban. *Ez a kritikus lépés* — rögzített referenciák nélkül az AI-videó nem marad stílusban.
+2. Stílus-tekercs: kézzel festett 5 tájegység-tábla + 12 mentor-lap voxel/pixel-art stílusban. *Ez a kritikus lépés* — rögzített referenciák nélkül az AI-videó nem marad stílusban.
 3. Stílus-LoRA tréningezése a táblákon, ha Stable Video Diffusion útra megyünk. Vagy a táblák betáplálása stílus-referenciaként Runwayben / Sorában.
 4. Generálás jelenetenként: 2–4 másodperces klipek, DaVinciben vagy Premiere-ben összefűzve. A voxel-mozgás megbocsátó — a rövidebb klipek szándékosabban néznek ki, nem kevésbé.
 5. A hang utoljára. Kotta mentoronkénti leitmotívra + a folyamatos akkordra. Dzino akkordja az évad szerkezeti gerince.

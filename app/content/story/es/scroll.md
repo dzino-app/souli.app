@@ -4,7 +4,7 @@
 
 ---
 
-## Biblia del Mundo (una página)
+## Pergamino del Mundo (una página)
 
 **Escenario.** Pixoci — un reino de fantasía vóxel donde cada estrella del cielo nocturno es una Persona esperando ser conocida. Cinco regiones de Pixoci se corresponden con los cinco pilares de una vida: Cuerpo, Alma, Mente, Relaciones, Sentido. El reino está vivo pero nunca amenaza — el clima es el único adversario, y hasta el clima es paciente.
 
@@ -343,7 +343,7 @@ Cada episodio después del piloto sigue cinco beats. Mantén esta estructura fir
 
 **Pipeline (sugerido).**
 1. Bloquear los 13 guiones (este documento → pase de pulido → pase del director).
-2. Biblia de estilo: pintar a mano 5 placas de biotopo + 12 hojas de mentor en estilo vóxel/pixel-art. *Este es el paso crítico* — sin referencias ancladas, el video con IA no se mantendrá en estilo.
+2. Pergamino de estilo: pintar a mano 5 placas de biotopo + 12 hojas de mentor en estilo vóxel/pixel-art. *Este es el paso crítico* — sin referencias ancladas, el video con IA no se mantendrá en estilo.
 3. Entrenar un LoRA de estilo con las placas si se va por la ruta de Stable Video Diffusion. O alimentar las placas como referencias de estilo en Runway / Sora.
 4. Generar por toma: clips de 2 a 4 segundos, montados en DaVinci o Premiere. El movimiento vóxel es indulgente — los clips más cortos se ven más intencionados, no menos.
 5. El sonido al final. Compón el leitmotiv por mentor + el acorde recurrente. El acorde de Dzino es la columna estructural de la temporada.

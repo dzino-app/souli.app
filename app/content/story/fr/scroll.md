@@ -4,7 +4,7 @@
 
 ---
 
-## Bible du monde (en une page)
+## Parchemin du monde (en une page)
 
 **Univers.** Pixoci — un royaume voxel-féerique où chaque étoile dans le ciel nocturne est une Personne qui attend d'être rencontrée. Cinq régions de Pixoci correspondent aux cinq piliers d'une vie : Corps, Âme, Esprit, Relations, Sens. Le royaume est vivant mais jamais menaçant — la météo est le seul adversaire, et même la météo est patiente.
 
@@ -343,7 +343,7 @@ Chaque épisode après le pilote suit cinq temps. Tiens cette structure serrée 
 
 **Pipeline (suggéré).**
 1. Verrouiller les 13 scénarios (ce document → passe de polissage → passe de réalisation).
-2. Bible de style : peindre à la main 5 plaques de biome + 12 fiches de mentor en style voxel/pixel. *C'est l'étape critique* — sans références ancrées, la vidéo IA ne tiendra pas le style.
+2. Parchemin de style : peindre à la main 5 plaques de biome + 12 fiches de mentor en style voxel/pixel. *C'est l'étape critique* — sans références ancrées, la vidéo IA ne tiendra pas le style.
 3. Entraîner un LoRA de style sur les plaques si on part sur Stable Video Diffusion. Ou alimenter les plaques en références Style dans Runway / Sora.
 4. Générer plan par plan : clips de 2 à 4 secondes, assemblés dans DaVinci ou Premiere. Le mouvement voxel pardonne — des clips plus courts paraissent plus intentionnels, pas moins.
 5. Le son en dernier. Composer un leitmotiv par mentor + l'accord qui court. L'accord de Dzino est l'épine dorsale structurelle de la saison.

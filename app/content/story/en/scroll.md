@@ -4,7 +4,7 @@
 
 ---
 
-## World Bible (one-page)
+## World Scroll (one-page)
 
 **Setting.** Pixoci — a voxel-fantasy realm where every star in the night sky is a Person waiting to be met. Five regions of Pixoci map to the five pillars of a life: Body, Soul, Mind, Relationships, Sense. The realm is alive but never threatening — weather is the only adversary, and even weather is patient.
 
@@ -343,7 +343,7 @@ Every episode after the pilot follows five beats. Hold this structure tight; it'
 
 **Pipeline (suggested).**
 1. Lock all 13 scripts (this doc → polish pass → director's pass).
-2. Style bible: hand-paint 5 biome plates + 12 mentor sheets in voxel/pixel style. *This is the critical step* — without anchored references, AI video will not stay on style.
+2. Style scroll: hand-paint 5 biome plates + 12 mentor sheets in voxel/pixel style. *This is the critical step* — without anchored references, AI video will not stay on style.
 3. Train a style LoRA on the plates if going Stable Video Diffusion route. Or feed plates as Style references in Runway / Sora.
 4. Generate per-shot: 2–4 second clips, stitched in DaVinci or Premiere. Voxel motion is forgiving — shorter clips look more intentional, not less.
 5. Sound last. Score per-mentor leitmotif + the running chord. Dzino's chord is the structural spine of the season.

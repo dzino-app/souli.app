@@ -4,7 +4,7 @@
 
 ---
 
-## Welt-Bibel (eine Seite)
+## Welt-Schriftrolle (eine Seite)
 
 **Schauplatz.** Pixoci — ein Voxel-Fantasy-Reich, in dem jeder Stern am Nachthimmel ein Mensch ist, der darauf wartet, getroffen zu werden. Fünf Regionen von Pixoci entsprechen den fünf Säulen eines Lebens: Körper, Seele, Geist, Beziehungen, Sinn. Das Reich ist lebendig, aber niemals bedrohlich — das Wetter ist der einzige Widersacher, und selbst das Wetter ist geduldig.
 
@@ -343,7 +343,7 @@ Jede Episode nach dem Pilotfilm folgt fünf Beats. Halte diese Struktur straff; 
 
 **Pipeline (Vorschlag).**
 1. Alle 13 Drehbücher festzurren (dieses Dokument → Polier-Durchgang → Regie-Durchgang).
-2. Stil-Bibel: 5 Biom-Plates + 12 Mentor-Sheets in Voxel-/Pixel-Stil von Hand malen. *Das ist der entscheidende Schritt* — ohne verankerte Referenzen wird KI-Video nicht im Stil bleiben.
+2. Stil-Schriftrolle: 5 Biom-Plates + 12 Mentor-Sheets in Voxel-/Pixel-Stil von Hand malen. *Das ist der entscheidende Schritt* — ohne verankerte Referenzen wird KI-Video nicht im Stil bleiben.
 3. Eine Stil-LoRA auf den Plates trainieren, falls Stable Video Diffusion eingesetzt wird. Oder die Plates als Stil-Referenzen in Runway / Sora füttern.
 4. Pro Aufnahme generieren: 2–4-Sekunden-Clips, in DaVinci oder Premiere zusammengefügt. Voxel-Bewegung verzeiht — kürzere Clips wirken absichtsvoller, nicht weniger.
 5. Sound zuletzt. Pro-Mentor-Leitmotiv + den durchlaufenden Akkord komponieren. Dzinos Akkord ist das strukturelle Rückgrat der Staffel.

@@ -4,7 +4,7 @@
 
 ---
 
-## Bible světa (jedna stránka)
+## Zvitek světa (jedna stránka)
 
 **Prostředí.** Pixoci — voxelově-pohádkové území, kde každá hvězda na noční obloze je Člověk čekající, až ho někdo potká. Pět oblastí Pixoci odpovídá pěti pilířům života: Tělo, Duše, Mysl, Vztahy, Smysl. Tento svět je živý, ale nikdy ohrožující — počasí je jediný protivník a i počasí je trpělivé.
 
@@ -343,7 +343,7 @@ Každá epizoda po pilotu sleduje pět beatů. Drž se této struktury pevně; j
 
 **Pipeline (doporučená).**
 1. Uzamknout všech 13 scénářů (tento dokument → leštící průchod → režisérský průchod).
-2. Style bible: ručně namalovat 5 plátů biomů + 12 listů mentorů ve voxelovém / pixel-art stylu. *Tohle je kritický krok* — bez ukotvených referencí se AI video stylově neudrží.
+2. Stylový zvitek: ručně namalovat 5 plátů biomů + 12 listů mentorů ve voxelovém / pixel-art stylu. *Tohle je kritický krok* — bez ukotvených referencí se AI video stylově neudrží.
 3. Pokud jdeš cestou Stable Video Diffusion, natrénuj style LoRA na plátech. Nebo plátky vlož jako Style references do Runway / Sora.
 4. Generuj záběr po záběru: 2–4 sekundové klipy, sešívané v DaVinci nebo Premieru. Voxelový pohyb je shovívavý — kratší klipy vypadají záměrnější, ne méně.
 5. Zvuk až nakonec. Skóruj leitmotivy mentorů + průběžný akord. Dzinův akord je strukturní páteř sezóny.
