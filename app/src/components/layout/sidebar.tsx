@@ -3,14 +3,18 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { NAV_ITEMS, getLocalePrefix } from "./nav-items";
+import { NAV_ITEMS, getLocalePrefix, resolveNavHref } from "./nav-items";
 import { AvatarMini } from "@/components/avatar/avatar-mini";
 
 const COLLAPSE_KEY = "souli_sidebar_collapsed";
 
-export function Sidebar() {
+interface SidebarProps {
+  isAuthenticated: boolean;
+}
+
+export function Sidebar({ isAuthenticated }: SidebarProps) {
   const pathname = usePathname();
   const localePrefix = getLocalePrefix(pathname);
   const [collapsed, setCollapsed] = useState(false);
@@ -48,27 +52,38 @@ export function Sidebar() {
 
       <nav className="flex-1 overflow-y-auto py-3 px-2">
         <ul className="space-y-0.5">
-          {NAV_ITEMS.map(({ href, icon: Icon, label }) => {
-            const fullHref = href === "/" ? `${localePrefix}/` : `${localePrefix}${href}`;
+          {NAV_ITEMS.map((item) => {
+            const { href, icon: Icon, label, requiresAuth } = item;
+            const dest = resolveNavHref(item, localePrefix, isAuthenticated);
             const active =
               href === "/"
                 ? pathname === `${localePrefix}/` || pathname === localePrefix
                 : pathname.includes(href);
+            const locked = requiresAuth && !isAuthenticated;
             return (
               <li key={href}>
                 <Link
-                  href={fullHref}
+                  href={dest}
                   title={collapsed ? label : undefined}
                   className={cn(
-                    "flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                    "flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors group",
                     collapsed && "justify-center px-2",
                     active
                       ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-accent",
+                      : locked
+                        ? "text-muted-foreground/60 hover:text-foreground hover:bg-accent"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent",
                   )}
                 >
                   <Icon className="h-4 w-4 shrink-0" />
-                  {!collapsed && <span className="truncate">{label}</span>}
+                  {!collapsed && (
+                    <>
+                      <span className="truncate flex-1">{label}</span>
+                      {locked && (
+                        <Lock className="h-3 w-3 text-muted-foreground/60 group-hover:text-muted-foreground shrink-0" />
+                      )}
+                    </>
+                  )}
                 </Link>
               </li>
             );
@@ -77,7 +92,11 @@ export function Sidebar() {
       </nav>
 
       <Link
-        href={`${localePrefix}/dusa`}
+        href={
+          isAuthenticated
+            ? `${localePrefix}/dusa`
+            : `${localePrefix}/landing?next=${encodeURIComponent(`${localePrefix}/dusa`)}`
+        }
         title={collapsed ? "Dzino" : undefined}
         className={cn(
           "flex items-center gap-3 mx-2 mb-2 px-2 py-2 rounded-md hover:bg-accent transition-colors",
@@ -90,7 +109,9 @@ export function Sidebar() {
         {!collapsed && (
           <div className="min-w-0 flex-1">
             <p className="text-sm font-medium truncate">Dzino</p>
-            <p className="text-xs text-muted-foreground truncate">tvoj prvý Souli</p>
+            <p className="text-xs text-muted-foreground truncate">
+              {isAuthenticated ? "tvoj prvý Souli" : "Klikni a začni cestu"}
+            </p>
           </div>
         )}
       </Link>

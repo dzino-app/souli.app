@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import {
   MessageCircle,
@@ -19,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { HeroAvatar } from "@/components/landing/hero-avatar";
 import { PreHatchingEgg } from "@/components/avatar/pre-hatching-egg";
+import { LandingCtaHero, LandingCtaBottom } from "@/components/landing/landing-cta";
 
 const useCases = [
   { key: "useCase1", icon: Heart },
@@ -65,18 +65,7 @@ export default function LandingPage() {
         <div className="flex justify-center mb-6">
           <HeroAvatar />
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-          {t("hero")}
-        </h1>
-        <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
-          {t("heroSub")}
-        </p>
-        <Link href="/registracia">
-          <Button size="lg" className="text-base px-8 py-6">
-            {t("cta")}
-          </Button>
-        </Link>
-        <p className="text-xs text-muted-foreground mt-3">{t("ctaSub")}</p>
+        <LandingCtaHero />
       </section>
 
       {/* Use cases */}
@@ -230,11 +219,7 @@ export default function LandingPage() {
           <PreHatchingEgg glowColor="#6C5CE7" size="md" />
         </div>
         <p className="text-sm text-muted-foreground mb-4 animate-pulse">{t("eggTease")}</p>
-        <Link href="/registracia">
-          <Button size="lg" className="text-base px-8 py-6">
-            {t("cta")}
-          </Button>
-        </Link>
+        <LandingCtaBottom />
         <p className="text-sm text-muted-foreground mt-6">{t("footer")}</p>
       </section>
     </div>

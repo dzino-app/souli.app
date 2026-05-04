@@ -148,7 +148,9 @@
     "faq4q": "¿Qué hace diferente a Souli de ChatGPT?",
     "faq4a": "Souli te recuerda. Conoce tus metas, preferencias y crece contigo con el tiempo.",
     "footer": "Dzino es el primer Souli. El tuyo es el siguiente.",
-    "origin": "En algún lugar de un pequeño mundo pixel vive Dzino — el primer Souli. Sigue ahí, saludando a todos los que llegan. Abrió las puertas para que puedas criar al tuyo. Tu Souli ya está esperando."
+    "origin": "En algún lugar de un pequeño mundo pixel vive Dzino — el primer Souli. Sigue ahí, saludando a todos los que llegan. Abrió las puertas para que puedas criar al tuyo. Tu Souli ya está esperando.",
+    "nextHint": "Inicia sesión para continuar",
+    "alreadyHaveAccount": "Ya tengo una cuenta"
   },
   "settings": {
     "title": "Ajustes",

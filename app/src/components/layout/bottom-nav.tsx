@@ -3,15 +3,20 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MoreHorizontal, X } from "lucide-react";
+import { MoreHorizontal, X, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   PRIMARY_NAV_ITEMS,
   SECONDARY_NAV_ITEMS,
   getLocalePrefix,
+  resolveNavHref,
 } from "./nav-items";
 
-export function BottomNav() {
+interface BottomNavProps {
+  isAuthenticated: boolean;
+}
+
+export function BottomNav({ isAuthenticated }: BottomNavProps) {
   const pathname = usePathname();
   const localePrefix = getLocalePrefix(pathname);
   const [moreOpen, setMoreOpen] = useState(false);
@@ -24,22 +29,33 @@ export function BottomNav() {
     <>
       <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/80 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60 lg:hidden">
         <div className="flex items-center justify-around h-[4.5rem] px-2">
-          {PRIMARY_NAV_ITEMS.map(({ href, icon: Icon, label }) => {
-            const fullHref = href === "/" ? `${localePrefix}/` : `${localePrefix}${href}`;
+          {PRIMARY_NAV_ITEMS.map((item) => {
+            const { href, icon: Icon, label, requiresAuth } = item;
+            const dest = resolveNavHref(item, localePrefix, isAuthenticated);
             const active =
               href === "/"
                 ? pathname === `${localePrefix}/` || pathname === localePrefix
                 : pathname.includes(href);
+            const locked = requiresAuth && !isAuthenticated;
             return (
               <Link
                 key={href}
-                href={fullHref}
+                href={dest}
                 className={cn(
-                  "flex flex-col items-center justify-center gap-1 w-16 py-1.5 rounded-md transition-colors",
-                  active ? "text-primary" : "text-muted-foreground hover:text-foreground",
+                  "flex flex-col items-center justify-center gap-1 w-16 py-1.5 rounded-md transition-colors relative",
+                  active
+                    ? "text-primary"
+                    : locked
+                      ? "text-muted-foreground/60 hover:text-foreground"
+                      : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                <Icon className="h-5 w-5" />
+                <div className="relative">
+                  <Icon className="h-5 w-5" />
+                  {locked && (
+                    <Lock className="absolute -top-1 -right-1 h-2.5 w-2.5 text-muted-foreground/70" />
+                  )}
+                </div>
                 <span className="text-[10px] font-medium">{label}</span>
                 {active && <div className="w-1 h-1 rounded-full bg-primary" />}
               </Link>
@@ -85,22 +101,31 @@ export function BottomNav() {
               </button>
             </div>
             <ul className="grid grid-cols-3 gap-2">
-              {SECONDARY_NAV_ITEMS.map(({ href, icon: Icon, label }) => {
-                const fullHref = `${localePrefix}${href}`;
+              {SECONDARY_NAV_ITEMS.map((item) => {
+                const { href, icon: Icon, label, requiresAuth } = item;
+                const dest = resolveNavHref(item, localePrefix, isAuthenticated);
                 const active = pathname.includes(href);
+                const locked = requiresAuth && !isAuthenticated;
                 return (
                   <li key={href}>
                     <Link
-                      href={fullHref}
+                      href={dest}
                       onClick={() => setMoreOpen(false)}
                       className={cn(
-                        "flex flex-col items-center gap-2 py-4 rounded-lg border transition-colors",
+                        "flex flex-col items-center gap-2 py-4 rounded-lg border transition-colors relative",
                         active
                           ? "text-primary border-primary/40 bg-primary/5"
-                          : "text-foreground border-border hover:bg-accent",
+                          : locked
+                            ? "text-muted-foreground/70 border-border hover:bg-accent"
+                            : "text-foreground border-border hover:bg-accent",
                       )}
                     >
-                      <Icon className="h-5 w-5" />
+                      <div className="relative">
+                        <Icon className="h-5 w-5" />
+                        {locked && (
+                          <Lock className="absolute -top-1 -right-1 h-2.5 w-2.5 text-muted-foreground/70" />
+                        )}
+                      </div>
                       <span className="text-xs font-medium">{label}</span>
                     </Link>
                   </li>

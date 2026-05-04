@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { Mail } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
@@ -23,6 +24,8 @@ import { RecoveryPhraseDisplay } from "@/components/crypto/recovery-phrase-displ
 export default function SignupPage() {
   const t = useTranslations("auth");
   const locale = useLocale();
+  const searchParams = useSearchParams();
+  const next = searchParams?.get("next") ?? null;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [ageConfirmed, setAgeConfirmed] = useState(false);
@@ -41,7 +44,11 @@ export default function SignupPage() {
       email,
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback?locale=${locale}`,
+        emailRedirectTo: `${window.location.origin}/auth/callback?locale=${locale}${
+          next && next.startsWith("/") && !next.startsWith("//")
+            ? `&next=${encodeURIComponent(next)}`
+            : ""
+        }`,
       },
     });
 

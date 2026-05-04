@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
 import { loadFromSupabase } from "@/lib/supabase/sync";
@@ -15,6 +15,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 export default function LoginPage() {
   const t = useTranslations("auth");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const next = searchParams?.get("next") ?? null;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -73,7 +75,9 @@ export default function LoginPage() {
       // Non-critical
     }
 
-    router.push("/");
+    // Honor ?next= intent if it points to a same-origin path; otherwise home.
+    const dest = next && next.startsWith("/") && !next.startsWith("//") ? next : "/";
+    router.push(dest);
     router.refresh();
   }
 

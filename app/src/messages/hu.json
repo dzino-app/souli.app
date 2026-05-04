@@ -148,7 +148,9 @@
     "faq4q": "Miben különbözik a Souli a ChatGPT-től?",
     "faq4a": "A Souli emlékszik rád. Ismeri a céljaidat, preferenciáidat, és idővel veled együtt fejlődik.",
     "footer": "Dzino az első Souli. A tiéd a következő.",
-    "origin": "Valahol egy kis pixelvilágban él Souli — a legelső Souli. Még mindig ott van, integet mindenkinek, aki megérkezik. Kinyitotta a kapukat, hogy te is felnevelhess egy sajátot. A Soulid már vár."
+    "origin": "Valahol egy kis pixelvilágban él Souli — a legelső Souli. Még mindig ott van, integet mindenkinek, aki megérkezik. Kinyitotta a kapukat, hogy te is felnevelhess egy sajátot. A Soulid már vár.",
+    "nextHint": "Jelentkezz be a folytatáshoz",
+    "alreadyHaveAccount": "Már van fiókom"
   },
   "settings": {
     "title": "Beállítások",

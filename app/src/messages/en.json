@@ -160,7 +160,9 @@
     "faq4a": "Your Souli remembers you. It knows your goals, preferences, and grows with you over time.",
     "eggTease": "Something is stirring inside... your Souli is waiting to hatch.",
     "footer": "Dzino is the first Souli. Yours is next.",
-    "origin": "Somewhere in a tiny pixel world lives Dzino — the very first Souli. He's still there, waving at everyone who arrives. He opened the gates so you could raise your own. Your Souli is already waiting."
+    "origin": "Somewhere in a tiny pixel world lives Dzino — the very first Souli. He's still there, waving at everyone who arrives. He opened the gates so you could raise your own. Your Souli is already waiting.",
+    "nextHint": "Sign in to continue",
+    "alreadyHaveAccount": "I already have an account"
   },
   "settings": {
     "title": "Settings",

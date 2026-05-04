@@ -118,12 +118,17 @@ export async function middleware(request: NextRequest) {
     ) ||
     /\/(kniznica|library|ochrana-sukromia|podmienky|privacy|terms|quiz|pribeh|story)(\/|$)/.test(pathname);
 
-  // Redirect unauthenticated users to landing (except public pages)
+  // Redirect unauthenticated users to landing (except public pages).
+  // Preserve intent in ?next so the user lands where they wanted after sign-in.
   if (!user && !isPublicPage) {
     const url = request.nextUrl.clone();
     url.pathname = "/landing";
+    // Drop /landing → /landing?next=/landing self-redirect; only set next if it's
+    // a meaningful intent (an actual app page they tried to reach).
+    if (pathname !== "/" && !pathname.endsWith("/landing")) {
+      url.searchParams.set("next", pathname + (request.nextUrl.search || ""));
+    }
     const redirectResponse = NextResponse.redirect(url);
-    // Copy session cookies to the redirect response
     intlResponse.cookies.getAll().forEach((cookie) => {
       redirectResponse.cookies.set(cookie.name, cookie.value);
     });

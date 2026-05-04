@@ -10,6 +10,7 @@ import { Sidebar } from "@/components/layout/sidebar";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { NotificationScheduler } from "@/components/notifications/notification-scheduler";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function LocaleLayout({
   children,
@@ -26,10 +27,20 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
 
+  // Auth state for nav components — anon users see lock icons + redirect-with-intent.
+  let isAuthenticated = false;
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase.auth.getUser();
+    isAuthenticated = Boolean(data.user);
+  } catch {
+    // Fail open — anon experience is safe.
+  }
+
   return (
     <NextIntlClientProvider messages={messages}>
       <div className="lg:flex min-h-screen">
-        <Sidebar />
+        <Sidebar isAuthenticated={isAuthenticated} />
         <div className="flex-1 min-w-0 flex flex-col">
           <header className="sticky top-0 z-30 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="flex h-14 items-center justify-between gap-4 px-4 mx-auto max-w-5xl">
@@ -52,7 +63,7 @@ export default async function LocaleLayout({
           </main>
         </div>
       </div>
-      <BottomNav />
+      <BottomNav isAuthenticated={isAuthenticated} />
       <NotificationScheduler />
     </NextIntlClientProvider>
   );

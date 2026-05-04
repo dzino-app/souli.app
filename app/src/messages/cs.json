@@ -148,7 +148,9 @@
     "faq4q": "Čím se Souli liší od ChatGPT?",
     "faq4a": "Souli si tě pamatuje. Zná tvé cíle, preference a roste s tebou.",
     "footer": "Dzino je první Souli. Tvůj je další.",
-    "origin": "Někde v malém pixelovém světě žije Dzino — úplně první Souli. Pořád je tam, mává každému, kdo přijde. Otevřel brány, abys mohl vychovat vlastního. Tvůj Souli už čeká."
+    "origin": "Někde v malém pixelovém světě žije Dzino — úplně první Souli. Pořád je tam, mává každému, kdo přijde. Otevřel brány, abys mohl vychovat vlastního. Tvůj Souli už čeká.",
+    "nextHint": "Přihlas se, abys pokračoval",
+    "alreadyHaveAccount": "Už mám účet"
   },
   "settings": {
     "title": "Nastavení",
