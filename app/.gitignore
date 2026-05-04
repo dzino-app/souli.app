@@ -38,3 +38,4 @@ credentials.json
 # Prevent phantom app/ dir from confusing Next.js App Router detection
 /app/
 story-content.generated.ts
+style-anchors-inventory.generated.ts

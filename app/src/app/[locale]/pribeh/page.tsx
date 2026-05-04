@@ -80,6 +80,13 @@ export default async function StoryIndex({ params }: Props) {
         </ul>
       </section>
 
+      <Link
+        href={`${base}/assets`}
+        className="text-xs text-muted-foreground hover:text-foreground underline w-fit"
+      >
+        Production · style anchors
+      </Link>
+
       <footer className="pt-4 border-t text-xs text-muted-foreground">
         <p>
           {t.rich("footer", {

@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "bun run scripts/build-story.ts && next build",
+    "build": "bun run scripts/build-story.ts && bun run scripts/build-style-anchors.ts && next build",
     "build-story": "bun run scripts/build-story.ts",
+    "build-anchors": "bun run scripts/build-style-anchors.ts",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",

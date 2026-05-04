@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   outputFileTracingIncludes: {
-    "/[locale]/pribeh/**": ["./content/story/**"],
+    "/[locale]/pribeh/**": ["./content/story/**", "./public/style-anchors/**"],
   },
   async redirects() {
     return [
