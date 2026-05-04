@@ -98,26 +98,44 @@ export default async function AssetsPage({ params }: Props) {
       {/* Production prompts */}
       <section className="pt-4 border-t">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
-          Production prompts
+          Production prompts (501 shots across 13 episodes)
         </h2>
         <Card>
           <CardContent className="py-4 space-y-2">
             <p className="text-sm">
               Per-shot prompts ready to paste into Runway Gen-4 / Sora / SVD:
             </p>
-            <ul className="text-sm space-y-1">
-              <li>
-                <a
-                  href="https://github.com/dzino-app/dzino/blob/main/app/content/story/en/prompts/e01.md"
-                  className="text-primary underline"
-                >
-                  E01 — The Pixel Garden (38 shots)
-                </a>
-              </li>
+            <ul className="text-sm grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+              {[
+                ["e00", "The Star Beyond the Horizon", 38],
+                ["e01", "The Pixel Garden", 38],
+                ["e02", "The Binary Forest", 36],
+                ["e03", "The Mirror Garden", 38],
+                ["e04", "The Cloud Café", 38],
+                ["e05", "The Moon Realm", 28],
+                ["e06", "The Stream of Liquid Gold", 38],
+                ["e07", "Race Under Three Moons", 42],
+                ["e08", "The Silent Owl", 30],
+                ["e09", "The Twilight Stage", 45],
+                ["e10", "The Library of a Thousand Stories", 36],
+                ["e11", "The Storm Field", 42],
+                ["e12", "The Window", 52],
+              ].map(([id, title, count]) => (
+                <li key={id as string}>
+                  <a
+                    href={`https://github.com/dzino-app/dzino/blob/main/app/content/story/en/prompts/${id}.md`}
+                    className="text-primary hover:opacity-80 transition-opacity"
+                  >
+                    {(id as string).toUpperCase()} · {title}{" "}
+                    <span className="text-muted-foreground text-xs">({count} shots)</span>
+                  </a>
+                </li>
+              ))}
             </ul>
             <p className="text-xs text-muted-foreground pt-2">
-              More episodes&apos; prompts are extracted on demand from{" "}
-              <code className="px-1 py-0.5 bg-muted rounded">app/content/story/en/storyboards/</code>.
+              Regenerate with{" "}
+              <code className="px-1 py-0.5 bg-muted rounded">scripts/build-style-anchors.ts</code>{" "}
+              after editing storyboards.
             </p>
           </CardContent>
         </Card>
