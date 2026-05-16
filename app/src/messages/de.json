@@ -150,7 +150,8 @@
     "footer": "Dzino ist der erste Souli. Deiner ist der nächste.",
     "origin": "Irgendwo in einer kleinen Pixelwelt lebt Dzino — der allererste Souli. Er ist immer noch da, winkt jedem zu, der ankommt. Er hat die Tore geöffnet, damit du deinen eigenen großziehen kannst. Dein Souli wartet schon.",
     "nextHint": "Melde dich an, um fortzufahren",
-    "alreadyHaveAccount": "Ich habe bereits ein Konto"
+    "alreadyHaveAccount": "Ich habe bereits ein Konto",
+    "madeBy": "Allein gebaut von <name>Maroš Janco</name>. Open-Source auf <github>GitHub</github>."
   },
   "settings": {
     "title": "Einstellungen",

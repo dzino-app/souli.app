@@ -222,6 +222,30 @@ export default function LandingPage() {
         <LandingCtaBottom />
         <p className="text-sm text-muted-foreground mt-6">{t("footer")}</p>
       </section>
+
+      {/* Maker credit + open-source link — bidirectional credibility */}
+      <footer className="text-center text-xs text-muted-foreground border-t pt-6 pb-2 space-y-2">
+        <p>
+          {t.rich("madeBy", {
+            name: (chunks) => (
+              <a
+                href="https://www.linkedin.com/in/marosjanco/"
+                className="underline hover:text-foreground transition-colors"
+              >
+                {chunks}
+              </a>
+            ),
+            github: (chunks) => (
+              <a
+                href="https://github.com/dzino-app/dzino"
+                className="underline hover:text-foreground transition-colors"
+              >
+                {chunks}
+              </a>
+            ),
+          })}
+        </p>
+      </footer>
     </div>
   );
 }

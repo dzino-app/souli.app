@@ -271,7 +271,8 @@
     "footer": "Džino je prvý Souli. Tvoj je ďalší.",
     "origin": "Niekde v malom pixelovom svete žije Džino — úplne prvý Souli. Stále je tam, máva každému, kto príde. Otvoril brány, aby si mohol vychovať vlastného. Tvoj Souli už čaká.",
     "nextHint": "Prihlás sa, aby si pokračoval",
-    "alreadyHaveAccount": "Už mám účet"
+    "alreadyHaveAccount": "Už mám účet",
+    "madeBy": "Sám tvoril <name>Maroš Janco</name>. Open-source na <github>GitHub-e</github>."
   },
   "invite": {
     "title": "Pozvite priateľa",

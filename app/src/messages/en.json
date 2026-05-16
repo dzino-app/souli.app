@@ -162,7 +162,8 @@
     "footer": "Dzino is the first Souli. Yours is next.",
     "origin": "Somewhere in a tiny pixel world lives Dzino — the very first Souli. He's still there, waving at everyone who arrives. He opened the gates so you could raise your own. Your Souli is already waiting.",
     "nextHint": "Sign in to continue",
-    "alreadyHaveAccount": "I already have an account"
+    "alreadyHaveAccount": "I already have an account",
+    "madeBy": "Solo-built by <name>Maroš Janco</name>. Open-source on <github>GitHub</github>."
   },
   "settings": {
     "title": "Settings",

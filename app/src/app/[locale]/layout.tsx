@@ -1,8 +1,87 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+
+const LOCALE_META: Record<string, { title: string; description: string }> = {
+  en: {
+    title: "Souli — an AI companion that knows you",
+    description:
+      "An AI companion that knows you — and that you actually own. End-to-end encrypted, open-source MVP, set in a voxel-fantasy world called Pixoci.",
+  },
+  sk: {
+    title: "Souli — AI parťák, ktorý ťa pozná",
+    description:
+      "AI parťák, ktorého máš naozaj ty. End-to-end šifrované, open-source MVP, vo voxelovom svete Pixoci.",
+  },
+  cs: {
+    title: "Souli — AI parťák, který tě zná",
+    description:
+      "AI parťák, kterého opravdu vlastníš. End-to-end šifrované, open-source MVP, ve vokselovém světě Pixoci.",
+  },
+  de: {
+    title: "Souli — ein KI-Begleiter, der dich kennt",
+    description:
+      "Ein KI-Begleiter, der dich wirklich kennt — und der dir wirklich gehört. Ende-zu-Ende verschlüsselt, Open-Source-MVP, in der Voxel-Märchenwelt Pixoci.",
+  },
+  es: {
+    title: "Souli — un compañero IA que te conoce",
+    description:
+      "Un compañero IA que te conoce — y que es realmente tuyo. Cifrado de extremo a extremo, MVP de código abierto, en el mundo voxel-fantasy de Pixoci.",
+  },
+  fr: {
+    title: "Souli — un compagnon IA qui te connaît",
+    description:
+      "Un compagnon IA qui te connaît — et qui t'appartient vraiment. Chiffré de bout en bout, MVP open-source, dans le monde voxel-féerique de Pixoci.",
+  },
+  hi: {
+    title: "Souli — एक AI साथी जो तुम्हें जानता है",
+    description:
+      "एक AI साथी जो वाकई तुम्हारा है। End-to-end एन्क्रिप्टेड, open-source MVP, voxel-कथा संसार Pixoci में।",
+  },
+  hu: {
+    title: "Souli — egy MI-társ, aki ismer téged",
+    description:
+      "Egy MI-társ, aki valóban a tiéd. Végpontok között titkosított, nyílt forráskódú MVP a Pixoci voxel-meseviláában.",
+  },
+  pl: {
+    title: "Souli — towarzysz AI, który cię zna",
+    description:
+      "Towarzysz AI, który naprawdę należy do ciebie. Szyfrowanie end-to-end, MVP open-source, w wokselowo-baśniowym świecie Pixoci.",
+  },
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const meta = LOCALE_META[locale] ?? LOCALE_META.en;
+  return {
+    title: meta.title,
+    description: meta.description,
+    openGraph: {
+      title: meta.title,
+      description: meta.description,
+      url: `https://souli.app/${locale}`,
+      locale: locale.replace("-", "_"),
+      images: ["/og.png"],
+    },
+    twitter: {
+      title: meta.title,
+      description: meta.description,
+    },
+    alternates: {
+      canonical: `https://souli.app/${locale}`,
+      languages: Object.fromEntries(
+        Object.keys(LOCALE_META).map((l) => [l, `https://souli.app/${l}`]),
+      ),
+    },
+  };
+}
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SoundToggle } from "@/components/sound-toggle";
 import { BottomNav } from "@/components/layout/bottom-nav";

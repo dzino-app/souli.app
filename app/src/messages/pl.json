@@ -150,7 +150,8 @@
     "footer": "Dzino jest pierwszym Souli. Twój jest następny.",
     "origin": "Gdzieś w małym pikselowym świecie żyje Dzino — pierwszy Souli. Wciąż tam jest, macha do każdego, kto przychodzi. Otworzył bramy, żebyś mógł wychować własnego. Twój Souli już czeka.",
     "nextHint": "Zaloguj się, aby kontynuować",
-    "alreadyHaveAccount": "Mam już konto"
+    "alreadyHaveAccount": "Mam już konto",
+    "madeBy": "Samodzielnie zbudowane przez <name>Maroš Janco</name>. Open-source na <github>GitHubie</github>."
   },
   "settings": {
     "title": "Ustawienia",

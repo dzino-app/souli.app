@@ -150,7 +150,8 @@
     "footer": "Dzino पहला Souli है। तुम्हारा अगला है।",
     "origin": "कहीं एक छोटी पिक्सेल दुनिया में Dzino रहता है — सबसे पहला Souli। वो अभी भी वहाँ है, हर आने वाले को हाथ हिलाता है। उसने दरवाज़े खोल दिए ताकि तुम अपना खुद का पाल सको। तुम्हारा Souli पहले से इंतज़ार कर रहा है।",
     "nextHint": "जारी रखने के लिए साइन इन करो",
-    "alreadyHaveAccount": "मेरा पहले से खाता है"
+    "alreadyHaveAccount": "मेरा पहले से खाता है",
+    "madeBy": "अकेले बनाया <name>Maroš Janco</name> ने। <github>GitHub</github> पर open-source।"
   },
   "settings": {
     "title": "सेटिंग्स",

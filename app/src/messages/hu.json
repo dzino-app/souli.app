@@ -150,7 +150,8 @@
     "footer": "Dzino az első Souli. A tiéd a következő.",
     "origin": "Valahol egy kis pixelvilágban él Souli — a legelső Souli. Még mindig ott van, integet mindenkinek, aki megérkezik. Kinyitotta a kapukat, hogy te is felnevelhess egy sajátot. A Soulid már vár.",
     "nextHint": "Jelentkezz be a folytatáshoz",
-    "alreadyHaveAccount": "Már van fiókom"
+    "alreadyHaveAccount": "Már van fiókom",
+    "madeBy": "Egyedül készítette <name>Maroš Janco</name>. Open-source a <github>GitHubon</github>."
   },
   "settings": {
     "title": "Beállítások",
