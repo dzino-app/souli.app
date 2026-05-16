@@ -65,19 +65,37 @@ export async function generateMetadata({
     title: { absolute: meta.title },
     description: meta.description,
     openGraph: {
+      type: "website",
+      siteName: "Souli",
       title: meta.title,
       description: meta.description,
       // Always show the bare canonical URL in LinkedIn/social cards,
       // regardless of locale-prefixed path the crawler ultimately landed on.
       url: "https://souli.app",
       locale: locale.replace("-", "_"),
-      images: ["/og.png"],
+      images: [
+        {
+          url: "https://souli.app/og.png",
+          secureUrl: "https://souli.app/og.png",
+          width: 1200,
+          height: 630,
+          type: "image/png",
+          alt: "Souli — open-source, end-to-end encrypted AI companion that gamifies personal growth",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: meta.title,
       description: meta.description,
-      images: ["/og.png"],
+      images: [
+        {
+          url: "https://souli.app/og.png",
+          width: 1200,
+          height: 630,
+          alt: "Souli — open-source, end-to-end encrypted AI companion that gamifies personal growth",
+        },
+      ],
     },
     alternates: {
       canonical: `https://souli.app/${locale}`,
