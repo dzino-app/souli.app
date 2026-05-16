@@ -33,13 +33,18 @@ The hard part of E2EE in an AI app is that the LLM needs to *read* your data to 
 
 This is not theoretical Signal Protocol. It is the smallest thing that makes the model useful while keeping the long-term corpus encrypted.
 
-## Screenshots
+## See it
 
-> *(coming — animated GIF of avatar evolution + chat + soul-file editor)*
+<!--
+  When the demo.gif is recorded, replace this <img> with:
+    <img src="app/public/readme/demo.gif" alt="Souli demo" width="800" />
+  Recommended: 6-second tour — Home (Dzino animating) → click Príbeh →
+  episode list → click E01 → story page renders. Record with Kap at 1280×720,
+  export as GIF at 12fps, drop at app/public/readme/demo.gif.
+-->
+<img src="app/public/og.png" alt="Souli — open-source E2EE AI companion" width="800" />
 
-In the meantime:
-
-- **Live app:** [souli.app](https://souli.app)
+- **Live app:** [souli.app](https://souli.app) — the real thing
 - **Voxel avatar art:** every Souli is procedurally drawn at runtime by `src/lib/pixel-art.ts` — try the [Pixoci library](https://souli.app/en/kniznica) to meet the seed mentors
 - **The story:** [souli.app/en/pribeh](https://souli.app/en/pribeh) — 13-episode Pixoci origin story, 9 locales, with production storyboards and a brand chime
 
