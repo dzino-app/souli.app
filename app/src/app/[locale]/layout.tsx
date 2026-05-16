@@ -61,7 +61,8 @@ export async function generateMetadata({
   const { locale } = await params;
   const meta = LOCALE_META[locale] ?? LOCALE_META.en;
   return {
-    title: meta.title,
+    // Suppress root layout's template ("%s — Souli") for the per-locale title
+    title: { absolute: meta.title },
     description: meta.description,
     openGraph: {
       title: meta.title,
@@ -71,8 +72,10 @@ export async function generateMetadata({
       images: ["/og.png"],
     },
     twitter: {
+      card: "summary_large_image",
       title: meta.title,
       description: meta.description,
+      images: ["/og.png"],
     },
     alternates: {
       canonical: `https://souli.app/${locale}`,
