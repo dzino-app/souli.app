@@ -112,4 +112,4 @@ If you're building anything in the "AI companion you actually own" space, I'd lo
 
 ---
 
-<sub>Built by Maroš Janco. The character Dzino was the first Souli; everything else followed.</sub>
+<sub>Built by Maros Janco. The character Dzino was the first Souli; everything else followed.</sub>
