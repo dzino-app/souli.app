@@ -1,0 +1,46 @@
+{
+  "name": "@souli/crypto",
+  "version": "0.1.0",
+  "description": "Zero-dependency client-side cryptography for Souli — AES-GCM 256, PBKDF2, AES-KW, BIP39. Pure Web Crypto API.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./crypto": "./src/crypto.ts",
+    "./crypto-keys": "./src/crypto-keys.ts",
+    "./crypto-session": "./src/crypto-session.ts",
+    "./crypto-salt-persist": "./src/crypto-salt-persist.ts",
+    "./crypto-migrate": "./src/crypto-migrate.ts",
+    "./crypto-sharing": "./src/crypto-sharing.ts",
+    "./bip39": "./src/bip39.ts",
+    "./bip39-wordlist": "./src/bip39-wordlist.ts"
+  },
+  "files": ["src"],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "cryptography",
+    "encryption",
+    "web-crypto",
+    "aes-gcm",
+    "pbkdf2",
+    "bip39",
+    "e2ee",
+    "zero-knowledge"
+  ],
+  "author": "Maroš Janco",
+  "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dzino-app/dzino.git",
+    "directory": "packages/crypto"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}

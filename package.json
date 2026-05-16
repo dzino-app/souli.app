@@ -1,1 +1,6 @@
-{"dependencies": {}}
+{
+  "name": "souli-monorepo",
+  "private": true,
+  "workspaces": ["app", "packages/*"],
+  "dependencies": {}
+}
