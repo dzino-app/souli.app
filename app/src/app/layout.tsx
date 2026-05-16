@@ -19,12 +19,12 @@ const geistSans = localFont({
 const SITE_URL = "https://souli.app";
 const OG_IMAGE = `${SITE_URL}/og.png`;
 const TAGLINE =
-  "An AI companion that knows you — and that you actually own. End-to-end encrypted, open-source MVP, set in a voxel-fantasy world called Pixoci.";
+  "Solo-built, end-to-end encrypted AI companion that gamifies personal growth across social, health, career, and personal life. Open-source MVP.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Souli — an AI companion that knows you",
+    default: "Souli — open-source E2EE AI companion",
     template: "%s — Souli",
   },
   description: TAGLINE,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Souli",
-    title: "Souli — an AI companion that knows you",
+    title: "Souli — open-source E2EE AI companion",
     description: TAGLINE,
     url: SITE_URL,
     images: [
@@ -53,14 +53,14 @@ export const metadata: Metadata = {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Souli — solo-built, end-to-end encrypted AI companion in a voxel-fantasy world",
+        alt: "Souli — open-source, end-to-end encrypted AI companion that gamifies personal growth",
       },
     ],
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Souli — an AI companion that knows you",
+    title: "Souli — open-source E2EE AI companion",
     description: TAGLINE,
     images: [OG_IMAGE],
   },

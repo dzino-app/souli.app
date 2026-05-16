@@ -7,9 +7,9 @@ import { routing } from "@/i18n/routing";
 
 const LOCALE_META: Record<string, { title: string; description: string }> = {
   en: {
-    title: "Souli — an AI companion that knows you",
+    title: "Souli — open-source E2EE AI companion",
     description:
-      "An AI companion that knows you — and that you actually own. End-to-end encrypted, open-source MVP, set in a voxel-fantasy world called Pixoci.",
+      "Solo-built, end-to-end encrypted AI companion that gamifies personal growth across social, health, career, and personal life. Open-source MVP.",
   },
   sk: {
     title: "Souli — AI parťák, ktorý ťa pozná",
@@ -67,7 +67,9 @@ export async function generateMetadata({
     openGraph: {
       title: meta.title,
       description: meta.description,
-      url: `https://souli.app/${locale}`,
+      // Always show the bare canonical URL in LinkedIn/social cards,
+      // regardless of locale-prefixed path the crawler ultimately landed on.
+      url: "https://souli.app",
       locale: locale.replace("-", "_"),
       images: ["/og.png"],
     },

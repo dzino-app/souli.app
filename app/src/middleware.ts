@@ -118,14 +118,24 @@ export async function middleware(request: NextRequest) {
     ) ||
     /\/(kniznica|library|ochrana-sukromia|podmienky|privacy|terms|quiz|pribeh|story)(\/|$)/.test(pathname);
 
+  // Detect social-media link previewers + search crawlers — they don't sign
+  // in, so the ?next intent is noise that pollutes the URL displayed in
+  // LinkedIn / Twitter / etc. Send them straight to /landing without it.
+  const ua = request.headers.get("user-agent") || "";
+  const isBot =
+    /bot|crawler|spider|linkedinbot|facebookexternalhit|twitterbot|whatsapp|slackbot|telegrambot|discordbot|developers\.google|pinterest|embedly|quora link preview|outbrain|skypeuripreview|preview|fetch|googlebot|bingbot|duckduckbot|yandex|baiduspider/i.test(
+      ua,
+    );
+
   // Redirect unauthenticated users to landing (except public pages).
   // Preserve intent in ?next so the user lands where they wanted after sign-in.
   if (!user && !isPublicPage) {
     const url = request.nextUrl.clone();
     url.pathname = "/landing";
     // Drop /landing → /landing?next=/landing self-redirect; only set next if it's
-    // a meaningful intent (an actual app page they tried to reach).
-    if (pathname !== "/" && !pathname.endsWith("/landing")) {
+    // a meaningful intent (an actual app page they tried to reach). Bots don't
+    // sign in, so never give them a ?next param — keep their crawled URL clean.
+    if (!isBot && pathname !== "/" && !pathname.endsWith("/landing")) {
       url.searchParams.set("next", pathname + (request.nextUrl.search || ""));
     }
     const redirectResponse = NextResponse.redirect(url);
